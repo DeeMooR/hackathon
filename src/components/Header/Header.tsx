@@ -4,7 +4,7 @@ import './Header.css'
 
 import logo from "src/img/icons/Logo.svg"
 import map from "src/img/icons/Map.svg"
-import menu from "src/img/icons/Location.svg"
+import menu from "src/img/icons/Burger.svg"
 import { Link } from 'react-router-dom'
 import SlideBar from '../SlideBar'
 
@@ -32,7 +32,9 @@ const Header = () => {
         </div>
         <img src={menu} alt="menu" className='header__menu' onClick={() => setClickMenu(true)} />
       </div>
-      <SlideBar clickMenu={clickMenu} setClickMenu={setClickMenu} />
+      {clickMenu &&
+        <SlideBar clickMenu={clickMenu} setClickMenu={setClickMenu} />
+      }
     </header>
   )
 }

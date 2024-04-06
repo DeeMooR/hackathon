@@ -15,6 +15,7 @@
   top: 50%;
   left: 20px;
   transform: translate(0, -50%);
+  cursor: pointer;
 }
 .header .wrapper .header__nav {
   position: absolute;
@@ -38,6 +39,7 @@
 }
 .header .wrapper .header__menu {
   display: none;
+  cursor: pointer;
 }
 
 @media (max-width: 1199.98px) {
