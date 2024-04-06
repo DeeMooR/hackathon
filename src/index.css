@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 /*--------- CONST ----------*/
 :root {
   --font-family: 'Manrope', sans-serif;
@@ -61,6 +63,7 @@ h2 {
   font-weight: 600;
   font-size: 42px;
   line-height: 110%;
+  margin: 0 0 45px 0;
 }
 
 h3 {
@@ -78,6 +81,22 @@ a {
   font-weight: 400;
   font-size: 18px;
   color: var(--dark-main);
+}
+
+input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: var(--main);
+  border-radius: 10px;
+  padding: 14px 10px 16px 20px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 135%;
+  color: var(--white);
+}
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .button {
@@ -114,4 +133,23 @@ a {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+@media (max-width: 599.98px) {
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 36px;
+    margin: 0 0 30px 0;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+  a {
+    font-size: 16px;
+  }
 }

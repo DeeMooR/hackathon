@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import "./SlideBar.css"
 
 import logo from "src/img/icons/Logo.svg"
-import menu from "src/img/icons/Location.svg"
+import close from "src/img/icons/Close.svg"
 
 interface ISlideBar {
     clickMenu: boolean,
@@ -24,8 +24,8 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, setClickMenu }) => {
   return (
     <div className={`slideBar ${clickMenu && 'show'}`} >
       <div className="slideBar__header">
-        <img src={logo} className='slideBar__logo' alt="logo" onClick={logoClick} />
-        <img src={menu} className='slideBar__cross' alt="cross" onClick={handleClick} />
+        <img src={logo} alt="logo" onClick={logoClick} />
+        <img src={close} alt="cross" onClick={handleClick} />
       </div>
       <div className="slideBar__items">
         <Link to='/' className='slideBar__item' onClick={handleClick}>Ближайшие мероприятия</Link>

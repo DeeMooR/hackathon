@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { FC } from 'react'
 import './MiniCard.css'
-import { BackgroundImage } from './styled'
+import { Container, BackgroundImage } from './styled'
 
 const hack = 'https://i.ibb.co/k5HzGCR/news-6.png'
 
-const MiniCard = () => {
+interface IMiniCard {
+  addClass: string
+}
+
+const MiniCard:FC<IMiniCard> = ({addClass}) => {
   return (
-    <div className='mini-card'>
-      <BackgroundImage image={hack} />
+    <div className={`mini-card ${addClass}`}>
+      <Container>
+        <BackgroundImage image={hack} />
+      </Container>
       <div className='mini-card__description'>
         <h3 className='mini-card__title'>Хакатон FCADHACK</h3>
         <div className="mini-card__icon-text mini-card__blue-box">
