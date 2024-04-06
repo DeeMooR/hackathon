@@ -67,10 +67,9 @@ public class EventService {
         return this.sortByDateToModel(allEvents).stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());//!!!Проверить
     }
 
-    public List<Event> getForPast30days(Filter filter) {//Дату берем сами
-        //put code here
-        //don't forget about sort
-        return new ArrayList<>();
+    public List<Event> getForPast30days(Filter filter) {
+        List<Event> events = this.getForPast30days();
+        return filterAll(events, filter);
     }
 
     public List<Event> getNext() {//Дату берем сами
@@ -80,10 +79,9 @@ public class EventService {
         return this.sortByDateToModel(allEvents);
     }
 
-    public List<Event> getNext(Filter filter) {//Дату берем сами
-        //put code here
-        //don't forget about sort
-        return new ArrayList<>();
+    public List<Event> getNext(Filter filter) {
+        List<Event> events = this.getNext();
+        return filterAll(events, filter);
     }
 
     public boolean delete(int id) throws EventNotFoundedException {
@@ -97,6 +95,41 @@ public class EventService {
         List<Event> events = new ArrayList<>();
         for(EventEntity event: eventsEntities)
             events.add(Event.toModel(event));
+        return events;
+    }
+
+    public List<Event> filterFaculty(List<Event> events, List<String> faculties){//проверить
+        List<Event> filterEvents = new ArrayList<>();
+        for(String faculty : faculties)
+            for(Event event : events)
+                if(event.getFaculties().contains(faculty))
+                    filterEvents.add(event);
+        return filterEvents.stream().distinct().collect(Collectors.toList());
+    }
+
+    public List<Event> filterType(List<Event> events, List<String> types){//проверить
+        List<Event> filterEvents = new ArrayList<>();
+        for(Event event : events)
+            if(types.contains(event.getType()))
+                filterEvents.add(event);
+        return filterEvents;
+    }
+
+    public List<Event> filterVisit(List<Event> events, List<String> visit){//проверить
+        List<Event> filterEvents = new ArrayList<>();
+        for(Event event : events)
+            if(visit.contains(event.getVisit()))
+                filterEvents.add(event);
+        return filterEvents;
+    }
+
+    public List<Event> filterAll(List<Event> events, Filter filter){
+        if(!filter.getFaculty().isEmpty())
+            events = this.filterFaculty(events, filter.getFaculty());
+        if(!filter.getType().isEmpty())
+            events = this.filterType(events, filter.getType());
+        if(!filter.getVisit().isEmpty())
+            events = this.filterVisit(events, filter.getVisit());
         return events;
     }
 }

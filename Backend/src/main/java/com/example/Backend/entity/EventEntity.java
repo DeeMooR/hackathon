@@ -22,6 +22,8 @@ public class EventEntity {
     private String shortDescription;//возможно надо будет удалить
     private String description;
     private String results;
+    private String type;
+    private String visit;
     private String archive;
 
     @OneToMany(mappedBy = "event")
@@ -29,6 +31,22 @@ public class EventEntity {
 
 
     public EventEntity() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getVisit() {
+        return visit;
+    }
+
+    public void setVisit(String visit) {
+        this.visit = visit;
     }
 
     public int getId() {

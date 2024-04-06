@@ -20,6 +20,8 @@ public class Event {
     private String description;
     private String archive;
     private String results;
+    private String type;
+    private String visit;
     private List<Participant> participants;//возвращать с номером в массиве?
 
     public static Event toModel(EventEntity entity){
@@ -38,6 +40,8 @@ public class Event {
         archive = entity.getArchive();
         faculties = new ArrayList<>();
         results = entity.getResults();
+        type = entity.getType();
+        visit = entity.getVisit();
         for(String str : entity.getFaculties())
             faculties.add(str);
         participants = new ArrayList<>();
@@ -71,6 +75,30 @@ public class Event {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getResults() {
+        return results;
+    }
+
+    public void setResults(String results) {
+        this.results = results;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getVisit() {
+        return visit;
+    }
+
+    public void setVisit(String visit) {
+        this.visit = visit;
     }
 
     public void setDate(Date date) {
