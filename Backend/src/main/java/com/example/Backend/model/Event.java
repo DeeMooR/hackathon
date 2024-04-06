@@ -13,7 +13,7 @@ public class Event {
     private String photo;
     private String title;
     private Date date;
-    private Time time;
+    private String time;
     private String location;
     private List<String> faculties;
     private String shortDescription;//возможно надо будет удалить
@@ -105,11 +105,11 @@ public class Event {
         this.date = date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time firstName) {
+    public void setTime(String firstName) {
         this.time = firstName;
     }
 

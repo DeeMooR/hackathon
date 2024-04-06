@@ -27,9 +27,9 @@ public class EventService {
     private EventRepo eventRepo;
 
     public boolean create(EventEntity event) throws EventAlredyCreate {
-        if (eventRepo.findByTitle(event.getTitle())!=null){
-            throw new EventAlredyCreate("Мероприятие уже существует");
-        }// как будто бы название пожет повторяться из года в год
+//        if (eventRepo.findByTitle(event.getTitle())!=null){
+//            throw new EventAlredyCreate("Мероприятие уже существует");
+//        }// как будто бы название пожет повторяться из года в год
         eventRepo.save(event);
         return true;
     }
@@ -60,11 +60,12 @@ public class EventService {
         return events;
     }
 
-    public List<Event> getForPast30days() {//Дату берем сами
-        Date currentDate = Date.valueOf(LocalDate.now());//!!!Проверить
+    public List<Event> getForPast30days() {
         List<EventEntity> allEvents = (List<EventEntity>) eventRepo.findAll();
-        allEvents.removeIf(event -> event.getDate().after(currentDate));//!!!Проверить
-        return this.sortByDateToModel(allEvents).stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());//!!!Проверить
+        allEvents.removeIf(event -> event.getDate().after(Date.valueOf(LocalDate.now())) || event.getDate().before(Date.valueOf(LocalDate.now().minusDays(30))));
+        List<Event> events = this.sortByDateToModel(allEvents);
+        Collections.reverse(events);
+        return events;
     }
 
     public List<Event> getForPast30days(Filter filter) {
