@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
@@ -28,7 +29,7 @@ public class EventService {
     public boolean create(EventEntity event) throws EventAlredyCreate {
         if (eventRepo.findByTitle(event.getTitle())!=null){
             throw new EventAlredyCreate("Мероприятие уже существует");
-        }
+        }// как будто бы название пожет повторяться из года в год
         eventRepo.save(event);
         return true;
     }
@@ -52,15 +53,18 @@ public class EventService {
         return true;
     }
 
-    public List<EventEntity> getEvents() {
-        List<EventEntity> eventList= (List<EventEntity>) eventRepo.findAll();
-        return eventList;
+    public List<Event> getEvents() {
+        List<Event> events= new ArrayList<>();
+        for(EventEntity event : (List<EventEntity>) eventRepo.findAll())
+            events.add(Event.toModel(event));
+        return events;
     }
 
     public List<Event> getForPast30days() {//Дату берем сами
-        //put code here
-        //don't forget about sort
-        return new ArrayList<>();
+        Date currentDate = Date.valueOf(LocalDate.now());//!!!Проверить
+        List<EventEntity> allEvents = (List<EventEntity>) eventRepo.findAll();
+        allEvents.removeIf(event -> event.getDate().after(currentDate));//!!!Проверить
+        return this.sortByDateToModel(allEvents).stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());//!!!Проверить
     }
 
     public List<Event> getForPast30days(Filter filter) {//Дату берем сами
@@ -70,9 +74,10 @@ public class EventService {
     }
 
     public List<Event> getNext() {//Дату берем сами
-        //put code here
-        //don't forget about sort
-        return new ArrayList<>();
+        Date currentDate = Date.valueOf(LocalDate.now());//!!!Проверить
+        List<EventEntity> allEvents = (List<EventEntity>) eventRepo.findAll();
+        allEvents.removeIf(event -> event.getDate().before(currentDate));//!!!Проверить
+        return this.sortByDateToModel(allEvents);
     }
 
     public List<Event> getNext(Filter filter) {//Дату берем сами
@@ -82,8 +87,16 @@ public class EventService {
     }
 
     public boolean delete(int id) throws EventNotFoundedException {
-        EventEntity eventEntity=eventRepo.findById(id).orElseThrow(() -> new EventNotFoundedException("Мероприятие не найдено"));
-        eventRepo.delete(eventEntity);
+        eventRepo.findById(id).orElseThrow(() -> new EventNotFoundedException("Мероприятие не найдено"));
+        eventRepo.deleteById(id);
         return true;
+    }
+
+    public List<Event> sortByDateToModel(List<EventEntity> eventsEntities){
+        eventsEntities.sort(Comparator.comparing(EventEntity::getDate));//!!!Проверить
+        List<Event> events = new ArrayList<>();
+        for(EventEntity event: eventsEntities)
+            events.add(Event.toModel(event));
+        return events;
     }
 }
