@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = {""})
@@ -28,7 +29,7 @@ public class ParticipantController {
         try {
             return ResponseEntity.ok(participantService.getParticipants(id));
         } catch(Exception e){
-            return ResponseEntity.badRequest().body(false);
+            return ResponseEntity.badRequest().body(new ArrayList<>());
         }
     }
 }

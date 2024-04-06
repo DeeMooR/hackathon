@@ -15,8 +15,8 @@ public class EventEntity {
     private int id;
     private String photo;
     private String title;
-    private Date date;
-    private Time time;
+    private Date date;//Возможно поменять на String
+    private Time time;//Возможно поменять на String
     private String location;
     private List<String> faculties = new ArrayList<>();
     private String shortDescription;//возможно надо будет удалить
