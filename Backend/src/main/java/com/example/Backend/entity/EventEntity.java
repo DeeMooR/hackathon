@@ -26,7 +26,7 @@ public class EventEntity {
     private String visit;
     private String archive;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<ParticipantEntity> participants;
 
 
