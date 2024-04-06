@@ -26,8 +26,8 @@ const MainPage = () => {
         <section className='eventsSection'>
           <h2>Ближайшие мероприятия</h2>
           <div className="eventsSection__events">
-            <MiniCard addClass='event_1'/>
-            <MiniCard addClass='event_2'/>
+            <MiniCard/>
+            <MiniCard/>
             <MiniCard addClass='event_3'/>
           </div>
           <button className='button eventsSection__button'>Смотреть будущие мероприятия</button>
@@ -35,8 +35,8 @@ const MainPage = () => {
         <section className='eventsSection'>
           <h2>Прошедшие мероприятия</h2>
           <div className="eventsSection__events">
-            <MiniCard addClass='event_1'/>
-            <MiniCard addClass='event_2'/>
+            <MiniCard/>
+            <MiniCard/>
             <MiniCard addClass='event_3'/>
           </div>
           <button className='button eventsSection__button'>Смотреть прошлые мероприятия</button>

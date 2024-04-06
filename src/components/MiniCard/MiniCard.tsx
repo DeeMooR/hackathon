@@ -5,10 +5,10 @@ import { Container, BackgroundImage } from './styled'
 const hack = 'https://i.ibb.co/k5HzGCR/news-6.png'
 
 interface IMiniCard {
-  addClass: string
+  addClass?: string
 }
 
-const MiniCard:FC<IMiniCard> = ({addClass}) => {
+const MiniCard:FC<IMiniCard> = ({addClass = ''}) => {
   return (
     <div className={`mini-card ${addClass}`}>
       <Container>

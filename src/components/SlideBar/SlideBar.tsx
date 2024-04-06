@@ -28,8 +28,8 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, setClickMenu }) => {
         <img src={close} alt="cross" onClick={handleClick} />
       </div>
       <div className="slideBar__items">
-        <Link to='/' className='slideBar__item' onClick={handleClick}>Ближайшие мероприятия</Link>
-        <Link to='/' className='slideBar__item' onClick={handleClick}>Прошедшие мероприятия</Link>
+        <Link to='/next' className='slideBar__item' onClick={handleClick}>Ближайшие мероприятия</Link>
+        <Link to='/past' className='slideBar__item' onClick={handleClick}>Прошедшие мероприятия</Link>
         <Link to='/' className='slideBar__item' onClick={handleClick}>Контакты</Link>
         <Link to='/' className='slideBar__item' onClick={handleClick}>Карта корпусов</Link>
       </div>

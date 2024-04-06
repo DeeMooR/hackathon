@@ -6,9 +6,6 @@
   gap: 40px;
   margin: 0 0 40px 0;
 }
-.wrapper .mainSection .mainSection__info h1 span {
-  color: var(--main);
-}
 .wrapper .mainSection .mainSection__info .mainSection__text-button {
   display: flex;
   flex-direction: column;
