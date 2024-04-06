@@ -17,7 +17,7 @@ public class EventEntity {
     private String photo;
     private String title;
     private Date date;//Возможно поменять на String
-    private Time time;//Возможно поменять на String
+    private String time;//Возможно поменять на String
     private String location;
     private List<String> faculties = new ArrayList<>();//без понятия как это будет хранится в бд, через базу не смогла добавить значения этого поля
     private String shortDescription;//возможно надо будет удалить
@@ -83,11 +83,11 @@ public class EventEntity {
         this.date = date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time firstName) {
+    public void setTime(String firstName) {
         this.time = firstName;
     }
 

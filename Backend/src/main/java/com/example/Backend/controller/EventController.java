@@ -6,7 +6,7 @@ import com.example.Backend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-//НЕ РАБОТАЕТ!!!!
+//НЕ РАБОТАЕТ!!!!Не надо тут ВСЕ РАБОТАЕТ
 @CrossOrigin(origins = {""})
 @RestController
 @RequestMapping("/events")//!!!Диме сказать
@@ -18,7 +18,7 @@ public class EventController {
         try {
             return ResponseEntity.ok(eventService.create(event));
         }catch(Exception e){
-            return ResponseEntity.badRequest().body(false);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
