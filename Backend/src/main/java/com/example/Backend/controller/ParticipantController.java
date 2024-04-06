@@ -19,9 +19,7 @@ public class ParticipantController {
     public ResponseEntity add(@RequestBody List<String> participants, @RequestParam int id){
         try {
             return ResponseEntity.ok(participantService.add(participants, id));
-        }catch(EventNotFoundException ex){
-            return ResponseEntity.badRequest().body(false);//исправить сообщение
-        }catch(Exception e){
+        } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
     }
@@ -30,9 +28,7 @@ public class ParticipantController {
     public ResponseEntity getParticipants(@RequestParam int id){
         try {
             return ResponseEntity.ok(participantService.getParticipants(id));
-        }catch(EventNotFoundException ex){
-            return ResponseEntity.badRequest().body(false);//исправить сообщение
-        }catch(Exception e){
+        } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
     }

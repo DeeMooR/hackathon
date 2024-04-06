@@ -41,25 +41,25 @@ public class EventService {
         return new ArrayList<>();
     }
 
-    public List<Event> getForPast30days() {
+    public List<Event> getForPast30days() {//Дату берем сами
         //put code here
         //don't forget about sort
         return new ArrayList<>();
     }
 
-    public List<Event> getForPast30days(Filter filter) {
+    public List<Event> getForPast30days(Filter filter) {//Дату берем сами
         //put code here
         //don't forget about sort
         return new ArrayList<>();
     }
 
-    public List<Event> getNext() {
+    public List<Event> getNext() {//Дату берем сами
         //put code here
         //don't forget about sort
         return new ArrayList<>();
     }
 
-    public List<Event> getNext(Filter filter) {
+    public List<Event> getNext(Filter filter) {//Дату берем сами
         //put code here
         //don't forget about sort
         return new ArrayList<>();
