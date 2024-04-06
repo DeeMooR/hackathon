@@ -4,6 +4,7 @@ import './MainPage.css'
 import Header from 'src/components/Header'
 
 import main from "src/img/main.png"
+import Newsletter from 'src/components/Newsletter'
 
 const MainPage = () => {
 
@@ -39,7 +40,15 @@ const MainPage = () => {
           </div>
           <button className='button eventsSection__button'>Смотреть все мероприятия</button>
         </section>
+        <section className="mapSection">
+          <h2>Карта корпусов</h2>
+          <iframe 
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A8df2e81712e171e182d9da4acd2de8361ccee6c301d8d1e327261d367f98df93&amp;source=constructor" 
+            className='mapSection__map'
+          />
+        </section>
       </div>
+      <Newsletter/>
     </>
   )
 }

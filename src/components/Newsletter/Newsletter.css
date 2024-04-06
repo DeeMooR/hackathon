@@ -1,0 +1,77 @@
+.newsletter {
+  padding: 120px 0;
+  background-color: var(--main);
+}
+.newsletter .wrapper .newsletter__photo-info {
+  display: flex;
+  gap: 40px;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__photo {
+  border-radius: 40px;
+  width: 360px;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__text-fields {
+  display: flex;
+  gap: 40px;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__text-fields .newsletter__text {
+  color: var(--white);
+  max-width: 360px;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__text-fields .newsletter__text h2 {
+  margin: 0 0 20px 0;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__text-fields .newsletter__text p {
+  line-height: 135%;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__text-fields .newsletter__fields {
+  max-width: 360px;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__text-fields .newsletter__fields .newsletter__input {
+  margin: 0 0 20px 0;
+}
+.newsletter .wrapper .newsletter__photo-info .newsletter__text-fields .newsletter__fields .newsletter__button {
+  width: 100%;
+}
+
+@media (max-width: 1199.98px) {
+  .newsletter .wrapper .newsletter__photo-info .newsletter__photo {
+    border-radius: 40px;
+    width: calc((100vw - 120px) / 3);
+    height: calc((100vw - 120px) / 3);
+  }
+}
+@media (max-width: 999.98px) {
+  .newsletter .wrapper .newsletter__photo-info .newsletter__photo {
+    width: 360px;
+    border-radius: 30px;
+  }
+  .newsletter .wrapper .newsletter__photo-info .newsletter__text-fields {
+    flex-direction: column;
+  }
+  .newsletter .wrapper .newsletter__photo-info .newsletter__text-fields .newsletter__text {
+    color: var(--white);
+    max-width: 100%;
+  }
+}
+@media (max-width: 799.98px) {
+  .newsletter .wrapper .newsletter__photo-info {
+    gap: 30px;
+  }
+  .newsletter .wrapper .newsletter__photo-info .newsletter__photo {
+    min-width: 200px;
+    min-height: 200px;
+    border-radius: 20px;
+  }
+}
+@media (max-width: 599.98px) {
+  .newsletter {
+    padding: 80px 0;
+  }
+  .newsletter .wrapper .newsletter__photo-info {
+    gap: 30px;
+  }
+  .newsletter .wrapper .newsletter__photo-info .newsletter__photo {
+    display: none;
+  }
+}
