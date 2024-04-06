@@ -13,18 +13,20 @@ public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String photo;
     private String title;
     private Date date;//Возможно поменять на String
     private Time time;//Возможно поменять на String
     private String location;
-    private List<String> faculties = new ArrayList<>();
+    private List<String> faculties = new ArrayList<>();//без понятия как это будет хранится в бд, через базу не смогла добавить значения этого поля
     private String shortDescription;//возможно надо будет удалить
     private String description;
     private String results;
     private String type;
-    private String visit;
     private String archive;
+    private String visit;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<ParticipantEntity> participants;
