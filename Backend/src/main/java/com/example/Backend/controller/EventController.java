@@ -2,7 +2,6 @@ package com.example.Backend.controller;
 
 import com.example.Backend.Filter;
 import com.example.Backend.entity.EventEntity;
-import com.example.Backend.exception.EventNotFoundException;
 import com.example.Backend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
