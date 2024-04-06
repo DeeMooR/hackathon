@@ -52,30 +52,41 @@ body {
 }
 
 h1 {
-  font-family: var(--font-family);
   font-weight: 600;
   font-size: 64px;
   line-height: 110%;
 }
 
 h2 {
-  font-family: var(--font-family);
   font-weight: 600;
   font-size: 42px;
   line-height: 110%;
 }
 
 h3 {
-  font-family: var(--font-family);
   font-weight: 600;
   font-size: 24px;
   line-height: 125%;
+}
+
+p {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+a {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--dark-main);
 }
 
 .button {
   border-radius: 10px;
   padding: 14px 10px 16px 10px;
   background: var(--main);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
   line-height: 135%;
   color: var(--white);
 }
@@ -85,11 +96,22 @@ h3 {
 
 .second-button {
   border: 2px solid var(--main);
+  background-color: var(--main-background);
   border-radius: 10px;
   padding: 14px 10px 16px 10px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
   line-height: 135%;
+  color: var(--dark-main);
 }
 .second-button:hover {
   background: var(--main);
   color: var(--white);
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
