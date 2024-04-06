@@ -11,7 +11,7 @@ const MainPage = () => {
     <>
       <Header/>
       <div className="wrapper">
-        <div className="mainSection">
+        <section className="mainSection">
           <div className="mainSection__info">
             <h1><span>Расписание</span> мероприятий в БГУИР</h1>
             <div className="mainSection__text-button">
@@ -20,12 +20,25 @@ const MainPage = () => {
             </div>
           </div>
           <img src={main} className='mainSection__image' alt="bsuir" />
-        </div>
-        <div className='cards'>
-          <MiniCard/>
-          {/* <MiniCard/>
-          <MiniCard/> */}
-        </div>
+        </section>
+        <section className='eventsSection'>
+          <h2>Ближайшие мероприятия</h2>
+          <div className="eventsSection__events">
+            <MiniCard addClass='event_1'/>
+            <MiniCard addClass='event_2'/>
+            <MiniCard addClass='event_3'/>
+          </div>
+          <button className='button eventsSection__button'>Смотреть все мероприятия</button>
+        </section>
+        <section className='eventsSection'>
+          <h2>Прошедшие мероприятия</h2>
+          <div className="eventsSection__events">
+            <MiniCard addClass='event_1'/>
+            <MiniCard addClass='event_2'/>
+            <MiniCard addClass='event_3'/>
+          </div>
+          <button className='button eventsSection__button'>Смотреть все мероприятия</button>
+        </section>
       </div>
     </>
   )
