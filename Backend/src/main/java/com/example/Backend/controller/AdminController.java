@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {""})
 @RestController
-@RequestMapping("/admin")//!!!Диме сказать
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private AdminService adminService;
-    @PostMapping("/auth")//!!!Get запрос!!!
+
+    @GetMapping("/auth")
     public ResponseEntity authorization(@RequestBody AdminEntity admin ) throws MyException {
         AdminEntity authenticatedUser = adminService.authoriz(admin.getLogin(), admin.getPassword());
         if (authenticatedUser != null) {
