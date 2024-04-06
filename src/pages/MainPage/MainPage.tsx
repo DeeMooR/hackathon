@@ -5,6 +5,7 @@ import Header from 'src/components/Header'
 
 import main from "src/img/main.png"
 import Newsletter from 'src/components/Newsletter'
+import Footer from 'src/components/Footer'
 
 const MainPage = () => {
 
@@ -29,7 +30,7 @@ const MainPage = () => {
             <MiniCard addClass='event_2'/>
             <MiniCard addClass='event_3'/>
           </div>
-          <button className='button eventsSection__button'>Смотреть все мероприятия</button>
+          <button className='button eventsSection__button'>Смотреть будущие мероприятия</button>
         </section>
         <section className='eventsSection'>
           <h2>Прошедшие мероприятия</h2>
@@ -38,7 +39,7 @@ const MainPage = () => {
             <MiniCard addClass='event_2'/>
             <MiniCard addClass='event_3'/>
           </div>
-          <button className='button eventsSection__button'>Смотреть все мероприятия</button>
+          <button className='button eventsSection__button'>Смотреть прошлые мероприятия</button>
         </section>
         <section className="mapSection">
           <h2>Карта корпусов</h2>
@@ -49,6 +50,7 @@ const MainPage = () => {
         </section>
       </div>
       <Newsletter/>
+      <Footer/>
     </>
   )
 }
