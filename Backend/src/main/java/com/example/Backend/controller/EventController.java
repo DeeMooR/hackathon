@@ -6,7 +6,7 @@ import com.example.Backend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+//НЕ РАБОТАЕТ!!!!
 @CrossOrigin(origins = {""})
 @RestController
 @RequestMapping("/events")//!!!Диме сказать
@@ -31,7 +31,7 @@ public class EventController {
         }
     }
 
-    @PatchMapping("/results")
+    @PatchMapping("/results")//не работает
     public ResponseEntity setResults(@RequestBody String results, @RequestParam int id){
         try {
             return ResponseEntity.ok(eventService.setResults(results, id));
@@ -40,7 +40,7 @@ public class EventController {
         }
     }
 
-    @PatchMapping("/link")//то ли?
+    @PatchMapping("/link")//не работает
     public ResponseEntity setArchive(@RequestBody String link, @RequestParam int id){
         try {
             return ResponseEntity.ok(eventService.setArchive(link, id));
@@ -49,7 +49,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all")//не работает
     public ResponseEntity getEvents(){
         try {
             return ResponseEntity.ok(eventService.getEvents());
@@ -58,7 +58,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/past30days")
+    @GetMapping("/past30days")//не работает
     public ResponseEntity past30days(){
         try {
             return ResponseEntity.ok(eventService.getForPast30days());
@@ -66,7 +66,7 @@ public class EventController {
             return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
         }
     }
-    @GetMapping("/next")
+    @GetMapping("/next")//не работает
     public ResponseEntity nextEvents(){
         try {
             return ResponseEntity.ok(eventService.getNext());
@@ -93,7 +93,7 @@ public class EventController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete")//не работает
     public ResponseEntity deleteEvent(@RequestParam int id){
         try {
             return  ResponseEntity.ok(eventService.delete(id));
