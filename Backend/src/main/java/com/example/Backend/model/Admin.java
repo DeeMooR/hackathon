@@ -4,6 +4,7 @@ import com.example.Backend.entity.AdminEntity;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 
 public class Admin {
+    //тут тоже можно обойтись без id
     private int id;
     private String login;
     private String password;
