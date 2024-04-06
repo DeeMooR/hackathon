@@ -24,12 +24,60 @@
       display: flex;
       justify-content: center;
       gap: 60px;
+      .link-map {
+        display: none;
+      }
     }
     .header__map {
       display: flex;
       gap: 8px;
       p {
         margin: auto 0;
+      }
+    }
+    .header__menu {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .header {
+    .wrapper {
+      .header__nav {
+        gap: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .header {
+    .wrapper {
+      display: block;
+      .header__nav {
+        position: relative;
+        justify-content: end;
+        .link-map {
+          display: block;
+        }
+      }
+      .header__map {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 799.98px) {
+  .header {
+    .wrapper {
+      display: flex;
+      .header__nav {
+        display: none;
+      }
+      .header__menu {
+          display: block;
       }
     }
   }

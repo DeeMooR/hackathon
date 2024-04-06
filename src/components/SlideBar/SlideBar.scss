@@ -1,0 +1,33 @@
+.slideBar {
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    bottom: 0;
+    right: -100%;
+    z-index: 10;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: right 0.3s ease;
+    background-color: var(--white);
+    &.show {
+        right: 0;
+    }
+    .slideBar__header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .slideBar__items {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin: 40px auto;
+      .slideBar__item {
+        font-weight: 600;
+        font-size: 20px;
+      }
+    }
+}
+
