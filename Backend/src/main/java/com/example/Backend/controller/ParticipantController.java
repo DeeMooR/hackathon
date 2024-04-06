@@ -1,6 +1,5 @@
 package com.example.Backend.controller;
 
-import com.example.Backend.exception.EventNotFoundException;
 import com.example.Backend.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
