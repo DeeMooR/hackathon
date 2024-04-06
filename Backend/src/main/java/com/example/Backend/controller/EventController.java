@@ -27,9 +27,7 @@ public class EventController {
     public ResponseEntity updateUser(@RequestBody EventEntity event, @RequestParam int id){
         try {
             return ResponseEntity.ok(eventService.update(event, id));
-        } catch(EventNotFoundException ex){
-            return ResponseEntity.badRequest().body(false);//исправить сообщение
-        }catch(Exception e){
+        } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
     }
@@ -38,9 +36,7 @@ public class EventController {
     public ResponseEntity setResults(@RequestBody String results, @RequestParam int id){
         try {
             return ResponseEntity.ok(eventService.setResults(results, id));
-        } catch(EventNotFoundException ex){
-            return ResponseEntity.badRequest().body(false);//исправить сообщение
-        }catch(Exception e){
+        } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
     }
@@ -49,9 +45,7 @@ public class EventController {
     public ResponseEntity setArchive(@RequestBody String link, @RequestParam int id){
         try {
             return ResponseEntity.ok(eventService.setArchive(link, id));
-        } catch(EventNotFoundException ex){
-            return ResponseEntity.badRequest().body(false);//исправить сообщение
-        }catch(Exception e){
+        } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
     }
@@ -65,7 +59,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/past30days")//будет время или нет
+    @GetMapping("/past30days")
     public ResponseEntity past30days(){
         try {
             return ResponseEntity.ok(eventService.getForPast30days());
@@ -73,7 +67,7 @@ public class EventController {
             return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
         }
     }
-    @GetMapping("/next")//будет время или нет
+    @GetMapping("/next")
     public ResponseEntity nextEvents(){
         try {
             return ResponseEntity.ok(eventService.getNext());
@@ -82,7 +76,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/past30days/filter")//будет время или нет
+    @GetMapping("/past30days/filter")
     public ResponseEntity past30daysFilter(@RequestBody Filter filter){
         try {
             return ResponseEntity.ok(eventService.getForPast30days(filter));
@@ -91,7 +85,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/next/filter")//будет время или нет
+    @GetMapping("/next/filter")
     public ResponseEntity nextEventsFilter(@RequestBody Filter filter){
         try {
             return ResponseEntity.ok(eventService.getNext(filter));
@@ -104,8 +98,6 @@ public class EventController {
     public ResponseEntity deleteEvent(@RequestParam int id){
         try {
             return  ResponseEntity.ok(eventService.delete(id));
-        }catch(EventNotFoundException ex){
-            return ResponseEntity.badRequest().body(false);//исправить сообщение
         } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
