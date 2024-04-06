@@ -1,0 +1,42 @@
+.mini-card {
+  max-width: 360px;
+  line-height: 135%;
+
+  .mini-card__description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0 0 0;
+    margin: 0 0 20px 0;
+  }
+  .mini-card__icon-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .mini-card__icon {
+      width: 24px;
+      height: 24px;
+    }
+    .icon-calendar {
+      background-image: url('src/img/icons/Calender.svg');
+    }
+    .icon-location {
+      background-image: url('src/img/icons/Location.svg');
+    }
+    .icon-time {
+      background-image: url('src/img/icons/Time.svg');
+    }
+  }
+  .mini-card__blue-box {
+    border-radius: 10px;
+    padding: 10px 15px;
+    background: #c6d2ff;
+    width: fit-content;
+    p {
+      font-weight: 600;
+    }
+  }
+  .mini-card__button {
+    width: 100%;
+  }
+}
