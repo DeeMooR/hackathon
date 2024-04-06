@@ -26,6 +26,7 @@ public class EventEntity {
     private String visit;
     private String archive;
 
+
     @OneToMany(mappedBy = "event")
     private List<ParticipantEntity> participants;
 
