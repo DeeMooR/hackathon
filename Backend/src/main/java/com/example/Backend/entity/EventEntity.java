@@ -21,6 +21,7 @@ public class EventEntity {
     private List<String> faculties = new ArrayList<>();
     private String shortDescription;//возможно надо будет удалить
     private String description;
+    private String results;
     private String archive;
 
     @OneToMany(mappedBy = "event")
@@ -116,5 +117,13 @@ public class EventEntity {
 
     public void setParticipants(List<ParticipantEntity> participants) {
         this.participants = participants;
+    }
+
+    public String getResults() {
+        return results;
+    }
+
+    public void setResults(String result) {
+        this.results = result;
     }
 }

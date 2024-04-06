@@ -19,6 +19,7 @@ public class Event {
     private String shortDescription;//возможно надо будет удалить
     private String description;
     private String archive;
+    private String results;
     private List<Participant> participants;//возвращать с номером в массиве?
 
     public static Event toModel(EventEntity entity){
@@ -36,6 +37,7 @@ public class Event {
         description = entity.getDescription();
         archive = entity.getArchive();
         faculties = new ArrayList<>();
+        results = entity.getResults();
         for(String str : entity.getFaculties())
             faculties.add(str);
         participants = new ArrayList<>();
