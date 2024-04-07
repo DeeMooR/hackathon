@@ -1,0 +1,15 @@
+.wrapper .adminPage {
+  margin: 70px 0 120px 0;
+}
+.wrapper h1 {
+  margin: 0 0 60px 0;
+}
+.wrapper h2 {
+  margin: 0 0 20px 0;
+}
+.wrapper .adminPage__events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px 40px;
+  margin: 0 0 60px 0;
+}

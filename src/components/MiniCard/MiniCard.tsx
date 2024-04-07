@@ -10,14 +10,16 @@ import { formatDate } from 'src/helpers'
 const hack = 'https://i.ibb.co/k5HzGCR/news-6.png'
 
 interface IMiniCard {
-  addClass?: string
+  isDeleteSmall?: boolean,
+  edit?: boolean,
+  show_users?: boolean
 }
 
-const MiniCard:FC<IMiniCard> = ({addClass = ''}) => {
+const MiniCard:FC<IMiniCard> = ({isDeleteSmall, edit, show_users}) => {
   const date = new Date('2024-04-05');
 
   return (
-    <div className={`mini-card ${addClass}`}>
+    <div className={`mini-card ${isDeleteSmall ? 'delete-small' : ''}`}>
       <Container>
         <BackgroundImage image={hack} />
       </Container>
@@ -28,7 +30,11 @@ const MiniCard:FC<IMiniCard> = ({addClass = ''}) => {
         <IconText icon={time} text='15:00' />
         <p>Все факультеты</p>
       </div>
-      <button className='second-button mini-card__button'>Подробнее</button>
+      <div className="mini-card__buttons">
+        {!edit && !show_users && <button className='second-button'>Подробнее</button>}
+        {edit && <button className='second-button'>Редактировать мероприятие</button>}
+        {show_users && <button className='button'>Смотреть участников</button>}
+      </div>
     </div>
   )
 }

@@ -65,3 +65,5 @@ export const formatDate = (dateString: Date) => {
   const year = date.getFullYear();
   return `${day} ${months[monthIndex]} ${year}`;
 }
+
+export const faculties = ['ФКП', 'ФИТУ', 'ИЭФ', 'ФКСИС', 'ФИБ', 'ФРЭ', 'ВФ'];

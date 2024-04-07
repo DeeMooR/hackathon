@@ -28,7 +28,7 @@ const MainPage = () => {
           <div className="eventsSection__events">
             <MiniCard/>
             <MiniCard/>
-            <MiniCard addClass='event_3'/>
+            <MiniCard isDeleteSmall/>
           </div>
           <button className='button eventsSection__button'>Смотреть будущие мероприятия</button>
         </section>
@@ -37,7 +37,7 @@ const MainPage = () => {
           <div className="eventsSection__events">
             <MiniCard/>
             <MiniCard/>
-            <MiniCard addClass='event_3'/>
+            <MiniCard isDeleteSmall/>
           </div>
           <button className='button eventsSection__button'>Смотреть прошлые мероприятия</button>
         </section>
