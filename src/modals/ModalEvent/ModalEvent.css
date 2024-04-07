@@ -14,3 +14,16 @@
 .modalEvent .modalEvent__select-box h3 {
   margin: 0;
 }
+
+.modalEvent__delete {
+  padding: 20px 0 0 0;
+  font-weight: 400;
+  line-height: 135%;
+  text-align: center;
+  color: #dc1d1d;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.modalEvent__delete:hover {
+  opacity: 1;
+}

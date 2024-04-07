@@ -7,11 +7,15 @@ import FilterOptions from 'src/components/FilterOptions';
 import RadioOptions from 'src/components/RadioOptions';
 
 interface IModalEvent {
-  isOpen: boolean;
+  isOpen: boolean,
+  action: string,
   closeModal: () => void,
+  clickShowDelete?: () => void,
+  addEvent?: () => void,
+  changeEvent?: () => void
 }
 
-const ModalEvent:FC<IModalEvent> = ({ isOpen, closeModal }) => {
+const ModalEvent:FC<IModalEvent> = ({ isOpen, action, closeModal, clickShowDelete, addEvent, changeEvent }) => {
   const [selected, setSelected] = useState<string[]>([faculty__user]);
   const [selectedRadio1, setSelectedRadio1] = useState('Культурное');
   const [selectedRadio2, setSelectedRadio2] = useState('Свободный вход');
@@ -20,15 +24,14 @@ const ModalEvent:FC<IModalEvent> = ({ isOpen, closeModal }) => {
   const optionsRadio1 = ['Культурное', 'Образовательное', 'Спортивное'];
   const optionsRadio2 = ['Свободный вход', 'С регистрацией'];
 
+  const word_title = (action === 'add') ? 'Добавление' : 'Редактирование';
+  const word_button = (action === 'add') ? 'Добавить' : 'Редактировать';
+
   const onClickRadio1 = (value: string) => {
     setSelectedRadio1(value);
   }
   const onClickRadio2 = (value: string) => {
     setSelectedRadio2(value);
-  }
-    
-  const clickAddEvent = () => {
-    closeModal();
   }
   const onClickOption = (value: string) => {
     if (value === faculty__user) return;
@@ -55,7 +58,7 @@ const ModalEvent:FC<IModalEvent> = ({ isOpen, closeModal }) => {
   return (
     <ModalTemplate isOpen={isOpen} closeModal={closeModal} positionUp>
       <div className="modalEvent">
-        <h2><span>Добавление</span> мероприятия</h2>
+        <h2><span>{word_title}</span> мероприятия</h2>
         <TextInput text='Обложка' type='text' placeholder='Вставьте ссылку на изображение'/>
         <TextInput text='Название' type='text'/>
         <TextInput text='Описание' type='text'/>
@@ -74,8 +77,9 @@ const ModalEvent:FC<IModalEvent> = ({ isOpen, closeModal }) => {
           <h3>Тип посещения</h3>
           <RadioOptions name='radio2' options={optionsRadio2} selected={selectedRadio2} onClickOption={onClickRadio2}/>
         </div>
-        <button className='button' onClick={clickAddEvent}>Добавить мероприятие</button>
+        <button className='button' onClick={action === 'add' ? addEvent : changeEvent}>{word_button} мероприятие</button>
       </div>
+      {action === 'change' && <p className='modalEvent__delete' onClick={clickShowDelete}>Удалить мероприятие</p>}
     </ModalTemplate>
   )
 }
