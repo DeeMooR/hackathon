@@ -104,33 +104,33 @@ public class EventService {
         List<Event> filterEvents = new ArrayList<>();
         for(String faculty : faculties)
             for(Event event : events)
-                if(event.getFaculties().contains(faculty))
+                if(event.getFaculties().contains(faculty) || event.getFaculties().contains("Все факультеты"))
                     filterEvents.add(event);
         return filterEvents.stream().distinct().collect(Collectors.toList());
     }
 
-    public List<Event> filterType(List<Event> events, List<String> types){
+    public List<Event> filterType(List<Event> events, String type){
         List<Event> filterEvents = new ArrayList<>();
         for(Event event : events)
-            if(types.contains(event.getType()))
+            if(event.getType().equals(type))
                 filterEvents.add(event);
         return filterEvents;
     }
 
-    public List<Event> filterVisit(List<Event> events, List<String> visit){
+    public List<Event> filterVisit(List<Event> events, String visit){
         List<Event> filterEvents = new ArrayList<>();
         for(Event event : events)
-            if(visit.contains(event.getVisit()))
+            if(event.getVisit().equals(visit))
                 filterEvents.add(event);
         return filterEvents;
     }
 
     public List<Event> filterAll(List<Event> events, Filter filter){
-        if(!filter.getFaculty().isEmpty())
+        if(!filter.getFaculty().isEmpty() && !filter.getFaculty().contains("Все факультеты"))//Проверить с пустым фильтром факультеты
             events = this.filterFaculty(events, filter.getFaculty());
-        else if(!filter.getType().isEmpty())
+        if(!filter.getType().isEmpty())
             events = this.filterType(events, filter.getType());
-        else if(!filter.getVisit().isEmpty())
+        if(!filter.getVisit().isEmpty())
             events = this.filterVisit(events, filter.getVisit());
         return events;
     }
