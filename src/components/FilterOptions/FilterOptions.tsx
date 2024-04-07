@@ -9,7 +9,7 @@ interface IFilterOptions {
 
 const FilterOptions:FC<IFilterOptions> = ({options, selected, onClickOption}) => {
   return (
-    <div className='filterOptions'>
+    <>
       {options.map(value => 
         <label className="filterOptions__checkbox" key={value}>
           <input 
@@ -22,7 +22,7 @@ const FilterOptions:FC<IFilterOptions> = ({options, selected, onClickOption}) =>
           <p className='checkbox__text'>{value}</p>
         </label>
       )}
-    </div>
+    </>
   )
 }
 

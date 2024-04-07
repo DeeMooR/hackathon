@@ -1,0 +1,16 @@
+.modalEvent {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  h2 {
+    margin: 0;
+  }
+  .modalEvent__select-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h3 {
+      margin: 0;
+    }
+  }
+}

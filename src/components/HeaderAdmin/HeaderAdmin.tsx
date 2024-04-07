@@ -5,10 +5,10 @@ import logo from "src/img/icons/Logo.svg"
 import { Link } from 'react-router-dom'
 
 interface IHeaderAdmin {
-  showModalMembers: () => void
+  showModalEvent: () => void
 }
 
-const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalMembers }) => {
+const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
   return (
     <header className='headerAdmin'>
       <div className="wrapper">
@@ -17,8 +17,8 @@ const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalMembers }) => {
           <p>АДМИН-ПАНЕЛЬ</p>
         </div>
         <div className="headerAdmin__right">
-          <button className='second-button headerAdmin__button headerAdmin__full' onClick={showModalMembers}>Добавить мероприятие</button>
-          <button className='second-button headerAdmin__button headerAdmin__short' onClick={showModalMembers}>Добавить</button>
+          <button className='second-button headerAdmin__button headerAdmin__full' onClick={showModalEvent}>Добавить мероприятие</button>
+          <button className='second-button headerAdmin__button headerAdmin__short' onClick={showModalEvent}>Добавить</button>
           <Link to='/auth' className='headerAdmin__link headerAdmin__full'>Выйти из аккаунта</Link>
           <Link to='/auth' className='headerAdmin__link headerAdmin__short'>Выйти</Link>
         </div>

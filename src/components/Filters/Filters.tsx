@@ -45,14 +45,22 @@ const Filters = () => {
             <p>Вид мероприятия</p>
             <img src={arrow} alt="arrow" />
           </div>
-          {isFirstOpen && <FilterOptions options={firstOptions} selected={selected} onClickOption={onClickOption}/>}
+          {isFirstOpen && 
+            <div className="filters__options-container">
+              <FilterOptions options={firstOptions} selected={selected} onClickOption={onClickOption}/>
+            </div>
+          }
         </div>
         <div className="filters__item">
           <div className={`filters__item-title ${isSecondOpen ? 'open' : ''}`} onClick={onClickSecond}>
             <p>Тип посещения</p>
             <img src={arrow} alt="arrow" />
           </div>
-          {isSecondOpen && <FilterOptions options={secondOptions} selected={selected} onClickOption={onClickOption}/>}
+          {isSecondOpen && 
+            <div className="filters__options-container">
+              <FilterOptions options={secondOptions} selected={selected} onClickOption={onClickOption}/>
+            </div>
+          }
         </div>
       </div>
       <div className={`filters__selected ${selected.length > 0 ? 'show' : ''}`}>

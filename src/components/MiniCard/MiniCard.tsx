@@ -13,9 +13,10 @@ interface IMiniCard {
   isDeleteSmall?: boolean,
   edit?: boolean,
   show_users?: boolean
+  clickShowMembers?: () => void
 }
 
-const MiniCard:FC<IMiniCard> = ({isDeleteSmall, edit, show_users}) => {
+const MiniCard:FC<IMiniCard> = ({isDeleteSmall, edit, show_users, clickShowMembers}) => {
   const date = new Date('2024-04-05');
 
   return (
@@ -33,7 +34,7 @@ const MiniCard:FC<IMiniCard> = ({isDeleteSmall, edit, show_users}) => {
       <div className="mini-card__buttons">
         {!edit && !show_users && <button className='second-button'>Подробнее</button>}
         {edit && <button className='second-button'>Редактировать мероприятие</button>}
-        {show_users && <button className='button'>Смотреть участников</button>}
+        {show_users && <button className='button' onClick={clickShowMembers}>Смотреть участников</button>}
       </div>
     </div>
   )

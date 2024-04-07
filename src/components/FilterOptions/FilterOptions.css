@@ -1,33 +1,22 @@
-.filterOptions {
-  position: absolute;
-  top: 35px;
-  left: 0;
-  padding: 15px 20px 5px;
-  background: var(--white);
-  border: 1px solid var(--main);
-  border-radius: 10px;
-  z-index: 2;
-}
-.filterOptions .filterOptions__checkbox {
+.filterOptions__checkbox {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 0 0 10px 0;
   cursor: pointer;
 }
-.filterOptions .filterOptions__checkbox .checkbox__icon {
+.filterOptions__checkbox .checkbox__icon {
   display: inline-block;
   width: 24px;
   height: 24px;
   background-image: url("src/img/icons/Unchecked.svg");
 }
-.filterOptions .filterOptions__checkbox .checkbox__text {
+.filterOptions__checkbox .checkbox__text {
   line-height: 135%;
   white-space: nowrap;
 }
-.filterOptions .filterOptions__checkbox input {
+.filterOptions__checkbox input {
   display: none;
 }
-.filterOptions .filterOptions__checkbox input:checked + .checkbox__icon {
+.filterOptions__checkbox input:checked + .checkbox__icon {
   background-image: url("src/img/icons/Checked.svg");
 }
