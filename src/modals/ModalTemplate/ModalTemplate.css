@@ -38,6 +38,11 @@
 .modal__background .modal .modal__content h3 {
   margin: 0 0 10px 0;
 }
+.modal__background .modal .modal__content p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 135%;
+}
 .modal__background .modal .modal__content button {
   width: 100%;
 }

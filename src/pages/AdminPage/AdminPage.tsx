@@ -4,7 +4,7 @@ import HeaderAdmin from 'src/components/HeaderAdmin'
 import Footer from 'src/components/Footer'
 import MiniCard from 'src/components/MiniCard'
 import { faculties } from 'src/helpers'
-import ModalMembers from 'src/components/ModalMembers'
+import ModalMembers from 'src/modals/ModalMembers'
 
 const AdminPage = () => {
   const [isOpenModalMembers, setOpenModalMembers] = useState(false);
@@ -12,7 +12,7 @@ const AdminPage = () => {
   const showModalMembers = () => {
     setOpenModalMembers(true);
   }
-  
+
   const closeModal = () => {
     document.body.style.overflowY = 'auto';
     document.body.style.padding = '0';
