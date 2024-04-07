@@ -1,7 +1,7 @@
 .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 25px;
   .filters__item {
     position: relative;
     .filters__item-title {
@@ -66,5 +66,28 @@
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+@media (max-width: 699.98px) {
+  .filters__selected {
+    gap: 15px;
+    .filters__selected-card {
+      border-radius: 7px;
+      padding: 8px 16px 10px 16px;
+    }
+  }
+}
+
+@media (max-width: 399.98px) {
+  .filters {
+    flex-direction: column;
+    gap: 15px;
+    .filters__item {
+      width: fit-content;
+    }
+  }
+  .filters__selected {
+    padding: 25px 0 0 0;
   }
 }

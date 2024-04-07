@@ -12,11 +12,15 @@ const Filters = () => {
 
   const onClickFirst = () => {
     setFirstOpen(!isFirstOpen);
+    setSecondOpen(false);
   }
   const onClickSecond = () => {
     setSecondOpen(!isSecondOpen);
+    setFirstOpen(false);
   }
   const cleanSelected = () => {
+    setFirstOpen(false);
+    setSecondOpen(false);
     setSelected([]);
   }
   const onClickOption = (value: string) => {

@@ -16,7 +16,7 @@
   background: var(--main);
 }
 
-@media (max-width: 599.98px) {
+@media (max-width: 699.98px) {
   .button__tab {
     border-radius: 7px;
     padding: 10px 24px 12px 24px;
