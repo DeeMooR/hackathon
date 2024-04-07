@@ -3,7 +3,7 @@ import './Tabs.css'
 import Tab from '../Tab';
 
 const Tabs = () => {
-  const [selected, setSelected] = useState(['Все факультеты']);
+  const [selected, setSelected] = useState<string[]>(['Все факультеты']);
   const faculties = ['Все факультеты', 'ФКП', 'ФИТиУ', 'ИЭФ', 'ФКСиС', 'ФИБ', 'ФРЭ', 'ВФ'];
 
   const onClickTab = (value: string) => {

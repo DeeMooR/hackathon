@@ -8,7 +8,6 @@ interface ITab {
 }
 
 const Tab:FC<ITab> = ({value, isSelected, onClickTab}) => {
-  console.log(isSelected)
   return (
     <button
       className={`button__tab ${isSelected ? 'selected' : ''}`} 
