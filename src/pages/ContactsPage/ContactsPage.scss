@@ -1,0 +1,23 @@
+.wrapper {
+  .contactsPage {
+    margin: 60px 0 120px;
+    h1 {
+      margin: 0 0 45px 0;
+    }
+    .contactsPage__cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+  }
+}
+
+@media (max-width: 499.98px) {
+  .wrapper {
+    .contactsPage {
+      .contactsPage__cards {
+        gap: 20px;
+      }
+    }
+  }
+}

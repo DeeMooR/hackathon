@@ -21,7 +21,7 @@ const EventsPage:FC<IEventsPage> = ({type}) => {
       <Header/>
       <div className="wrapper">
         <section className="eventsPage">
-          <p className='eventsPage__crumbs'>Главная /</p>
+          <p className='crumbs'>Главная /</p>
           <h1><span>{word}</span> мероприятия</h1>
           <Tabs/>
           <Filters/>
