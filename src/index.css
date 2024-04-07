@@ -138,6 +138,13 @@ input::placeholder {
   padding: 0 20px;
 }
 
+.crumbs {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: 0.5;
+  margin: 0 0 13px 0;
+}
+
 @media (max-width: 599.98px) {
   h1 {
     font-size: 48px;

@@ -28,7 +28,7 @@ const Header = () => {
         <nav className='header__nav'>
           <Link to='/next'>Ближайшие мероприятия</Link>
           <Link to='/past'>Прошедшие мероприятия</Link>
-          <Link to='/'>Контакты</Link>
+          <Link to='/contacts'>Контакты</Link>
           <Link to='/' className='link-map'>Карта</Link>
         </nav>
         <div className="header__map">

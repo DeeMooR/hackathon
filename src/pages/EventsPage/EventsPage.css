@@ -1,12 +1,6 @@
 .wrapper .eventsPage {
   margin: 60px 0 120px;
 }
-.wrapper .eventsPage .eventsPage__crumbs {
-  font-weight: 400;
-  font-size: 14px;
-  opacity: 0.5;
-  margin: 0 0 13px 0;
-}
 .wrapper .eventsPage h1 {
   margin: 0 0 45px 0;
 }

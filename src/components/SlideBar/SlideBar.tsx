@@ -30,7 +30,7 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, setClickMenu }) => {
       <div className="slideBar__items">
         <Link to='/next' className='slideBar__item' onClick={handleClick}>Ближайшие мероприятия</Link>
         <Link to='/past' className='slideBar__item' onClick={handleClick}>Прошедшие мероприятия</Link>
-        <Link to='/' className='slideBar__item' onClick={handleClick}>Контакты</Link>
+        <Link to='/contacts' className='slideBar__item' onClick={handleClick}>Контакты</Link>
         <Link to='/' className='slideBar__item' onClick={handleClick}>Карта корпусов</Link>
       </div>
     </div>

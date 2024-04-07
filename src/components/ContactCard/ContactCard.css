@@ -1,0 +1,40 @@
+.contactCard {
+  width: calc((100% - 120px) / 4);
+  padding: 20px 30px 25px 30px;
+  background: var(--white);
+  border: 1px solid rgba(38, 54, 129, 0.5);
+  border-radius: 10px;
+}
+.contactCard h2 {
+  margin: 0 0 20px 0;
+}
+.contactCard .contactCard__icons {
+  display: flex;
+  gap: 15px;
+}
+.contactCard .contactCard__icons .img {
+  width: 34px;
+  height: 34px;
+}
+
+@media (max-width: 999.98px) {
+  .contactCard {
+    width: calc((100% - 80px) / 3);
+  }
+}
+@media (max-width: 699.98px) {
+  .contactCard {
+    width: calc((100% - 40px) / 2);
+  }
+}
+@media (max-width: 499.98px) {
+  .contactCard {
+    padding: 16px 24px 20px 24px;
+    border-radius: 7px;
+  }
+}
+@media (max-width: 399.98px) {
+  .contactCard {
+    width: 100%;
+  }
+}
