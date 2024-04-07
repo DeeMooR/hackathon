@@ -16,12 +16,11 @@ public class EventEntity {
 
     private String photo;
     private String title;
-    private Date date;//Возможно поменять на String
+    private Date date;//Возможно поменять на String//Date лучше
     private String time;//Возможно поменять на String
     private String location;
     @ElementCollection
-    private List<String> faculties = new ArrayList<>();//без понятия как это будет хранится в бд, через базу не смогла добавить значения этого поля
-    private String shortDescription;//УДАЛИТЬ
+    private List<String> faculties = new ArrayList<>();
     private String description;
     private String results;
     private String type;
@@ -106,14 +105,6 @@ public class EventEntity {
 
     public void setFaculties(List<String> faculties) {
         this.faculties = faculties;
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
     }
 
     public String getDescription() {

@@ -77,7 +77,7 @@ public class EventService {
     public List<Event> getNext() {//Дату берем сами
         Date currentDate = Date.valueOf(LocalDate.now());//!!!Проверить!!!Работает
         List<EventEntity> allEvents = (List<EventEntity>) eventRepo.findAll();
-        allEvents.removeIf(event -> event.getDate().before(currentDate));//!!!Проверить
+        allEvents.removeIf(event -> event.getDate().before(currentDate));//!!!Проверить!!!Работает
         return this.sortByDateToModel(allEvents);
     }
 
@@ -126,7 +126,7 @@ public class EventService {
     }
 
     public List<Event> filterAll(List<Event> events, Filter filter){
-        if(!filter.getFaculty().isEmpty() && !filter.getFaculty().contains("Все факультеты"))//Проверить с пустым фильтром факультеты
+        if(!filter.getFaculty().isEmpty() && !filter.getFaculty().contains("Все факультеты"))//Проверить с пустым фильтром факультеты!!!Работает
             events = this.filterFaculty(events, filter.getFaculty());
         if(!filter.getType().isEmpty())
             events = this.filterType(events, filter.getType());

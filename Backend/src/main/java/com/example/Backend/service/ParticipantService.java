@@ -33,12 +33,12 @@ public class ParticipantService {
         return true;
     }
 
-    public List<Participant> getParticipants(int id) throws EventNotFoundedException {
+    public List<String> getParticipants(int id) throws EventNotFoundedException {
         if(!eventRepo.existsById(id))
             throw new EventNotFoundedException("event not founded");
-        List<Participant> participants = new ArrayList<>();
+        List<String> participants = new ArrayList<>();
         for(ParticipantEntity participant : eventRepo.findById(id).get().getParticipants()){
-            participants.add(Participant.toModel(participant));
+            participants.add(Participant.toModel(participant).getFullNameAndGroup());
         }
         return participants;
     }
