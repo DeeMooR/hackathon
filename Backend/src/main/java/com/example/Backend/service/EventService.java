@@ -26,11 +26,11 @@ public class EventService {
     @Autowired
     private GmailSender mailSender;
 
-    public boolean create(EventEntity event) throws EventAlredyCreate{
+    public EventEntity create(EventEntity event) throws EventAlredyCreate{
         eventRepo.save(event);
         for(ReceiverEntity receiver : receiverRepo.findAll())
             mailSender.send(receiver.getEmail(),event);
-        return true;
+        return event;
     }
 
     public boolean update(EventEntity event, int id) throws EventNotFoundedException {

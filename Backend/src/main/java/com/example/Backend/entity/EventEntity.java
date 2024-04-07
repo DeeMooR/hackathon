@@ -147,4 +147,13 @@ public class EventEntity {
     public void setResults(String result) {
         this.results = result;
     }
+    @Override
+    public String toString() {
+        String message = "Дорогой студент, тебя ждет " + getTitle() + "\n"
+                + "Где: " + getLocation() + "\n"
+                + "Когда: " + getDate().toString() + " " + getTime() + "\n"
+                + "За подробностями обращайся на наш сайт или в социальные сети. А вот ссылка на наш сайт:\n" +
+                "http://localhost:3000/next/" + getId();;
+        return message;
+    }
 }

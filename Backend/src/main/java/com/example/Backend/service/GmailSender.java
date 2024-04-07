@@ -26,15 +26,15 @@ public class GmailSender {
         int message = random.nextInt(3);
         String text = "";
         switch (message){
-            case 0 -> text = "Привет от BSUIR";
-            case 1 -> text = "Подъем студент, BSUIR ждет тебя";
-            case 2 -> text = "Пора отдохнуть вместе с BSUIR";
+            case 0 -> text = "Привет от BSUIR \uD83D\uDC4B";
+            case 1 -> text = "Подъем студент, BSUIR ждет тебя \uD83D\uDE0A";
+            case 2 -> text = "Пора отдохнуть вместе с BSUIR \uD83C\uDF89";
         }
         return text;
     }
 
-    public String createMessage(EventEntity event){//Надо в EventEntity переопределить toString и сделать норм сообщение
-        return "Дорогой студент, тебя ждет " + event.getTitle() + "\nГде: " + event.getLocation() + ",\nКогда: " + event.getDate().toString() + " " + event.getTime() + "\nЗа подробностями оброщайся на наш сайт идли социальные сети";// попробовать добавить ссылку
+    public String createMessage(EventEntity event){
+        return event.toString();
     }
 
 
