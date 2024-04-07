@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = {""})
+@CrossOrigin(origins = {""})//Дописывать адресс фронта
 @RestController
 @RequestMapping("/participants")//!!!Диме сказать
 public class ParticipantController {

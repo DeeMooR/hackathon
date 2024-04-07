@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 //НЕ РАБОТАЕТ!!!!Тут ВСЕ РАБОТАЕТ//Все исправила
-@CrossOrigin(origins = {""})
+@CrossOrigin(origins = {""})//Дописывать адресс фронта
 @RestController
 @RequestMapping("/events")//!!!Диме сказать
 public class EventController {
