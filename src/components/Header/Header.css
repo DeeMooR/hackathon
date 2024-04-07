@@ -16,6 +16,7 @@
   left: 20px;
   transform: translate(0, -50%);
   cursor: pointer;
+  z-index: 2;
 }
 .header .wrapper .header__nav {
   position: absolute;
@@ -33,6 +34,8 @@
 .header .wrapper .header__map {
   display: flex;
   gap: 8px;
+  cursor: pointer;
+  z-index: 2;
 }
 .header .wrapper .header__map p {
   margin: auto 0;
