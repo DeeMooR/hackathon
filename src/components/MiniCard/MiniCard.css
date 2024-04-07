@@ -9,34 +9,6 @@
   padding: 20px 0 0 0;
   margin: 0 0 20px 0;
 }
-.mini-card .mini-card__icon-text {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.mini-card .mini-card__icon-text .mini-card__icon {
-  width: 24px;
-  height: 24px;
-}
-.mini-card .mini-card__icon-text .icon-calendar {
-  background-image: url("src/img/icons/Calender.svg");
-}
-.mini-card .mini-card__icon-text .icon-location {
-  background-image: url("src/img/icons/Location.svg");
-}
-.mini-card .mini-card__icon-text .icon-time {
-  background-image: url("src/img/icons/Time.svg");
-}
-.mini-card .mini-card__blue-box {
-  border-radius: 10px;
-  padding: 10px 15px;
-  background: #c6d2ff;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.mini-card .mini-card__blue-box p {
-  font-weight: 600;
-}
 .mini-card .mini-card__button {
   width: 100%;
 }

@@ -1,0 +1,223 @@
+.wrapper .eventPage {
+  margin: 60px 0 0 0;
+}
+.wrapper .eventPage .crumbs {
+  margin: 0 0 30px 0;
+}
+.wrapper .eventPage .eventPage__card {
+  display: flex;
+  gap: 40px;
+  margin: 0 0 120px 0;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__completed {
+  margin: 0 0 10px 0;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 14px;
+  line-height: 135%;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__completed.finished {
+  background: #e0e0e0;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__completed.registration {
+  color: #4a3737;
+  background: #ffc6c6;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__completed.free {
+  color: #323f31;
+  background: #cbffc6;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up h1 {
+  margin: 0 0 25px 0;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin: 0 0 25px 0;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__options .iconText {
+  gap: 5px;
+}
+.wrapper .eventPage .eventPage__card .eventPage__info .info__button {
+  max-width: 360px;
+}
+.wrapper .eventPage .eventPage__description {
+  display: flex;
+  gap: 40px;
+  margin: 0 0 120px 0;
+}
+.wrapper .eventPage .eventPage__description p {
+  max-width: 560px;
+  line-height: 135%;
+}
+.wrapper .eventPage .eventPage__registration {
+  display: flex;
+  gap: 40px;
+  margin: 0 0 120px 0;
+}
+.wrapper .eventPage .eventPage__registration .registration__fields {
+  max-width: 360px;
+  width: 100%;
+}
+.wrapper .eventPage .eventPage__registration .registration__fields .registration__input {
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+.wrapper .eventPage .eventPage__registration .registration__fields .registration__btn-add {
+  margin: 0 0 30px 0;
+}
+.wrapper .eventPage .eventPage__registration .registration__fields button {
+  width: 100%;
+  max-width: 360px;
+}
+.wrapper .eventPage .eventPage__results {
+  display: flex;
+  gap: 40px;
+  margin: 0 0 120px 0;
+}
+.wrapper .eventPage .eventPage__results .results__info p {
+  line-height: 2;
+  margin: 0 0 10px 0;
+}
+.wrapper .eventPage .eventPage__results .results__info a {
+  line-height: 135%;
+  text-decoration: underline;
+  color: var(--main);
+}
+
+.column-left {
+  width: 31.0344827586%;
+  min-width: 31.0344827586%;
+  margin: 0;
+}
+
+@media (max-width: 1099.98px) {
+  .wrapper .eventPage .eventPage__description h2 {
+    font-size: 38px;
+  }
+  .wrapper .eventPage .eventPage__registration h2 {
+    font-size: 38px;
+  }
+  .wrapper .eventPage .eventPage__results h2 {
+    font-size: 38px;
+  }
+}
+@media (max-width: 999.98px) {
+  .column-left {
+    width: 28.4482758621%;
+    min-width: 28.4482758621%;
+  }
+  .wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up h1 {
+    font-size: 48px;
+    margin: 0 0 20px 0;
+  }
+  .wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__options {
+    margin: 0 0 20px 0;
+  }
+  .wrapper .eventPage .eventPage__description h2 {
+    font-size: 28px;
+  }
+  .wrapper .eventPage .eventPage__registration h2 {
+    font-size: 28px;
+  }
+  .wrapper .eventPage .eventPage__results h2 {
+    font-size: 28px;
+  }
+}
+@media (max-width: 799.98px) {
+  .column-left {
+    width: 32%;
+    min-width: 32%;
+  }
+  .wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up h1 {
+    font-size: 40px;
+    margin: 0 0 15px 0;
+  }
+}
+@media (max-width: 699.98px) {
+  .wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up h1 {
+    font-size: 36px;
+  }
+  .wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__options {
+    gap: 15px;
+  }
+  .wrapper .eventPage .eventPage__description {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .wrapper .eventPage .eventPage__description h2 {
+    width: 100%;
+  }
+  .wrapper .eventPage .eventPage__registration {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .wrapper .eventPage .eventPage__registration h2 {
+    text-align: center;
+    width: 100%;
+  }
+  .wrapper .eventPage .eventPage__registration .registration__fields {
+    margin: 0 auto;
+  }
+  .wrapper .eventPage .eventPage__registration .registration__fields .registration__input {
+    display: block;
+    margin: 0 auto 20px;
+  }
+  .wrapper .eventPage .eventPage__registration .registration__fields .registration__btn-add {
+    margin: 0 auto 30px;
+  }
+  .wrapper .eventPage .eventPage__registration .registration__fields button {
+    display: block;
+    margin: 0 auto;
+  }
+  .wrapper .eventPage .eventPage__results {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .wrapper .eventPage .eventPage__results h2 {
+    width: 100%;
+  }
+}
+@media (max-width: 599.98px) {
+  .column-left {
+    max-width: 440px;
+    width: 100%;
+  }
+  .wrapper .eventPage .eventPage__card {
+    margin: 0 0 80px 0;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up h1 {
+    margin: 0 0 20px 0;
+  }
+  .wrapper .eventPage .eventPage__description {
+    margin: 0 0 80px 0;
+  }
+  .wrapper .eventPage .eventPage__registration {
+    margin: 0 0 80px 0;
+  }
+  .wrapper .eventPage .eventPage__results {
+    margin: 0 0 80px 0;
+  }
+}
+@media (max-width: 499.98px) {
+  .wrapper .eventPage .eventPage__description h2 {
+    font-size: 24px;
+  }
+  .wrapper .eventPage .eventPage__registration h2 {
+    font-size: 24px;
+  }
+  .wrapper .eventPage .eventPage__results h2 {
+    font-size: 24px;
+  }
+}
