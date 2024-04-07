@@ -17,7 +17,7 @@ public class AdminController {
 
     @GetMapping("/auth")
     public ResponseEntity authorization(@RequestBody AdminEntity admin ) throws MyException {
-        AdminEntity authenticatedUser = adminService.authoriz(admin.getLogin(), admin.getPassword());//почему не объектом
+        AdminEntity authenticatedUser = adminService.authoriz(admin);//почему не объектом//Исправленно
         if (authenticatedUser != null) {
             return ResponseEntity.ok(authenticatedUser.getName());
         } else {

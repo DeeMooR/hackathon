@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 public class AdminService {
     @Autowired
     private AdminRepo adminRepo;
-    public AdminEntity authoriz(String login, String password) throws MyException {
-        AdminEntity admin = adminRepo.findByLogin(login);
-        if (admin != null||admin.getPassword().equals(password)) {
+    public AdminEntity authoriz(AdminEntity adminEntity) throws MyException {
+        AdminEntity admin = adminRepo.findByLogin(adminEntity.getLogin());
+        if (admin != null && admin.getPassword().equals(adminEntity.getPassword())) {
             return admin;
         } else {
             throw new MyException("Неверный пароль или пароль");

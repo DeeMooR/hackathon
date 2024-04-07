@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class AdminEntity {
-    //Вариант ключ перекинуть на логин и удалить id(не надо repo + меньше полей)
+    //Вариант ключ перекинуть на логин//Оставляем так
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

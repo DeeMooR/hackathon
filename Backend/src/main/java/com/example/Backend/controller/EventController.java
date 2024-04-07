@@ -6,7 +6,7 @@ import com.example.Backend.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-//НЕ РАБОТАЕТ!!!!Не надо тут ВСЕ РАБОТАЕТ
+//НЕ РАБОТАЕТ!!!!Тут ВСЕ РАБОТАЕТ//Все исправила
 @CrossOrigin(origins = {""})
 @RestController
 @RequestMapping("/events")//!!!Диме сказать
@@ -32,7 +32,7 @@ public class EventController {
         }
     }
 
-    @PatchMapping("/results")//не работает
+    @PatchMapping("/results")//не работает//Починил
     public ResponseEntity setResults(@RequestBody String results, @RequestParam int id){
         try {
             return ResponseEntity.ok(eventService.setResults(results, id));
@@ -41,7 +41,7 @@ public class EventController {
         }
     }
 
-    @PatchMapping("/link")//не работает
+    @PatchMapping("/link")//не работает//Починил
     public ResponseEntity setArchive(@RequestBody String link, @RequestParam int id){
         try {
             return ResponseEntity.ok(eventService.setArchive(link, id));
@@ -50,7 +50,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/all")//не работает
+    @GetMapping("/all")//не работает//Починил
     public ResponseEntity getEvents(){
         try {
             return ResponseEntity.ok(eventService.getEvents());
@@ -59,7 +59,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/past30days")//не работает
+    @GetMapping("/past30days")//не работает//Починил
     public ResponseEntity past30days(){
         try {
             return ResponseEntity.ok(eventService.getForPast30days());
@@ -67,7 +67,7 @@ public class EventController {
             return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
         }
     }
-    @GetMapping("/next")//не работает
+    @GetMapping("/next")//не работает//Починил
     public ResponseEntity nextEvents(){
         try {
             return ResponseEntity.ok(eventService.getNext());
@@ -94,7 +94,7 @@ public class EventController {
         }
     }
 
-    @DeleteMapping("/delete")//не работает
+    @DeleteMapping("/delete")//не работает//Починил
     public ResponseEntity deleteEvent(@RequestParam int id){
         try {
             return  ResponseEntity.ok(eventService.delete(id));

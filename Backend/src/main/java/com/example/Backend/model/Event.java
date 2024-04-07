@@ -1,10 +1,8 @@
 package com.example.Backend.model;
 
 import com.example.Backend.entity.EventEntity;
-import com.example.Backend.entity.ParticipantEntity;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +14,11 @@ public class Event {
     private String time;
     private String location;
     private List<String> faculties;
-    private String shortDescription;//УДАЛИТЬ
     private String description;
     private String archive;
     private String results;
     private String type;
     private String visit;
-    private List<Participant> participants;//Убрать
 
     public static Event toModel(EventEntity entity){
         return new Event(entity);
@@ -35,7 +31,6 @@ public class Event {
         date = entity.getDate();
         time = entity.getTime();
         location = entity.getLocation();
-        shortDescription = entity.getShortDescription();
         description = entity.getDescription();
         archive = entity.getArchive();
         faculties = new ArrayList<>();
@@ -44,9 +39,6 @@ public class Event {
         visit = entity.getVisit();
         for(String str : entity.getFaculties())
             faculties.add(str);
-        participants = new ArrayList<>();
-        for(ParticipantEntity participant : entity.getParticipants())
-            participants.add(Participant.toModel(participant));
     }
 
     public int getId() {
@@ -129,14 +121,6 @@ public class Event {
         this.faculties = faculties;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -153,11 +137,4 @@ public class Event {
         this.archive = archive;
     }
 
-    public List<Participant> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<Participant> participants) {
-        this.participants = participants;
-    }
 }
