@@ -49,8 +49,8 @@ h1,h2,h3,h4,h5,h6{font-family: var(--font-family); font-weight:600;}
 /*--------- STYLES ---------*/
 
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {

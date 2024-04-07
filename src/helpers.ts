@@ -67,3 +67,5 @@ export const formatDate = (dateString: Date) => {
 }
 
 export const faculties = ['ФКП', 'ФИТУ', 'ИЭФ', 'ФКСИС', 'ФИБ', 'ФРЭ', 'ВФ'];
+
+export const event_members = ['110901, Антонович Алексей', '210902, Матышев Дмитрий', '210902, Бабич Александр', '210902, Огиенко Надежда'];
