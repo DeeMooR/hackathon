@@ -16,13 +16,13 @@ public class Event {
     private String time;
     private String location;
     private List<String> faculties;
-    private String shortDescription;//возможно надо будет удалить
+    private String shortDescription;//УДАЛИТЬ
     private String description;
     private String archive;
     private String results;
     private String type;
     private String visit;
-    private List<Participant> participants;//возвращать с номером в массиве?
+    private List<Participant> participants;//Убрать
 
     public static Event toModel(EventEntity entity){
         return new Event(entity);

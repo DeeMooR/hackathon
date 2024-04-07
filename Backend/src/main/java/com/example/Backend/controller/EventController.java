@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/events")//!!!Диме сказать
 public class EventController {
+
     @Autowired
     private EventService eventService;
     @PostMapping("/create")

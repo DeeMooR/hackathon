@@ -2,35 +2,34 @@ package com.example.Backend.service;
 
 import com.example.Backend.Filter;
 import com.example.Backend.entity.EventEntity;
+import com.example.Backend.entity.ReceiverEntity;
 import com.example.Backend.exception.EventAlredyCreate;
 import com.example.Backend.exception.EventNotFoundedException;
 import com.example.Backend.model.Event;
 import com.example.Backend.repository.EventRepo;
+import com.example.Backend.repository.ReceiverRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.util.Comparator.*;
 
 @Service
 public class EventService {
 
     @Autowired
     private EventRepo eventRepo;
+    @Autowired
+    private ReceiverRepo receiverRepo;
+    @Autowired
+    private GmailSender mailSender;
 
-    public boolean create(EventEntity event) throws EventAlredyCreate {
-//        if (eventRepo.findByTitle(event.getTitle())!=null){
-//            throw new EventAlredyCreate("Мероприятие уже существует");
-//        }// как будто бы название пожет повторяться из года в год
+    public boolean create(EventEntity event) throws EventAlredyCreate{
         eventRepo.save(event);
+        for(ReceiverEntity receiver : receiverRepo.findAll())
+            mailSender.send(receiver.getEmail(),event);
         return true;
     }
 
@@ -133,4 +132,6 @@ public class EventService {
             events = this.filterVisit(events, filter.getVisit());
         return events;
     }
+
+
 }
