@@ -6,8 +6,8 @@ import java.util.List;
 public class Filter {
     // Или переписать на массивы
     List<String> faculty = new ArrayList<>();
-    List<String> type = new ArrayList<>();
-    List<String> visit = new ArrayList<>();
+    String type;
+    String visit;
 
     public List<String> getFaculty() {
         return faculty;
@@ -17,19 +17,19 @@ public class Filter {
         this.faculty = faculty;
     }
 
-    public List<String> getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(List<String> type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public List<String> getVisit() {
+    public String getVisit() {
         return visit;
     }
 
-    public void setVisit(List<String> visit) {
+    public void setVisit(String visit) {
         this.visit = visit;
     }
 }
