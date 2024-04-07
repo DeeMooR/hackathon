@@ -1,0 +1,20 @@
+.iconText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.iconText img {
+  width: 24px;
+  height: 24px;
+}
+
+.blue-box {
+  border-radius: 10px;
+  padding: 10px 15px;
+  background: #c6d2ff;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.blue-box p {
+  font-weight: 600;
+}
