@@ -1,0 +1,16 @@
+.modalMembers h2 {
+  margin: 0 0 30px 0;
+}
+.modalMembers h3 {
+  margin: 0 0 10px 0;
+}
+.modalMembers ol {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0 0 30px 20px;
+}
+.modalMembers ol li {
+  font-weight: 400;
+  line-height: 135%;
+}

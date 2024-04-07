@@ -1,0 +1,9 @@
+.textInput {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.textInput img {
+  width: 24px;
+  height: 24px;
+}

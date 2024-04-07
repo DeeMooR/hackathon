@@ -1,0 +1,15 @@
+.modalDelete h2 {
+  margin: 0 0 30px 0;
+}
+.modalDelete .modalDelete__buttons {
+  display: flex;
+  gap: 20px;
+}
+.modalDelete .modalDelete__buttons .button-delete {
+  background: #dc1d1d;
+  color: var(--white);
+  border: none;
+}
+.modalDelete .modalDelete__buttons .button-cancel {
+  border: 2px solid var(--dark-main);
+}
