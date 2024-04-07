@@ -44,12 +44,14 @@ public class EventService {
     public boolean setResults(String result, int id) throws EventNotFoundedException {
         EventEntity eventEntity=eventRepo.findById(id).orElseThrow(() -> new EventNotFoundedException("Мероприятие не найдено"));
         eventEntity.setResults(result);
+        eventRepo.save(eventEntity);
         return true;
     }
 
     public boolean setArchive(String link, int id) throws EventNotFoundedException {
         EventEntity eventEntity=eventRepo.findById(id).orElseThrow(() -> new EventNotFoundedException("Мероприятие не найдено"));
         eventEntity.setArchive(link);
+        eventRepo.save(eventEntity);
         return true;
     }
 
@@ -74,7 +76,7 @@ public class EventService {
     }
 
     public List<Event> getNext() {//Дату берем сами
-        Date currentDate = Date.valueOf(LocalDate.now());//!!!Проверить
+        Date currentDate = Date.valueOf(LocalDate.now());//!!!Проверить!!!Работает
         List<EventEntity> allEvents = (List<EventEntity>) eventRepo.findAll();
         allEvents.removeIf(event -> event.getDate().before(currentDate));//!!!Проверить
         return this.sortByDateToModel(allEvents);
@@ -92,14 +94,14 @@ public class EventService {
     }
 
     public List<Event> sortByDateToModel(List<EventEntity> eventsEntities){
-        eventsEntities.sort(Comparator.comparing(EventEntity::getDate));//!!!Проверить
+        eventsEntities.sort(Comparator.comparing(EventEntity::getDate));//!!!Проверить!!Работает
         List<Event> events = new ArrayList<>();
         for(EventEntity event: eventsEntities)
             events.add(Event.toModel(event));
         return events;
     }
 
-    public List<Event> filterFaculty(List<Event> events, List<String> faculties){//проверить
+    public List<Event> filterFaculty(List<Event> events, List<String> faculties){
         List<Event> filterEvents = new ArrayList<>();
         for(String faculty : faculties)
             for(Event event : events)
@@ -108,7 +110,7 @@ public class EventService {
         return filterEvents.stream().distinct().collect(Collectors.toList());
     }
 
-    public List<Event> filterType(List<Event> events, List<String> types){//проверить
+    public List<Event> filterType(List<Event> events, List<String> types){
         List<Event> filterEvents = new ArrayList<>();
         for(Event event : events)
             if(types.contains(event.getType()))
@@ -116,7 +118,7 @@ public class EventService {
         return filterEvents;
     }
 
-    public List<Event> filterVisit(List<Event> events, List<String> visit){//проверить
+    public List<Event> filterVisit(List<Event> events, List<String> visit){
         List<Event> filterEvents = new ArrayList<>();
         for(Event event : events)
             if(visit.contains(event.getVisit()))
@@ -127,9 +129,9 @@ public class EventService {
     public List<Event> filterAll(List<Event> events, Filter filter){
         if(!filter.getFaculty().isEmpty())
             events = this.filterFaculty(events, filter.getFaculty());
-        if(!filter.getType().isEmpty())
+        else if(!filter.getType().isEmpty())
             events = this.filterType(events, filter.getType());
-        if(!filter.getVisit().isEmpty())
+        else if(!filter.getVisit().isEmpty())
             events = this.filterVisit(events, filter.getVisit());
         return events;
     }
