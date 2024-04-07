@@ -58,6 +58,9 @@ h1 {
   font-size: 64px;
   line-height: 110%;
 }
+h1 span {
+  color: var(--main);
+}
 
 h2 {
   font-weight: 600;

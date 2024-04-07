@@ -1,5 +1,5 @@
 .mini-card {
-  width: 100%;
+  width: calc((100% - 80px)/3);
   line-height: 135%;
 
   .mini-card__description {
@@ -43,6 +43,10 @@
 
 
 @media (max-width: 999.98px) {
+  .mini-card {
+    width: calc((100% - 40px)/2);
+    line-height: 135%;
+  }
   .event_3 {
     display: none;
   }
@@ -50,6 +54,7 @@
 
 @media (max-width: 599.98px) {
   .mini-card {
+    width: 100%;
     max-width: 400px;
     margin: 0 auto;
   }

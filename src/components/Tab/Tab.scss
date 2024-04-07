@@ -1,0 +1,26 @@
+.button__tab {
+  border-radius: 10px;
+  padding: 14px 30px 16px 30px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 135%;
+  color: var(--dark-main);
+  background: #c6d2ff;
+
+  &:hover {
+    background: #abbdff;
+  }
+  &.selected {
+    color: var(--white);
+    background: var(--main);
+  }
+}
+
+@media (max-width: 599.98px) {
+  .button__tab {
+    border-radius: 7px;
+    padding: 10px 24px 12px 24px;
+    font-size: 16px;
+  }
+}
