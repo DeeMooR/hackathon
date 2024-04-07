@@ -15,7 +15,7 @@ const Newsletter = () => {
               <p>Введите почту и получайте уведомления о мероприятиях в БГУИР</p>
             </div>
             <div className="newsletter__fields">
-              <input type="email" className='newsletter__input' placeholder='Эл. почта' />
+              <input type="email" className='input-dark newsletter__input' placeholder='Эл. почта' />
               <button className='second-button newsletter__button'>Получать уведомления на почту</button>
             </div>
           </div>

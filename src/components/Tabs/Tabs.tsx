@@ -4,7 +4,7 @@ import Tab from '../Tab';
 
 const Tabs = () => {
   const [selected, setSelected] = useState<string[]>(['Все факультеты']);
-  const faculties = ['Все факультеты', 'ФКП', 'ФИТиУ', 'ИЭФ', 'ФКСиС', 'ФИБ', 'ФРЭ', 'ВФ'];
+  const facultiesTabs = ['Все факультеты', 'ФКП', 'ФИТиУ', 'ИЭФ', 'ФКСиС', 'ФИБ', 'ФРЭ', 'ВФ'];
 
   const onClickTab = (value: string) => {
     const newSelected = selected.includes(value)
@@ -15,7 +15,7 @@ const Tabs = () => {
 
   return (
     <div className='tabs'>
-      {faculties.map(v => 
+      {facultiesTabs.map(v => 
         <Tab 
           value={v} 
           isSelected={selected.includes(v)} 

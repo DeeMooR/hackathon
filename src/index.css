@@ -88,17 +88,24 @@ a {
 
 input {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: var(--main);
+  background: #c6d2ff;
   border-radius: 10px;
   padding: 14px 10px 16px 20px;
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 18px;
   line-height: 135%;
-  color: var(--white);
+  color: var(--dark-text);
 }
 input::placeholder {
+  opacity: 0.5;
+}
+.input-dark {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: var(--main);
+  color: var(--white);
+}
+.input-dark::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 

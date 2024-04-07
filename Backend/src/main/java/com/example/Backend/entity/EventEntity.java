@@ -19,6 +19,7 @@ public class EventEntity {
     private Date date;//Возможно поменять на String
     private String time;//Возможно поменять на String
     private String location;
+    @ElementCollection
     private List<String> faculties = new ArrayList<>();//без понятия как это будет хранится в бд, через базу не смогла добавить значения этого поля
     private String shortDescription;//УДАЛИТЬ
     private String description;
