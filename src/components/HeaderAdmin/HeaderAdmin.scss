@@ -35,6 +35,10 @@
         font-size: 16px;
         padding: 8px 25px 10px 25px;
         background: var(--white);
+        &:hover {
+          background: var(--main);
+          color: var(--white);
+        }
       }
       .headerAdmin__link {
         font-weight: 400;

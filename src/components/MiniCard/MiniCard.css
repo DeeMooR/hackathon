@@ -9,7 +9,12 @@
   padding: 20px 0 0 0;
   margin: 0 0 20px 0;
 }
-.mini-card .mini-card__button {
+.mini-card .mini-card__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mini-card .mini-card__buttons button {
   width: 100%;
 }
 
@@ -18,7 +23,7 @@
     width: calc((100% - 40px) / 2);
     line-height: 135%;
   }
-  .event_3 {
+  .delete-small {
     display: none;
   }
 }
