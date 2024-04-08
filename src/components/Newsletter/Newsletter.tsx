@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './Newsletter.css'
 
-import email from 'src/img/email_image.png'
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { setReceiverEmailAPI } from 'src/store/requests';
+import emailImage from 'src/img/email_image.png';
 
 const Newsletter = () => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
@@ -19,7 +19,7 @@ const Newsletter = () => {
     <div className='newsletter'>
       <div className="wrapper">
         <div className="newsletter__photo-info">
-          <img src={email} className='newsletter__photo' alt="photo" />
+          <img src={emailImage} className='newsletter__photo' alt="photo" />
           <div className="newsletter__text-fields">
             <div className="newsletter__text">
               <h2>Узнавайте первым о новых событиях</h2>

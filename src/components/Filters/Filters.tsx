@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import './Filters.css'
 
 import arrow from "src/img/icons/Arrow.svg"
 import close from "src/img/icons/Close.svg"
 import FilterOptions from '../FilterOptions'
 
-const Filters = () => {
+interface IFilters {
+  types: string[],
+  visits: string[],
+  clickType: (v: string[]) => void,
+  clickVisit: (v: string[]) => void,
+}
+
+const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
   const [isFirstOpen, setFirstOpen] = useState(false);
   const [isSecondOpen, setSecondOpen] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
@@ -21,7 +28,8 @@ const Filters = () => {
   const cleanSelected = () => {
     setFirstOpen(false);
     setSecondOpen(false);
-    setSelected([]);
+    clickType([]);
+    clickVisit([]);
   }
   const onClickOption = (value: string) => {
     const newSelected = selected.includes(value)
@@ -47,7 +55,7 @@ const Filters = () => {
           </div>
           {isFirstOpen && 
             <div className="filters__options-container">
-              <FilterOptions options={firstOptions} selected={selected} onClickOption={onClickOption}/>
+              <FilterOptions options={firstOptions} selected={types} onClickOption={clickType}/>
             </div>
           }
         </div>
@@ -58,7 +66,7 @@ const Filters = () => {
           </div>
           {isSecondOpen && 
             <div className="filters__options-container">
-              <FilterOptions options={secondOptions} selected={selected} onClickOption={onClickOption}/>
+              <FilterOptions options={secondOptions} selected={visits} onClickOption={clickVisit}/>
             </div>
           }
         </div>

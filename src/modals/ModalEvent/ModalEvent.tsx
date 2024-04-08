@@ -147,7 +147,7 @@ const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickSh
       
           <div className="modalEvent__select-box">
             <h3>Факультеты</h3>
-            <FilterOptions options={options} selected={selected} onClickOption={onClickOption}/>
+            <FilterOptions options={options} selected={selected} onClickOption={() => onClickOption}/>
           </div>
           <div className="modalEvent__select-box">
             <h3>Вид мероприятия</h3>

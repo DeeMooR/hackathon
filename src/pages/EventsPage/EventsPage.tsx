@@ -23,12 +23,26 @@ const EventsPage:FC<IEventsPage> = ({type}) => {
   const word = (type === 'next') ? 'Ближайшие' : 'Прошедшие';
 
   const [tab, setTab] = useState<string>('Все факультеты');
-  const [types, setTypes] = useState([]);
-  const [visits, setVisits] = useState([]);
+  const [types, setTypes] = useState<string[]>([]);
+  const [visits, setVisits] = useState<string[]>([]);
 
   const onClickTab = (value: string) => {
     console.log(value)
     setTab(value);
+  }
+  const clickType = (value: string) => {
+    if (types.includes(value)) {
+      const update = types.filter(v => v !== value);
+      setTypes(update)
+    }
+    console.log(types, visits)
+  }
+  const clickVisit = (value: string) => {
+    if (visits.includes(value)) {
+      const update = visits.filter(v => v !== value);
+      setVisits(update)
+    }
+    console.log(types, visits)
   }
 
   return (
@@ -39,7 +53,7 @@ const EventsPage:FC<IEventsPage> = ({type}) => {
           <p className='crumbs'>Главная /</p>
           <h1><span>{word}</span> мероприятия</h1>
           <Tabs tab={tab} onClickTab={onClickTab}/>
-          {/* <Filters types={types} setTypes={setTypes} visits={visits} setVisits={setVisits}/> */}
+          <Filters types={types} clickType={() => clickType} visits={visits} clickVisit={() => clickVisit}/>
           <div className="eventsPage__events">
             {events.map((obj: IEvent) => 
               <MiniCard obj={obj} key={obj.id}/>

@@ -4,7 +4,7 @@ import './FilterOptions.css'
 interface IFilterOptions {
   options: string[],
   selected: string[],
-  onClickOption: (value: string) => void
+  onClickOption: (value: string[]) => void
 }
 
 const FilterOptions:FC<IFilterOptions> = ({options, selected, onClickOption}) => {
@@ -16,7 +16,7 @@ const FilterOptions:FC<IFilterOptions> = ({options, selected, onClickOption}) =>
             type="checkbox" 
             name="name" 
             checked={selected.includes(value)} 
-            onChange={() => onClickOption(value)} 
+            onChange={(e: any) => onClickOption(e.target.value)} 
           />
           <div className='checkbox__icon'></div>
           <p className='checkbox__text'>{value}</p>
