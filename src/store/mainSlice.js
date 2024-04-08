@@ -6,7 +6,8 @@ const initialState = {
   eventsPast: [],
   admin_name: null,
   status: null,
-  error: false
+  error: false,
+  user: null
 }
 
 const setLoading = (state) => {
@@ -30,11 +31,11 @@ const mainSlice = createSlice({
     builder
     .addCase(getEventsNextAPI.fulfilled, (state, action) => {
       state.status = 'resolved';
-      state.eventsNext.push(...action.payload);
+      state.eventsNext = [...action.payload];
     })
     .addCase(getEventsPastAPI.fulfilled, (state, action) => {
       state.status = 'resolved';
-      state.eventsPast.push(...action.payload);
+      state.eventsPast = [...action.payload];
     })
     .addCase(checkAuthAPI.fulfilled, (state, action) => {
       state.status = 'resolved';

@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Newsletter.css'
 
-import email from "src/img/email_image.png"
+import email from 'src/img/email_image.png'
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { setReceiverEmailAPI } from 'src/store/requests';
 
 const Newsletter = () => {
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const [email, setEmail] = useState('');
+
+  const clickBth = () => {
+    dispatch(setReceiverEmailAPI(email));
+  }
+
   return (
     <div className='newsletter'>
       <div className="wrapper">
@@ -15,8 +26,8 @@ const Newsletter = () => {
               <p>Введите почту и получайте уведомления о мероприятиях в БГУИР</p>
             </div>
             <div className="newsletter__fields">
-              <input type="email" className='input-dark newsletter__input' placeholder='Эл. почта' />
-              <button className='second-button newsletter__button'>Получать уведомления на почту</button>
+              <input type="email" className='input-dark newsletter__input' onChange={(e: any) => setEmail(e.target.value)} placeholder='Эл. почта' />
+              <button className='second-button newsletter__button' onClick={clickBth}>Получать уведомления на почту</button>
             </div>
           </div>
         </div>

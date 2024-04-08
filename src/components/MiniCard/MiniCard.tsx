@@ -25,7 +25,7 @@ const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, clickShow
 
   const openEventPage = () => {
     if (isPast(obj.date)) navigate(`/past/${obj.id}`);
-    else navigate(`/past/${obj.id}`);
+    else navigate(`/next/${obj.id}`);
   }
   
   return (

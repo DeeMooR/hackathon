@@ -4,7 +4,7 @@ import ModalTemplate from '../ModalTemplate'
 import { event_members } from 'src/helpers';
 
 interface IModalMembers {
-  isOpen: boolean;
+  isOpen: boolean,
   closeModal: () => void
 }
 

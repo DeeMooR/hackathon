@@ -8,12 +8,16 @@ import ModalEvent from 'src/modals/ModalEvent'
 import ModalMembers from 'src/modals/ModalMembers'
 import ModalMessage from 'src/modals/ModalMessage'
 import ModalDelete from 'src/modals/ModalDelete'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IEvent } from 'src/interface'
 import { useNavigate } from 'react-router-dom'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
+import { deleteEventAPI } from 'src/store/requests'
 
 const AdminPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const {eventsNext, eventsPast, admin_name} = useSelector((state: any) => state.main);
   const [isOpenModalEvent, setOpenModalEvent] = useState(false);
   const [isOpenModalChangeEvent, setOpenModalChangeEvent] = useState(false);
@@ -22,6 +26,13 @@ const AdminPage = () => {
 
   const [eventsNextFaculty, setEventsNextFaculty] = useState([]);
   const [eventsPastFaculty, setEventsPastFaculty] = useState([]);
+
+  const [idEventAction, setIdEventAction] = useState(-1);
+  const [objEventAction, setObjEventAction] = useState();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   useEffect(() => {
     const updateNext = faculties.includes(admin_name) 
@@ -40,19 +51,30 @@ const AdminPage = () => {
   },[eventsPast])
 
   const showModalEvent = () => {
+    console.log('ku')
     setOpenModalEvent(true);
   }
-  const clickChangeEvent = (id: number) => {
+  const clickChangeEvent = (id: number) => {setIdEventAction(id);
+    const obj = [...eventsNext, ...eventsPast].find((item: IEvent) => item.id === id);
+    setObjEventAction(obj);
     setOpenModalChangeEvent(true);
   }
   const clickShowMembers = (id: number) => {
+    setIdEventAction(id);
     setOpenModalMembers(true);
   }
-  const clickShowDelete = () => {
-    setOpenModalEvent(false);
+  const clickShowDelete = (id: number) => {
+    setIdEventAction(id);
+    setOpenModalChangeEvent(false);
     setOpenModalDelete(true);
   }
-  const deleteEvent = () => {}
+  const deleteEvent = () => {
+    if (idEventAction) {
+      dispatch(deleteEventAPI(idEventAction));
+      window.scrollTo(0, 0);
+      closeModal();
+    }
+  }
 
   const closeModal = () => {
     document.body.style.overflowY = 'auto';
@@ -118,7 +140,7 @@ const AdminPage = () => {
         </div>
         <Footer/>
         <ModalEvent isOpen={isOpenModalEvent} closeModal={closeModal} action='add' />
-        <ModalEvent isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />
+        <ModalEvent event={objEventAction} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />
         <ModalMembers isOpen={isOpenModalMembers} closeModal={closeModal} />
         <ModalDelete isOpen={isOpenModalDelete} closeModal={closeModal} deleteEvent={deleteEvent} />
         {/* <ModalMessage isOpen={true} closeModal={closeModal} isSuccess={false}/> */}
