@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AuthPage.css'
 import Header from 'src/components/Header'
 import Footer from 'src/components/Footer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { checkAuthAPI } from 'src/store/requests'
 import { IAuth } from 'src/interface'
+import { useNavigate } from 'react-router-dom'
+import ModalMessage from 'src/modals/ModalMessage'
 
 const AuthPage = () => {
+  window.scrollTo(0, 0);
+  const navigate = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const {admin_name, status} = useSelector((state: any) => state.main);
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [isOpenModal, setOpenModal] = useState(false);
 
   const changeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value);
@@ -27,6 +34,29 @@ const AuthPage = () => {
     dispatch(checkAuthAPI(obj));
   }
 
+  useEffect(() => {
+    if (admin_name) {
+      localStorage.setItem('admin_name', admin_name);
+      setTimeout(() => {
+        navigate('/admin');
+      }, 300)
+    }
+    if (status === 'rejected') setOpenModal(true);
+  }, [admin_name, status])
+
+  const closeModal = () => {
+    document.body.style.overflowY = 'auto';
+    document.body.style.padding = '0';
+    setOpenModal(false);
+  }
+
+  useEffect(() => {
+    if (isOpenModal) {
+      document.body.style.overflowY = 'hidden';
+      document.body.style.padding = '0 17px 0 0';
+    }
+  }, [isOpenModal])
+
   return (
     <>
       <Header/>
@@ -41,6 +71,7 @@ const AuthPage = () => {
         </section>
       </div>
       <Footer/>
+      <ModalMessage isOpen={isOpenModal} closeModal={closeModal} isSuccess={false}/>
     </>
   )
 }

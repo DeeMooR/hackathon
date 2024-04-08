@@ -97,3 +97,13 @@ export const defaultObj = {
   "type":"a",
   "visit":"z"
 }
+
+export const isPast = (date: Date) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const event_date = new Date(date);
+  event_date.setHours(0, 0, 0, 0);
+
+  if (event_date.getTime() < today.getTime()) return true;
+  return false;
+}

@@ -6,7 +6,8 @@ const initialState = {
   eventsPast: [],
   admin_name: null,
   status: null,
-  error: false
+  error: false,
+  user: null
 }
 
 const setLoading = (state) => {
@@ -22,23 +23,24 @@ const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
+    clearAdminName(state) {
+      state.admin_name = null;
+  },
   },
   extraReducers: (builder) => {
     builder
     .addCase(getEventsNextAPI.fulfilled, (state, action) => {
       state.status = 'resolved';
-      state.eventsNext.push(...action.payload);
+      state.eventsNext = [...action.payload];
     })
     .addCase(getEventsPastAPI.fulfilled, (state, action) => {
       state.status = 'resolved';
-      state.eventsPast.push(...action.payload);
+      state.eventsPast = [...action.payload];
     })
     .addCase(checkAuthAPI.fulfilled, (state, action) => {
       state.status = 'resolved';
-      console.log(action.payload)
       state.admin_name = action.payload;
     })
-
     
     .addCase(getEventsNextAPI.pending, setLoading)
     .addCase(getEventsPastAPI.pending, setLoading)
@@ -51,4 +53,4 @@ const mainSlice = createSlice({
 })
 
 export default mainSlice.reducer
-export const { getFields } = mainSlice.actions
+export const { clearAdminName } = mainSlice.actions

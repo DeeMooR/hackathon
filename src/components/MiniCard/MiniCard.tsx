@@ -6,25 +6,26 @@ import calendar from "src/img/icons/Calender.svg"
 import location from "src/img/icons/Location.svg"
 import time from "src/img/icons/Time.svg"
 import IconText from '../IconText'
-import { defaultObj, formatDate } from 'src/helpers'
+import { defaultObj, formatDate, isPast } from 'src/helpers'
 import { IEvent } from 'src/interface'
 import { useNavigate } from 'react-router-dom'
 const hack = 'https://i.ibb.co/k5HzGCR/news-6.png'
 
 interface IMiniCard {
-  obj?: IEvent,
+  obj: IEvent,
   isDeleteSmall?: boolean,
   edit?: boolean,
   show_users?: boolean,
-  clickShowMembers?: () => void,
-  clickChangeEvent?: () => void
+  clickShowMembers?: (id: number) => void,
+  clickChangeEvent?: (id: number) => void
 }
 
-const MiniCard:FC<IMiniCard> = ({obj = defaultObj, isDeleteSmall, edit, show_users, clickShowMembers, clickChangeEvent}) => {
+const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, clickShowMembers, clickChangeEvent}) => {
   const navigate = useNavigate();
 
   const openEventPage = () => {
-    navigate(`/next/${obj.id}`);
+    if (isPast(obj.date)) navigate(`/past/${obj.id}`);
+    else navigate(`/next/${obj.id}`);
   }
   
   return (
@@ -43,8 +44,8 @@ const MiniCard:FC<IMiniCard> = ({obj = defaultObj, isDeleteSmall, edit, show_use
         {!edit && !show_users && 
           <button className='second-button' onClick={openEventPage}>Подробнее</button>
         }
-        {edit && <button className='second-button' onClick={clickChangeEvent}>Редактировать мероприятие</button>}
-        {show_users && <button className='button' onClick={clickShowMembers}>Смотреть участников</button>}
+        {edit && <button className='second-button' onClick={() => clickChangeEvent?.(obj.id)}>Редактировать мероприятие</button>}
+        {show_users && <button className='button' onClick={() => clickShowMembers?.(obj.id)}>Смотреть участников</button>}
       </div>
     </div>
   )
