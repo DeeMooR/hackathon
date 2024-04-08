@@ -18,3 +18,8 @@ export interface IEvent {
   type: string,
   visit: string
 }
+
+export interface IAuth {
+  login: string,
+  password: string
+}

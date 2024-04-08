@@ -6,8 +6,11 @@ import Header from 'src/components/Header'
 import main from "src/img/main.png"
 import Newsletter from 'src/components/Newsletter'
 import Footer from 'src/components/Footer'
+import { IEvent } from 'src/interface'
+import { useSelector } from 'react-redux'
 
 const MainPage = () => {
+  const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
 
   return (
     <>
@@ -26,18 +29,18 @@ const MainPage = () => {
         <section className='eventsSection'>
           <h2>Ближайшие мероприятия</h2>
           <div className="eventsSection__events">
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard isDeleteSmall/>
+            {eventsNext.slice(0, 3).map((obj: IEvent, i: number) => 
+              <MiniCard obj={obj} key={i} isDeleteSmall={i === 2}/>
+            )}
           </div>
           <button className='button eventsSection__button'>Смотреть будущие мероприятия</button>
         </section>
         <section className='eventsSection'>
           <h2>Прошедшие мероприятия</h2>
           <div className="eventsSection__events">
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard isDeleteSmall/>
+            {eventsPast.slice(0, 3).map((obj: IEvent, i: number) => 
+              <MiniCard obj={obj} key={i} isDeleteSmall={i === 2}/>
+            )}
           </div>
           <button className='button eventsSection__button'>Смотреть прошлые мероприятия</button>
         </section>
