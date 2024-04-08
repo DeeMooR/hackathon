@@ -21,6 +21,7 @@ public class EventEntity {
     private String location;
     @ElementCollection
     private List<String> faculties = new ArrayList<>();
+    @Column(length = 2000)
     private String description;
     private String results;
     private String type;
