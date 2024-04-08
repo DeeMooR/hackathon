@@ -2,7 +2,6 @@ package com.example.Backend.controller;
 
 import com.example.Backend.entity.AdminEntity;
 import com.example.Backend.exception.MyException;
-import com.example.Backend.model.Admin;
 import com.example.Backend.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +18,15 @@ public class AdminController {
     public ResponseEntity authorization(@RequestBody AdminEntity admin ) throws MyException {
         try{
             return ResponseEntity.ok(adminService.authoriz(admin));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity create(@RequestBody AdminEntity admin ) throws MyException {
+        try{
+            return ResponseEntity.ok(adminService.create(admin));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(false);
         }

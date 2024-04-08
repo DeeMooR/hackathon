@@ -112,7 +112,7 @@ public class EventService {
     public List<Event> filterType(List<Event> events, String type){
         List<Event> filterEvents = new ArrayList<>();
         for(Event event : events)
-            if(event.getType().equals(type))
+            if(type.equals(event.getType()))
                 filterEvents.add(event);
         return filterEvents;
     }
@@ -120,7 +120,7 @@ public class EventService {
     public List<Event> filterVisit(List<Event> events, String visit){
         List<Event> filterEvents = new ArrayList<>();
         for(Event event : events)
-            if(event.getVisit().equals(visit))
+            if(visit.equals(event.getVisit()))
                 filterEvents.add(event);
         return filterEvents;
     }
