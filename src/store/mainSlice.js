@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getEventsNextAPI, getEventsPastAPI, checkAuthAPI } from './requests.ts'
+import { getEventsNextAPI, getEventsPastAPI, checkAuthAPI, getEventMembersAPI } from './requests.ts'
 
 const initialState = {
   eventsNext: [],
@@ -7,7 +7,8 @@ const initialState = {
   admin_name: null,
   status: null,
   error: false,
-  user: null
+  user: null,
+  members: []
 }
 
 const setLoading = (state) => {
@@ -41,14 +42,20 @@ const mainSlice = createSlice({
       state.status = 'resolved';
       state.admin_name = action.payload;
     })
+    .addCase(getEventMembersAPI.fulfilled, (state, action) => {
+      state.status = 'resolved';
+      state.members = action.payload;
+    })
     
     .addCase(getEventsNextAPI.pending, setLoading)
     .addCase(getEventsPastAPI.pending, setLoading)
     .addCase(checkAuthAPI.pending, setLoading)
+    .addCase(getEventMembersAPI.pending, setLoading)
 
     .addCase(getEventsNextAPI.rejected, setError)
     .addCase(getEventsPastAPI.rejected, setError)
     .addCase(checkAuthAPI.rejected, setError)
+    .addCase(getEventMembersAPI.rejected, setError)
 },
 })
 

@@ -133,18 +133,36 @@ export const setReceiverEmailAPI = createAsyncThunk(
 )
 export const sendMembersAPI = createAsyncThunk(
   'user/setReceiverEmailAPI',
-  async ({ members, id }: { members: string[], id: number }, {rejectWithValue}) => {
+  async ({ members, id }: { members: {fullNameAndGroup: string;}[], id: number }, {rejectWithValue}) => {
     try {
       const response = await fetch(`http://localhost:8080/participants/add?id=${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({members})
+        body: JSON.stringify(members)
       })
       if (!response.ok) throw new Error();
       const data = await response.json();
       console.log(data)
+    } catch (error: any) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+export const getEventMembersAPI = createAsyncThunk(
+  'user/getEventMembersAPI',
+  async (id: number, {rejectWithValue}) => {
+    try {
+      const response = await fetch(`http://localhost:8080/participants/get?id=${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      if (!response.ok) throw new Error();
+      const data = await response.json();
+      return data;
     } catch (error: any) {
       return rejectWithValue(error.message)
     }

@@ -1,24 +1,20 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import './Tabs.css'
 import Tab from '../Tab';
 
-const Tabs = () => {
-  const [selected, setSelected] = useState<string[]>(['Все факультеты']);
-  const facultiesTabs = ['Все факультеты', 'ФКП', 'ФИТиУ', 'ИЭФ', 'ФКСиС', 'ФИБ', 'ФРЭ', 'ВФ'];
+interface ITabs {
+  tab: string,
+  onClickTab: (value: string) => void
+}
 
-  const onClickTab = (value: string) => {
-    const newSelected = selected.includes(value)
-      ? selected.filter((item) => item !== value)
-      : [...selected, value];
-    setSelected(newSelected);
-  }
-
+const Tabs:FC<ITabs> = ({tab, onClickTab}) => {
+  const facultiesTabs = ['Все факультеты', 'ФКП', 'ФИТУ', 'ИЭФ', 'ФКСиС', 'ФИБ', 'ФРЭ', 'ВФ'];
   return (
     <div className='tabs'>
       {facultiesTabs.map(v => 
         <Tab 
           value={v} 
-          isSelected={selected.includes(v)} 
+          isSelected={(tab === v)} 
           key={v} 
           onClickTab={onClickTab}
         />

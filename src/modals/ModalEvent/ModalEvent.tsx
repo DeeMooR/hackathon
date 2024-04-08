@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import './ModalEvent.css'
 import ModalTemplate from '../ModalTemplate'
-import { faculties, faculty__user, isPast } from 'src/helpers';
+import { faculties, isPast } from 'src/helpers';
 import TextInput from 'src/components/TextInput';
 import FilterOptions from 'src/components/FilterOptions';
 import RadioOptions from 'src/components/RadioOptions';
@@ -40,10 +40,10 @@ const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickSh
     setSelectedRadio2(value);
   }
   const onClickOption = (value: string) => {
-    if (value === faculty__user) return;
+    if (value === admin_name) return;
     if (value === 'Все факультеты') {
       if (!selected.includes(value)) setSelected(options);
-      else setSelected([faculty__user]);
+      else setSelected([admin_name]);
       return;
     }
     if (selected.length == 6 && !selected.includes(value)) {

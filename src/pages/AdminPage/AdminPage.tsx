@@ -3,7 +3,7 @@ import './AdminPage.css'
 import HeaderAdmin from 'src/components/HeaderAdmin'
 import Footer from 'src/components/Footer'
 import MiniCard from 'src/components/MiniCard'
-import { faculties, faculty__user } from 'src/helpers'
+import { faculties } from 'src/helpers'
 import ModalEvent from 'src/modals/ModalEvent'
 import ModalMembers from 'src/modals/ModalMembers'
 import ModalMessage from 'src/modals/ModalMessage'
@@ -13,7 +13,7 @@ import { IEvent } from 'src/interface'
 import { useNavigate } from 'react-router-dom'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { deleteEventAPI } from 'src/store/requests'
+import { deleteEventAPI, getEventMembersAPI } from 'src/store/requests'
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -62,6 +62,7 @@ const AdminPage = () => {
   const clickShowMembers = (id: number) => {
     setIdEventAction(id);
     setOpenModalMembers(true);
+    dispatch(getEventMembersAPI(id));
   }
   const clickShowDelete = (id: number) => {
     setIdEventAction(id);
@@ -94,11 +95,11 @@ const AdminPage = () => {
 
   let organization = '';
   let faculty = '';
-  if (faculties.includes(faculty__user)) {
+  if (faculties.includes(admin_name)) {
     organization = 'Студ. совет ';
-    faculty = faculty__user;
+    faculty = admin_name;
   } 
-  else organization = faculty__user;
+  else organization = admin_name;
 
   return (
     <>

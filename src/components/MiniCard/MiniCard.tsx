@@ -6,7 +6,7 @@ import calendar from "src/img/icons/Calender.svg"
 import location from "src/img/icons/Location.svg"
 import time from "src/img/icons/Time.svg"
 import IconText from '../IconText'
-import { defaultObj, formatDate, isPast } from 'src/helpers'
+import { formatDate, isPast } from 'src/helpers'
 import { IEvent } from 'src/interface'
 import { useNavigate } from 'react-router-dom'
 const hack = 'https://i.ibb.co/k5HzGCR/news-6.png'

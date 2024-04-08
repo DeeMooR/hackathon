@@ -68,8 +68,6 @@ export const formatDate = (dateString: Date) => {
 
 export const faculties = ['ФКП', 'ФИТУ', 'ИЭФ', 'ФКСИС', 'ФИБ', 'ФРЭ', 'ВФ'];
 
-export const faculty__user = 'ФКП';
-
 export const event_members = ['110901, Антонович Алексей', '210902, Матышев Дмитрий', '210902, Бабич Александр', '210902, Огиенко Надежда'];
 
 export const modal_text = [
@@ -84,19 +82,6 @@ export const modal_text = [
     button: 'Назад'
   }
 ];
-
-export const defaultObj = {
-  "id": "0",
-  "photo": "fcad",
-  "title": "fcad",
-  "date": new Date('2024-05-05'),
-  "time": "33-44-33",
-  "location": "gggg",
-  "faculties":["ФКП"],
-  "description": "fhfh",
-  "type":"a",
-  "visit":"z"
-}
 
 export const isPast = (date: Date) => {
   const today = new Date();

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import MiniCard from 'src/components/MiniCard'
 import './EventsPage.css'
 import Header from 'src/components/Header'
@@ -22,6 +22,15 @@ const EventsPage:FC<IEventsPage> = ({type}) => {
   const events = (type === 'next') ? eventsNext : eventsPast;
   const word = (type === 'next') ? 'Ближайшие' : 'Прошедшие';
 
+  const [tab, setTab] = useState<string>('Все факультеты');
+  const [types, setTypes] = useState([]);
+  const [visits, setVisits] = useState([]);
+
+  const onClickTab = (value: string) => {
+    console.log(value)
+    setTab(value);
+  }
+
   return (
     <>
       <Header/>
@@ -29,8 +38,8 @@ const EventsPage:FC<IEventsPage> = ({type}) => {
         <section className="eventsPage">
           <p className='crumbs'>Главная /</p>
           <h1><span>{word}</span> мероприятия</h1>
-          <Tabs/>
-          <Filters/>
+          <Tabs tab={tab} onClickTab={onClickTab}/>
+          {/* <Filters types={types} setTypes={setTypes} visits={visits} setVisits={setVisits}/> */}
           <div className="eventsPage__events">
             {events.map((obj: IEvent) => 
               <MiniCard obj={obj} key={obj.id}/>

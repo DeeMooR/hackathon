@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import './EventPage.css'
 import { events, formatDate, isPast } from 'src/helpers'
 import Header from 'src/components/Header';
@@ -29,6 +29,13 @@ const EventPage:FC<{type: string}> = ({type}) => {
   const [completedClass, setCompletedClass] = useState('')
   const [crumbsMessege, setCrumbsMessege] = useState('Главная /')
   const [typeDate, setTypeDate] = useState('');
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const scrollToButton = () => {
+    if (buttonRef.current) {
+      buttonRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -83,7 +90,9 @@ const EventPage:FC<{type: string}> = ({type}) => {
     setMembers(sendMembers);
     setInputRegister('');
     console.log(sendMembers);
-    dispatch(sendMembersAPI({ members: sendMembers, id: event.id }));
+    // dispatch(sendMembersAPI({ members: sendMembers, id: event.id }));
+    const newArray = sendMembers.map(item => ({ fullNameAndGroup: item }));
+    dispatch(sendMembersAPI({ members: newArray, id: event.id }));
   }
 
   return (
@@ -113,7 +122,7 @@ const EventPage:FC<{type: string}> = ({type}) => {
                 </div>
               </div>
               {type === 'next' && event.visit === 'С регистрацией' &&
-                <button className='button info__button'>Зарегистрироваться</button>
+                <button className='button info__button' onClick={scrollToButton}>Зарегистрироваться</button>
               }
             </div>
           </div>
@@ -133,7 +142,7 @@ const EventPage:FC<{type: string}> = ({type}) => {
                   </div>
                 )}
                 <button className='second-button registration__btn-add' onClick={addMember}>Добавить участника</button>
-                <button className='button registration__btn-send' onClick={sendMembers}>Зарегистрироваться</button>
+                <button className='button registration__btn-send' onClick={sendMembers} ref={buttonRef}>Зарегистрироваться</button>
               </div>
             </div>
           }
