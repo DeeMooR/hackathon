@@ -11,6 +11,8 @@ public class AdminEntity {
     private String login;
     private String password;
     private String name;
+    private byte[] sold;
+
     public AdminEntity(){}
 
     public void setId(int id) {
@@ -43,5 +45,13 @@ public class AdminEntity {
 
     public int getId() {
         return id;
+    }
+
+    public byte[] getSold() {
+        return sold;
+    }
+
+    public void setSold(byte[] sold) {
+        this.sold = sold;
     }
 }
