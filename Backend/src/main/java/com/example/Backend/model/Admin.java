@@ -9,6 +9,7 @@ public class Admin {
     private String login;
     private String password;
     private String name;
+
     private Admin(){}
 
     public void setPassword(String password) {

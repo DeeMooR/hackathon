@@ -7,16 +7,54 @@ import com.example.Backend.repository.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
+
 @Service
 public class AdminService {
     @Autowired
     private AdminRepo adminRepo;
-    public AdminEntity authoriz(AdminEntity adminEntity) throws MyException {
+    public AdminEntity authoriz(AdminEntity adminEntity) throws MyException, NoSuchAlgorithmException {
         AdminEntity admin = adminRepo.findByLogin(adminEntity.getLogin());
-        if (admin != null && admin.getPassword().equals(adminEntity.getPassword())) {
+        if (admin != null && verifyPassword(adminEntity.getPassword(), admin.getPassword(), admin.getSold())) {
             return admin;
         } else {
             throw new MyException("Неверный пароль или пароль");
         }
+    }
+
+    public boolean create(AdminEntity adminEntity) throws MyException, NoSuchAlgorithmException {
+        if(adminRepo.findByLogin(adminEntity.getLogin()) != null) {
+            throw new MyException("Неверный пароль или пароль");
+        }
+        byte[] salt = generateSalt();
+        adminEntity.setSold(salt);
+        String password = hashPassword(adminEntity.getPassword(), salt);
+        adminEntity.setPassword(password);
+        adminRepo.save(adminEntity);
+        return true;
+    }
+
+    public static byte[] generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        return salt;
+    }
+
+    // Хеширование пароля с использованием соли
+    public static String hashPassword(String password, byte[] salt) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        digest.reset();
+        digest.update(salt);
+        byte[] hashedBytes = digest.digest(password.getBytes());
+        return Base64.getEncoder().encodeToString(hashedBytes);
+    }
+
+    public static boolean verifyPassword(String password, String hashedPassword, byte[] salt) throws NoSuchAlgorithmException {
+        String newHashedPassword = hashPassword(password, salt);
+        return newHashedPassword.equals(hashedPassword);
     }
 }
