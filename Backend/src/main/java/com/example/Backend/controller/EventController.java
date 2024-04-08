@@ -85,7 +85,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/next/filter")
+    @PutMapping("/next/filter")
     public ResponseEntity nextEventsFilter(@RequestBody Filter filter){
         try {
             return ResponseEntity.ok(eventService.getNext(filter));
