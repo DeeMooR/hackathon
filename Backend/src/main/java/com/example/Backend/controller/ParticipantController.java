@@ -17,7 +17,7 @@ public class ParticipantController {
     @Autowired
     private ParticipantService participantService;
     @PostMapping("/add")
-    public ResponseEntity add(@RequestBody List<ParticipantEntity> participants, @RequestParam int id){
+    public ResponseEntity add(@RequestBody List<String> participants, @RequestParam int id){
         try {
             return ResponseEntity.ok(participantService.add(participants, id));
         } catch(Exception e){

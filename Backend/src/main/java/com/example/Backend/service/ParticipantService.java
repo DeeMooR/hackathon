@@ -20,11 +20,13 @@ public class ParticipantService {
     @Autowired
     private EventRepo eventRepo;
 
-    public boolean add(List<ParticipantEntity> participants,int id) throws EventNotFoundedException {
+    public boolean add(List<String> participants,int id) throws EventNotFoundedException {
         if(!eventRepo.existsById(id))
             throw new EventNotFoundedException("event not founded");
         EventEntity event = eventRepo.findById(id).get();
-        for(ParticipantEntity participant : participants){
+        for(String str : participants){
+            ParticipantEntity participant = new ParticipantEntity();
+            participant.setFullNameAndGroup(str);
             participant.setEvent(event);
             participantRepo.save(participant);
         }
