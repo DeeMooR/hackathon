@@ -63,7 +63,7 @@ public class EventService {
 
     public List<Event> getForPast30days() {
         List<EventEntity> allEvents = (List<EventEntity>) eventRepo.findAll();
-        allEvents.removeIf(event -> event.getDate().after(Date.valueOf(LocalDate.now())) || event.getDate().before(Date.valueOf(LocalDate.now().minusDays(30))));
+        allEvents.removeIf(event -> event.getDate().after(Date.valueOf(LocalDate.now().minusDays(1))) || event.getDate().before(Date.valueOf(LocalDate.now().minusDays(30))));
         List<Event> events = this.sortByDateToModel(allEvents);
         Collections.reverse(events);
         return events;
