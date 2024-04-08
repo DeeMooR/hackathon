@@ -19,7 +19,7 @@ public class EventController {
         try {
             return ResponseEntity.ok(eventService.create(event));
         }catch(Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(false);
         }
     }
 
@@ -55,33 +55,33 @@ public class EventController {
         try {
             return ResponseEntity.ok(eventService.getEvents());
         } catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
+            return ResponseEntity.badRequest().body(false);
         }
     }
 
-    @GetMapping("/past30days")//не работает//Починил
+    @PutMapping("/past30days")//не работает//Починил
     public ResponseEntity past30days(){
         try {
             return ResponseEntity.ok(eventService.getForPast30days());
         } catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
+            return ResponseEntity.badRequest().body(false);
         }
     }
-    @GetMapping("/next")//не работает//Починил
+    @PutMapping("/next")//не работает//Починил
     public ResponseEntity nextEvents(){
         try {
             return ResponseEntity.ok(eventService.getNext());
         } catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
+            return ResponseEntity.badRequest().body(false);
         }
     }
 
-    @GetMapping("/past30days/filter")
+    @PutMapping("/past30days/filter")
     public ResponseEntity past30daysFilter(@RequestBody Filter filter){
         try {
             return ResponseEntity.ok(eventService.getForPast30days(filter));
         } catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
+            return ResponseEntity.badRequest().body(false);
         }
     }
 
@@ -90,7 +90,7 @@ public class EventController {
         try {
             return ResponseEntity.ok(eventService.getNext(filter));
         } catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка"+ e.getMessage());
+            return ResponseEntity.badRequest().body(false);
         }
     }
 

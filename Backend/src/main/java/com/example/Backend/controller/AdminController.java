@@ -14,7 +14,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @GetMapping("/auth")
+    @PostMapping("/auth")
     public ResponseEntity authorization(@RequestBody AdminEntity admin ) throws MyException {
         try{
             return ResponseEntity.ok(adminService.authoriz(admin));
