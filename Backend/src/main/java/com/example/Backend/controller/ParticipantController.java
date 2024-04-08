@@ -1,5 +1,6 @@
 package com.example.Backend.controller;
 
+import com.example.Backend.entity.ParticipantEntity;
 import com.example.Backend.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class ParticipantController {
     @Autowired
     private ParticipantService participantService;
     @PostMapping("/add")
-    public ResponseEntity add(@RequestBody List<String> participants, @RequestParam int id){
+    public ResponseEntity add(@RequestBody List<ParticipantEntity> participants, @RequestParam int id){
         try {
             return ResponseEntity.ok(participantService.add(participants, id));
         } catch(Exception e){
