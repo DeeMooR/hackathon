@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import './EventPage.css'
-import { events, formatDate } from 'src/helpers'
+import { events, formatDate, isPast } from 'src/helpers'
 import Header from 'src/components/Header';
 import Newsletter from 'src/components/Newsletter';
 import Footer from 'src/components/Footer';
@@ -11,33 +11,50 @@ import calendar from "src/img/icons/Calender.svg"
 import location from "src/img/icons/Location.svg"
 import time from "src/img/icons/Time.svg"
 import dots from "src/img/icons/Dots.svg"
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { IEvent } from 'src/interface';
 
 const EventPage:FC<{type: string}> = ({type}) => {
-  const event = events[0];
-  let completedMessege = '';
-  let completedClass = ''
-  let crumbsMessege = (type === 'past') ? 'Главная / Прошедшие мероприятия' : 'Главная / Ближайшие мероприятия';
+  const { id = 0 } = useParams();
+  const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
 
-  if (type === 'past') {
-    completedMessege = 'Мероприятие завершилось';
-    completedClass = 'finished'
-  } 
-  else if (event.visit === 'Свободный вход') {
-    completedMessege = 'Вход свободный';
-    completedClass = 'free'
-  } 
-  else {
-    completedMessege = 'Регистрация обязательна';
-    completedClass = 'registration'
-  }
+  const [event, setEvent] = useState<any>(null)
+  const [completedMessege, setCompletedMessege] = useState('')
+  const [completedClass, setCompletedClass] = useState('')
+  const [crumbsMessege, setCrumbsMessege] = useState('Главная /')
+  
+  useEffect(() => {
+    if (eventsNext.length > 0 && eventsPast.length > 0) {
+      const updateEvent = [...eventsNext, ...eventsPast].find((item: IEvent) => item.id === +id);
+      console.log(eventsNext, updateEvent)
+      setEvent(updateEvent);
+    }
+  }, [eventsNext, eventsPast])
 
-  const showFaculties = () => {
-    return event.faculties.join(', ');
-  }
+  useEffect(() => {
+    if (event) {
+      const type = isPast(event.date) ? 'past' : 'next'; 
+      if (type === 'past') setCrumbsMessege('Главная / Прошедшие мероприятия');
+      else setCrumbsMessege('Главная / Ближайшие мероприятия');
 
-  const stringWithBreak = "Пример строки <br/> с тегом переноса строки.";
+      if (type === 'past') {
+        setCompletedMessege('Мероприятие завершилось');
+        setCompletedClass('finished');
+      } else if (event?.visit === 'Свободный вход') {
+        setCompletedMessege('Вход свободный');
+        setCompletedClass('free');
+      } else {
+        setCompletedMessege('Регистрация обязательна');
+        setCompletedClass('registration');
+      }
+    }
+  }, [event])
+
   return (
     <>
+    {event && event.id &&
+      <>
       <Header/>
       <div className="wrapper">
         <section className="eventPage">
@@ -45,7 +62,7 @@ const EventPage:FC<{type: string}> = ({type}) => {
           <div className="eventPage__card">
             <div className="eventPage__image column-left">
               <Container>
-                <BackgroundImage image={event.photo} />
+                <BackgroundImage image={event?.photo} />
               </Container>
             </div>
             <div className="eventPage__info">
@@ -57,7 +74,7 @@ const EventPage:FC<{type: string}> = ({type}) => {
                   <IconText icon={location} text={event.location} />
                   <IconText icon={time} text={event.time} />
                   <IconText icon={dots} text={event.type} />
-                  <p>{showFaculties()}</p>
+                  <p>{event.faculties.join(', ')}</p>
                 </div>
               </div>
               {type === 'next' && event.visit === 'С регистрацией' &&
@@ -93,6 +110,8 @@ const EventPage:FC<{type: string}> = ({type}) => {
       <Newsletter/>
       <Footer/>
     </>
+    }
+  </>
   )
 }
 

@@ -22,6 +22,9 @@ const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
+    clearAdminName(state) {
+      state.admin_name = null;
+  },
   },
   extraReducers: (builder) => {
     builder
@@ -35,10 +38,8 @@ const mainSlice = createSlice({
     })
     .addCase(checkAuthAPI.fulfilled, (state, action) => {
       state.status = 'resolved';
-      console.log(action.payload)
       state.admin_name = action.payload;
     })
-
     
     .addCase(getEventsNextAPI.pending, setLoading)
     .addCase(getEventsPastAPI.pending, setLoading)
@@ -51,4 +52,4 @@ const mainSlice = createSlice({
 })
 
 export default mainSlice.reducer
-export const { getFields } = mainSlice.actions
+export const { clearAdminName } = mainSlice.actions
