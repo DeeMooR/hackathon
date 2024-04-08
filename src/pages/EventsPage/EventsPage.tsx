@@ -8,12 +8,17 @@ import Newsletter from 'src/components/Newsletter'
 import Footer from 'src/components/Footer'
 import Tabs from 'src/components/Tabs'
 import Filters from 'src/components/Filters'
+import { useSelector } from 'react-redux'
+import { IEvent } from 'src/interface'
 
 interface IEventsPage {
   type: string
 }
 
 const EventsPage:FC<IEventsPage> = ({type}) => {
+  const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
+
+  const events = (type === 'next') ? eventsNext : eventsPast;
   const word = (type === 'next') ? 'Ближайшие' : 'Прошедшие';
 
   return (
@@ -26,15 +31,9 @@ const EventsPage:FC<IEventsPage> = ({type}) => {
           <Tabs/>
           <Filters/>
           <div className="eventsPage__events">
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
-            <MiniCard/>
+            {events.map((obj: IEvent) => 
+              <MiniCard obj={obj} key={obj.id}/>
+            )}
           </div>
         </section>
       </div>

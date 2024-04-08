@@ -12,6 +12,7 @@ public class AdminService {
     @Autowired
     private AdminRepo adminRepo;
     public AdminEntity authoriz(AdminEntity adminEntity) throws MyException {
+        System.out.println(adminEntity);
         AdminEntity admin = adminRepo.findByLogin(adminEntity.getLogin());
         if (admin != null && admin.getPassword().equals(adminEntity.getPassword())) {
             return admin;

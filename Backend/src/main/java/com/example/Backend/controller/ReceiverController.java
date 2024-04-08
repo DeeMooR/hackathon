@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {""})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequestMapping("/receiver")//!!!Диме сказать
 public class ReceiverController {

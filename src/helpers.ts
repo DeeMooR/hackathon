@@ -84,3 +84,16 @@ export const modal_text = [
     button: 'Назад'
   }
 ];
+
+export const defaultObj = {
+  "id": "0",
+  "photo": "fcad",
+  "title": "fcad",
+  "date": new Date('2024-05-05'),
+  "time": "33-44-33",
+  "location": "gggg",
+  "faculties":["ФКП"],
+  "description": "fhfh",
+  "type":"a",
+  "visit":"z"
+}

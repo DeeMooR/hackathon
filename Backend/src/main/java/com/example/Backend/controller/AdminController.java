@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {""})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -17,11 +17,10 @@ public class AdminController {
 
     @GetMapping("/auth")
     public ResponseEntity authorization(@RequestBody AdminEntity admin ) throws MyException {
-        AdminEntity authenticatedUser = adminService.authoriz(admin);//почему не объектом//Исправленно
-        if (authenticatedUser != null) {
-            return ResponseEntity.ok(authenticatedUser.getName());
-        } else {
-            return ResponseEntity.badRequest().body("Неверный логин или пароль");
+        try{
+            return ResponseEntity.ok(adminService.authoriz(admin));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(false);
         }
     }
 }
