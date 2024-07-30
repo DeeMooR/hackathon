@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getEvents, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, IconText } from 'src/components';
 import { formatDate, isPast } from 'src/helpers'
@@ -11,13 +11,14 @@ import './EventPage.css'
 
 export const EventPage:FC<{type: string}> = ({type}) => {
   const { id = 0 } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { eventsNext, eventsPast } = useAppSelector(getEvents);
 
   const [event, setEvent] = useState<any>(null)
   const [completedMessege, setCompletedMessege] = useState('')
   const [completedClass, setCompletedClass] = useState('')
-  const [crumbsMessege, setCrumbsMessege] = useState('Главная /')
+  const [crumbsEventsPage, setCrumbsEventsPage] = useState('')
   const [typeDate, setTypeDate] = useState('');
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -40,8 +41,8 @@ export const EventPage:FC<{type: string}> = ({type}) => {
       const updateTypeDate = isPast(event.date) ? 'past' : 'next'; 
       setTypeDate(updateTypeDate);
       console.log(type, event)
-      if (type === 'past') setCrumbsMessege('Главная / Прошедшие мероприятия');
-      else setCrumbsMessege('Главная / Ближайшие мероприятия');
+      if (type === 'past') setCrumbsEventsPage('Прошедшие мероприятия');
+      else setCrumbsEventsPage('Ближайшие мероприятия');
 
       if (type === 'past') {
         setCompletedMessege('Мероприятие завершилось');
@@ -80,7 +81,7 @@ export const EventPage:FC<{type: string}> = ({type}) => {
     const newArray = sendMembers.map(item => ({ fullNameAndGroup: item }));
     dispatch(sendMembersAPI({ members: newArray, id: event.id }));
   }
-
+  
   return (
     <>
     {event && event.id &&
@@ -88,7 +89,11 @@ export const EventPage:FC<{type: string}> = ({type}) => {
       <Header/>
       <div className="wrapper">
         <section className="eventPage">
-          <p className='crumbs'>{crumbsMessege}</p>
+          <p className='crumbs'>
+            // !!! Исправить на объект с данными
+            <span onClick={() => navigate('/')}>Главная</span> / 
+            <span onClick={() => navigate(`/${type}`)}>{crumbsEventsPage}</span>
+          </p>
           <div className="eventPage__card">
             <div className="eventPage__image column-left">
               <Container>

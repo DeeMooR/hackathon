@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAdmin, getEvents, useAppDispatch, useAppSelector } from 'src/store'
+import { getAdmin, getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store'
 import { HeaderAdmin, Footer, MiniCard } from 'src/components';
 import { ModalEvent, ModalMembers, ModalMessage, ModalDelete } from 'src/modals';
 import { faculties } from 'src/helpers'
@@ -9,7 +9,6 @@ import { deleteEventAPI, getEventMembersAPI } from 'src/store/requests'
 import './AdminPage.css'
 
 export const AdminPage = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { eventsNext, eventsPast } = useAppSelector(getEvents);
   const { adminFaculty } = useAppSelector(getAdmin);
@@ -23,6 +22,11 @@ export const AdminPage = () => {
 
   const [idEventAction, setIdEventAction] = useState(-1);
   const [objEventAction, setObjEventAction] = useState<IEvent>();
+
+  useEffect(() => {
+    dispatch(getEventsNextAction());
+    dispatch(getEventsPastAction());
+  }, [])
 
   useEffect(() => {
     const updateNext = faculties.includes(adminFaculty) 

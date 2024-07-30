@@ -89,9 +89,10 @@ a {
 
 input {
   width: 100%;
+  height: 54px;
   background: #c6d2ff;
   border-radius: 10px;
-  padding: 14px 10px 16px 20px;
+  padding: 0 10px 0 20px;
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 18px;
@@ -121,11 +122,13 @@ textarea {
   font-size: 18px;
   line-height: 135%;
   color: var(--dark-text);
+  resize: none;
 }
 
 .button {
+  height: 54px;
   border-radius: 10px;
-  padding: 14px 10px 16px 10px;
+  padding: 0 10px 0 10px;
   background: var(--main);
   font-family: var(--font-family);
   font-weight: 600;
@@ -138,10 +141,11 @@ textarea {
 }
 
 .second-button {
+  height: 54px;
   border: 2px solid var(--main);
   background-color: var(--main-background);
   border-radius: 10px;
-  padding: 14px 10px 16px 10px;
+  padding: 0 10px 0 10px;
   font-family: var(--font-family);
   font-weight: 600;
   font-size: 18px;
@@ -164,6 +168,7 @@ textarea {
   font-size: 14px;
   opacity: 0.5;
   margin: 0 0 13px 0;
+  cursor: pointer;
 }
 
 @media (max-width: 599.98px) {

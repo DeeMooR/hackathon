@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, EventsTop } from 'src/components';
 import { mainImage } from 'src/assets';
 import './MainPage.css'
 
 export const MainPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { eventsNext, eventsPast } = useAppSelector(getEvents);
   
@@ -12,6 +14,10 @@ export const MainPage = () => {
     dispatch(getEventsNextAction());
     dispatch(getEventsPastAction());
   }, [])
+
+  const clickOpenEventsNext = () => {
+    navigate('/next');
+  }
 
   return (
     <>
@@ -22,7 +28,7 @@ export const MainPage = () => {
             <h1><span>Расписание</span> мероприятий в БГУИР</h1>
             <div className="mainSection__text-button">
               <p className='mainSection__text'>Список мероприятий всех типов, от всех факультетов, с гибкой сортировкой и возможностью зарегистрироваться</p>
-              <button className='button mainSection__button'>Смотреть ближайшие события</button>
+              <button className='button mainSection__button' onClick={clickOpenEventsNext}>Смотреть ближайшие события</button>
             </div>
           </div>
           <img src={mainImage} className='mainSection__image' alt="bsuir" />

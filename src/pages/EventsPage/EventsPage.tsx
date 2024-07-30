@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Header, Footer, Newsletter, Tabs, Filters, MiniCard } from 'src/components';
 import { IEvent } from 'src/interface'
 import './EventsPage.css'
@@ -9,6 +10,7 @@ interface IEventsPage {
 }
 
 export const EventsPage:FC<IEventsPage> = ({type}) => {
+  const navigate = useNavigate();
   const { eventsNext, eventsPast } = useAppSelector(getEvents);
 
   const events = (type === 'next') ? eventsNext : eventsPast;
@@ -37,12 +39,16 @@ export const EventsPage:FC<IEventsPage> = ({type}) => {
     console.log(types, visits)
   }
 
+  const openMainPage = () => {
+    navigate('/');
+  }
+
   return (
     <>
       <Header/>
       <div className="wrapper">
         <section className="eventsPage">
-          <p className='crumbs'>Главная /</p>
+          <p className='crumbs' onClick={openMainPage}>Главная /</p>
           <h1><span>{word}</span> мероприятия</h1>
           <Tabs tab={tab} onClickTab={onClickTab}/>
           <Filters types={types} clickType={() => clickType} visits={visits} clickVisit={() => clickVisit}/>

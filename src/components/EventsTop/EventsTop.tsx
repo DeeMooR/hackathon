@@ -16,6 +16,10 @@ export const EventsTop:FC<IEventsTop> = ({ eventsShow, type }) => {
   const { isLoading } = useAppSelector(getEvents);
   const { title, navigatePage, buttonText, emptyText } = EventsTopType[type];
 
+  const onClickButton = () => {
+    navigate(navigatePage);
+  }
+
   return (
     <section className='eventsTop'>
       <h2>{title}</h2>
@@ -28,7 +32,7 @@ export const EventsTop:FC<IEventsTop> = ({ eventsShow, type }) => {
                   <MiniCard obj={obj} key={i} />
                 )}
               </div>
-              <button className='button eventsTop__button' onClick={() => navigate(navigatePage)}>{buttonText}</button>
+              <button className='button eventsTop__button' onClick={onClickButton}>{buttonText}</button>
             </>
           ) : (
             <h4 className='eventsTop__empty'>{emptyText}</h4>
