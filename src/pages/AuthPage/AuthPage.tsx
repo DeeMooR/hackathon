@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import './AuthPage.css'
-import Header from 'src/components/Header'
-import Footer from 'src/components/Footer'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+import { Header, Footer } from 'src/components';
+import { ModalMessage } from 'src/modals';
 import { checkAuthAPI } from 'src/store/requests'
 import { IAuth } from 'src/interface'
-import { useNavigate } from 'react-router-dom'
-import ModalMessage from 'src/modals/ModalMessage'
+import './AuthPage.css'
 
-const AuthPage = () => {
+export const AuthPage = () => {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
@@ -75,5 +74,3 @@ const AuthPage = () => {
     </>
   )
 }
-
-export default AuthPage

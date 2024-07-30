@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import EventsPage from './pages/EventsPage';
-import ContactsPage from './pages/ContactsPage';
-import AuthPage from './pages/AuthPage';
-import EventPage from './pages/EventPage';
-import AdminPage from './pages/AdminPage';
 import { getEventsNextAPI, getEventsPastAPI } from 'src/store/requests'
 import { useDispatch } from 'react-redux'
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
+import { AdminPage, AuthPage, ContactsPage, EventPage, EventsPage, MainPage } from './pages';
 
 function App() {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();

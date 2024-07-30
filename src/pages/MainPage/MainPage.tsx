@@ -1,16 +1,12 @@
 import React from 'react'
-import MiniCard from 'src/components/MiniCard'
-import './MainPage.css'
-import Header from 'src/components/Header'
-
-import main from "src/img/main.jpg"
-import Newsletter from 'src/components/Newsletter'
-import Footer from 'src/components/Footer'
-import { IEvent } from 'src/interface'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Header, Footer, Newsletter, MiniCard } from 'src/components';
+import { IEvent } from 'src/interface'
+import { mainImage } from 'src/assets';
+import './MainPage.css'
 
-const MainPage = () => {
+export const MainPage = () => {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
@@ -27,7 +23,7 @@ const MainPage = () => {
               <button className='button mainSection__button'>Смотреть ближайшие события</button>
             </div>
           </div>
-          <img src={main} className='mainSection__image' alt="bsuir" />
+          <img src={mainImage} className='mainSection__image' alt="bsuir" />
         </section>
         <section className='eventsSection'>
           <h2>Ближайшие мероприятия</h2>
@@ -60,5 +56,3 @@ const MainPage = () => {
     </>
   )
 }
-
-export default MainPage

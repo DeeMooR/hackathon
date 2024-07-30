@@ -1,15 +1,11 @@
 import React, { FC } from 'react'
-import './MiniCard.css'
-import { BackgroundImage, Container } from 'src/styled'
-
-import calendar from "src/img/icons/Calender.svg"
-import location from "src/img/icons/Location.svg"
-import time from "src/img/icons/Time.svg"
-import IconText from '../IconText'
+import { useNavigate } from 'react-router-dom'
+import { IconText } from 'src/components';
 import { formatDate, isPast } from 'src/helpers'
 import { IEvent } from 'src/interface'
-import { useNavigate } from 'react-router-dom'
-const hack = 'https://i.ibb.co/k5HzGCR/news-6.png'
+import { calenderIcon, locationIcon, timeIcon } from 'src/assets';
+import { BackgroundImage, Container } from 'src/styled'
+import './MiniCard.css'
 
 interface IMiniCard {
   obj: IEvent,
@@ -20,7 +16,7 @@ interface IMiniCard {
   clickChangeEvent?: (id: number) => void
 }
 
-const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, clickShowMembers, clickChangeEvent}) => {
+export const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, clickShowMembers, clickChangeEvent}) => {
   const navigate = useNavigate();
 
   const openEventPage = () => {
@@ -35,9 +31,9 @@ const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, clickShow
       </Container>
       <div className='mini-card__description'>
         <h3 className='mini-card__title'>{obj.title}</h3>
-        <IconText icon={calendar} text={formatDate(obj.date)} isBlueBox />
-        <IconText icon={location} text={obj.location} />
-        <IconText icon={time} text={obj.time} />
+        <IconText icon={calenderIcon} text={formatDate(obj.date)} isBlueBox />
+        <IconText icon={locationIcon} text={obj.location} />
+        <IconText icon={timeIcon} text={obj.time} />
         <p>{obj.faculties.join(', ')}</p>
       </div>
       <div className="mini-card__buttons">
@@ -50,5 +46,3 @@ const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, clickShow
     </div>
   )
 }
-
-export default MiniCard

@@ -1,16 +1,14 @@
 import React, { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { logoIcon, crossIcon } from 'src/assets';
 import "./SlideBar.css"
-
-import logo from "src/img/icons/Logo.svg"
-import close from "src/img/icons/Close.svg"
 
 interface ISlideBar {
     clickMenu: boolean,
     setClickMenu: (value: boolean) => void,
 }
 
-const SlideBar:FC<ISlideBar> = ({ clickMenu, setClickMenu }) => {
+export const SlideBar:FC<ISlideBar> = ({ clickMenu, setClickMenu }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -24,8 +22,8 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, setClickMenu }) => {
   return (
     <div className={`slideBar ${clickMenu && 'show'}`} >
       <div className="slideBar__header">
-        <img src={logo} alt="logo" onClick={logoClick} />
-        <img src={close} alt="cross" onClick={handleClick} />
+        <img src={logoIcon} alt="logo" onClick={logoClick} />
+        <img src={crossIcon} alt="cross" onClick={handleClick} />
       </div>
       <div className="slideBar__items">
         <Link to='/next' className='slideBar__item' onClick={handleClick}>Ближайшие мероприятия</Link>
@@ -36,5 +34,3 @@ const SlideBar:FC<ISlideBar> = ({ clickMenu, setClickMenu }) => {
     </div>
   )
 }
-
-export default SlideBar

@@ -1,25 +1,17 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import './EventPage.css'
-import { events, formatDate, isPast } from 'src/helpers'
-import Header from 'src/components/Header';
-import Newsletter from 'src/components/Newsletter';
-import Footer from 'src/components/Footer';
-import { BackgroundImage, Container } from 'src/styled'
-import IconText from 'src/components/IconText';
-
-import close from "src/img/icons/Close.svg"
-import calendar from "src/img/icons/Calender.svg"
-import location from "src/img/icons/Location.svg"
-import time from "src/img/icons/Time.svg"
-import dots from "src/img/icons/Dots.svg"
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { IEvent } from 'src/interface';
+import { useParams } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import { Header, Footer, Newsletter, IconText } from 'src/components';
+import { formatDate, isPast } from 'src/helpers'
 import { sendMembersAPI } from 'src/store/requests';
+import { IEvent } from 'src/interface';
+import { crossIcon, calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
+import { BackgroundImage, Container } from 'src/styled'
+import './EventPage.css'
 
-const EventPage:FC<{type: string}> = ({type}) => {
+export const EventPage:FC<{type: string}> = ({type}) => {
   const { id = 0 } = useParams();
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
@@ -114,10 +106,10 @@ const EventPage:FC<{type: string}> = ({type}) => {
                 <div className={`info__completed ${completedClass}`}>{completedMessege}</div>
                 <h1>{event.title}</h1>
                 <div className="info__options">
-                  <IconText icon={calendar} text={formatDate(event.date)} isBlueBox />
-                  <IconText icon={location} text={event.location} />
-                  <IconText icon={time} text={event.time} />
-                  <IconText icon={dots} text={event.type} />
+                  <IconText icon={calenderIcon} text={formatDate(event.date)} isBlueBox />
+                  <IconText icon={locationIcon} text={event.location} />
+                  <IconText icon={timeIcon} text={event.time} />
+                  <IconText icon={dotsIcon} text={event.type} />
                   <p>{event.faculties.join(', ')}</p>
                 </div>
               </div>
@@ -138,7 +130,7 @@ const EventPage:FC<{type: string}> = ({type}) => {
                 {members.map((value, i) => 
                   <div className='registration__member' key={i}>
                     <p>{value}</p>
-                    <img src={close} alt="cross" onClick={() => deleteMember(value)} />
+                    <img src={crossIcon} alt="cross" onClick={() => deleteMember(value)} />
                   </div>
                 )}
                 <button className='second-button registration__btn-add' onClick={addMember}>Добавить участника</button>
@@ -164,5 +156,3 @@ const EventPage:FC<{type: string}> = ({type}) => {
   </>
   )
 }
-
-export default EventPage

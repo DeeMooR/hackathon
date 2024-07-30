@@ -1,9 +1,7 @@
 import React, { FC, useState } from 'react'
+import { FilterOptions } from 'src/components';
+import { arrowIcon, crossIcon } from 'src/assets';
 import './Filters.css'
-
-import arrow from "src/img/icons/Arrow.svg"
-import close from "src/img/icons/Close.svg"
-import FilterOptions from '../FilterOptions'
 
 interface IFilters {
   types: string[],
@@ -12,7 +10,7 @@ interface IFilters {
   clickVisit: (v: string[]) => void,
 }
 
-const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
+export const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
   const [isFirstOpen, setFirstOpen] = useState(false);
   const [isSecondOpen, setSecondOpen] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
@@ -51,7 +49,7 @@ const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
         <div className="filters__item">
           <div className={`filters__item-title ${isFirstOpen ? 'open' : ''}`} onClick={onClickFirst}>
             <p>Вид мероприятия</p>
-            <img src={arrow} alt="arrow" />
+            <img src={arrowIcon} alt="arrow" />
           </div>
           {isFirstOpen && 
             <div className="filters__options-container">
@@ -62,7 +60,7 @@ const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
         <div className="filters__item">
           <div className={`filters__item-title ${isSecondOpen ? 'open' : ''}`} onClick={onClickSecond}>
             <p>Тип посещения</p>
-            <img src={arrow} alt="arrow" />
+            <img src={arrowIcon} alt="arrow" />
           </div>
           {isSecondOpen && 
             <div className="filters__options-container">
@@ -76,7 +74,7 @@ const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
           <div className='filters__selected-card' key={value}>
             <p>{value}</p>
             <div className='filters__selected-icon' onClick={() => onClickCross(value)}>
-              <img src={close} alt="cross" />
+              <img src={crossIcon} alt="cross" />
             </div>
           </div>
         )}
@@ -87,5 +85,3 @@ const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
     </>
   )
 }
-
-export default Filters

@@ -1,16 +1,15 @@
 import React, { FC } from 'react'
-import './HeaderAdmin.css'
-
-import logo from "src/img/icons/Logo.svg"
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { clearAdminName } from 'src/store/mainSlice'
+import { logoIcon } from 'src/assets';
+import './HeaderAdmin.css'
 
 interface IHeaderAdmin {
   showModalEvent: () => void
 }
 
-const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
+export const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,7 +23,7 @@ const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
     <header className='headerAdmin'>
       <div className="wrapper">
         <div className="headerAdmin__left">
-          <img src={logo} alt="logo" />
+          <img src={logoIcon} alt="logo" />
           <p>АДМИН-ПАНЕЛЬ</p>
         </div>
         <div className="headerAdmin__right">
@@ -37,5 +36,3 @@ const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
     </header>
   )
 }
-
-export default HeaderAdmin

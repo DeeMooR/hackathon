@@ -1,13 +1,10 @@
 import React from 'react'
-import './ContactsPage.css'
-import Header from 'src/components/Header'
-import Newsletter from 'src/components/Newsletter'
-import Footer from 'src/components/Footer'
+import { Header, Footer, Newsletter, ContactCard } from 'src/components';
 import { IContact } from 'src/interface'
-import ContactCard from 'src/components/ContactCard'
 import { contacts } from 'src/helpers'
+import './ContactsPage.css'
 
-const ContactsPage = () => {
+export const ContactsPage = () => {
   window.scrollTo(0, 0);
   return (
     <>
@@ -28,5 +25,3 @@ const ContactsPage = () => {
     </>
   )
 }
-
-export default ContactsPage

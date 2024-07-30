@@ -1,15 +1,13 @@
 import React, { FC, useEffect, useState } from 'react'
-import './ModalEvent.css'
-import ModalTemplate from '../ModalTemplate'
-import { faculties, isPast } from 'src/helpers';
-import TextInput from 'src/components/TextInput';
-import FilterOptions from 'src/components/FilterOptions';
-import RadioOptions from 'src/components/RadioOptions';
-import { IAddEvent, IEvent } from 'src/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import { TextInput, FilterOptions, RadioOptions } from 'src/components';
+import { ModalTemplate } from 'src/modals';
+import { faculties, isPast } from 'src/helpers';
+import { IAddEvent, IEvent } from 'src/interface';
 import { addEventAPI, updateEventAPI } from 'src/store/requests';
+import './ModalEvent.css'
 
 interface IModalEvent {
   isOpen: boolean,
@@ -19,7 +17,7 @@ interface IModalEvent {
   clickShowDelete?: (id: number) => void,
 }
 
-const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickShowDelete }) => {
+export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickShowDelete }) => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const {admin_name } = useSelector((state: any) => state.main);
   const [selected, setSelected] = useState<string[]>([admin_name]);
@@ -163,5 +161,3 @@ const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickSh
       </ModalTemplate>
   )
 }
-
-export default ModalEvent

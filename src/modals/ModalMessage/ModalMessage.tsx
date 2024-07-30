@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import './ModalMessage.css'
-import ModalTemplate from '../ModalTemplate'
-import { event_members, modal_text } from 'src/helpers';
 import { useNavigate } from 'react-router-dom';
+import { ModalTemplate } from 'src/modals';
+import { modal_text } from 'src/helpers';
+import './ModalMessage.css'
 
 interface IModalMessage {
   isOpen: boolean,
@@ -10,7 +10,7 @@ interface IModalMessage {
   isSuccess: boolean
 }
 
-const ModalMessage:FC<IModalMessage> = ({ isOpen, closeModal, isSuccess }) => {
+export const ModalMessage:FC<IModalMessage> = ({ isOpen, closeModal, isSuccess }) => {
   const navigate = useNavigate();
   const obj = isSuccess ? modal_text[0] : modal_text[1];
 
@@ -28,5 +28,3 @@ const ModalMessage:FC<IModalMessage> = ({ isOpen, closeModal, isSuccess }) => {
     </ModalTemplate>
   )
 }
-
-export default ModalMessage

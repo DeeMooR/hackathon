@@ -7,7 +7,7 @@ interface ITab {
   onClickTab: (value: string) => void
 }
 
-const Tab:FC<ITab> = ({value, isSelected, onClickTab}) => {
+export const Tab:FC<ITab> = ({value, isSelected, onClickTab}) => {
   return (
     <button
       className={`button__tab ${isSelected ? 'selected' : ''}`} 
@@ -17,5 +17,3 @@ const Tab:FC<ITab> = ({value, isSelected, onClickTab}) => {
     </button>
   )
 }
-
-export default Tab

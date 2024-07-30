@@ -9,7 +9,7 @@ interface ITextInput {
   placeholder?: string
 }
 
-const TextInput:FC<ITextInput> = ({text, type, value, onChange, placeholder = ''}) => {
+export const TextInput:FC<ITextInput> = ({text, type, value, onChange, placeholder = ''}) => {
 
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -29,5 +29,3 @@ const TextInput:FC<ITextInput> = ({text, type, value, onChange, placeholder = ''
     </div>
   )
 }
-
-export default TextInput

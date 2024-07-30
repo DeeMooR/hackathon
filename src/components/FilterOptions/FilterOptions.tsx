@@ -7,7 +7,7 @@ interface IFilterOptions {
   onClickOption: (value: string[]) => void
 }
 
-const FilterOptions:FC<IFilterOptions> = ({options, selected, onClickOption}) => {
+export const FilterOptions:FC<IFilterOptions> = ({options, selected, onClickOption}) => {
   return (
     <>
       {options.map(value => 
@@ -25,5 +25,3 @@ const FilterOptions:FC<IFilterOptions> = ({options, selected, onClickOption}) =>
     </>
   )
 }
-
-export default FilterOptions

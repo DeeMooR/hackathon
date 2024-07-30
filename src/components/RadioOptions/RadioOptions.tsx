@@ -8,7 +8,7 @@ interface IRadioOptions {
   onClickOption: (value: string) => void
 }
 
-const RadioOptions:FC<IRadioOptions> = ({options, selected, name, onClickOption}) => {
+export const RadioOptions:FC<IRadioOptions> = ({options, selected, name, onClickOption}) => {
   return (
     <>
       {options.map(value => 
@@ -26,5 +26,3 @@ const RadioOptions:FC<IRadioOptions> = ({options, selected, name, onClickOption}
     </>
   )
 }
-
-export default RadioOptions

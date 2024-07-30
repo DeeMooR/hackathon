@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
+import { ModalTemplate } from 'src/modals';
 import './ModalDelete.css'
-import ModalTemplate from '../ModalTemplate'
 
 interface IModalDelete {
   isOpen: boolean,
@@ -8,7 +8,7 @@ interface IModalDelete {
   deleteEvent: () => void
 }
 
-const ModalDelete:FC<IModalDelete> = ({ isOpen, closeModal, deleteEvent }) => {
+export const ModalDelete:FC<IModalDelete> = ({ isOpen, closeModal, deleteEvent }) => {
   return (
     <ModalTemplate isOpen={isOpen} closeModal={closeModal}>
       <div className="modalDelete">
@@ -21,5 +21,3 @@ const ModalDelete:FC<IModalDelete> = ({ isOpen, closeModal, deleteEvent }) => {
     </ModalTemplate>
   )
 }
-
-export default ModalDelete

@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react'
+import { Tab } from 'src/components';
 import './Tabs.css'
-import Tab from '../Tab';
 
 interface ITabs {
   tab: string,
   onClickTab: (value: string) => void
 }
 
-const Tabs:FC<ITabs> = ({tab, onClickTab}) => {
+export const Tabs:FC<ITabs> = ({tab, onClickTab}) => {
   const facultiesTabs = ['Все факультеты', 'ФКП', 'ФИТУ', 'ИЭФ', 'ФКСиС', 'ФИБ', 'ФРЭ', 'ВФ'];
   return (
     <div className='tabs'>
@@ -22,5 +22,3 @@ const Tabs:FC<ITabs> = ({tab, onClickTab}) => {
     </div>
   )
 }
-
-export default Tabs

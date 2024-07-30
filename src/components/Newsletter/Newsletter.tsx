@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import './Newsletter.css'
-
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { setReceiverEmailAPI } from 'src/store/requests';
-import emailImage from 'src/img/email_image.png';
+import { emailImage } from 'src/assets';
+import './Newsletter.css'
 
-const Newsletter = () => {
+export const Newsletter = () => {
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const [email, setEmail] = useState('');
 
@@ -35,5 +34,3 @@ const Newsletter = () => {
     </div>
   )
 }
-
-export default Newsletter

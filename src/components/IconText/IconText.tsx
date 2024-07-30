@@ -7,7 +7,7 @@ interface IIconText {
   isBlueBox?: boolean
 }
 
-const IconText:FC<IIconText> = ({icon, text, isBlueBox = false}) => {
+export const IconText:FC<IIconText> = ({icon, text, isBlueBox = false}) => {
   return (
     <div className={`iconText ${isBlueBox ? 'blue-box' : ''}`}>
       <img src={icon} alt="icon" />
@@ -15,5 +15,3 @@ const IconText:FC<IIconText> = ({icon, text, isBlueBox = false}) => {
     </div>
   )
 }
-
-export default IconText

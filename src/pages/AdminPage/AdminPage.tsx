@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import './AdminPage.css'
-import HeaderAdmin from 'src/components/HeaderAdmin'
-import Footer from 'src/components/Footer'
-import MiniCard from 'src/components/MiniCard'
-import { faculties } from 'src/helpers'
-import ModalEvent from 'src/modals/ModalEvent'
-import ModalMembers from 'src/modals/ModalMembers'
-import ModalMessage from 'src/modals/ModalMessage'
-import ModalDelete from 'src/modals/ModalDelete'
-import { useDispatch, useSelector } from 'react-redux'
-import { IEvent } from 'src/interface'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+import { HeaderAdmin, Footer, MiniCard } from 'src/components';
+import { ModalEvent, ModalMembers, ModalMessage, ModalDelete } from 'src/modals';
+import { faculties } from 'src/helpers'
+import { IEvent } from 'src/interface'
 import { deleteEventAPI, getEventMembersAPI } from 'src/store/requests'
+import './AdminPage.css'
 
-const AdminPage = () => {
+export const AdminPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const {eventsNext, eventsPast, admin_name} = useSelector((state: any) => state.main);
@@ -150,5 +145,3 @@ const AdminPage = () => {
     </>
   )
 }
-
-export default AdminPage

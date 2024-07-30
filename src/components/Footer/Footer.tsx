@@ -1,14 +1,13 @@
 import React from 'react'
+import { logoWhiteIcon } from 'src/assets';
 import './Footer.css'
 
-import logo_white from "src/img/icons/Logo-white.svg"
-
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className='footer'>
       <div className="wrapper">
         <div className="footer__left">
-          <img src={logo_white} className='footer__logo' alt="logo" />
+          <img src={logoWhiteIcon} className='footer__logo' alt="logo" />
           <h3>Белорусский государственный университет информатики и радиоэлектроники</h3>
         </div>
         <div className="footer__right">
@@ -25,5 +24,3 @@ const Footer = () => {
     </footer>
   )
 }
-
-export default Footer

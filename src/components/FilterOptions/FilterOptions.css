@@ -8,7 +8,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url("src/img/icons/Unchecked.svg");
+  background-image: url("src/assets/icons/Unchecked.svg");
 }
 .filterOptions__checkbox .checkbox__text {
   line-height: 135%;
@@ -18,5 +18,5 @@
   display: none;
 }
 .filterOptions__checkbox input:checked + .checkbox__icon {
-  background-image: url("src/img/icons/Checked.svg");
+  background-image: url("src/assets/icons/Checked.svg");
 }
