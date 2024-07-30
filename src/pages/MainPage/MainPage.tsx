@@ -1,14 +1,17 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { getEvents, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, MiniCard } from 'src/components';
-import { IEvent } from 'src/interface'
+import React, { useEffect } from 'react'
+import { getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store';
+import { Header, Footer, Newsletter, EventsTop } from 'src/components';
 import { mainImage } from 'src/assets';
 import './MainPage.css'
 
 export const MainPage = () => {
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { eventsNext, eventsPast } = useAppSelector(getEvents);
+  
+  useEffect(() => {
+    dispatch(getEventsNextAction());
+    dispatch(getEventsPastAction());
+  }, [])
 
   return (
     <>
@@ -25,22 +28,10 @@ export const MainPage = () => {
           <img src={mainImage} className='mainSection__image' alt="bsuir" />
         </section>
         <section className='eventsSection'>
-          <h2>Ближайшие мероприятия</h2>
-          <div className="eventsSection__events">
-            {eventsNext.slice(0, 3).map((obj: IEvent, i: number) => 
-              <MiniCard obj={obj} key={i} isDeleteSmall={i === 2}/>
-            )}
-          </div>
-          <button className='button eventsSection__button' onClick={() => navigate('/next')}>Смотреть будущие мероприятия</button>
+          <EventsTop eventsShow={eventsNext.slice(0, 3)} type='next' />
         </section>
         <section className='eventsSection'>
-          <h2>Прошедшие мероприятия</h2>
-          <div className="eventsSection__events">
-            {eventsPast.slice(0, 3).map((obj: IEvent, i: number) => 
-              <MiniCard obj={obj} key={i} isDeleteSmall={i === 2}/>
-            )}
-          </div>
-          <button className='button eventsSection__button' onClick={() => navigate('/past')}>Смотреть прошлые мероприятия</button>
+          <EventsTop eventsShow={eventsPast.slice(0, 3)} type='past' />
         </section>
         <section className="mapSection">
           <h2>Карта корпусов</h2>

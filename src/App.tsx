@@ -1,17 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { getEventsNextAction, useAppDispatch } from './store';
-import { getEventsPastAPI } from 'src/store/requests'
 import { AdminPage, AuthPage, ContactsPage, EventPage, EventsPage, MainPage } from './pages';
 
-function App() {
-  const dispatch = useAppDispatch();
-  
-  useEffect(() => {
-    dispatch(getEventsNextAction());
-    dispatch(getEventsPastAPI());
-  }, [])
-
+const App = () => {
   return (
     <Routes>
       <Route path='/' element={<MainPage />} />

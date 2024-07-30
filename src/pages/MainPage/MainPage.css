@@ -25,16 +25,6 @@
 .wrapper .eventsSection {
   margin: 0 0 120px 0;
 }
-.wrapper .eventsSection .eventsSection__events {
-  display: flex;
-  gap: 40px;
-  margin: 0 0 50px 0;
-}
-.wrapper .eventsSection .eventsSection__button {
-  display: block;
-  margin: 0 auto;
-  width: calc((100% - 80px) / 3);
-}
 .wrapper .mapSection {
   margin: 0 0 120px 0;
 }
@@ -44,12 +34,6 @@
   border-radius: 40px;
 }
 
-@media (max-width: 999.98px) {
-  .wrapper .eventsSection .eventsSection__button {
-    width: calc((100% - 40px) / 2);
-    min-width: 320px;
-  }
-}
 @media (max-width: 799.98px) {
   .wrapper .mainSection .mainSection__info {
     flex-direction: column;
@@ -69,15 +53,6 @@
   }
 }
 @media (max-width: 599.98px) {
-  .wrapper .eventsSection .eventsSection__events {
-    flex-direction: column;
-    margin: 0 0 40px 0;
-  }
-  .wrapper .eventsSection .eventsSection__button {
-    width: 100%;
-    max-width: 400px;
-    min-width: 0;
-  }
   .wrapper .mapSection .mapSection__map {
     height: 300px;
     border-radius: 20px;

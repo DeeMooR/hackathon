@@ -13,3 +13,5 @@ export * from './Tabs/Tabs';
 export * from './Tab/Tab';
 export * from './TextInput/TextInput';
 export * from './ScrollToTop/ScrollToTop';
+export * from './Loading/Loading';
+export * from './EventsTop/EventsTop';

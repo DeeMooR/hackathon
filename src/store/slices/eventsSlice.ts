@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getEventsPastAPI, getEventMembersAPI } from '../requests'
-import { getEventsNextAction } from '../actions';
+import { getEventMembersAPI } from '../requests'
+import { getEventsNextAction, getEventsPastAction } from '../actions';
 import { eventsState } from '../interface';
 
 const initialState: eventsState = {
@@ -35,13 +35,13 @@ const eventsSlice = createSlice({
         state.errorMessage = 'Ошибка при получении ближайших мероприятий';
       })
 
-      .addCase(getEventsPastAPI.pending, setLoading)
-      .addCase(getEventsPastAPI.fulfilled, (state, { payload }) => {
+      .addCase(getEventsPastAction.pending, setLoading)
+      .addCase(getEventsPastAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.eventsPast = [...payload];
       })
-      .addCase(getEventsPastAPI.rejected, (state) => {
+      .addCase(getEventsPastAction.rejected, (state) => {
         state.isLoading = false;
         state.errorMessage = 'Ошибка при получении прошедших мероприятий';
       })

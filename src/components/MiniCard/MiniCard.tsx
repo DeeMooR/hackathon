@@ -9,14 +9,13 @@ import './MiniCard.css'
 
 interface IMiniCard {
   obj: IEvent,
-  isDeleteSmall?: boolean,
   edit?: boolean,
   show_users?: boolean,
   clickShowMembers?: (id: number) => void,
   clickChangeEvent?: (id: number) => void
 }
 
-export const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, clickShowMembers, clickChangeEvent}) => {
+export const MiniCard:FC<IMiniCard> = ({obj, edit, show_users, clickShowMembers, clickChangeEvent}) => {
   const navigate = useNavigate();
 
   const openEventPage = () => {
@@ -25,7 +24,7 @@ export const MiniCard:FC<IMiniCard> = ({obj, isDeleteSmall, edit, show_users, cl
   }
   
   return (
-    <div className={`mini-card ${isDeleteSmall ? 'delete-small' : ''}`}>
+    <div className='mini-card'>
       <Container>
         <BackgroundImage image={obj.photo} />
       </Container>

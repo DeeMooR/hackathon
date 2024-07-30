@@ -9,4 +9,4 @@ interface checkAuthResponse {
 const headers = { 'Content-Type': 'application/json' };
 
 export const checkAuth = (obj: IAuth): Promise<checkAuthResponse> =>
-  axios.post(endpoints.auth, obj, { headers });
+  axios.post(endpoints.auth, obj, { headers }).then(({ data }) => data);
