@@ -1,6 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { getEvents, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, MiniCard } from 'src/components';
 import { IEvent } from 'src/interface'
 import { mainImage } from 'src/assets';
@@ -8,7 +8,7 @@ import './MainPage.css'
 
 export const MainPage = () => {
   const navigate = useNavigate();
-  const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
+  const { eventsNext, eventsPast } = useAppSelector(getEvents);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useSelector } from 'react-redux';
+import { getEvents, useAppSelector } from 'src/store';
 import { ModalTemplate } from 'src/modals';
 import './ModalMembers.css'
 
@@ -9,7 +9,7 @@ interface IModalMembers {
 }
 
 export const ModalMembers:FC<IModalMembers> = ({ isOpen, closeModal }) => {
-  const {members}:{members: string[]} = useSelector((state: any) => state.main);
+  const { members } = useAppSelector(getEvents);
 
   return (
   <>

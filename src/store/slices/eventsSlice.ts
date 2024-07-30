@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getEventsNextAPI, getEventsPastAPI, checkAuthAPI, getEventMembersAPI } from '../requests'
+import { getEventsPastAPI, getEventMembersAPI } from '../requests'
+import { getEventsNextAction } from '../actions';
 import { eventsState } from '../interface';
 
 const initialState: eventsState = {
   eventsNext: [],
   eventsPast: [],
-  adminFaculty: null,
   members: [],
   isLoading: false,
   isSuccess: false,
@@ -21,20 +21,16 @@ const setLoading = (state: eventsState) => {
 const eventsSlice = createSlice({
   name: 'events',
   initialState,
-  reducers: {
-    clearAdminFaculty(state) {
-      state.adminFaculty = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getEventsNextAPI.pending, setLoading)
-      .addCase(getEventsNextAPI.fulfilled, (state, { payload }) => {
+      .addCase(getEventsNextAction.pending, setLoading)
+      .addCase(getEventsNextAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.eventsNext = [...payload];
       })
-      .addCase(getEventsNextAPI.rejected, (state) => {
+      .addCase(getEventsNextAction.rejected, (state) => {
         state.isLoading = false;
         state.errorMessage = 'Ошибка при получении ближайших мероприятий';
       })
@@ -48,17 +44,6 @@ const eventsSlice = createSlice({
       .addCase(getEventsPastAPI.rejected, (state) => {
         state.isLoading = false;
         state.errorMessage = 'Ошибка при получении прошедших мероприятий';
-      })
-
-      .addCase(checkAuthAPI.pending, setLoading)
-      .addCase(checkAuthAPI.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.adminFaculty = payload;
-      })
-      .addCase(checkAuthAPI.rejected, (state) => {
-        state.isLoading = false;
-        state.errorMessage = 'Ошибка входа в аккаунт';
       })
 
       .addCase(getEventMembersAPI.pending, setLoading)
@@ -75,8 +60,6 @@ const eventsSlice = createSlice({
 })
 
 export const {
-  reducer: eventsReduces,
-  actions: {
-    clearAdminFaculty
-  },
+  reducer: eventsReducer,
+  actions: {},
 } = eventsSlice;

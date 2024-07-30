@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from 'src/store';
+import { getEvents, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, IconText } from 'src/components';
 import { formatDate, isPast } from 'src/helpers'
 import { sendMembersAPI } from 'src/store/requests';
@@ -13,7 +12,7 @@ import './EventPage.css'
 export const EventPage:FC<{type: string}> = ({type}) => {
   const { id = 0 } = useParams();
   const dispatch = useAppDispatch();
-  const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
+  const { eventsNext, eventsPast } = useAppSelector(getEvents);
 
   const [event, setEvent] = useState<any>(null)
   const [completedMessege, setCompletedMessege] = useState('')

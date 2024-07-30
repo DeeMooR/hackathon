@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'src/store'
+import { getAdmin, getEvents, useAppDispatch, useAppSelector } from 'src/store'
 import { HeaderAdmin, Footer, MiniCard } from 'src/components';
 import { ModalEvent, ModalMembers, ModalMessage, ModalDelete } from 'src/modals';
 import { faculties } from 'src/helpers'
@@ -12,29 +11,30 @@ import './AdminPage.css'
 export const AdminPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {eventsNext, eventsPast, admin_name} = useSelector((state: any) => state.main);
+  const { eventsNext, eventsPast } = useAppSelector(getEvents);
+  const { adminFaculty } = useAppSelector(getAdmin);
   const [isOpenModalEvent, setOpenModalEvent] = useState(false);
   const [isOpenModalChangeEvent, setOpenModalChangeEvent] = useState(false);
   const [isOpenModalMembers, setOpenModalMembers] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
 
-  const [eventsNextFaculty, setEventsNextFaculty] = useState([]);
-  const [eventsPastFaculty, setEventsPastFaculty] = useState([]);
+  const [eventsNextFaculty, setEventsNextFaculty] = useState<IEvent[] | []>([]);
+  const [eventsPastFaculty, setEventsPastFaculty] = useState<IEvent[] | []>([]);
 
   const [idEventAction, setIdEventAction] = useState(-1);
-  const [objEventAction, setObjEventAction] = useState();
+  const [objEventAction, setObjEventAction] = useState<IEvent>();
 
   useEffect(() => {
-    const updateNext = faculties.includes(admin_name) 
-      ? eventsNext.filter((item: IEvent) => item.faculties.includes(admin_name))
+    const updateNext = faculties.includes(adminFaculty) 
+      ? eventsNext.filter((item: IEvent) => item.faculties.includes(adminFaculty))
       : [...eventsNext];
     setEventsNextFaculty(updateNext);
     console.log(eventsNextFaculty)
   },[eventsNext])
 
   useEffect(() => {
-    const updatePast = faculties.includes(admin_name) 
-      ? eventsPast.filter((item: IEvent) => item.faculties.includes(admin_name))
+    const updatePast = faculties.includes(adminFaculty) 
+      ? eventsPast.filter((item: IEvent) => item.faculties.includes(adminFaculty))
       : [...eventsPast];
       setEventsPastFaculty(updatePast);
       console.log(eventsPastFaculty)
@@ -85,11 +85,11 @@ export const AdminPage = () => {
 
   let organization = '';
   let faculty = '';
-  if (faculties.includes(admin_name)) {
+  if (faculties.includes(adminFaculty)) {
     organization = 'Студ. совет ';
-    faculty = admin_name;
+    faculty = adminFaculty;
   } 
-  else organization = admin_name;
+  else organization = adminFaculty;
 
   return (
     <>

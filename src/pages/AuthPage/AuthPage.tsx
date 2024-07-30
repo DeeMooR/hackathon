@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'src/store'
+import { checkAuthAction, getAdmin, useAppDispatch, useAppSelector } from 'src/store'
 import { Header, Footer } from 'src/components';
 import { ModalMessage } from 'src/modals';
-import { checkAuthAPI } from 'src/store/requests'
 import { IAuth } from 'src/interface'
 import './AuthPage.css'
 
 export const AuthPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {admin_name, status} = useSelector((state: any) => state.main);
+  const { adminFaculty, errorMessage } = useAppSelector(getAdmin);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -28,18 +26,18 @@ export const AuthPage = () => {
       login: login,
       password: password
     }
-    dispatch(checkAuthAPI(obj));
+    dispatch(checkAuthAction(obj));
   }
 
   useEffect(() => {
-    if (admin_name) {
-      localStorage.setItem('admin_name', admin_name);
+    if (adminFaculty) {
+      localStorage.setItem('admin_name', adminFaculty);
       setTimeout(() => {
         navigate('/admin');
       }, 300)
     }
-    if (status === 'rejected') setOpenModal(true);
-  }, [admin_name, status])
+    if (errorMessage) setOpenModal(true);
+  }, [adminFaculty, errorMessage])
 
   const closeModal = () => {
     document.body.style.overflowY = 'auto';

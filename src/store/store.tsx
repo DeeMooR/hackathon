@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { eventsReduces } from "./slices";
+import { adminReducer, eventsReducer } from "./slices";
  
 const store = configureStore({
   reducer: {
-    events: eventsReduces
+    events: eventsReducer,
+    admin: adminReducer,
   }
 })
 
