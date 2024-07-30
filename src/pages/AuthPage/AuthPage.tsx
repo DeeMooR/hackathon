@@ -10,7 +10,6 @@ import { IAuth } from 'src/interface'
 import './AuthPage.css'
 
 export const AuthPage = () => {
-  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
   const {admin_name, status} = useSelector((state: any) => state.main);

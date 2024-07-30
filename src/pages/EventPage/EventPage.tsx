@@ -28,10 +28,6 @@ export const EventPage:FC<{type: string}> = ({type}) => {
       buttonRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
 
   useEffect(() => {
     if (eventsNext.length > 0 && eventsPast.length > 0) {

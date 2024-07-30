@@ -5,7 +5,6 @@ import { contacts } from 'src/helpers'
 import './ContactsPage.css'
 
 export const ContactsPage = () => {
-  window.scrollTo(0, 0);
   return (
     <>
       <Header/>

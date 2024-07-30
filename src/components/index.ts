@@ -12,3 +12,4 @@ export * from './SlideBar/SlideBar';
 export * from './Tabs/Tabs';
 export * from './Tab/Tab';
 export * from './TextInput/TextInput';
+export * from './ScrollToTop/ScrollToTop';

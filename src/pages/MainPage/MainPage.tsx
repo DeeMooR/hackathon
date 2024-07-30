@@ -7,7 +7,6 @@ import { mainImage } from 'src/assets';
 import './MainPage.css'
 
 export const MainPage = () => {
-  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
 

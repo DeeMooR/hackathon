@@ -9,7 +9,6 @@ interface IEventsPage {
 }
 
 export const EventsPage:FC<IEventsPage> = ({type}) => {
-  window.scrollTo(0, 0);
   const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
 
   const events = (type === 'next') ? eventsNext : eventsPast;
