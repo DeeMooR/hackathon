@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { getEventsNextAPI, getEventsPastAPI } from 'src/store/requests'
-import { useDispatch } from 'react-redux'
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
+import { getEventsNextAction, useAppDispatch } from './store';
+import { getEventsPastAPI } from 'src/store/requests'
 import { AdminPage, AuthPage, ContactsPage, EventPage, EventsPage, MainPage } from './pages';
 
 function App() {
-  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const dispatch = useAppDispatch();
   
   useEffect(() => {
-    dispatch(getEventsNextAPI());
+    dispatch(getEventsNextAction());
     dispatch(getEventsPastAPI());
   }, [])
 

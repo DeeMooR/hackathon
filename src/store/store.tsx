@@ -1,12 +1,10 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import mainSlice from "./mainSlice";
-
-const rootReducer = combineReducers({
-  main: mainSlice
-})
-
+import { configureStore } from "@reduxjs/toolkit";
+import { eventsReduces } from "./slices";
+ 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: {
+    events: eventsReduces
+  }
 })
 
 export default store;

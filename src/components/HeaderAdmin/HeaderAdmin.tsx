@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { clearAdminName } from 'src/store/mainSlice'
+import { clearAdminFaculty, useAppDispatch } from 'src/store';
 import { logoIcon } from 'src/assets';
 import './HeaderAdmin.css'
 
@@ -10,12 +9,12 @@ interface IHeaderAdmin {
 }
 
 export const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const clickBack = () => {
     localStorage.removeItem('admin_name');
-    dispatch(clearAdminName());
+    dispatch(clearAdminFaculty());
     navigate('/auth');
   }
 

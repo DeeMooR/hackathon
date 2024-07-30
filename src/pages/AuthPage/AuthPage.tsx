@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'src/store'
 import { Header, Footer } from 'src/components';
 import { ModalMessage } from 'src/modals';
 import { checkAuthAPI } from 'src/store/requests'
@@ -11,7 +10,7 @@ import './AuthPage.css'
 
 export const AuthPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const dispatch = useAppDispatch();
   const {admin_name, status} = useSelector((state: any) => state.main);
 
   const [login, setLogin] = useState('');

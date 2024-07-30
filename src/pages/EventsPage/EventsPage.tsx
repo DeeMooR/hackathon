@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Header, Footer, Newsletter, Tabs, Filters, MiniCard } from 'src/components';
 import { IEvent } from 'src/interface'
 import './EventsPage.css'
+import { getEvents, useAppSelector } from 'src/store';
 
 interface IEventsPage {
   type: string
 }
 
 export const EventsPage:FC<IEventsPage> = ({type}) => {
-  const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
+  const { eventsNext, eventsPast } = useAppSelector(getEvents);
 
   const events = (type === 'next') ? eventsNext : eventsPast;
   const word = (type === 'next') ? 'Ближайшие' : 'Прошедшие';

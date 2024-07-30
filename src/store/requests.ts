@@ -1,6 +1,5 @@
 import { AnyAction, ThunkDispatch, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { IAddEvent, IAuth, IEvent } from 'src/interface';
 
 export const getEventsNextAPI = createAsyncThunk(

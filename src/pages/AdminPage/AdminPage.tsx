@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
+import { useSelector } from 'react-redux'
+import { useAppDispatch } from 'src/store'
 import { HeaderAdmin, Footer, MiniCard } from 'src/components';
 import { ModalEvent, ModalMembers, ModalMessage, ModalDelete } from 'src/modals';
 import { faculties } from 'src/helpers'
@@ -12,7 +11,7 @@ import './AdminPage.css'
 
 export const AdminPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const dispatch = useAppDispatch();
   const {eventsNext, eventsPast, admin_name} = useSelector((state: any) => state.main);
   const [isOpenModalEvent, setOpenModalEvent] = useState(false);
   const [isOpenModalChangeEvent, setOpenModalChangeEvent] = useState(false);

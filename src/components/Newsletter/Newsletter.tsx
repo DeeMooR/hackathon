@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
+import { useAppDispatch } from 'src/store';
 import { setReceiverEmailAPI } from 'src/store/requests';
 import { emailImage } from 'src/assets';
 import './Newsletter.css'
 
 export const Newsletter = () => {
-  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
 
   const clickBth = () => {

@@ -1,8 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
+import { useAppDispatch } from 'src/store';
 import { Header, Footer, Newsletter, IconText } from 'src/components';
 import { formatDate, isPast } from 'src/helpers'
 import { sendMembersAPI } from 'src/store/requests';
@@ -13,7 +12,7 @@ import './EventPage.css'
 
 export const EventPage:FC<{type: string}> = ({type}) => {
   const { id = 0 } = useParams();
-  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  const dispatch = useAppDispatch();
   const {eventsNext, eventsPast} = useSelector((state: any) => state.main);
 
   const [event, setEvent] = useState<any>(null)
