@@ -1,11 +1,11 @@
-interface IEventsTopType {
+interface IEventsTopData {
   title: string,
   navigatePage: string,
   buttonText: string,
   emptyText: string,
 }
 
-export const EventsTopType: { [type: string]: IEventsTopType } = {
+export const EventsTopData: { [type: string]: IEventsTopData } = {
   next: {
     title: 'Ближайшие мероприятия',
     navigatePage: '/next',

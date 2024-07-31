@@ -1,12 +1,13 @@
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store';
+import { getEvents, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, Tabs, Filters, MiniCard } from 'src/components';
 import { IEvent } from 'src/interface'
+import { EventsPageAllEvents, EventsPageData } from './config';
 import './EventsPage.css'
 
 interface IEventsPage {
-  type: string
+  type: 'next' | 'past',
 }
 
 export const EventsPage:FC<IEventsPage> = ({type}) => {
@@ -14,13 +15,12 @@ export const EventsPage:FC<IEventsPage> = ({type}) => {
   const dispatch = useAppDispatch();
   const { eventsNext, eventsPast } = useAppSelector(getEvents);
 
-  const events = (type === 'next') ? eventsNext : eventsPast;
-  const word = (type === 'next') ? 'Ближайшие' : 'Прошедшие';
+  const { titleWord, actionGetEvents } = EventsPageData[type];
+  const events = EventsPageAllEvents[type]({eventsNext, eventsPast});
 
   useEffect(() => {
-    dispatch(getEventsNextAction());
-    dispatch(getEventsPastAction());
-  }, [])
+    dispatch(actionGetEvents);
+  }, [type])
 
   const openMainPage = () => {
     navigate('/');
@@ -32,7 +32,7 @@ export const EventsPage:FC<IEventsPage> = ({type}) => {
       <div className="wrapper">
         <section className="eventsPage">
           <p className='crumbs' onClick={openMainPage}>Главная /</p>
-          <h1><span>{word}</span> мероприятия</h1>
+          <h1><span>{titleWord}</span> мероприятия</h1>
           <Tabs />
           <Filters />
           <div className="eventsPage__events">

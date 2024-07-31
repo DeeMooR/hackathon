@@ -1,5 +1,6 @@
 export * from './ContactCard/ContactCard';
 export * from './FilterOptions/FilterOptions';
+export * from './FilterItem/FilterItem';
 export * from './Filters/Filters';
 export * from './Footer/Footer';
 export * from './Header/Header';

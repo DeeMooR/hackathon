@@ -4,6 +4,7 @@ export interface eventsState {
   eventsNext: IEvent[],
   eventsPast: IEvent[],
   members: string[],
+  activeFilter: 'type' | 'visit' | null,
   filters: {
     faculties: string[],
     types: string[],

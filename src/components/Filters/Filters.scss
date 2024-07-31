@@ -3,44 +3,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
-    .filters__item {
-      position: relative;
-      .filters__item-title {
-        display: flex;
-        align-items: end;
-        gap: 2px;
-        cursor: pointer;
-        p {
-          line-height: 135%;
-        }
-        img {
-          width: 20px;
-          height: 20px;
-          transition: all 0.3s ease-in-out 0s;
-        }
-        &:hover {
-          color: var(--main);
-        }
-        &.open {
-          img {
-            transform: scaleY(-1);
-          }
-        }
-      }
-    }
-    .filters__options-container {
-      position: absolute;
-      top: 35px;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 15px 20px;
-      background: var(--white);
-      border: 1px solid var(--main);
-      border-radius: 10px;
-      z-index: 2;
-    }
   }
   .filters__selected {
     display: none;
@@ -54,24 +16,30 @@
     .filters__selected-card {
       display: flex;
       align-items: center;
-      gap: 5px;
+      height: 44px;
+      gap: 6px;
       border: 2px solid #c6d2ff;
       border-radius: 10px;
-      padding: 10px 20px 12px 20px;
+      padding: 0 16px 0 20px;
       p {
+        font-size: 16px;
         line-height: 135%;
         white-space: nowrap;
       }
       .filters__selected-icon {
-        padding: 0 0 0 5px;
+        padding: 4px;
         cursor: pointer;
         img {
           width: 20px;
           height: 20px;
         }
       }
+      &:has(.filters__selected-icon:hover) {
+        opacity: 0.6;
+      }
     }
     .filters__selected-clear {
+      font-size: 16px;
       line-height: 135%;
       opacity: 0.7;
       padding: 0 0 0 10px;
@@ -101,9 +69,6 @@
     .filters__choice {
       flex-direction: column;
       gap: 15px;
-      .filters__item {
-        width: fit-content;
-      }
     }
     .filters__selected {
       padding: 25px 0 0 0;

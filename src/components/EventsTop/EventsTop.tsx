@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getEvents, useAppSelector } from 'src/store'
 import { Loading, MiniCard } from 'src/components'
 import { IEvent } from 'src/interface'
-import { EventsTopType } from './config'
+import { EventsTopData } from './config'
 import './EventsTop.css'
 
 interface IEventsTop {
@@ -14,7 +14,7 @@ interface IEventsTop {
 export const EventsTop:FC<IEventsTop> = ({ eventsShow, type }) => {
   const navigate = useNavigate();
   const { isLoading } = useAppSelector(getEvents);
-  const { title, navigatePage, buttonText, emptyText } = EventsTopType[type];
+  const { title, navigatePage, buttonText, emptyText } = EventsTopData[type];
 
   const onClickButton = () => {
     navigate(navigatePage);

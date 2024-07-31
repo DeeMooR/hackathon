@@ -7,6 +7,7 @@ const initialState: eventsState = {
   eventsNext: [],
   eventsPast: [],
   members: [],
+  activeFilter: null,
   filters: {
     faculties: [],
     types: [],
@@ -62,6 +63,9 @@ const eventsSlice = createSlice({
       const { types, visits } = state.filters;
       state.filters.types = types.filter((item) => item !== payload);
       state.filters.visits = visits.filter((item) => item !== payload);
+    },
+    setEventsActiveFilter: (state, { payload }) => {
+      state.activeFilter = payload;
     }
   },
   extraReducers: (builder) => {
@@ -103,5 +107,12 @@ const eventsSlice = createSlice({
 
 export const {
   reducer: eventsReducer,
-  actions: {setEventsFaculties, setEventsTypes, setEventsVisits, clearEventsFilters, clearEventsFiltersItem},
+  actions: {
+    setEventsFaculties, 
+    setEventsTypes, 
+    setEventsVisits, 
+    clearEventsFilters, 
+    clearEventsFiltersItem,
+    setEventsActiveFilter
+  },
 } = eventsSlice;
