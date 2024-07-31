@@ -1,70 +1,59 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { FilterOptions } from 'src/components';
 import { arrowIcon, crossIcon } from 'src/assets';
 import './Filters.css'
+import { clearEventsFilters, clearEventsFiltersItem, getEventsFilters, setEventsTypes, setEventsVisits, useAppDispatch, useAppSelector } from 'src/store';
+import { allEventsTypes, allEventsVisits } from 'src/helpers';
 
-interface IFilters {
-  types: string[],
-  visits: string[],
-  clickType: (v: string[]) => void,
-  clickVisit: (v: string[]) => void,
-}
-
-export const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => {
-  const [isFirstOpen, setFirstOpen] = useState(false);
-  const [isSecondOpen, setSecondOpen] = useState(false);
+export const Filters = () => {
+  const dispatch = useAppDispatch();
+  const { types, visits } = useAppSelector(getEventsFilters);
+  const [activeFilter, setActiveFilter] = useState<'type' | 'visit' | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
 
-  const onClickFirst = () => {
-    setFirstOpen(!isFirstOpen);
-    setSecondOpen(false);
-  }
-  const onClickSecond = () => {
-    setSecondOpen(!isSecondOpen);
-    setFirstOpen(false);
-  }
-  const cleanSelected = () => {
-    setFirstOpen(false);
-    setSecondOpen(false);
-    clickType([]);
-    clickVisit([]);
-  }
-  const onClickOption = (value: string) => {
-    const newSelected = selected.includes(value)
-      ? selected.filter((item) => item !== value)
-      : [...selected, value];
-    setSelected(newSelected);
-  }
-  const onClickCross = (value: string) => {
-    const newSelected = selected.filter((item) => item !== value);
-    setSelected(newSelected);
-  }
+  useEffect(() => {
+    setSelected([...types, ...visits]);
+  }, [types, visits])
 
-  const firstOptions = ['Культурные', 'Образовательные', 'Спортивные'];
-  const secondOptions = ['Свободный вход', 'С регистрацией'];
+  const onClickNameFilter = (value: 'type' | 'visit') => {
+    setActiveFilter(prev => (prev === value ? null : value));
+  }
+  const updateEventsTypes = (value: string) => {
+    dispatch(setEventsTypes(value));
+  }
+  const updateEventsVisits = (value: string) => {
+    dispatch(setEventsVisits(value));
+  }
+  
+  const clearSelected = () => {
+    dispatch(clearEventsFilters());
+  }
+  const clearSelectedItem = (value: string) => {
+    dispatch(clearEventsFiltersItem(value));
+  }
 
   return (
-    <>
-      <div className='filters'>
+    <div className='filters'>
+      <div className='filters__choice'>
         <div className="filters__item">
-          <div className={`filters__item-title ${isFirstOpen ? 'open' : ''}`} onClick={onClickFirst}>
+          <div className={`filters__item-title ${activeFilter === 'type' ? 'open' : ''}`} onClick={() => onClickNameFilter('type')}>
             <p>Вид мероприятия</p>
             <img src={arrowIcon} alt="arrow" />
           </div>
-          {isFirstOpen && 
+          {activeFilter === 'type' && 
             <div className="filters__options-container">
-              <FilterOptions options={firstOptions} selected={types} onClickOption={clickType}/>
+              <FilterOptions options={allEventsTypes} selected={types} onClickOption={updateEventsTypes}/>
             </div>
           }
         </div>
         <div className="filters__item">
-          <div className={`filters__item-title ${isSecondOpen ? 'open' : ''}`} onClick={onClickSecond}>
+          <div className={`filters__item-title ${activeFilter === 'visit' ? 'open' : ''}`} onClick={() => onClickNameFilter('visit')}>
             <p>Тип посещения</p>
             <img src={arrowIcon} alt="arrow" />
           </div>
-          {isSecondOpen && 
+          {activeFilter === 'visit' && 
             <div className="filters__options-container">
-              <FilterOptions options={secondOptions} selected={visits} onClickOption={clickVisit}/>
+              <FilterOptions options={allEventsVisits} selected={visits} onClickOption={updateEventsVisits}/>
             </div>
           }
         </div>
@@ -73,15 +62,15 @@ export const Filters:FC<IFilters> = ({types, visits, clickType, clickVisit}) => 
         {selected.map(value => 
           <div className='filters__selected-card' key={value}>
             <p>{value}</p>
-            <div className='filters__selected-icon' onClick={() => onClickCross(value)}>
+            <div className='filters__selected-icon' onClick={() => clearSelectedItem(value)}>
               <img src={crossIcon} alt="cross" />
             </div>
           </div>
         )}
         {selected.length > 0 &&
-          <p className='filters__selected-clear' onClick={cleanSelected}>Очистить фильтры</p>
+          <p className='filters__selected-clear' onClick={clearSelected}>Очистить фильтры</p>
         }
       </div>
-    </>
+    </div>
   )
 }

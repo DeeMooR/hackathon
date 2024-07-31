@@ -1,22 +1,31 @@
-import React, { FC, useState } from 'react'
+import React from 'react'
 import { Tab } from 'src/components';
 import './Tabs.css'
+import { getEventsFilters, setEventsFaculties, useAppDispatch, useAppSelector } from 'src/store';
+import { allFaculties } from 'src/helpers';
 
-interface ITabs {
-  tab: string,
-  onClickTab: (value: string) => void
-}
+export const Tabs = () => {
+  const dispatch = useAppDispatch();
+  const { faculties } = useAppSelector(getEventsFilters);
+  const allTabs = ['Все факультеты', ...allFaculties];
 
-export const Tabs:FC<ITabs> = ({tab, onClickTab}) => {
-  const facultiesTabs = ['Все факультеты', 'ФКП', 'ФИТУ', 'ИЭФ', 'ФКСиС', 'ФИБ', 'ФРЭ', 'ВФ'];
+  const checkIsSelected = (value: string) => {
+    if (!faculties.length && value === 'Все факультеты') return true;
+    return faculties.includes(value);
+  }
+
+  const onClickTab = (value: string) => {
+    dispatch(setEventsFaculties(value))
+  }
+
   return (
     <div className='tabs'>
-      {facultiesTabs.map(v => 
+      {allTabs.map(value =>
         <Tab 
-          value={v} 
-          isSelected={(tab === v)} 
-          key={v} 
+          value={value}
+          isSelected={checkIsSelected(value)} 
           onClickTab={onClickTab}
+          key={value} 
         />
       )}
     </div>

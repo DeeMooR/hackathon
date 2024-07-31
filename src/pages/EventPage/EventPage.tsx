@@ -10,7 +10,7 @@ import { BackgroundImage, Container } from 'src/styled'
 import './EventPage.css'
 
 export const EventPage:FC<{type: string}> = ({type}) => {
-  const { id = 0 } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { eventsNext, eventsPast } = useAppSelector(getEvents);
@@ -29,9 +29,8 @@ export const EventPage:FC<{type: string}> = ({type}) => {
   };
 
   useEffect(() => {
-    if (eventsNext.length > 0 && eventsPast.length > 0) {
+    if (id) {
       const updateEvent = [...eventsNext, ...eventsPast].find((item: IEvent) => item.id === +id);
-      console.log(eventsNext, updateEvent)
       setEvent(updateEvent);
     }
   }, [eventsNext, eventsPast])
@@ -82,6 +81,8 @@ export const EventPage:FC<{type: string}> = ({type}) => {
     dispatch(sendMembersAPI({ members: newArray, id: event.id }));
   }
   
+  console.log(id)
+
   return (
     <>
     {event && event.id &&

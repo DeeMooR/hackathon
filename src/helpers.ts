@@ -66,7 +66,9 @@ export const formatDate = (dateString: Date) => {
   return `${day} ${months[monthIndex]} ${year}`;
 }
 
-export const faculties = ['ФКП', 'ФИТУ', 'ИЭФ', 'ФКСИС', 'ФИБ', 'ФРЭ', 'ВФ'];
+export const allFaculties = ['ФКП', 'ФИТУ', 'ИЭФ', 'ФКСИС', 'ФИБ', 'ФРЭ', 'ВФ'];
+export const allEventsTypes = ['Культурные', 'Образовательные', 'Спортивные'];
+export const allEventsVisits = ['Свободный вход', 'С регистрацией'];
 
 export const event_members = ['110901, Антонович Алексей', '210902, Матышев Дмитрий', '210902, Бабич Александр', '210902, Огиенко Надежда'];
 

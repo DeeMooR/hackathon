@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getAdmin, getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store'
 import { HeaderAdmin, Footer, MiniCard } from 'src/components';
 import { ModalEvent, ModalMembers, ModalMessage, ModalDelete } from 'src/modals';
-import { faculties } from 'src/helpers'
+import { allFaculties } from 'src/helpers'
 import { IEvent } from 'src/interface'
 import { deleteEventAPI, getEventMembersAPI } from 'src/store/requests'
 import './AdminPage.css'
@@ -29,7 +29,7 @@ export const AdminPage = () => {
   }, [])
 
   useEffect(() => {
-    const updateNext = faculties.includes(adminFaculty) 
+    const updateNext = allFaculties.includes(adminFaculty) 
       ? eventsNext.filter((item: IEvent) => item.faculties.includes(adminFaculty))
       : [...eventsNext];
     setEventsNextFaculty(updateNext);
@@ -37,7 +37,7 @@ export const AdminPage = () => {
   },[eventsNext])
 
   useEffect(() => {
-    const updatePast = faculties.includes(adminFaculty) 
+    const updatePast = allFaculties.includes(adminFaculty) 
       ? eventsPast.filter((item: IEvent) => item.faculties.includes(adminFaculty))
       : [...eventsPast];
       setEventsPastFaculty(updatePast);
@@ -89,7 +89,7 @@ export const AdminPage = () => {
 
   let organization = '';
   let faculty = '';
-  if (faculties.includes(adminFaculty)) {
+  if (allFaculties.includes(adminFaculty)) {
     organization = 'Студ. совет ';
     faculty = adminFaculty;
   } 

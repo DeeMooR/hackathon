@@ -7,6 +7,11 @@ const initialState: eventsState = {
   eventsNext: [],
   eventsPast: [],
   members: [],
+  filters: {
+    faculties: [],
+    types: [],
+    visits: [],
+  },
   isLoading: false,
   isSuccess: false,
   errorMessage: null,
@@ -21,7 +26,44 @@ const setLoading = (state: eventsState) => {
 const eventsSlice = createSlice({
   name: 'events',
   initialState,
-  reducers: {},
+  reducers: {
+    setEventsFaculties: (state, { payload }) => {
+      const selected = state.filters.faculties;
+      if (payload === 'Все факультеты') {
+        state.filters.faculties = [];
+        return;
+      }
+      if (selected.length == 6 && !selected.includes(payload)) {
+        state.filters.faculties = [];
+        return;
+      }
+      const newArr = selected.includes(payload)
+        ? selected.filter((item) => item !== payload)
+        : [...selected, payload];
+      state.filters.faculties = newArr;
+    },
+    setEventsTypes: (state, { payload }) => {
+      const selected = state.filters.types;
+      state.filters.types = selected.includes(payload)
+        ? selected.filter((item) => item !== payload)
+        : [...selected, payload];
+    },
+    setEventsVisits: (state, { payload }) => {
+      const selected = state.filters.visits;
+      state.filters.visits = selected.includes(payload)
+        ? selected.filter((item) => item !== payload)
+        : [...selected, payload];
+    },
+    clearEventsFilters: (state) => {
+      state.filters.types = [];
+      state.filters.visits = [];
+    },
+    clearEventsFiltersItem: (state, { payload }) => {
+      const { types, visits } = state.filters;
+      state.filters.types = types.filter((item) => item !== payload);
+      state.filters.visits = visits.filter((item) => item !== payload);
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getEventsNextAction.pending, setLoading)
@@ -61,5 +103,5 @@ const eventsSlice = createSlice({
 
 export const {
   reducer: eventsReducer,
-  actions: {},
+  actions: {setEventsFaculties, setEventsTypes, setEventsVisits, clearEventsFilters, clearEventsFiltersItem},
 } = eventsSlice;

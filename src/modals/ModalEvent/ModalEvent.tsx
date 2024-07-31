@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { getAdmin, useAppDispatch, useAppSelector } from 'src/store';
 import { TextInput, FilterOptions, RadioOptions } from 'src/components';
 import { ModalTemplate } from 'src/modals';
-import { faculties, isPast } from 'src/helpers';
+import { allFaculties, isPast } from 'src/helpers';
 import { IAddEvent, IEvent } from 'src/interface';
 import { addEventAPI, updateEventAPI } from 'src/store/requests';
 import './ModalEvent.css'
@@ -22,7 +22,7 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
   const [selectedRadio1, setSelectedRadio1] = useState('');
   const [selectedRadio2, setSelectedRadio2] = useState('');
 
-  const options = [...faculties, 'Все факультеты'];
+  const options = [...allFaculties, 'Все факультеты'];
   const optionsRadio1 = ['Культурное', 'Образовательное', 'Спортивное'];
   const optionsRadio2 = ['Свободный вход', 'С регистрацией'];
 

@@ -19,7 +19,7 @@ const adminSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    clearAdminFaculty(state) {
+    clearAdminFaculty: (state) => {
       state.adminFaculty = '';
     },
   },

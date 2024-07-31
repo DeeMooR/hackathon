@@ -1,32 +1,32 @@
-.filters {
+.filters .filters__choice {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
 }
-.filters .filters__item {
+.filters .filters__choice .filters__item {
   position: relative;
 }
-.filters .filters__item .filters__item-title {
+.filters .filters__choice .filters__item .filters__item-title {
   display: flex;
   align-items: end;
   gap: 2px;
   cursor: pointer;
 }
-.filters .filters__item .filters__item-title p {
+.filters .filters__choice .filters__item .filters__item-title p {
   line-height: 135%;
 }
-.filters .filters__item .filters__item-title img {
+.filters .filters__choice .filters__item .filters__item-title img {
   width: 20px;
   height: 20px;
   transition: all 0.3s ease-in-out 0s;
 }
-.filters .filters__item .filters__item-title:hover {
+.filters .filters__choice .filters__item .filters__item-title:hover {
   color: var(--main);
 }
-.filters .filters__item .filters__item-title.open img {
+.filters .filters__choice .filters__item .filters__item-title.open img {
   transform: scaleY(-1);
 }
-.filters .filters__options-container {
+.filters .filters__choice .filters__options-container {
   position: absolute;
   top: 35px;
   left: 0;
@@ -39,18 +39,17 @@
   border-radius: 10px;
   z-index: 2;
 }
-
-.filters__selected {
+.filters .filters__selected {
   display: none;
   flex-wrap: wrap;
   align-items: center;
   gap: 20px;
   padding: 30px 0 0 0;
 }
-.filters__selected.show {
+.filters .filters__selected.show {
   display: flex;
 }
-.filters__selected .filters__selected-card {
+.filters .filters__selected .filters__selected-card {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -58,48 +57,48 @@
   border-radius: 10px;
   padding: 10px 20px 12px 20px;
 }
-.filters__selected .filters__selected-card p {
+.filters .filters__selected .filters__selected-card p {
   line-height: 135%;
   white-space: nowrap;
 }
-.filters__selected .filters__selected-card .filters__selected-icon {
+.filters .filters__selected .filters__selected-card .filters__selected-icon {
   padding: 0 0 0 5px;
   cursor: pointer;
 }
-.filters__selected .filters__selected-card .filters__selected-icon img {
+.filters .filters__selected .filters__selected-card .filters__selected-icon img {
   width: 20px;
   height: 20px;
 }
-.filters__selected .filters__selected-clear {
+.filters .filters__selected .filters__selected-clear {
   line-height: 135%;
   opacity: 0.7;
   padding: 0 0 0 10px;
   white-space: nowrap;
   cursor: pointer;
 }
-.filters__selected .filters__selected-clear:hover {
+.filters .filters__selected .filters__selected-clear:hover {
   opacity: 1;
 }
 
 @media (max-width: 699.98px) {
-  .filters__selected {
+  .filters .filters__selected {
     gap: 15px;
   }
-  .filters__selected .filters__selected-card {
+  .filters .filters__selected .filters__selected-card {
     border-radius: 7px;
     padding: 8px 16px 10px 16px;
   }
 }
 @media (max-width: 399.98px) {
-  .filters {
+  .filters .filters__choice {
     flex-direction: column;
     gap: 15px;
   }
-  .filters .filters__item {
+  .filters .filters__choice .filters__item {
     width: -moz-fit-content;
     width: fit-content;
   }
-  .filters__selected {
+  .filters .filters__selected {
     padding: 25px 0 0 0;
   }
 }
