@@ -19,6 +19,12 @@ export interface IEvent {
   visit: string
 }
 
+export interface IFilters {
+  faculties: string[],
+  types: string[],
+  visits: string[],
+}
+
 export interface IAddEvent {
   photo: string,
   title: string,

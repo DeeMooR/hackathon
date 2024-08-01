@@ -8,10 +8,9 @@ import './MainPage.css'
 export const MainPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { eventsNext, eventsPast } = useAppSelector(getEvents);
+  const { events } = useAppSelector(getEvents);
   
   useEffect(() => {
-    dispatch(getEventsNextAction());
     dispatch(getEventsPastAction());
   }, [])
 
@@ -27,17 +26,17 @@ export const MainPage = () => {
           <div className="mainSection__info">
             <h1><span>Расписание</span> мероприятий в БГУИР</h1>
             <div className="mainSection__text-button">
-              <p className='mainSection__text'>Список мероприятий всех типов, от всех факультетов, с гибкой сортировкой и возможностью зарегистрироваться</p>
+              <p className='mainSection__text'>Список мероприятий всех типов, от всех факультетов, с гибкой сортировкой</p>
               <button className='button mainSection__button' onClick={clickOpenEventsNext}>Смотреть ближайшие события</button>
             </div>
           </div>
           <img src={mainImage} className='mainSection__image' alt="bsuir" />
         </section>
         <section className='eventsSection'>
-          <EventsTop eventsShow={eventsNext.slice(0, 3)} type='next' />
+          <EventsTop eventsShow={events.slice(0, 3)} type='next' />
         </section>
         <section className='eventsSection'>
-          <EventsTop eventsShow={eventsPast.slice(0, 3)} type='past' />
+          <EventsTop eventsShow={events.slice(0, 3)} type='past' />
         </section>
         <section className="mapSection">
           <h2>Карта корпусов</h2>

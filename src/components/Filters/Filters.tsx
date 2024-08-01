@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { clearEventsFilters, clearEventsFiltersItem, getEventsFilters, useAppDispatch, useAppSelector } from 'src/store';
+import { clearEventsFilters, clearEventsFiltersItem, getEvents, getEventsFilters, setEventsErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
 import { FilterItem } from 'src/components';
+import { ActionGetEvents } from 'src/helpers';
 import { crossIcon } from 'src/assets';
 import './Filters.css'
 
 export const Filters = () => {
   const dispatch = useAppDispatch();
+  const { page } = useAppSelector(getEvents);
   const { types, visits } = useAppSelector(getEventsFilters);
   const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {
     setSelected([...types, ...visits]);
   }, [types, visits])
+
+  const getAllEvents = () => {
+    if (page) dispatch(ActionGetEvents[page]);
+    else dispatch(setEventsErrorMessage('Ошибка фильтрации мероприятий'));
+  }
   
   const clearSelected = () => {
     dispatch(clearEventsFilters());
+    getAllEvents();
   }
   const clearSelectedItem = (value: string) => {
     dispatch(clearEventsFiltersItem(value));
+    getAllEvents();
   }
 
   return (
@@ -26,10 +35,12 @@ export const Filters = () => {
         <FilterItem 
           type='type' 
           selected={types}
+          getAllEvents={getAllEvents}
         />
         <FilterItem 
           type='visit'
           selected={visits}
+          getAllEvents={getAllEvents}
         />
       </div>
       <div className={`filters__selected ${selected.length > 0 ? 'show' : ''}`}>

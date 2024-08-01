@@ -8,9 +8,10 @@ import './FilterItem.css'
 interface IFilterItem {
   type: 'type' | 'visit',
   selected: string[],
+  getAllEvents: () => void,
 }
 
-export const FilterItem:FC<IFilterItem> = ({ type, selected }) => {
+export const FilterItem:FC<IFilterItem> = ({ type, selected, getAllEvents }) => {
   const dispatch = useAppDispatch();
   const { activeFilter } = useAppSelector(getEvents);
   const { title, options } = FilterItemData[type];
@@ -34,6 +35,7 @@ export const FilterItem:FC<IFilterItem> = ({ type, selected }) => {
   const updateFilters = (value: string) => {
     const func = FilterItemFuncUpdate[type](value);
     dispatch(func);
+    getAllEvents();
   }
 
   const setActiveFilter = (event: React.MouseEvent<HTMLDivElement>) => {

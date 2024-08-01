@@ -1,4 +1,5 @@
 import { IContact, IEvent } from "./interface";
+import { getEventsNextAction, getEventsPastAction } from "./store";
 
 export const contacts: IContact[] = [
   {
@@ -94,3 +95,8 @@ export const isPast = (date: Date) => {
   if (event_date.getTime() < today.getTime()) return true;
   return false;
 }
+
+export const ActionGetEvents: { [type: string]: any } = {
+  next: getEventsNextAction(),
+  past: getEventsPastAction(),
+};

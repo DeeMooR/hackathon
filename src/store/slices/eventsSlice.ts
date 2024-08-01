@@ -4,8 +4,8 @@ import { getEventsNextAction, getEventsPastAction } from '../actions';
 import { eventsState } from '../interface';
 
 const initialState: eventsState = {
-  eventsNext: [],
-  eventsPast: [],
+  page: null,
+  events: [],
   members: [],
   activeFilter: null,
   filters: {
@@ -28,6 +28,9 @@ const eventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
+    setEventsPage: (state, { payload }) => {
+      state.page = payload;
+    },
     setEventsFaculties: (state, { payload }) => {
       const selected = state.filters.faculties;
       if (payload === 'Все факультеты') {
@@ -66,6 +69,9 @@ const eventsSlice = createSlice({
     },
     setEventsActiveFilter: (state, { payload }) => {
       state.activeFilter = payload;
+    },
+    setEventsErrorMessage: (state, { payload }) => {
+      state.errorMessage = payload;
     }
   },
   extraReducers: (builder) => {
@@ -74,7 +80,7 @@ const eventsSlice = createSlice({
       .addCase(getEventsNextAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.eventsNext = [...payload];
+        state.events = [...payload];
       })
       .addCase(getEventsNextAction.rejected, (state) => {
         state.isLoading = false;
@@ -85,7 +91,7 @@ const eventsSlice = createSlice({
       .addCase(getEventsPastAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.eventsPast = [...payload];
+        state.events = [...payload];
       })
       .addCase(getEventsPastAction.rejected, (state) => {
         state.isLoading = false;
@@ -108,11 +114,13 @@ const eventsSlice = createSlice({
 export const {
   reducer: eventsReducer,
   actions: {
+    setEventsPage,
     setEventsFaculties, 
     setEventsTypes, 
     setEventsVisits, 
     clearEventsFilters, 
     clearEventsFiltersItem,
-    setEventsActiveFilter
+    setEventsActiveFilter,
+    setEventsErrorMessage
   },
 } = eventsSlice;

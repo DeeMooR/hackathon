@@ -3,6 +3,7 @@
 }
 .wrapper .mainSection .mainSection__info {
   display: flex;
+  align-items: end;
   gap: 40px;
   margin: 0 0 40px 0;
 }

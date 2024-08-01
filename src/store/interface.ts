@@ -1,15 +1,11 @@
-import { IEvent } from "src/interface";
+import { IEvent, IFilters } from "src/interface";
 
 export interface eventsState {
-  eventsNext: IEvent[],
-  eventsPast: IEvent[],
+  page: 'next' | 'past' | null,
+  events: IEvent[],
   members: string[],
   activeFilter: 'type' | 'visit' | null,
-  filters: {
-    faculties: string[],
-    types: string[],
-    visits: string[],
-  },
+  filters: IFilters,
   isLoading: boolean,
   isSuccess: boolean,
   errorMessage: string | null,

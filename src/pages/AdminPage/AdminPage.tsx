@@ -10,7 +10,7 @@ import './AdminPage.css'
 
 export const AdminPage = () => {
   const dispatch = useAppDispatch();
-  const { eventsNext, eventsPast } = useAppSelector(getEvents);
+  const { events } = useAppSelector(getEvents);
   const { adminFaculty } = useAppSelector(getAdmin);
   const [isOpenModalEvent, setOpenModalEvent] = useState(false);
   const [isOpenModalChangeEvent, setOpenModalChangeEvent] = useState(false);
@@ -24,32 +24,31 @@ export const AdminPage = () => {
   const [objEventAction, setObjEventAction] = useState<IEvent>();
 
   useEffect(() => {
-    dispatch(getEventsNextAction());
     dispatch(getEventsPastAction());
   }, [])
 
   useEffect(() => {
     const updateNext = allFaculties.includes(adminFaculty) 
-      ? eventsNext.filter((item: IEvent) => item.faculties.includes(adminFaculty))
-      : [...eventsNext];
+      ? events.filter((item: IEvent) => item.faculties.includes(adminFaculty))
+      : [...events];
     setEventsNextFaculty(updateNext);
     console.log(eventsNextFaculty)
-  },[eventsNext])
+  },[events])
 
   useEffect(() => {
     const updatePast = allFaculties.includes(adminFaculty) 
-      ? eventsPast.filter((item: IEvent) => item.faculties.includes(adminFaculty))
-      : [...eventsPast];
+      ? events.filter((item: IEvent) => item.faculties.includes(adminFaculty))
+      : [...events];
       setEventsPastFaculty(updatePast);
       console.log(eventsPastFaculty)
-  },[eventsPast])
+  },[events])
 
   const showModalEvent = () => {
     console.log('ku')
     setOpenModalEvent(true);
   }
   const clickChangeEvent = (id: number) => {setIdEventAction(id);
-    const obj = [...eventsNext, ...eventsPast].find((item: IEvent) => item.id === id);
+    const obj = [...events].find((item: IEvent) => item.id === id);
     setObjEventAction(obj);
     setOpenModalChangeEvent(true);
   }

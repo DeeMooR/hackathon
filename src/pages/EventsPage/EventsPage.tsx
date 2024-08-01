@@ -1,26 +1,27 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getEvents, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, Tabs, Filters, MiniCard } from 'src/components';
+import { getEvents, setEventsPage, useAppDispatch, useAppSelector } from 'src/store';
+import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading } from 'src/components';
 import { IEvent } from 'src/interface'
-import { EventsPageAllEvents, EventsPageData } from './config';
+import { ActionGetEvents } from 'src/helpers';
+import { EventsPageData } from './config';
 import './EventsPage.css'
 
 interface IEventsPage {
-  type: 'next' | 'past',
+  page: 'next' | 'past',
 }
 
-export const EventsPage:FC<IEventsPage> = ({type}) => {
+export const EventsPage:FC<IEventsPage> = ({page}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { eventsNext, eventsPast } = useAppSelector(getEvents);
-
-  const { titleWord, actionGetEvents } = EventsPageData[type];
-  const events = EventsPageAllEvents[type]({eventsNext, eventsPast});
+  const { events, isLoading } = useAppSelector(getEvents);
+  const showLoading = ShowLoading(isLoading);
+  const { titleWord } = EventsPageData[page];
 
   useEffect(() => {
-    dispatch(actionGetEvents);
-  }, [type])
+    dispatch(setEventsPage(page));
+    dispatch(ActionGetEvents[page]);
+  }, [page])
 
   const openMainPage = () => {
     navigate('/');
@@ -36,8 +37,12 @@ export const EventsPage:FC<IEventsPage> = ({type}) => {
           <Tabs />
           <Filters />
           <div className="eventsPage__events">
-            {events.map((obj: IEvent) => 
-              <MiniCard obj={obj} key={obj.id}/>
+            {showLoading ? (
+              <Loading />
+            ) : (
+              events.map((obj: IEvent) => (
+                <MiniCard obj={obj} key={obj.id} />
+              ))
             )}
           </div>
         </section>

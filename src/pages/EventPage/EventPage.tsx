@@ -9,11 +9,15 @@ import { crossIcon, calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/a
 import { BackgroundImage, Container } from 'src/styled'
 import './EventPage.css'
 
-export const EventPage:FC<{type: string}> = ({type}) => {
+interface IEventPage {
+  page: 'next' | 'past'
+}
+
+export const EventPage:FC<IEventPage> = ({page}) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { eventsNext, eventsPast } = useAppSelector(getEvents);
+  const { events } = useAppSelector(getEvents);
 
   const [event, setEvent] = useState<any>(null)
   const [completedMessege, setCompletedMessege] = useState('')
@@ -30,20 +34,20 @@ export const EventPage:FC<{type: string}> = ({type}) => {
 
   useEffect(() => {
     if (id) {
-      const updateEvent = [...eventsNext, ...eventsPast].find((item: IEvent) => item.id === +id);
+      const updateEvent = [...events].find((item: IEvent) => item.id === +id);
       setEvent(updateEvent);
     }
-  }, [eventsNext, eventsPast])
+  }, [events])
 
   useEffect(() => {
     if (event) {
       const updateTypeDate = isPast(event.date) ? 'past' : 'next'; 
       setTypeDate(updateTypeDate);
-      console.log(type, event)
-      if (type === 'past') setCrumbsEventsPage('Прошедшие мероприятия');
+      console.log(page, event)
+      if (page === 'past') setCrumbsEventsPage('Прошедшие мероприятия');
       else setCrumbsEventsPage('Ближайшие мероприятия');
 
-      if (type === 'past') {
+      if (page === 'past') {
         setCompletedMessege('Мероприятие завершилось');
         setCompletedClass('finished');
       } else if (event?.visit === 'Свободный вход') {
@@ -93,7 +97,7 @@ export const EventPage:FC<{type: string}> = ({type}) => {
           <p className='crumbs'>
             // !!! Исправить на объект с данными
             <span onClick={() => navigate('/')}>Главная</span> / 
-            <span onClick={() => navigate(`/${type}`)}>{crumbsEventsPage}</span>
+            <span onClick={() => navigate(`/${page}`)}>{crumbsEventsPage}</span>
           </p>
           <div className="eventPage__card">
             <div className="eventPage__image column-left">
@@ -113,7 +117,7 @@ export const EventPage:FC<{type: string}> = ({type}) => {
                   <p>{event.faculties.join(', ')}</p>
                 </div>
               </div>
-              {type === 'next' && event.visit === 'С регистрацией' &&
+              {page === 'next' && event.visit === 'С регистрацией' &&
                 <button className='button info__button' onClick={scrollToButton}>Зарегистрироваться</button>
               }
             </div>
@@ -122,7 +126,7 @@ export const EventPage:FC<{type: string}> = ({type}) => {
             <h2 className='column-left'>Описание мероприятия</h2>
             <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
           </div>
-          {type === 'next' && event.visit === 'С регистрацией' &&
+          {page === 'next' && event.visit === 'С регистрацией' &&
             <div className="eventPage__registration">
               <h2 className='column-left'>Регистрация на мероприятие</h2>
               <div className="registration__fields">
@@ -138,7 +142,7 @@ export const EventPage:FC<{type: string}> = ({type}) => {
               </div>
             </div>
           }
-          {type === 'past' && event.results &&
+          {page === 'past' && event.results &&
             <div className="eventPage__results">
               <h2 className='column-left'>Результаты мероприятия</h2>
               <div className="results__info">
