@@ -5,31 +5,31 @@ import java.util.List;
 
 public class Filter {
     // Или переписать на массивы
-    List<String> faculty = new ArrayList<>();
-    String type;
-    String visit;
+    List<String> faculties = new ArrayList<>();
+    List<String> types = new ArrayList<>();
+    List<String> visits = new ArrayList<>();
 
-    public List<String> getFaculty() {
-        return faculty;
+    public List<String> getFaculties() {
+        return faculties;
     }
 
-    public void setFaculty(List<String> faculty) {
-        this.faculty = faculty;
+    public void setFaculties(List<String> faculties) {
+        this.faculties = faculties;
     }
 
-    public String getType() {
-        return type;
+    public List<String> getTypes() {
+        return types;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypes(List<String> types) {
+        this.types = types;
     }
 
-    public String getVisit() {
-        return visit;
+    public List<String> getVisits() {
+        return visits;
     }
 
-    public void setVisit(String visit) {
-        this.visit = visit;
+    public void setVisits(List<String> visits) {
+        this.visits = visits;
     }
 }

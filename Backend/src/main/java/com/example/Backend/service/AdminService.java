@@ -16,10 +16,10 @@ import java.util.Base64;
 public class AdminService {
     @Autowired
     private AdminRepo adminRepo;
-    public AdminEntity authoriz(AdminEntity adminEntity) throws MyException, NoSuchAlgorithmException {
+    public Admin authoriz(AdminEntity adminEntity) throws MyException, NoSuchAlgorithmException {
         AdminEntity admin = adminRepo.findByLogin(adminEntity.getLogin());
         if (admin != null && verifyPassword(adminEntity.getPassword(), admin.getPassword(), admin.getSold())) {
-            return admin;
+            return Admin.toModel(admin);
         } else {
             throw new MyException("Неверный пароль или пароль");
         }

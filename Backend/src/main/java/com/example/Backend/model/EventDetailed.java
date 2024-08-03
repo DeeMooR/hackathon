@@ -3,10 +3,12 @@ package com.example.Backend.model;
 import com.example.Backend.entity.EventEntity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Event {
+
+public class EventDetailed {
     private int id;
     private String photo;
     private String title;
@@ -14,23 +16,36 @@ public class Event {
     private String time;
     private String location;
     private List<String> faculties;
+    private String description;
+    private String archive;
+    private String results;
+    private String type;
     private String visit;
+    private String page;
 
-    public static Event toModel(EventEntity entity){
-        return new Event(entity);
+    public static EventDetailed toModel(EventEntity entity){
+        return new EventDetailed(entity);
     }
 
-    public Event(EventEntity entity) {
+    public EventDetailed(EventEntity entity) {
         id = entity.getId();
         photo = entity.getPhoto();
         title = entity.getTitle();
         date = entity.getDate();
         time = entity.getTime();
         location = entity.getLocation();
+        description = entity.getDescription();
+        archive = entity.getArchive();
         faculties = new ArrayList<>();
+        results = entity.getResults();
+        type = entity.getType();
         visit = entity.getVisit();
         for(String str : entity.getFaculties())
             faculties.add(str);
+        if(LocalDate.now().isAfter(date.toLocalDate()))
+            page = "past";
+        else
+            page = "next";
     }
 
     public int getId() {
@@ -59,6 +74,22 @@ public class Event {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getResults() {
+        return results;
+    }
+
+    public void setResults(String results) {
+        this.results = results;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getVisit() {
@@ -95,6 +126,22 @@ public class Event {
 
     public void setFaculties(List<String> faculties) {
         this.faculties = faculties;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getArchive() {
+        return archive;
+    }
+
+    public void setArchive(String archive) {
+        this.archive = archive;
     }
 
 }
