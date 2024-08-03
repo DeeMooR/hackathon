@@ -1,43 +1,30 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { getEvents, useAppDispatch, useAppSelector } from 'src/store';
+import { getEventAction, getEventItemSelector, getEventSelector, getEvents, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, IconText } from 'src/components';
-import { formatDate, isPast } from 'src/helpers'
+import { eventExample, formatDate, isPast } from 'src/helpers'
 import { sendMembersAPI } from 'src/store/requests';
 import { IEvent } from 'src/interface';
 import { crossIcon, calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
 import './EventPage.css'
 
-interface IEventPage {
-  page: 'next' | 'past'
-}
-
-export const EventPage:FC<IEventPage> = ({page}) => {
+export const EventPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { events } = useAppSelector(getEvents);
+  const event = eventExample;
+  // useAppSelector(getEventItemSelector);
+  const { date, description, faculties, location, photo, time, title, type, visit, archive, results, page } = event;
 
-  const [event, setEvent] = useState<any>(null)
+  useEffect(() => {
+    if (id) dispatch(getEventAction(+id));
+  }, [])
+  
   const [completedMessege, setCompletedMessege] = useState('')
   const [completedClass, setCompletedClass] = useState('')
   const [crumbsEventsPage, setCrumbsEventsPage] = useState('')
   const [typeDate, setTypeDate] = useState('');
-
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const scrollToButton = () => {
-    if (buttonRef.current) {
-      buttonRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
-
-  useEffect(() => {
-    if (id) {
-      const updateEvent = [...events].find((item: IEvent) => item.id === +id);
-      setEvent(updateEvent);
-    }
-  }, [events])
 
   useEffect(() => {
     if (event) {
@@ -89,44 +76,38 @@ export const EventPage:FC<IEventPage> = ({page}) => {
 
   return (
     <>
-    {event && event.id &&
-      <>
       <Header/>
       <div className="wrapper">
         <section className="eventPage">
           <p className='crumbs'>
-            // !!! Исправить на объект с данными
             <span onClick={() => navigate('/')}>Главная</span> / 
-            <span onClick={() => navigate(`/${page}`)}>{crumbsEventsPage}</span>
+            <span onClick={() => navigate(`/${page}`)}> {crumbsEventsPage}</span>
           </p>
           <div className="eventPage__card">
             <div className="eventPage__image column-left">
               <Container>
-                <BackgroundImage image={event?.photo} />
+                <BackgroundImage image={photo} />
               </Container>
             </div>
             <div className="eventPage__info">
               <div className="eventPage__info-up">
                 <div className={`info__completed ${completedClass}`}>{completedMessege}</div>
-                <h1>{event.title}</h1>
+                <h1>{title}</h1>
                 <div className="info__options">
-                  <IconText icon={calenderIcon} text={formatDate(event.date)} isBlueBox />
-                  <IconText icon={locationIcon} text={event.location} />
-                  <IconText icon={timeIcon} text={event.time} />
-                  <IconText icon={dotsIcon} text={event.type} />
-                  <p>{event.faculties.join(', ')}</p>
+                  <IconText icon={calenderIcon} text={formatDate(date)} isBlueBox />
+                  <IconText icon={locationIcon} text={location} />
+                  <IconText icon={timeIcon} text={time} />
+                  <IconText icon={dotsIcon} text={type} />
+                  <p>{faculties.join(', ')}</p>
                 </div>
               </div>
-              {page === 'next' && event.visit === 'С регистрацией' &&
-                <button className='button info__button' onClick={scrollToButton}>Зарегистрироваться</button>
-              }
             </div>
           </div>
           <div className="eventPage__description">
             <h2 className='column-left'>Описание мероприятия</h2>
-            <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
+            <p dangerouslySetInnerHTML={{ __html: description }}></p>
           </div>
-          {page === 'next' && event.visit === 'С регистрацией' &&
+          {page === 'next' && visit === 'С регистрацией' &&
             <div className="eventPage__registration">
               <h2 className='column-left'>Регистрация на мероприятие</h2>
               <div className="registration__fields">
@@ -138,16 +119,16 @@ export const EventPage:FC<IEventPage> = ({page}) => {
                   </div>
                 )}
                 <button className='second-button registration__btn-add' onClick={addMember}>Добавить участника</button>
-                <button className='button registration__btn-send' onClick={sendMembers} ref={buttonRef}>Зарегистрироваться</button>
+                <button className='button registration__btn-send' onClick={sendMembers}>Зарегистрироваться</button>
               </div>
             </div>
           }
-          {page === 'past' && event.results &&
+          {page === 'past' && results &&
             <div className="eventPage__results">
               <h2 className='column-left'>Результаты мероприятия</h2>
               <div className="results__info">
-                <p dangerouslySetInnerHTML={{ __html: event.results }}></p>
-                {event.archive && <a href={event.archive} target='blank'>Архив с фотографиями</a>}
+                <p dangerouslySetInnerHTML={{ __html: results }}></p>
+                {archive && <a href={archive} target='blank'>Архив с фотографиями</a>}
               </div>
             </div>
           }
@@ -156,7 +137,5 @@ export const EventPage:FC<IEventPage> = ({page}) => {
       <Newsletter/>
       <Footer/>
     </>
-    }
-  </>
   )
 }

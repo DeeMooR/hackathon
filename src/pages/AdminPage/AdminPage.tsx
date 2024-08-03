@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { getAdmin, getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store'
 import { HeaderAdmin, Footer, MiniCard } from 'src/components';
 import { ModalEvent, ModalMembers, ModalMessage, ModalDelete } from 'src/modals';
-import { allFaculties } from 'src/helpers'
-import { IEvent } from 'src/interface'
+import { allFaculties, eventExample } from 'src/helpers'
+import { IShortEvent } from 'src/interface'
 import { deleteEventAPI, getEventMembersAPI } from 'src/store/requests'
 import './AdminPage.css'
 
@@ -17,11 +17,13 @@ export const AdminPage = () => {
   const [isOpenModalMembers, setOpenModalMembers] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
 
-  const [eventsNextFaculty, setEventsNextFaculty] = useState<IEvent[] | []>([]);
-  const [eventsPastFaculty, setEventsPastFaculty] = useState<IEvent[] | []>([]);
+  let visit = 'С регистрацией';
+
+  const [eventsNextFaculty, setEventsNextFaculty] = useState<IShortEvent[] | []>([]);
+  const [eventsPastFaculty, setEventsPastFaculty] = useState<IShortEvent[] | []>([]);
 
   const [idEventAction, setIdEventAction] = useState(-1);
-  const [objEventAction, setObjEventAction] = useState<IEvent>();
+  const [objEventAction, setObjEventAction] = useState<IShortEvent>();
 
   useEffect(() => {
     dispatch(getEventsPastAction());
@@ -29,7 +31,7 @@ export const AdminPage = () => {
 
   useEffect(() => {
     const updateNext = allFaculties.includes(adminFaculty) 
-      ? events.filter((item: IEvent) => item.faculties.includes(adminFaculty))
+      ? events.filter((item: IShortEvent) => item.faculties.includes(adminFaculty))
       : [...events];
     setEventsNextFaculty(updateNext);
     console.log(eventsNextFaculty)
@@ -37,7 +39,7 @@ export const AdminPage = () => {
 
   useEffect(() => {
     const updatePast = allFaculties.includes(adminFaculty) 
-      ? events.filter((item: IEvent) => item.faculties.includes(adminFaculty))
+      ? events.filter((item: IShortEvent) => item.faculties.includes(adminFaculty))
       : [...events];
       setEventsPastFaculty(updatePast);
       console.log(eventsPastFaculty)
@@ -48,7 +50,7 @@ export const AdminPage = () => {
     setOpenModalEvent(true);
   }
   const clickChangeEvent = (id: number) => {setIdEventAction(id);
-    const obj = [...events].find((item: IEvent) => item.id === id);
+    const obj = [...events].find((item: IShortEvent) => item.id === id);
     setObjEventAction(obj);
     setOpenModalChangeEvent(true);
   }
@@ -106,8 +108,8 @@ export const AdminPage = () => {
               <h3>Пусто</h3>
             :
             <>
-            {eventsNextFaculty.map((obj: IEvent, i: number) => (
-              obj.visit !== 'С регистрацией' 
+            {eventsNextFaculty.map((obj: IShortEvent, i: number) => (
+              visit !== 'С регистрацией' 
                 ? <MiniCard obj={obj} key={i} edit clickChangeEvent={clickChangeEvent} />
                 : <MiniCard obj={obj} key={i} edit show_users clickShowMembers={clickShowMembers} clickChangeEvent={clickChangeEvent} />
             ))}
@@ -120,8 +122,8 @@ export const AdminPage = () => {
               <h3>Пусто</h3>
             :
             <>
-            {eventsPastFaculty.map((obj: IEvent, i: number) => (
-              obj.visit !== 'С регистрацией' 
+            {eventsPastFaculty.map((obj: IShortEvent, i: number) => (
+              visit !== 'С регистрацией' 
                 ? <MiniCard obj={obj} key={i} edit clickChangeEvent={clickChangeEvent} />
                 : <MiniCard obj={obj} key={i} edit show_users clickShowMembers={clickShowMembers} clickChangeEvent={clickChangeEvent} />
             ))}
@@ -132,7 +134,7 @@ export const AdminPage = () => {
       </div>
       <Footer/>
       <ModalEvent isOpen={isOpenModalEvent} closeModal={closeModal} action='add' />
-      <ModalEvent event={objEventAction} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />
+      <ModalEvent event={eventExample} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />
       <ModalMembers isOpen={isOpenModalMembers} closeModal={closeModal} />
       <ModalDelete isOpen={isOpenModalDelete} closeModal={closeModal} deleteEvent={deleteEvent} />
       {/* <ModalMessage isOpen={true} closeModal={closeModal} isSuccess={false}/> */}

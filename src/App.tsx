@@ -8,8 +8,7 @@ const App = () => {
       <Route path='/' element={<MainPage />} />
       <Route path='/next' element={<EventsPage page='next' />} />
       <Route path='/past' element={<EventsPage page='past' />} />
-      <Route path='/next/:id' element={<EventPage page='next'/>} />
-      <Route path='/past/:id' element={<EventPage page='past'/>} />
+      <Route path='/events/:id' element={<EventPage />} />
       <Route path='/contacts' element={<ContactsPage />} />
       <Route path='/auth' element={<AuthPage />} />
       <Route path='/admin' element={<AdminPage />} />

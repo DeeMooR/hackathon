@@ -47,9 +47,6 @@
 .wrapper .eventPage .eventPage__card .eventPage__info .eventPage__info-up .info__options .iconText {
   gap: 5px;
 }
-.wrapper .eventPage .eventPage__card .eventPage__info .info__button {
-  max-width: 360px;
-}
 .wrapper .eventPage .eventPage__description {
   display: flex;
   gap: 40px;

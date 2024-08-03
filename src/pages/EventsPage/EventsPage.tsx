@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getEvents, setEventsPage, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading } from 'src/components';
-import { IEvent } from 'src/interface'
+import { IShortEvent } from 'src/interface'
 import { ActionGetEvents } from 'src/helpers';
 import { EventsPageData } from './config';
 import './EventsPage.css'
@@ -40,7 +40,7 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
             {showLoading ? (
               <Loading />
             ) : (
-              events.map((obj: IEvent) => (
+              events.map((obj: IShortEvent) => (
                 <MiniCard obj={obj} key={obj.id} />
               ))
             )}
