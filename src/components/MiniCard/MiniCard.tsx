@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IconText } from 'src/components';
 import { formatDate, isPast } from 'src/helpers'
-import { IEvent } from 'src/interface'
+import { IShortEvent } from 'src/interface'
 import { calenderIcon, locationIcon, timeIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
 import './MiniCard.css'
 
 interface IMiniCard {
-  obj: IEvent,
+  obj: IShortEvent,
   edit?: boolean,
   show_users?: boolean,
   clickShowMembers?: (id: number) => void,
@@ -17,23 +17,23 @@ interface IMiniCard {
 
 export const MiniCard:FC<IMiniCard> = ({obj, edit, show_users, clickShowMembers, clickChangeEvent}) => {
   const navigate = useNavigate();
+  const { id, date, faculties, location, photo, time, title } = obj;
 
   const openEventPage = () => {
-    if (isPast(obj.date)) navigate(`/past/${obj.id}`);
-    else navigate(`/next/${obj.id}`);
+    navigate(`/events/${id}`);
   }
   
   return (
     <div className='mini-card'>
       <Container>
-        <BackgroundImage image={obj.photo} />
+        <BackgroundImage image={photo} />
       </Container>
       <div className='mini-card__description'>
-        <h3 className='mini-card__title'>{obj.title}</h3>
-        <IconText icon={calenderIcon} text={formatDate(obj.date)} isBlueBox />
-        <IconText icon={locationIcon} text={obj.location} />
-        <IconText icon={timeIcon} text={obj.time} />
-        <p>{obj.faculties.join(', ')}</p>
+        <h3 className='mini-card__title'>{title}</h3>
+        <IconText icon={calenderIcon} text={formatDate(date)} isBlueBox />
+        <IconText icon={locationIcon} text={location} />
+        <IconText icon={timeIcon} text={time} />
+        <p>{faculties.join(', ')}</p>
       </div>
       <div className="mini-card__buttons">
         {!edit && !show_users && 

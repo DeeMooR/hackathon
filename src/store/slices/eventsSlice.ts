@@ -6,7 +6,6 @@ import { eventsState } from '../interface';
 const initialState: eventsState = {
   page: null,
   events: [],
-  members: [],
   activeFilter: null,
   filters: {
     faculties: [],
@@ -96,17 +95,6 @@ const eventsSlice = createSlice({
       .addCase(getEventsPastAction.rejected, (state) => {
         state.isLoading = false;
         state.errorMessage = 'Ошибка при получении прошедших мероприятий';
-      })
-
-      .addCase(getEventMembersAPI.pending, setLoading)
-      .addCase(getEventMembersAPI.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.members = payload;
-      })
-      .addCase(getEventMembersAPI.rejected, (state) => {
-        state.isLoading = false;
-        state.errorMessage = 'Ошибка получения списка пользователей';
       })
   },
 })

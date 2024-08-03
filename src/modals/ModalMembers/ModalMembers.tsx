@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { getEvents, useAppSelector } from 'src/store';
+import { membersExample } from 'src/helpers';
 import { ModalTemplate } from 'src/modals';
 import './ModalMembers.css'
 
@@ -9,7 +9,7 @@ interface IModalMembers {
 }
 
 export const ModalMembers:FC<IModalMembers> = ({ isOpen, closeModal }) => {
-  const { members } = useAppSelector(getEvents);
+  const members = membersExample;
 
   return (
   <>

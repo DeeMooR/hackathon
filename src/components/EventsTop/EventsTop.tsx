@@ -2,12 +2,12 @@ import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getEvents, useAppSelector } from 'src/store'
 import { Loading, MiniCard, ShowLoading } from 'src/components'
-import { IEvent } from 'src/interface'
+import { IShortEvent } from 'src/interface'
 import { EventsTopData } from './config'
 import './EventsTop.css'
 
 interface IEventsTop {
-  eventsShow: IEvent[],
+  eventsShow: IShortEvent[],
   type: 'next' | 'past',
 }
 
@@ -29,7 +29,7 @@ export const EventsTop:FC<IEventsTop> = ({ eventsShow, type }) => {
           {eventsShow.length ? (
             <>
               <div className="eventsTop__events">
-                {eventsShow.map((obj: IEvent, i: number) => 
+                {eventsShow.map((obj: IShortEvent, i: number) => 
                   <MiniCard obj={obj} key={i} />
                 )}
               </div>

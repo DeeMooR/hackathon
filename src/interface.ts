@@ -13,28 +13,29 @@ export interface IEvent {
   location: string,
   faculties: string[],
   description: string,
-  archive: string,
-  results: string,
   type: string,
-  visit: string
+  visit: string,
+  archive?: string,
+  results?: string,
+  page: 'next' | 'past',
 }
 
-export interface IFilters {
-  faculties: string[],
-  types: string[],
-  visits: string[],
-}
+export interface IAddEvent extends Omit<IEvent, 'id' | 'page'> {}
 
-export interface IAddEvent {
+export interface IShortEvent {
+  id: number,
   photo: string,
   title: string,
   date: Date,
   time: string,
   location: string,
   faculties: string[],
-  description: string,
-  type: string,
-  visit: string
+}
+
+export interface IFilters {
+  faculties: string[],
+  types: string[],
+  visits: string[],
 }
 
 export interface IAuth {

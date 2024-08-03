@@ -67,7 +67,7 @@ export const addEventAPI = createAsyncThunk(
 )
 export const updateEventAPI = createAsyncThunk(
   'eventsNext/updateEventAPI',
-  async (obj: IEvent, {dispatch, rejectWithValue}) => {
+  async (obj: any, {dispatch, rejectWithValue}) => {
     try {
       console.log(obj)
       const response = await fetch(`http://localhost:8080/events/update?id=${obj.id}`, {

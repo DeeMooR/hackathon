@@ -78,8 +78,8 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
       setTime(event?.time);
       setDate(event?.date);
       setLocation(event?.location);
-      setResults(event?.results);
-      setArchive(event?.archive);
+      setResults('asdas');
+      setArchive('asdasd');
     }
   }, [event])
 
@@ -100,8 +100,7 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
   }
   const changeEvent = () => {
     if (event) {
-      const obj: IEvent = {
-        id: event.id,
+      const obj: IAddEvent = {
         photo: photo,
         title: title,
         date: date,
@@ -112,7 +111,7 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
         type: selectedRadio1,
         visit: selectedRadio2,
         results: results,
-        archive: archive
+        archive: archive,
       }
       dispatch(updateEventAPI(obj));
     }
