@@ -52,7 +52,7 @@ export const eventExample: IEvent =  {
   results: '1 место: команда 1 <br/>2 место: команда 2 <br/>3 место: команда 3 <br/>4 место: команда 4 <br/>5 место: команда 5 <br/>6 место: команда 6',
   type: 'Образовательное',
   visit: 'С регистрацией',
-  page: 'past'
+  page: 'next'
 }
 
 export const formatDate = (dateString: Date) => {

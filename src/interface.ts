@@ -42,3 +42,7 @@ export interface IAuth {
   login: string,
   password: string
 }
+
+export interface IRegistrationForm {
+  member: string,
+}

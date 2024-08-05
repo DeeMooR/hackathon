@@ -4,6 +4,7 @@ import { eventState } from '../interface';
 
 const initialState: eventState = {
   event: null,
+  members: [],
   isLoading: false,
   isSuccess: false,
   errorMessage: null,
@@ -18,7 +19,16 @@ const setLoading = (state: eventState) => {
 const eventSlice = createSlice({
   name: 'event',
   initialState,
-  reducers: {},
+  reducers: {
+    setEventMembers: (state, { payload }) => {
+      const { members } = state;
+      if (!members.includes(payload)) state.members = [...members, payload];
+      else state.errorMessage = 'Такой участник уже добавлен';
+    },
+    clearEventMember: (state, { payload }) => {
+      state.members = state.members.filter((v) => v !== payload);;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getEventAction.pending, setLoading)
@@ -26,6 +36,7 @@ const eventSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.event = payload;
+        state.members = [];
       })
       .addCase(getEventAction.rejected, (state) => {
         state.isLoading = false;
@@ -36,5 +47,5 @@ const eventSlice = createSlice({
 
 export const {
   reducer: eventReducer,
-  actions: {},
+  actions: {setEventMembers, clearEventMember},
 } = eventSlice;

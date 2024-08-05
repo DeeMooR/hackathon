@@ -9,7 +9,7 @@ import './AuthPage.css'
 export const AuthPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { adminFaculty, errorMessage } = useAppSelector(getAdmin);
+  const { adminName, errorMessage } = useAppSelector(getAdmin);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -30,14 +30,14 @@ export const AuthPage = () => {
   }
 
   useEffect(() => {
-    if (adminFaculty) {
-      localStorage.setItem('admin_name', adminFaculty);
+    if (adminName) {
+      localStorage.setItem('admin_name', adminName);
       setTimeout(() => {
         navigate('/admin');
       }, 300)
     }
     if (errorMessage) setOpenModal(true);
-  }, [adminFaculty, errorMessage])
+  }, [adminName, errorMessage])
 
   const closeModal = () => {
     document.body.style.overflowY = 'auto';

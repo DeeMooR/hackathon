@@ -17,8 +17,8 @@ interface IModalEvent {
 
 export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickShowDelete }) => {
   const dispatch = useAppDispatch();
-  const { adminFaculty } = useAppSelector(getAdmin);
-  const [selected, setSelected] = useState<string[]>([adminFaculty]);
+  const { adminName } = useAppSelector(getAdmin);
+  const [selected, setSelected] = useState<string[]>([adminName]);
   const [selectedRadio1, setSelectedRadio1] = useState('');
   const [selectedRadio2, setSelectedRadio2] = useState('');
 
@@ -36,10 +36,10 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
     setSelectedRadio2(value);
   }
   const onClickOption = (value: string) => {
-    if (value === adminFaculty) return;
+    if (value === adminName) return;
     if (value === 'Все факультеты') {
       if (!selected.includes(value)) setSelected(options);
-      else setSelected([adminFaculty]);
+      else setSelected([adminName]);
       return;
     }
     if (selected.length == 6 && !selected.includes(value)) {

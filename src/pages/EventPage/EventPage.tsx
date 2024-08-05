@@ -1,78 +1,53 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { getEventAction, getEventItemSelector, getEventSelector, getEvents, useAppDispatch, useAppSelector } from 'src/store';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { clearEventMember, getEventAction, getEventSelector, setEventMembers, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, IconText } from 'src/components';
-import { eventExample, formatDate, isPast } from 'src/helpers'
-import { sendMembersAPI } from 'src/store/requests';
-import { IEvent } from 'src/interface';
+import { eventExample, formatDate } from 'src/helpers'
 import { crossIcon, calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
+import { IRegistrationForm } from 'src/interface';
+import { eventMemberScheme } from 'src/validation';
 import { BackgroundImage, Container } from 'src/styled'
+import { EventPageData } from './config';
 import './EventPage.css'
 
 export const EventPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { members, errorMessage } = useAppSelector(getEventSelector);
   const event = eventExample;
   // useAppSelector(getEventItemSelector);
   const { date, description, faculties, location, photo, time, title, type, visit, archive, results, page } = event;
+  const { crumbs, visitMessage, visitClass } = EventPageData[page](visit); 
 
   useEffect(() => {
     if (id) dispatch(getEventAction(+id));
   }, [])
-  
-  const [completedMessege, setCompletedMessege] = useState('')
-  const [completedClass, setCompletedClass] = useState('')
-  const [crumbsEventsPage, setCrumbsEventsPage] = useState('')
-  const [typeDate, setTypeDate] = useState('');
 
-  useEffect(() => {
-    if (event) {
-      const updateTypeDate = isPast(event.date) ? 'past' : 'next'; 
-      setTypeDate(updateTypeDate);
-      console.log(page, event)
-      if (page === 'past') setCrumbsEventsPage('Прошедшие мероприятия');
-      else setCrumbsEventsPage('Ближайшие мероприятия');
-
-      if (page === 'past') {
-        setCompletedMessege('Мероприятие завершилось');
-        setCompletedClass('finished');
-      } else if (event?.visit === 'Свободный вход') {
-        setCompletedMessege('Вход свободный');
-        setCompletedClass('free');
-      } else {
-        setCompletedMessege('Регистрация обязательна');
-        setCompletedClass('registration');
-      }
-    }
-  }, [event])
-
-  const [inputRegister, setInputRegister] = useState<string>('');
-  const [members, setMembers] = useState<string[]>([]);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { isValid },
+  } = useForm<IRegistrationForm>({
+    mode: 'onSubmit',
+    resolver: yupResolver(eventMemberScheme),
+  });
   
   const addMember = () => {
-    if (inputRegister !== '') {
-      setMembers(prevMembers => [...prevMembers, inputRegister]);
-      setInputRegister('');
-    }
+    dispatch(setEventMembers(getValues().member));
+    setValue('member', '');
   }
   const deleteMember = (value: string) => {
-    const updateMembers = members.filter((v) => v !== value);
-    setMembers(updateMembers);
+    dispatch(clearEventMember(value));
   }
-  const sendMembers = () => {
-    const sendMembers = (inputRegister !== '')
-    ? [...members, inputRegister]
-    : members
-    setMembers(sendMembers);
-    setInputRegister('');
-    console.log(sendMembers);
-    // dispatch(sendMembersAPI({ members: sendMembers, id: event.id }));
-    const newArray = sendMembers.map(item => ({ fullNameAndGroup: item }));
-    dispatch(sendMembersAPI({ members: newArray, id: event.id }));
+  const onSubmit = (data: IRegistrationForm) => {
+    if (isValid) dispatch(setEventMembers(data.member));
+    console.log('Отправить запрос');
   }
-  
-  console.log(id)
 
   return (
     <>
@@ -81,7 +56,7 @@ export const EventPage = () => {
         <section className="eventPage">
           <p className='crumbs'>
             <span onClick={() => navigate('/')}>Главная</span> / 
-            <span onClick={() => navigate(`/${page}`)}> {crumbsEventsPage}</span>
+            <span onClick={() => navigate(`/${page}`)}> {crumbs}</span>
           </p>
           <div className="eventPage__card">
             <div className="eventPage__image column-left">
@@ -91,7 +66,7 @@ export const EventPage = () => {
             </div>
             <div className="eventPage__info">
               <div className="eventPage__info-up">
-                <div className={`info__completed ${completedClass}`}>{completedMessege}</div>
+                <div className={`info__completed ${visitClass}`}>{visitMessage}</div>
                 <h1>{title}</h1>
                 <div className="info__options">
                   <IconText icon={calenderIcon} text={formatDate(date)} isBlueBox />
@@ -107,21 +82,26 @@ export const EventPage = () => {
             <h2 className='column-left'>Описание мероприятия</h2>
             <p dangerouslySetInnerHTML={{ __html: description }}></p>
           </div>
-          {page === 'next' && visit === 'С регистрацией' &&
-            <div className="eventPage__registration">
+          {visitClass === 'registration' &&
+            <form className="eventPage__registration" onSubmit={handleSubmit(onSubmit)}>
               <h2 className='column-left'>Регистрация на мероприятие</h2>
               <div className="registration__fields">
-                <input type="text" className='registration__input' value={inputRegister} onChange={(e: any) => setInputRegister(e.target.value)} placeholder='Группа, ФИО' />
+                <input 
+                  {...register('member')}
+                  type="text" 
+                  className='registration__input' 
+                  placeholder='Группа, ФИО' 
+                />
                 {members.map((value, i) => 
                   <div className='registration__member' key={i}>
                     <p>{value}</p>
                     <img src={crossIcon} alt="cross" onClick={() => deleteMember(value)} />
                   </div>
                 )}
-                <button className='second-button registration__btn-add' onClick={addMember}>Добавить участника</button>
-                <button className='button registration__btn-send' onClick={sendMembers}>Зарегистрироваться</button>
+                <button type='button' className='second-button registration__btn-add' onClick={addMember} disabled={!isValid}>Добавить участника</button>
+                <button type='submit' className='button registration__btn-send'>Зарегистрироваться</button>
               </div>
-            </div>
+            </form>
           }
           {page === 'past' && results &&
             <div className="eventPage__results">

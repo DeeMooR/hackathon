@@ -12,6 +12,7 @@ export interface eventsState {
 
 export interface eventState {
   event: IEvent | null,
+  members: string[],
   isLoading: boolean,
   isSuccess: boolean,
   errorMessage: string | null,
@@ -19,7 +20,7 @@ export interface eventState {
 
 
 export interface adminState {
-  adminFaculty: string,
+  adminName: string,
   isLoading: boolean,
   isSuccess: boolean,
   errorMessage: string | null,

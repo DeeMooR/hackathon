@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearAdminFaculty, useAppDispatch } from 'src/store';
+import { clearAdminName, useAppDispatch } from 'src/store';
 import { logoIcon } from 'src/assets';
 import './HeaderAdmin.css'
 
@@ -14,7 +14,7 @@ export const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
 
   const clickBack = () => {
     localStorage.removeItem('admin_name');
-    dispatch(clearAdminFaculty());
+    dispatch(clearAdminName());
     navigate('/auth');
   }
 

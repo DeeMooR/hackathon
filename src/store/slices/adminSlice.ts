@@ -3,7 +3,7 @@ import { checkAuthAction } from '../actions';
 import { adminState } from '../interface';
 
 const initialState: adminState = {
-  adminFaculty: '',
+  adminName: '',
   isLoading: false,
   isSuccess: false,
   errorMessage: null,
@@ -19,8 +19,8 @@ const adminSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    clearAdminFaculty: (state) => {
-      state.adminFaculty = '';
+    clearAdminName: (state) => {
+      state.adminName = '';
     },
   },
   extraReducers: (builder) => {
@@ -29,7 +29,7 @@ const adminSlice = createSlice({
       .addCase(checkAuthAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.adminFaculty = payload;
+        state.adminName = payload;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.isLoading = false;
@@ -41,6 +41,6 @@ const adminSlice = createSlice({
 export const {
   reducer: adminReducer,
   actions: {
-    clearAdminFaculty
+    clearAdminName
   },
 } = adminSlice;

@@ -11,7 +11,7 @@ import './AdminPage.css'
 export const AdminPage = () => {
   const dispatch = useAppDispatch();
   const { events } = useAppSelector(getEvents);
-  const { adminFaculty } = useAppSelector(getAdmin);
+  const { adminName } = useAppSelector(getAdmin);
   const [isOpenModalEvent, setOpenModalEvent] = useState(false);
   const [isOpenModalChangeEvent, setOpenModalChangeEvent] = useState(false);
   const [isOpenModalMembers, setOpenModalMembers] = useState(false);
@@ -30,16 +30,16 @@ export const AdminPage = () => {
   }, [])
 
   useEffect(() => {
-    const updateNext = allFaculties.includes(adminFaculty) 
-      ? events.filter((item: IShortEvent) => item.faculties.includes(adminFaculty))
+    const updateNext = allFaculties.includes(adminName) 
+      ? events.filter((item: IShortEvent) => item.faculties.includes(adminName))
       : [...events];
     setEventsNextFaculty(updateNext);
     console.log(eventsNextFaculty)
   },[events])
 
   useEffect(() => {
-    const updatePast = allFaculties.includes(adminFaculty) 
-      ? events.filter((item: IShortEvent) => item.faculties.includes(adminFaculty))
+    const updatePast = allFaculties.includes(adminName) 
+      ? events.filter((item: IShortEvent) => item.faculties.includes(adminName))
       : [...events];
       setEventsPastFaculty(updatePast);
       console.log(eventsPastFaculty)
@@ -90,11 +90,11 @@ export const AdminPage = () => {
 
   let organization = '';
   let faculty = '';
-  if (allFaculties.includes(adminFaculty)) {
+  if (allFaculties.includes(adminName)) {
     organization = 'Студ. совет ';
-    faculty = adminFaculty;
+    faculty = adminName;
   } 
-  else organization = adminFaculty;
+  else organization = adminName;
 
   return (
     <>
