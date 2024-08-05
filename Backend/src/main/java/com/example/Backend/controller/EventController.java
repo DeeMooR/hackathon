@@ -59,15 +59,15 @@ public class EventController {
         }
     }
 
-    @PutMapping("/past30days")//не работает//Починил
-    public ResponseEntity past30days(){
+    @GetMapping("/past")//не работает//Починил
+    public ResponseEntity pastEvents(){
         try {
-            return ResponseEntity.ok(eventService.getForPast30days());
+            return ResponseEntity.ok(eventService.getPast());
         } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
     }
-    @PutMapping("/next")//не работает//Починил
+    @GetMapping("/next")//не работает//Починил
     public ResponseEntity nextEvents(){
         try {
             return ResponseEntity.ok(eventService.getNext());
@@ -76,16 +76,33 @@ public class EventController {
         }
     }
 
-    @PutMapping("/past30days/filter")
-    public ResponseEntity past30daysFilter(@RequestBody Filter filter){
+    @GetMapping("/past/top")
+    public ResponseEntity pastTop(){
         try {
-            return ResponseEntity.ok(eventService.getForPast30days(filter));
+            return ResponseEntity.ok(eventService.getPast("top"));
+        } catch(Exception e){
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+    @GetMapping("/next/top")
+    public ResponseEntity nextTopEvents(){
+        try {
+            return ResponseEntity.ok(eventService.getNext("top"));
         } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
     }
 
-    @PutMapping("/next/filter")
+    @PostMapping("/past/filter")
+    public ResponseEntity pastFilter(@RequestBody Filter filter){
+        try {
+            return ResponseEntity.ok(eventService.getPast(filter));
+        } catch(Exception e){
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
+    @PostMapping("/next/filter")
     public ResponseEntity nextEventsFilter(@RequestBody Filter filter){
         try {
             return ResponseEntity.ok(eventService.getNext(filter));
@@ -98,6 +115,15 @@ public class EventController {
     public ResponseEntity deleteEvent(@RequestParam int id){
         try {
             return  ResponseEntity.ok(eventService.delete(id));
+        } catch(Exception e){
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
+    @GetMapping("/one")
+    public ResponseEntity one(@RequestParam int id){
+        try {
+            return ResponseEntity.ok(eventService.getOne(id));
         } catch(Exception e){
             return ResponseEntity.badRequest().body(false);
         }
