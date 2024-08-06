@@ -82,11 +82,11 @@ public class EventService {
     }
 
     public List<Event> getPast(String top) {
-        if(top.equals("top")){
-            List<Event> events = this.getPast().subList(0,3);
-            return events;
+        List<Event> events = this.getPast();
+        if(events.size() > 3){
+            return events.subList(0,3);
         }
-        return new ArrayList<>();
+        return events;
     }
 
     public List<Event> getNext() {//Дату берем сами
@@ -107,11 +107,11 @@ public class EventService {
     }
 
     public List<Event> getNext(String top) {
-        if(top.equals("top")){
-            List<Event> events = this.getNext().subList(0,3);
-            return events;
+        List<Event> events = this.getNext();
+        if(events.size() > 3){
+            return events.subList(0,3);
         }
-        return new ArrayList<>();
+        return events;
     }
 
     public boolean delete(int id) throws EventNotFoundedException {
