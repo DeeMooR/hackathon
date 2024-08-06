@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { clearEventMember, getEventAction, getEventSelector, setEventMembers, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, IconText } from 'src/components';
+import { clearEventErrorMessage, clearEventMember, getEventAction, getEventSelector, setEventMembers, useAppDispatch, useAppSelector } from 'src/store';
+import { Header, Footer, Newsletter, IconText, ErrorNotification } from 'src/components';
 import { eventExample, formatDate } from 'src/helpers'
 import { crossIcon, calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
 import { IRegistrationForm } from 'src/interface';
@@ -47,6 +47,10 @@ export const EventPage = () => {
   const onSubmit = (data: IRegistrationForm) => {
     if (isValid) dispatch(setEventMembers(data.member));
     console.log('Отправить запрос');
+  }
+
+  const clearErrorMessage = () => {
+    dispatch(clearEventErrorMessage());
   }
 
   return (
@@ -99,7 +103,7 @@ export const EventPage = () => {
                   </div>
                 )}
                 <button type='button' className='second-button registration__btn-add' onClick={addMember} disabled={!isValid}>Добавить участника</button>
-                <button type='submit' className='button registration__btn-send'>Зарегистрироваться</button>
+                <button type='submit' className='button registration__btn-send' disabled={!members.length}>Зарегистрироваться</button>
               </div>
             </form>
           }
@@ -116,6 +120,7 @@ export const EventPage = () => {
       </div>
       <Newsletter/>
       <Footer/>
+      {errorMessage && <ErrorNotification message={errorMessage} clearMessage={clearErrorMessage} />}
     </>
   )
 }

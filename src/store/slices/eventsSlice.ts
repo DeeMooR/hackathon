@@ -18,6 +18,7 @@ const initialState: eventsState = {
 }
 
 const setLoading = (state: eventsState) => {
+  state.events = [];
   state.isLoading = true;
   state.isSuccess = false;
   state.errorMessage = '';
@@ -71,7 +72,10 @@ const eventsSlice = createSlice({
     },
     setEventsErrorMessage: (state, { payload }) => {
       state.errorMessage = payload;
-    }
+    },
+    clearEventsErrorMessage: (state) => {
+      state.errorMessage = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -109,6 +113,7 @@ export const {
     clearEventsFilters, 
     clearEventsFiltersItem,
     setEventsActiveFilter,
-    setEventsErrorMessage
+    setEventsErrorMessage,
+    clearEventsErrorMessage
   },
 } = eventsSlice;

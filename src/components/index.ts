@@ -17,3 +17,4 @@ export * from './ScrollToTop/ScrollToTop';
 export * from './Loading/Loading';
 export * from './ShowLoading/ShowLoading';
 export * from './EventsTop/EventsTop';
+export * from './ErrorNotification/ErrorNotification';

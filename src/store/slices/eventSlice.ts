@@ -28,6 +28,9 @@ const eventSlice = createSlice({
     clearEventMember: (state, { payload }) => {
       state.members = state.members.filter((v) => v !== payload);;
     },
+    clearEventErrorMessage: (state) => {
+      state.errorMessage = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -47,5 +50,5 @@ const eventSlice = createSlice({
 
 export const {
   reducer: eventReducer,
-  actions: {setEventMembers, clearEventMember},
+  actions: {setEventMembers, clearEventMember, clearEventErrorMessage},
 } = eventSlice;

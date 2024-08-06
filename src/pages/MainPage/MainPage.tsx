@@ -1,21 +1,26 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, EventsTop } from 'src/components';
+import { clearMainErrorMessage, getEventsTopAction, getMainEventsTopSelector, getMainSelector, useAppDispatch, useAppSelector } from 'src/store';
+import { Header, Footer, Newsletter, EventsTop, ErrorNotification } from 'src/components';
 import { mainImage } from 'src/assets';
 import './MainPage.css'
 
 export const MainPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { events } = useAppSelector(getEvents);
+  const { errorMessage } = useAppSelector(getMainSelector);
+  const { eventsNextTop, eventsPastTop } = useAppSelector(getMainEventsTopSelector);
   
   useEffect(() => {
-    dispatch(getEventsPastAction());
+    dispatch(getEventsTopAction());
   }, [])
 
   const clickOpenEventsNext = () => {
     navigate('/next');
+  }
+
+  const clearErrorMessage = () => {
+    dispatch(clearMainErrorMessage());
   }
 
   return (
@@ -33,10 +38,10 @@ export const MainPage = () => {
           <img src={mainImage} className='mainSection__image' alt="bsuir" />
         </section>
         <section className='eventsSection'>
-          <EventsTop eventsShow={events.slice(0, 3)} type='next' />
+          <EventsTop eventsShow={eventsNextTop} type='next' />
         </section>
         <section className='eventsSection'>
-          <EventsTop eventsShow={events.slice(0, 3)} type='past' />
+          <EventsTop eventsShow={eventsPastTop} type='past' />
         </section>
         <section className="mapSection">
           <h2>Карта корпусов</h2>
@@ -48,6 +53,7 @@ export const MainPage = () => {
       </div>
       <Newsletter/>
       <Footer/>
+      {errorMessage && <ErrorNotification message={errorMessage} clearMessage={clearErrorMessage} />}
     </>
   )
 }
