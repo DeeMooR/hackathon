@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getEvents, setEventsPage, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading } from 'src/components';
+import { getEvents, setEventsPage, clearEventsErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
+import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading, ErrorNotification } from 'src/components';
 import { IShortEvent } from 'src/interface'
 import { ActionGetEvents } from 'src/helpers';
 import { EventsPageData } from './config';
@@ -14,7 +14,7 @@ interface IEventsPage {
 export const EventsPage:FC<IEventsPage> = ({page}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { events, isLoading } = useAppSelector(getEvents);
+  const { events, isLoading, errorMessage } = useAppSelector(getEvents);
   const showLoading = ShowLoading(isLoading);
   const { titleWord } = EventsPageData[page];
 
@@ -25,6 +25,10 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
 
   const openMainPage = () => {
     navigate('/');
+  }
+
+  const clearErrorMessage = () => {
+    dispatch(clearEventsErrorMessage());
   }
 
   return (
@@ -49,6 +53,7 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
       </div>
       <Newsletter/>
       <Footer/>
+      {errorMessage && <ErrorNotification message={errorMessage} clearMessage={clearErrorMessage} />}
     </>
   )
 }

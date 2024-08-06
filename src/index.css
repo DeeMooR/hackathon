@@ -8,6 +8,7 @@
   --main: #263681;
   --white: #FFFFFF;
   --main-background: #F6F8FF;
+  --error: #DF5A5A;
 }
 
 /*--------- NULLING STYLE ----------*/
@@ -139,11 +140,16 @@ textarea {
 .button:hover {
   background: #3a4a95;
 }
+.button:disabled {
+  background: var(--main);
+  opacity: 0.8;
+  cursor: not-allowed;
+}
 
 .second-button {
   height: 54px;
   border: 2px solid var(--main);
-  background-color: var(--main-background);
+  background: var(--main-background);
   border-radius: 10px;
   padding: 0 10px 0 10px;
   font-family: var(--font-family);
@@ -155,6 +161,12 @@ textarea {
 .second-button:hover {
   background: var(--main);
   color: var(--white);
+}
+.second-button:disabled {
+  background: var(--main-background);
+  color: var(--dark-main);
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
 .wrapper {

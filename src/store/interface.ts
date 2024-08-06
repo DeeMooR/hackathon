@@ -18,6 +18,16 @@ export interface eventState {
   errorMessage: string | null,
 }
 
+export interface mainState {
+  eventsTop: {
+    eventsNextTop: IShortEvent[],
+    eventsPastTop: IShortEvent[],
+  },
+  isLoading: boolean,
+  isSuccess: boolean,
+  errorMessage: string | null,
+}
+
 
 export interface adminState {
   adminName: string,
