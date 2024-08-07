@@ -120,12 +120,12 @@ public class EventController {
         }
     }
 
-    @GetMapping("/one")
-    public ResponseEntity one(@RequestParam int id){
+    @GetMapping("/{id}")
+    public ResponseEntity one(@PathVariable int id){
         try {
             return ResponseEntity.ok(eventService.getOne(id));
         } catch(Exception e){
-            return ResponseEntity.badRequest().body(false);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

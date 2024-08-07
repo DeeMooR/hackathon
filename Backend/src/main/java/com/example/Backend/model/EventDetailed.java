@@ -32,6 +32,10 @@ public class EventDetailed {
         photo = entity.getPhoto();
         title = entity.getTitle();
         date = entity.getDate();
+        if(LocalDate.now().isAfter(date.toLocalDate()))
+            this.page = "past";
+        else
+            this.page = "next";
         time = entity.getTime();
         location = entity.getLocation();
         description = entity.getDescription();
@@ -40,12 +44,7 @@ public class EventDetailed {
         results = entity.getResults();
         type = entity.getType();
         visit = entity.getVisit();
-        for(String str : entity.getFaculties())
-            faculties.add(str);
-        if(LocalDate.now().isAfter(date.toLocalDate()))
-            page = "past";
-        else
-            page = "next";
+        faculties.addAll(entity.getFaculties());
     }
 
     public int getId() {
@@ -144,4 +143,11 @@ public class EventDetailed {
         this.archive = archive;
     }
 
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
 }
