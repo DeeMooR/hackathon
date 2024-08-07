@@ -6,6 +6,8 @@
   --dark-main: #24262E;
   --dark-text: #42444C;
   --main: #263681;
+  --bright-blue: #C6D2FF;
+  --bright-blue-hover: #ABBDFF;
   --white: #FFFFFF;
   --main-background: #F6F8FF;
   --error: #DF5A5A;
@@ -92,7 +94,7 @@ a {
 input {
   width: 100%;
   height: 54px;
-  background: #c6d2ff;
+  background: var(--bright-blue);
   border-radius: 10px;
   padding: 0 10px 0 20px;
   font-family: var(--font-family);
@@ -116,7 +118,7 @@ input::placeholder {
 textarea {
   width: 100%;
   height: 105px;
-  background: #c6d2ff;
+  background: var(--bright-blue);
   border-radius: 10px;
   padding: 14px 10px 16px 20px;
   font-family: var(--font-family);

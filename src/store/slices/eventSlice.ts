@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getEventAction, setEventMembersAction } from '../actions';
 import { eventState } from '../interface';
+import { memberAlreadyExist, removeMember } from './config';
 
 const initialState: eventState = {
   event: null,
@@ -22,11 +23,15 @@ const eventSlice = createSlice({
   reducers: {
     setEventMembers: (state, { payload }) => {
       const { members } = state;
-      if (!members.some((obj) => obj.member === payload.member)) state.members = [...members, payload];
+      if (!memberAlreadyExist(members, payload)) state.members = [...members, payload];
       else state.errorMessage = 'Такой участник уже добавлен';
     },
     clearEventMember: (state, { payload }) => {
-      state.members = state.members.filter((obj) => obj.member !== payload.member);
+      const { members } = state;
+      state.members = removeMember(members, payload);
+    },
+    clearEventAllMembers: (state) => {
+      state.members = [];
     },
     clearEventErrorMessage: (state) => {
       state.errorMessage = null;
@@ -46,10 +51,9 @@ const eventSlice = createSlice({
       })
 
       .addCase(setEventMembersAction.pending, setLoading)
-      .addCase(setEventMembersAction.fulfilled, (state, { payload }) => {
+      .addCase(setEventMembersAction.fulfilled, (state) => {
         state.isLoading = false;
         state.successMessage = 'Вы успешно зарегистрированы';
-        state.members = [];
       })
       .addCase(setEventMembersAction.rejected, (state) => {
         state.isLoading = false;
@@ -60,5 +64,5 @@ const eventSlice = createSlice({
 
 export const {
   reducer: eventReducer,
-  actions: {setEventMembers, clearEventMember, clearEventErrorMessage},
+  actions: {setEventMembers, clearEventMember, clearEventAllMembers, clearEventErrorMessage},
 } = eventSlice;

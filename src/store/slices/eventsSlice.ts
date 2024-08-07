@@ -18,7 +18,6 @@ const initialState: eventsState = {
 }
 
 const setLoading = (state: eventsState) => {
-  state.events = [];
   state.isLoading = true;
   state.successMessage = null;
   state.errorMessage = null;
@@ -86,6 +85,7 @@ const eventsSlice = createSlice({
       })
       .addCase(getEventsNextAction.rejected, (state) => {
         state.isLoading = false;
+        state.events = [];
         state.errorMessage = 'Ошибка при получении ближайших мероприятий';
       })
 
@@ -96,6 +96,7 @@ const eventsSlice = createSlice({
       })
       .addCase(getEventsPastAction.rejected, (state) => {
         state.isLoading = false;
+        state.events = [];
         state.errorMessage = 'Ошибка при получении прошедших мероприятий';
       })
   },

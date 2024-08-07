@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
-import { eventMemberRequiredValidation } from '../validationRules';
+import { fieldValidation, fieldRequiredValidation } from '../validationRules';
 
 export const eventMemberScheme = Yup.object().shape({
-  member: eventMemberRequiredValidation,
+  team: fieldRequiredValidation,
+  name: fieldRequiredValidation,
+  surname: fieldRequiredValidation,
+  group: fieldRequiredValidation,
 });

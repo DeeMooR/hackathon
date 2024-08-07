@@ -61,42 +61,6 @@
       display: flex;
       gap: 40px;
       margin: 0 0 120px 0;
-      .registration__fields {
-        max-width: 360px;
-        width: 100%;
-        .registration__input {
-          width: 100%;
-          margin: 0 0 20px 0;
-        }
-        .registration__member {
-          width: 100%;
-          margin: 0 0 20px 0;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-radius: 10px;
-          padding: 14px 20px 16px 20px;
-          background: #c6d2ff;
-          p {
-            font-weight: 600;
-            line-height: 135%;
-            word-break: break-all;
-          }
-          img {
-            width: 20px;
-            height: 20px;
-            margin: 0 0 0 10px;
-            cursor: pointer;
-          }
-        }
-        .registration__btn-add {
-          margin: 0 0 30px 0;
-        }
-        button {
-          width: 100%;
-          max-width: 360px;
-        }
-      }
     }
     .eventPage__results {
       display: flex;
@@ -232,20 +196,6 @@
         h2 {
           text-align: center;
           width: 100%;
-        }
-        .registration__fields {
-          margin: 0 auto;
-          .registration__input {
-            display: block;
-            margin: 0 auto 20px;
-          }
-          .registration__btn-add {
-            margin: 0 auto 30px;
-          }
-          button {
-            display: block;
-            margin: 0 auto;
-          }
         }
       }
       .eventPage__results {

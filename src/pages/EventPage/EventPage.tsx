@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { clearEventErrorMessage, clearEventMember, getEventAction, getEventItemSelector, getEventSelector, setEventMembers, setEventMembersAction, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, IconText, ErrorNotification, Input } from 'src/components';
+import { clearEventErrorMessage, getEventAction, getEventSelector, useAppDispatch, useAppSelector } from 'src/store';
+import { Header, Footer, Newsletter, IconText, ErrorNotification, MembersRegistration } from 'src/components';
 import { eventExample, formatDate } from 'src/helpers'
-import { crossIcon, calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
-import { IMember } from 'src/interface';
-import { eventMemberScheme } from 'src/validation';
+import { calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
 import { EventPageData } from './config';
 import './EventPage.css'
@@ -16,7 +12,7 @@ export const EventPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { members, errorMessage } = useAppSelector(getEventSelector);
+  const { errorMessage } = useAppSelector(getEventSelector);
   const event = 
   // useAppSelector(getEventItemSelector) || 
   eventExample;
@@ -27,28 +23,6 @@ export const EventPage = () => {
     if (id) dispatch(getEventAction(+id));
   }, [])
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    formState: { isValid, errors },
-  } = useForm<IMember>({
-    mode: 'onSubmit',
-    resolver: yupResolver(eventMemberScheme),
-  });
-  
-  const onSubmit = (data: IMember) => {
-    if (isValid) dispatch(setEventMembers(data));
-    setValue('member', '');
-  }
-  const sendMembers = () => {
-    if (isValid) dispatch(setEventMembers(getValues()));
-    if (id) dispatch(setEventMembersAction(+id));
-  }
-  const deleteMember = (value: string) => {
-    dispatch(clearEventMember(value));
-  }
   const clearErrorMessage = () => {
     dispatch(clearEventErrorMessage());
   }
@@ -87,27 +61,10 @@ export const EventPage = () => {
             <p dangerouslySetInnerHTML={{ __html: description }}></p>
           </div>
           {visitClass === 'registration' &&
-            <form className="eventPage__registration" onSubmit={handleSubmit(onSubmit)}>
+            <div className="eventPage__registration">
               <h2 className='column-left'>Регистрация на мероприятие</h2>
-              <div className="registration__fields">
-                <Input 
-                  id='member' 
-                  register={register}
-                  type="text" 
-                  className='registration__input' 
-                  placeholder='Группа, ФИО'
-                  error={errors.member?.message}
-                />
-                {members.map((obj, i) => 
-                  <div className='registration__member' key={i}>
-                    <p>{obj.member}</p>
-                    <img src={crossIcon} alt="cross" onClick={() => deleteMember(obj.member)} />
-                  </div>
-                )}
-                <button type='submit' className='second-button registration__btn-add'>Добавить участника</button>
-                <button type='button' className='button registration__btn-send' disabled={!members.length} onClick={sendMembers}>Зарегистрироваться</button>
-              </div>
-            </form>
+              <MembersRegistration />
+            </div>
           }
           {page === 'past' && results &&
             <div className="eventPage__results">

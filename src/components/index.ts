@@ -19,3 +19,4 @@ export * from './ShowLoading/ShowLoading';
 export * from './EventsTop/EventsTop';
 export * from './ErrorNotification/ErrorNotification';
 export * from './Input/Input';
+export * from './MembersRegistration/MembersRegistration';

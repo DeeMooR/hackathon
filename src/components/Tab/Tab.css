@@ -6,10 +6,10 @@
   font-size: 18px;
   line-height: 135%;
   color: var(--dark-main);
-  background: #c6d2ff;
+  background: var(--bright-blue);
 }
 .button__tab:hover {
-  background: #abbdff;
+  background: var(--bright-blue-hover);
 }
 .button__tab.selected {
   color: var(--white);

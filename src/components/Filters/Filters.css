@@ -18,7 +18,7 @@
   align-items: center;
   height: 44px;
   gap: 6px;
-  border: 2px solid #c6d2ff;
+  border: 2px solid var(--bright-blue);
   border-radius: 10px;
   padding: 0 16px 0 20px;
 }

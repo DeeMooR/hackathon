@@ -1,0 +1,44 @@
+.membersRegistration .membersRegistration__fields .fields__team {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 0 20px 0;
+}
+.membersRegistration .membersRegistration__fields .fields__member {
+  display: flex;
+  gap: 15px;
+  margin: 0 0 20px 0;
+}
+.membersRegistration .membersRegistration__member {
+  display: flex;
+  gap: 15px;
+  margin: 0 0 20px 0;
+}
+.membersRegistration .membersRegistration__member .member__field {
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  background: var(--bright-blue);
+  border-radius: 10px;
+  padding: 0 10px 0 20px;
+  font-weight: 600;
+  line-height: 135%;
+  color: var(--dark-text);
+}
+.membersRegistration .member__button {
+  width: 100%;
+  max-width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bright-blue);
+  border-radius: 10px;
+}
+.membersRegistration .member__button:hover {
+  background-color: var(--bright-blue-hover);
+}
+.membersRegistration .membersRegistration__btn-send {
+  width: 100%;
+  max-width: 360px;
+}

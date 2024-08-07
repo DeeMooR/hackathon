@@ -11,7 +11,7 @@
 .blue-box {
   border-radius: 10px;
   padding: 10px 15px;
-  background: #c6d2ff;
+  background: var(--bright-blue);
   width: -moz-fit-content;
   width: fit-content;
 }

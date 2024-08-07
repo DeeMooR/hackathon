@@ -15,6 +15,8 @@ import radioUnselectedIcon from './icons/RadioUnselected.svg';
 import instagramIcon from './icons/Instagram.svg';
 import telegramIcon from './icons/Telegram.svg';
 import warningIcon from './icons/Warning.svg';
+import plusIcon from './icons/Plus.svg';
+import minusIcon from './icons/Minus.svg';
 
 import mainImage from './images/main.jpg';
 import emailImage from './images/email_image.png';
@@ -37,6 +39,8 @@ export {
   instagramIcon,
   telegramIcon,
   warningIcon,
+  plusIcon,
+  minusIcon,
   mainImage,
   emailImage
 }

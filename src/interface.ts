@@ -44,5 +44,11 @@ export interface IAuth {
 }
 
 export interface IMember {
-  member: string,
+  name: string,
+  surname: string, 
+  group: string
+}
+
+export interface IMemberForm extends IMember {
+  team: string;
 }
