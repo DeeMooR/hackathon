@@ -29,8 +29,7 @@ public class Event {
         location = entity.getLocation();
         faculties = new ArrayList<>();
         visit = entity.getVisit();
-        for(String str : entity.getFaculties())
-            faculties.add(str);
+        faculties.addAll(entity.getFaculties());
     }
 
     public int getId() {

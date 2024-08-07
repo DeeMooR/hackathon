@@ -8,11 +8,13 @@ public class ParticipantEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String fullNameAndGroup;
+    private String name;
+    private String surname;
+    private String groupNumber;
 
     @ManyToOne
-    @JoinColumn(name = "eventId")
-    private  EventEntity event;
+    @JoinColumn(name = "teamId")
+    private TeamEntity team;
 
     public ParticipantEntity() {
     }
@@ -25,19 +27,35 @@ public class ParticipantEntity {
         this.id = id;
     }
 
-    public String getFullNameAndGroup() {
-        return fullNameAndGroup;
+    public String getName() {
+        return name;
     }
 
-    public void setFullNameAndGroup(String fullNameAndGroup) {
-        this.fullNameAndGroup = fullNameAndGroup;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public EventEntity getEvent() {
-        return event;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setEvent(EventEntity event) {
-        this.event = event;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getGroupNumber() {
+        return groupNumber;
+    }
+
+    public void setGroupNumber(String groupNumber) {
+        this.groupNumber = groupNumber;
+    }
+
+    public TeamEntity getTeam() {
+        return team;
+    }
+
+    public void setTeam(TeamEntity team) {
+        this.team = team;
     }
 }

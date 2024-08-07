@@ -30,7 +30,7 @@ public class EventEntity {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<ParticipantEntity> participants;
+    private List<TeamEntity> teams;
 
 
     public EventEntity() {
@@ -124,12 +124,12 @@ public class EventEntity {
         this.archive = archive;
     }
 
-    public List<ParticipantEntity> getParticipants() {
-        return participants;
+    public List<TeamEntity> getTeams() {
+        return teams;
     }
 
-    public void setParticipants(List<ParticipantEntity> participants) {
-        this.participants = participants;
+    public void setTeams(List<TeamEntity> teams) {
+        this.teams = teams;
     }
 
     public String getResults() {
