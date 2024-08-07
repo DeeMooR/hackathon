@@ -1,0 +1,16 @@
+.inputBlock {
+  position: relative;
+  .warning {
+    border: 2px solid var(--warning);
+  }
+  .error {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 3px;
+    span {
+      font-size: 12px;
+      margin: 0 0 0 10px;
+    }
+  }
+}

@@ -15,8 +15,8 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { events, isLoading, errorMessage } = useAppSelector(getEvents);
-  const showLoading = ShowLoading(isLoading);
   const { titleWord } = EventsPageData[page];
+  const showLoading = ShowLoading(isLoading);
 
   useEffect(() => {
     dispatch(setEventsPage(page));
@@ -44,9 +44,13 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
             {showLoading ? (
               <Loading />
             ) : (
-              events.map((obj: IShortEvent) => (
-                <MiniCard obj={obj} key={obj.id} />
-              ))
+              events.length ? (
+                events.map((obj: IShortEvent) => (
+                  <MiniCard obj={obj} key={obj.id} />
+                ))
+              ) : (
+                <h4 className='eventsPage__empty'>Мероприятий не найдено</h4>
+              )
             )}
           </div>
         </section>

@@ -13,15 +13,15 @@ const initialState: eventsState = {
     visits: [],
   },
   isLoading: false,
-  isSuccess: false,
+  successMessage: null,
   errorMessage: null,
 }
 
 const setLoading = (state: eventsState) => {
   state.events = [];
   state.isLoading = true;
-  state.isSuccess = false;
-  state.errorMessage = '';
+  state.successMessage = null;
+  state.errorMessage = null;
 }
 
 const eventsSlice = createSlice({
@@ -82,7 +82,6 @@ const eventsSlice = createSlice({
       .addCase(getEventsNextAction.pending, setLoading)
       .addCase(getEventsNextAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.events = [...payload];
       })
       .addCase(getEventsNextAction.rejected, (state) => {
@@ -93,7 +92,6 @@ const eventsSlice = createSlice({
       .addCase(getEventsPastAction.pending, setLoading)
       .addCase(getEventsPastAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.events = [...payload];
       })
       .addCase(getEventsPastAction.rejected, (state) => {

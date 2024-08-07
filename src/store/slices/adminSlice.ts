@@ -5,14 +5,14 @@ import { adminState } from '../interface';
 const initialState: adminState = {
   adminName: '',
   isLoading: false,
-  isSuccess: false,
+  successMessage: null,
   errorMessage: null,
 }
 
 const setLoading = (state: adminState) => {
   state.isLoading = true;
-  state.isSuccess = false;
-  state.errorMessage = '';
+  state.successMessage = null;
+  state.errorMessage = null;
 }
 
 const adminSlice = createSlice({
@@ -28,7 +28,6 @@ const adminSlice = createSlice({
       .addCase(checkAuthAction.pending, setLoading)
       .addCase(checkAuthAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.adminName = payload;
       })
       .addCase(checkAuthAction.rejected, (state) => {

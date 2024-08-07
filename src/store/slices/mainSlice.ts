@@ -8,14 +8,14 @@ const initialState: mainState = {
     eventsPastTop: [],
   },
   isLoading: false,
-  isSuccess: false,
+  successMessage: null,
   errorMessage: null,
 }
 
 const setLoading = (state: mainState) => {
   state.isLoading = true;
-  state.isSuccess = false;
-  state.errorMessage = '';
+  state.successMessage = null;
+  state.errorMessage = null;
 }
 
 const mainSlice = createSlice({
@@ -31,7 +31,6 @@ const mainSlice = createSlice({
       .addCase(getEventsTopAction.pending, setLoading)
       .addCase(getEventsTopAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.eventsTop = payload;
       })
       .addCase(getEventsTopAction.rejected, (state) => {

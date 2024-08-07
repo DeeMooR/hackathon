@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { clearEventErrorMessage, clearEventMember, getEventAction, getEventSelector, setEventMembers, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, IconText, ErrorNotification } from 'src/components';
+import { clearEventErrorMessage, clearEventMember, getEventAction, getEventItemSelector, getEventSelector, setEventMembers, setEventMembersAction, useAppDispatch, useAppSelector } from 'src/store';
+import { Header, Footer, Newsletter, IconText, ErrorNotification, Input } from 'src/components';
 import { eventExample, formatDate } from 'src/helpers'
 import { crossIcon, calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
-import { IRegistrationForm } from 'src/interface';
+import { IMember } from 'src/interface';
 import { eventMemberScheme } from 'src/validation';
 import { BackgroundImage, Container } from 'src/styled'
 import { EventPageData } from './config';
@@ -17,10 +17,11 @@ export const EventPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { members, errorMessage } = useAppSelector(getEventSelector);
-  const event = eventExample;
-  // useAppSelector(getEventItemSelector);
+  const event = 
+  // useAppSelector(getEventItemSelector) || 
+  eventExample;
   const { date, description, faculties, location, photo, time, title, type, visit, archive, results, page } = event;
-  const { crumbs, visitMessage, visitClass } = EventPageData[page](visit); 
+  const { crumbs, visitMessage, visitClass } = EventPageData[page](visit);
 
   useEffect(() => {
     if (id) dispatch(getEventAction(+id));
@@ -31,24 +32,23 @@ export const EventPage = () => {
     handleSubmit,
     setValue,
     getValues,
-    formState: { isValid },
-  } = useForm<IRegistrationForm>({
+    formState: { isValid, errors },
+  } = useForm<IMember>({
     mode: 'onSubmit',
     resolver: yupResolver(eventMemberScheme),
   });
   
-  const addMember = () => {
-    dispatch(setEventMembers(getValues().member));
+  const onSubmit = (data: IMember) => {
+    if (isValid) dispatch(setEventMembers(data));
     setValue('member', '');
+  }
+  const sendMembers = () => {
+    if (isValid) dispatch(setEventMembers(getValues()));
+    if (id) dispatch(setEventMembersAction(+id));
   }
   const deleteMember = (value: string) => {
     dispatch(clearEventMember(value));
   }
-  const onSubmit = (data: IRegistrationForm) => {
-    if (isValid) dispatch(setEventMembers(data.member));
-    console.log('Отправить запрос');
-  }
-
   const clearErrorMessage = () => {
     dispatch(clearEventErrorMessage());
   }
@@ -90,20 +90,22 @@ export const EventPage = () => {
             <form className="eventPage__registration" onSubmit={handleSubmit(onSubmit)}>
               <h2 className='column-left'>Регистрация на мероприятие</h2>
               <div className="registration__fields">
-                <input 
-                  {...register('member')}
+                <Input 
+                  id='member' 
+                  register={register}
                   type="text" 
                   className='registration__input' 
-                  placeholder='Группа, ФИО' 
+                  placeholder='Группа, ФИО'
+                  error={errors.member?.message}
                 />
-                {members.map((value, i) => 
+                {members.map((obj, i) => 
                   <div className='registration__member' key={i}>
-                    <p>{value}</p>
-                    <img src={crossIcon} alt="cross" onClick={() => deleteMember(value)} />
+                    <p>{obj.member}</p>
+                    <img src={crossIcon} alt="cross" onClick={() => deleteMember(obj.member)} />
                   </div>
                 )}
-                <button type='button' className='second-button registration__btn-add' onClick={addMember} disabled={!isValid}>Добавить участника</button>
-                <button type='submit' className='button registration__btn-send' disabled={!members.length}>Зарегистрироваться</button>
+                <button type='submit' className='second-button registration__btn-add'>Добавить участника</button>
+                <button type='button' className='button registration__btn-send' disabled={!members.length} onClick={sendMembers}>Зарегистрироваться</button>
               </div>
             </form>
           }

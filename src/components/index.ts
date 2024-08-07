@@ -18,3 +18,4 @@ export * from './Loading/Loading';
 export * from './ShowLoading/ShowLoading';
 export * from './EventsTop/EventsTop';
 export * from './ErrorNotification/ErrorNotification';
+export * from './Input/Input';

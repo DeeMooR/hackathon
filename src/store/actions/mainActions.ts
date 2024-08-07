@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IShortEvent } from "src/interface";
-import { getEventsNextTop, getEventsPastTop } from "../api";
+import { getEventsNextTopApi, getEventsPastTopApi } from "../api";
 
 interface IResponseEventsTop {
   eventsNextTop: IShortEvent[],
@@ -10,8 +10,8 @@ interface IResponseEventsTop {
 export const getEventsTopAction = createAsyncThunk<IResponseEventsTop, void>(
   'main/getEventsTopAction',
   async () => {
-    const eventsNextTop = await getEventsNextTop();
-    const eventsPastTop = await getEventsPastTop();
+    const eventsNextTop = await getEventsNextTopApi();
+    const eventsPastTop = await getEventsPastTopApi();
     return {eventsNextTop, eventsPastTop};
   }
 )

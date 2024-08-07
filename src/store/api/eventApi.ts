@@ -1,7 +1,11 @@
 import axios from "axios";
-import { IEvent } from "src/interface";
+import { IEvent, IMember } from "src/interface";
 import { endpoints } from "./endpoints";
 
-export const getEvent = (id: number): Promise<IEvent> =>
-  axios.get(`${endpoints.event}/${id}`).then(({ data }) => data);
+export const getEventApi = (id: number): Promise<IEvent> =>
+  axios.get(`${endpoints.events}/${id}`).then(({ data }) => data);
+
+export const setEventMembersApi = (id: number, body: IMember[]): Promise<void> =>
+  axios.post(endpoints.setMembers, body, {params: { id }});
+  
 

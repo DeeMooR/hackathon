@@ -9,6 +9,9 @@
       flex-wrap: wrap;
       gap: 60px 40px;
       padding: 60px 0 0 0;
+      .eventsPage__empty {
+        text-align: center;
+      }
     }
   }
 }

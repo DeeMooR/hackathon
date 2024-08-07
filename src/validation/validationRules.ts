@@ -4,7 +4,6 @@ import {
   EVENT_MEMBER__PATTERN,
 } from './regExp';
 
-// имя / фамилия (обязательное)
-export const eventMemberValidation = Yup.string()
-  .matches(EVENT_MEMBER__PATTERN, 'Некорректная запись')
-  .required('')
+// участник мероприятия (обязательное)
+export const eventMemberRequiredValidation = Yup.string().required('Обязательное для заполнения поле');
+// .matches(EVENT_MEMBER__PATTERN, 'Некорректная запись')

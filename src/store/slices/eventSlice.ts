@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getEventAction } from '../actions';
+import { getEventAction, setEventMembersAction } from '../actions';
 import { eventState } from '../interface';
 
 const initialState: eventState = {
   event: null,
   members: [],
   isLoading: false,
-  isSuccess: false,
+  successMessage: null,
   errorMessage: null,
 }
 
 const setLoading = (state: eventState) => {
   state.isLoading = true;
-  state.isSuccess = false;
-  state.errorMessage = '';
+  state.successMessage = null;
+  state.errorMessage = null;
 }
 
 const eventSlice = createSlice({
@@ -22,11 +22,11 @@ const eventSlice = createSlice({
   reducers: {
     setEventMembers: (state, { payload }) => {
       const { members } = state;
-      if (!members.includes(payload)) state.members = [...members, payload];
+      if (!members.some((obj) => obj.member === payload.member)) state.members = [...members, payload];
       else state.errorMessage = 'Такой участник уже добавлен';
     },
     clearEventMember: (state, { payload }) => {
-      state.members = state.members.filter((v) => v !== payload);;
+      state.members = state.members.filter((obj) => obj.member !== payload.member);
     },
     clearEventErrorMessage: (state) => {
       state.errorMessage = null;
@@ -37,13 +37,23 @@ const eventSlice = createSlice({
       .addCase(getEventAction.pending, setLoading)
       .addCase(getEventAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.event = payload;
         state.members = [];
       })
       .addCase(getEventAction.rejected, (state) => {
         state.isLoading = false;
         state.errorMessage = 'Ошибка при получении мероприятия';
+      })
+
+      .addCase(setEventMembersAction.pending, setLoading)
+      .addCase(setEventMembersAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.successMessage = 'Вы успешно зарегистрированы';
+        state.members = [];
+      })
+      .addCase(setEventMembersAction.rejected, (state) => {
+        state.isLoading = false;
+        state.errorMessage = 'Ошибка при регистрации на мероприятие';
       })
   },
 })

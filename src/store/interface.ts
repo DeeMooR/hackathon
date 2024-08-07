@@ -1,4 +1,4 @@
-import { IEvent, IFilters, IShortEvent } from "src/interface";
+import { IEvent, IFilters, IMember, IShortEvent } from "src/interface";
 
 export interface eventsState {
   page: 'next' | 'past' | null,
@@ -6,15 +6,15 @@ export interface eventsState {
   activeFilter: 'type' | 'visit' | null,
   filters: IFilters,
   isLoading: boolean,
-  isSuccess: boolean,
+  successMessage: string | null,
   errorMessage: string | null,
 }
 
 export interface eventState {
   event: IEvent | null,
-  members: string[],
+  members: IMember[],
   isLoading: boolean,
-  isSuccess: boolean,
+  successMessage: string | null,
   errorMessage: string | null,
 }
 
@@ -24,7 +24,7 @@ export interface mainState {
     eventsPastTop: IShortEvent[],
   },
   isLoading: boolean,
-  isSuccess: boolean,
+  successMessage: string | null,
   errorMessage: string | null,
 }
 
@@ -32,6 +32,6 @@ export interface mainState {
 export interface adminState {
   adminName: string,
   isLoading: boolean,
-  isSuccess: boolean,
+  successMessage: string | null,
   errorMessage: string | null,
 }
