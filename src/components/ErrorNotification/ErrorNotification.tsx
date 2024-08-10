@@ -10,7 +10,7 @@ interface IErrorNotification {
 
 export const ErrorNotification:FC<IErrorNotification> = ({
   message = 'Ошибка при выполнении действия',
-  displayTime = 3000,
+  displayTime = 3500,
   clearMessage,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -22,7 +22,7 @@ export const ErrorNotification:FC<IErrorNotification> = ({
 
   useEffect(() => {
     setIsVisible(true);
-    const timer = setTimeout(() => closeModal, displayTime);
+    const timer = setTimeout(closeModal, displayTime);
     return () => clearTimeout(timer);
   }, []);
 

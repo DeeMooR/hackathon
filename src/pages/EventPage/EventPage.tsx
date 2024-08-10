@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { clearEventErrorMessage, getEventAction, getEventSelector, useAppDispatch, useAppSelector } from 'src/store';
+import { clearEventErrorMessage, getEventAction, getEventItemSelector, getEventSelector, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, IconText, ErrorNotification, MembersRegistration } from 'src/components';
 import { eventExample, formatDate } from 'src/helpers'
 import { calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
@@ -14,7 +14,7 @@ export const EventPage = () => {
   const dispatch = useAppDispatch();
   const { errorMessage } = useAppSelector(getEventSelector);
   const event = 
-  // useAppSelector(getEventItemSelector) || 
+  useAppSelector(getEventItemSelector) || 
   eventExample;
   const { date, description, faculties, location, photo, time, title, type, visit, archive, results, page } = event;
   const { crumbs, visitMessage, visitClass } = EventPageData[page](visit);

@@ -39,11 +39,15 @@ export const MembersRegistration = () => {
     setValue('team', team);
   }
   const sendMembers = () => {
-    const {team, ...user} = getValues();
-    dispatch(setEventMembers(user));
-    if (id) dispatch(setEventMembersAction({id: +id, team}));
-    dispatch(clearEventAllMembers());
-    reset();
+    if (id) {
+      const {team, ...user} = getValues();
+      dispatch(setEventMembers(user));
+      const newTeam = (team === 'empty') ? null : team;
+      const body = {id, team: newTeam}
+      dispatch(setEventMembersAction(body));
+      dispatch(clearEventAllMembers());
+      reset();
+    }
   }
   const deleteMember = (obj: IMember) => {
     dispatch(clearEventMember(obj));
