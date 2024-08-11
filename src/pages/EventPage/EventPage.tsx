@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearEventErrorMessage, getEventAction, getEventItemSelector, getEventSelector, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, IconText, ErrorNotification, MembersRegistration } from 'src/components';
+import { Header, Footer, Newsletter, IconText, Notification, MembersRegistration } from 'src/components';
 import { eventExample, formatDate } from 'src/helpers'
 import { calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
@@ -12,10 +12,8 @@ export const EventPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { errorMessage } = useAppSelector(getEventSelector);
-  const event = 
-  useAppSelector(getEventItemSelector) || 
-  eventExample;
+  const { errorMessage, successMessage } = useAppSelector(getEventSelector);
+  const event = useAppSelector(getEventItemSelector) || eventExample;
   const { date, description, faculties, location, photo, time, title, type, visit, archive, results, page } = event;
   const { crumbs, visitMessage, visitClass } = EventPageData[page](visit);
 
@@ -79,7 +77,8 @@ export const EventPage = () => {
       </div>
       <Newsletter/>
       <Footer/>
-      {errorMessage && <ErrorNotification message={errorMessage} clearMessage={clearErrorMessage} />}
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearErrorMessage} />}
+      {successMessage && <Notification type='success' message={successMessage} clearMessage={clearErrorMessage} />}
     </>
   )
 }

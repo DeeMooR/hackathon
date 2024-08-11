@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { clearMainErrorMessage, getEventsTopAction, getMainEventsTopSelector, getMainSelector, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, EventsTop, ErrorNotification } from 'src/components';
+import { Header, Footer, Newsletter, EventsTop, Notification } from 'src/components';
 import { mainImage } from 'src/assets';
 import './MainPage.css'
 
@@ -53,7 +53,7 @@ export const MainPage = () => {
       </div>
       <Newsletter/>
       <Footer/>
-      {errorMessage && <ErrorNotification message={errorMessage} clearMessage={clearErrorMessage} />}
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearErrorMessage} />}
     </>
   )
 }

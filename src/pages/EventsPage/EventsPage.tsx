@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getEvents, setEventsPage, clearEventsErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
-import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading, ErrorNotification } from 'src/components';
+import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading, Notification } from 'src/components';
 import { IShortEvent } from 'src/interface'
 import { ActionGetEvents } from 'src/helpers';
 import { EventsPageData } from './config';
@@ -57,7 +57,7 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
       </div>
       <Newsletter/>
       <Footer/>
-      {errorMessage && <ErrorNotification message={errorMessage} clearMessage={clearErrorMessage} />}
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearErrorMessage} />}
     </>
   )
 }

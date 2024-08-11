@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,18 +26,22 @@ export const MembersRegistration = () => {
     resolver: yupResolver(eventMemberScheme),
   });
 
+  // чтобы если один пользователь, поле team было валидным
   useEffect(() => {
     const { team } = getValues();
     if (team === 'empty') setValue('team', '');
     if (!members.length) setValue('team', 'empty');
   }, [members])
   
+  // добавить пользователя
   const onSubmit = (data: IMemberForm) => {
     const {team, ...user} = data;
     dispatch(setEventMembers(user));
     reset();
     setValue('team', team);
   }
+  
+  // добавить пользователя в store и затем отправить запрос
   const sendMembers = () => {
     if (id) {
       const {team, ...user} = getValues();
