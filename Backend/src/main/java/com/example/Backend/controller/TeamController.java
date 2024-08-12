@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
-@RequestMapping("/participants")//!!!Диме сказать
+@RequestMapping("/teams")//!!!Диме сказать
 public class TeamController {
 
     @Autowired
@@ -18,7 +18,7 @@ public class TeamController {
         try {
             return ResponseEntity.ok(participantService.add(team, eventId));
         } catch(Exception e){
-            return ResponseEntity.badRequest().body(false);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

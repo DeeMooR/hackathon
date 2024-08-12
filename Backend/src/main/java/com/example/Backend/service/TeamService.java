@@ -31,10 +31,10 @@ public class TeamService {
         EventEntity event = eventRepo.findById(eventId).get();
         team.setEvent(event);
         teamRepo.save(team);
-        //for(ParticipantEntity participant : team.getParticipants()){//не уверен надо ли
-        //participant.setTeam(team);
-        //participantRepo.save(participant);
-        //}
+        for(ParticipantEntity participant : team.getMembers()){//не уверен надо ли
+        participant.setTeam(team);
+        participantRepo.save(participant);
+        }
         return true;
     }
 

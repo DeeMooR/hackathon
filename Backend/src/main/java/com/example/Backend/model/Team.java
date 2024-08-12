@@ -9,7 +9,7 @@ import java.util.List;
 public class Team {
 
     private String team;
-    private List<Participant> participants;
+    private List<Participant> members;
 
     public static Team toModel(TeamEntity entity){
         return new Team(entity);
@@ -17,9 +17,9 @@ public class Team {
 
     public Team (TeamEntity entity){
         team = entity.getTeam();
-        participants = new ArrayList<>();
-        for(ParticipantEntity participant : entity.getParticipants())
-            participants.add(Participant.toModel(participant));
+        members = new ArrayList<>();
+        for(ParticipantEntity participant : entity.getMembers())
+            members.add(Participant.toModel(participant));
     }
 
     public String getTeam() {
@@ -30,11 +30,11 @@ public class Team {
         this.team = team;
     }
 
-    public List<Participant> getParticipants() {
-        return participants;
+    public List<Participant> getMembers() {
+        return members;
     }
 
-    public void setParticipants(List<Participant> participants) {
-        this.participants = participants;
+    public void setMembers(List<Participant> members) {
+        this.members = members;
     }
 }

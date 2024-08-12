@@ -17,7 +17,7 @@ public class TeamEntity {
     private  EventEntity event;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    private List<ParticipantEntity> participants;
+    private List<ParticipantEntity> members;
 
     public TeamEntity() {
     }
@@ -46,11 +46,11 @@ public class TeamEntity {
         this.event = event;
     }
 
-    public List<ParticipantEntity> getParticipants() {
-        return participants;
+    public List<ParticipantEntity> getMembers() {
+        return members;
     }
 
-    public void setParticipants(List<ParticipantEntity> participants) {
-        this.participants = participants;
+    public void setMembers(List<ParticipantEntity> members) {
+        this.members = members;
     }
 }
