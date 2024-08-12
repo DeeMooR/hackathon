@@ -21,9 +21,10 @@ export const MembersRegistration = () => {
     setValue,
     getValues,
     reset,
+    trigger,
     formState: { isValid, errors,  },
   } = useForm<IMemberForm>({
-    mode: 'onSubmit',
+    mode: 'onChange',
     resolver: yupResolver(eventMemberScheme),
     defaultValues: {team: 'empty'}
   });
@@ -52,14 +53,18 @@ export const MembersRegistration = () => {
   
   // добавить участника и отправить запрос
   const sendMembers = () => {
-    const data = getValues();
-    const updatedMembers = addMember(data);
-    if (updatedMembers && id) {
-      const newTeam = (data.team === 'empty') ? null : data.team;
-      const body = {team: newTeam, members: updatedMembers}
-      dispatch(setEventMembersAction({id, body}));
-      setMembers([]);
-      setValue('team', 'empty');
+    trigger();
+    if (isValid) {
+      const data = getValues();
+      const updatedMembers = addMember(data);
+      if (updatedMembers && id) {
+        const newTeam = (data.team === 'empty') ? null : data.team;
+        const body = {team: newTeam, members: updatedMembers}
+        dispatch(setEventMembersAction({id, body}));
+        console.log(body)
+        setMembers([]);
+        setValue('team', 'empty');
+      }
     }
   }
 
@@ -101,11 +106,11 @@ export const MembersRegistration = () => {
             error={errors.surname?.message}
           />
           <Input
-            id='group'
+            id='groupNumber'
             register={register}
             type="text"
             placeholder='Группа'
-            error={errors.group?.message}
+            error={errors.groupNumber?.message}
           />
           <button type='submit' className='member__button'>
             <img src={plusIcon} alt="plus" />
@@ -116,13 +121,13 @@ export const MembersRegistration = () => {
         <div className='membersRegistration__member' key={i}>
           <p className='member__field'>{obj.name}</p>
           <p className='member__field'>{obj.surname}</p>
-          <p className='member__field'>{obj.group}</p>
+          <p className='member__field'>{obj.groupNumber}</p>
           <button type='button' className='member__button' onClick={() => deleteMember(obj)}>
             <img src={minusIcon} alt="minus" />
           </button>
         </div>
       )}
-      <button type='button' className='button membersRegistration__btn-send' disabled={!isValid} onClick={sendMembers}>Зарегистрироваться</button>
+      <button type='button' className='button membersRegistration__btn-send' onClick={sendMembers}>Зарегистрироваться</button>
     </div>
   )
 }

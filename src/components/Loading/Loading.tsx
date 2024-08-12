@@ -6,7 +6,7 @@ interface ILoading {
   isPage?: boolean,
 }
 
-export const Loading:FC<ILoading> = ({ delay = 0, isPage }) => {
+export const Loading:FC<ILoading> = ({ delay = 0, isPage = false }) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {

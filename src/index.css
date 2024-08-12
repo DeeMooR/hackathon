@@ -103,6 +103,7 @@ input {
   font-size: 18px;
   line-height: 135%;
   color: var(--dark-text);
+  border: 2px solid transparent;
 }
 input::placeholder {
   opacity: 0.5;
