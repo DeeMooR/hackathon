@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getEvents, setEventsPage, clearEventsErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
+import { getEvents, setEventsPage, clearEventsMessages, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading, Notification } from 'src/components';
 import { IShortEvent } from 'src/interface'
 import { ActionGetEvents } from 'src/helpers';
@@ -27,8 +27,8 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
     navigate('/');
   }
 
-  const clearErrorMessage = () => {
-    dispatch(clearEventsErrorMessage());
+  const clearMessages = () => {
+    dispatch(clearEventsMessages());
   }
 
   return (
@@ -57,7 +57,7 @@ export const EventsPage:FC<IEventsPage> = ({page}) => {
       </div>
       <Newsletter/>
       <Footer/>
-      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearErrorMessage} />}
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessages} />}
     </>
   )
 }

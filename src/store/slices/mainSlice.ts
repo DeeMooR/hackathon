@@ -10,6 +10,7 @@ const initialState: mainState = {
   isLoading: false,
   successMessage: null,
   errorMessage: null,
+  errorLoadingEventMessage: null,
 }
 
 const setLoading = (state: mainState) => {
@@ -22,8 +23,13 @@ const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    clearMainErrorMessage: (state) => {
+    setMainErrorLoadingEventMessage: (state, { payload }) => {
+      state.errorLoadingEventMessage = payload;
+    },
+    clearMainMessages: (state) => {
+      state.successMessage = null;
       state.errorMessage = null;
+      state.errorLoadingEventMessage = null;
     },
   },
   extraReducers: (builder) => {
@@ -42,5 +48,5 @@ const mainSlice = createSlice({
 
 export const {
   reducer: mainReducer,
-  actions: {clearMainErrorMessage},
+  actions: {setMainErrorLoadingEventMessage, clearMainMessages},
 } = mainSlice;

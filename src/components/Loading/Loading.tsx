@@ -3,9 +3,10 @@ import './Loading.css'
 
 interface ILoading {
   delay?: number,
+  isPage?: boolean,
 }
 
-export const Loading:FC<ILoading> = ({ delay = 0 }) => {
+export const Loading:FC<ILoading> = ({ delay = 0, isPage }) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export const Loading:FC<ILoading> = ({ delay = 0 }) => {
   }, [delay]);
 
   return isActive ? (
-    <div className='loading'>
+    <div className={`loading ${isPage ? 'isPage' :  ''}`}>
       <div className='loading__spinner' />
     </div>
   ) : null;

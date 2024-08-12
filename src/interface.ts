@@ -14,7 +14,7 @@ export interface IEvent {
   faculties: string[],
   description: string,
   type: string,
-  visit: string,
+  visit: 'Свободный вход' | 'С регистрацией',
   archive?: string,
   results?: string,
   page: 'next' | 'past',

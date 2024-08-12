@@ -15,6 +15,7 @@ export interface eventState {
   isLoading: boolean,
   successMessage: string | null,
   errorMessage: string | null,
+  isErrorLoading: boolean;
 }
 
 export interface mainState {
@@ -25,6 +26,7 @@ export interface mainState {
   isLoading: boolean,
   successMessage: string | null,
   errorMessage: string | null,
+  errorLoadingEventMessage: string | null,
 }
 
 

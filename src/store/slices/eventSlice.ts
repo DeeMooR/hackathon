@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getEventAction, setEventMembersAction } from '../actions';
 import { eventState } from '../interface';
-import { useNavigate } from 'react-router-dom';
 
 const initialState: eventState = {
   event: null,
   isLoading: false,
   successMessage: null,
   errorMessage: null,
+  isErrorLoading: false,
 }
 
 const setLoading = (state: eventState) => {
@@ -20,10 +20,14 @@ const eventSlice = createSlice({
   name: 'event',
   initialState,
   reducers: {
+    setEventErrorLoading: (state, { payload }) => {
+      state.isErrorLoading = payload;
+    },
     setEventErrorMessage: (state, { payload }) => {
       state.errorMessage = payload;
     },
-    clearEventErrorMessage: (state) => {
+    clearEventMessages: (state) => {
+      state.successMessage = null;
       state.errorMessage = null;
     },
   },
@@ -36,7 +40,7 @@ const eventSlice = createSlice({
       })
       .addCase(getEventAction.rejected, (state) => {
         state.isLoading = false;
-        state.errorMessage = 'Ошибка при загрузке мероприятия';
+        state.isErrorLoading = true;
       })
 
       .addCase(setEventMembersAction.pending, setLoading)
@@ -53,5 +57,5 @@ const eventSlice = createSlice({
 
 export const {
   reducer: eventReducer,
-  actions: {setEventErrorMessage, clearEventErrorMessage},
+  actions: {setEventErrorLoading, setEventErrorMessage, clearEventMessages},
 } = eventSlice;

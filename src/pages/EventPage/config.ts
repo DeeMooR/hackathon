@@ -1,3 +1,5 @@
+import { IEvent } from "src/interface";
+
 interface IEventPageData {
   crumbs: string,
   visitMessage: string,
@@ -35,4 +37,21 @@ export const EventPageNextVisit: { [visit: string]: IEventPageNextVisit } = {
     message: 'Регистрация обязательна',
     class: 'registration'
   },
+}
+
+// заглушка для ts. Данные из объекта не будет использоваться
+export const eventPlug: IEvent =  {
+  id: 0,
+  photo: '',
+  title: '',
+  date: new Date(),
+  time: '',
+  location: '',
+  faculties: [],
+  description: '',
+  archive: '',
+  results: '',
+  type: '',
+  visit: 'Свободный вход',
+  page: 'next'
 }

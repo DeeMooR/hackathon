@@ -93,7 +93,7 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
       faculties: selected,
       description: description,
       type: selectedRadio1,
-      visit: selectedRadio2
+      visit: 'С регистрацией'
     }
     const hasEmpty = Object.values(obj).some(value => value === '');
     if (!hasEmpty) dispatch(addEventAPI(obj));
@@ -109,7 +109,7 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
         faculties: selected,
         description: description,
         type: selectedRadio1,
-        visit: selectedRadio2,
+        visit: 'С регистрацией',
         results: results,
         archive: archive,
       }

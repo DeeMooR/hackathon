@@ -72,7 +72,8 @@ const eventsSlice = createSlice({
     setEventsErrorMessage: (state, { payload }) => {
       state.errorMessage = payload;
     },
-    clearEventsErrorMessage: (state) => {
+    clearEventsMessages: (state) => {
+      state.successMessage = null;
       state.errorMessage = null;
     },
   },
@@ -113,6 +114,6 @@ export const {
     clearEventsFiltersItem,
     setEventsActiveFilter,
     setEventsErrorMessage,
-    clearEventsErrorMessage
+    clearEventsMessages
   },
 } = eventsSlice;

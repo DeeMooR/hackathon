@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { clearMainErrorMessage, getEventsTopAction, getMainEventsTopSelector, getMainSelector, useAppDispatch, useAppSelector } from 'src/store';
+import { clearMainMessages, getEventsTopAction, getMainEventsTopSelector, getMainSelector, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, EventsTop, Notification } from 'src/components';
 import { mainImage } from 'src/assets';
 import './MainPage.css'
@@ -8,7 +8,7 @@ import './MainPage.css'
 export const MainPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { errorMessage } = useAppSelector(getMainSelector);
+  const { errorMessage, errorLoadingEventMessage } = useAppSelector(getMainSelector);
   const { eventsNextTop, eventsPastTop } = useAppSelector(getMainEventsTopSelector);
   
   useEffect(() => {
@@ -19,8 +19,8 @@ export const MainPage = () => {
     navigate('/next');
   }
 
-  const clearErrorMessage = () => {
-    dispatch(clearMainErrorMessage());
+  const clearMessages = () => {
+    dispatch(clearMainMessages());
   }
 
   return (
@@ -53,7 +53,8 @@ export const MainPage = () => {
       </div>
       <Newsletter/>
       <Footer/>
-      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearErrorMessage} />}
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessages} />}
+      {errorLoadingEventMessage && <Notification type='error' message={errorLoadingEventMessage} clearMessage={clearMessages} />}
     </>
   )
 }
