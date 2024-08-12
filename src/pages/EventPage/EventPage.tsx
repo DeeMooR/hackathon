@@ -9,7 +9,7 @@ import { EventPageData, eventPlug } from './config';
 import './EventPage.css'
 
 export const EventPage = () => {
-  const { id } = useParams();
+  const { id = '' } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isLoading, errorMessage, successMessage, isErrorLoading } = useAppSelector(getEventSelector);
@@ -18,7 +18,7 @@ export const EventPage = () => {
   const { crumbs, visitMessage, visitClass } = EventPageData[page](visit);
 
   useEffect(() => {
-    if (id) dispatch(getEventAction(+id));
+    dispatch(getEventAction(+id));
   }, [])
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export const EventPage = () => {
           {visitClass === 'registration' &&
             <div className="eventPage__registration">
               <h2 className='column-left'>Регистрация на мероприятие</h2>
-              <MembersRegistration />
+              <MembersRegistration eventId={+id} />
             </div>
           }
           {page === 'past' && results &&

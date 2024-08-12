@@ -1,7 +1,7 @@
 .inputBlock {
   position: relative;
 }
-.inputBlock .warning {
+.inputBlock .showWarning {
   border: 2px solid var(--warning);
 }
 .inputBlock .error {
@@ -13,4 +13,27 @@
 .inputBlock .error span {
   font-size: 12px;
   margin: 0 0 0 10px;
+}
+
+@media (max-width: 599.98px) {
+  .inputBlock .error {
+    margin: 1px 0 0 3px;
+  }
+  .inputBlock .error span {
+    line-height: 0.8;
+    font-size: 11px;
+  }
+}
+@media (max-width: 599.98px) {
+  .inputBlock .error span {
+    margin: 0 0 0 3px;
+  }
+}
+@media (max-width: 399.98px) {
+  .inputBlock .error img {
+    display: none;
+  }
+  .inputBlock .error span {
+    margin: 0;
+  }
 }

@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { FC, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { setEventErrorMessage, setEventMembersAction, useAppDispatch } from 'src/store';
@@ -10,8 +9,11 @@ import { minusIcon, plusIcon } from 'src/assets';
 import { memberAlreadyExist, removeMember } from './config';
 import './MembersRegistration.css';
 
-export const MembersRegistration = () => {
-  const { id } = useParams();
+interface IMembersRegistration {
+  eventId: number
+}
+
+export const MembersRegistration:FC<IMembersRegistration> = ({eventId}) => {
   const dispatch = useAppDispatch();
   const [members, setMembers] = useState<IMember[]>([])
 
@@ -57,10 +59,10 @@ export const MembersRegistration = () => {
     if (isValid) {
       const data = getValues();
       const updatedMembers = addMember(data);
-      if (updatedMembers && id) {
+      if (updatedMembers) {
         const newTeam = (data.team === 'empty') ? null : data.team;
         const body = {team: newTeam, members: updatedMembers}
-        dispatch(setEventMembersAction({id, body}));
+        dispatch(setEventMembersAction({eventId, body}));
         console.log(body)
         setMembers([]);
         setValue('team', 'empty');

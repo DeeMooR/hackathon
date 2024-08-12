@@ -3,7 +3,7 @@ import { IEvent } from "src/interface";
 import { SetEventMembersPayload, getEventApi, setEventMembersApi } from "../api";
 
 interface ISetEventMembersAction {
-  id: string,
+  eventId: number,
   body: SetEventMembersPayload,
 }
 
@@ -17,8 +17,8 @@ export const getEventAction = createAsyncThunk<IEvent, number>(
 
 export const setEventMembersAction = createAsyncThunk<void, ISetEventMembersAction>(
   'event/setEventMembersAction',
-  async ({id, body}) => {
-    const response = await setEventMembersApi(+id, body);
+  async ({eventId, body}) => {
+    const response = await setEventMembersApi(eventId, body);
     return response;
   }
 )

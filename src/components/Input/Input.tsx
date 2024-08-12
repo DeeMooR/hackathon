@@ -13,7 +13,7 @@ interface IInput {
 }
 
 export const Input:FC<IInput> = ({id, type, placeholder, className, register, error}) => {
-  const inputStyle = `${error ? 'warning' : ''}`
+  const inputStyle = `${error ? 'showWarning' : ''}`
   
   return (
     <div className={`inputBlock ${className}`}>

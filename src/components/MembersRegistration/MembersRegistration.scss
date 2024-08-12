@@ -2,7 +2,7 @@
   .membersRegistration__fields {
     .fields__team {
       width: 100%;
-      max-width: 360px;
+      max-width: calc(360/760*100%);
       margin: 0 0 20px 0;
     }
     .fields__member {
@@ -15,6 +15,7 @@
     display: flex;
     gap: 15px;
     margin: 0 0 20px 0;
+    width: 100%;
     .member__field {
       width: 100%;
       height: 54px;
@@ -43,6 +44,89 @@
   }  
   .membersRegistration__btn-send {
     width: 100%;
-    max-width: 360px;
+    max-width: calc(360/760*100%);
+  }
+}
+
+@media (max-width: 999.98px) {
+  .membersRegistration {
+    .membersRegistration__fields {
+      .fields__team {
+        max-width: 58%;
+      }
+    }
+    .membersRegistration__btn-send {
+      max-width: 58%;
+    }
+  }
+}
+
+@media (max-width: 799.98px) {
+  .membersRegistration {
+    .membersRegistration__fields {
+      .fields__member {
+        gap: 10px;
+      }
+    }
+    .membersRegistration__member {
+      gap: 10px;
+    }
+    .member__button {
+      max-width: 40px;
+    }  
+  }
+}
+
+@media (max-width: 699.98px) {
+  .membersRegistration {
+    .membersRegistration__fields {
+      .fields__member {
+        gap: 15px;
+      }
+    }
+    .membersRegistration__member {
+      gap: 15px;
+    }
+    .member__button {
+      max-width: 54px;
+    }  
+  }
+}
+
+@media (max-width: 599.98px) {
+  .membersRegistration {
+    .membersRegistration__fields {
+      .fields__team {
+        max-width: 300px;
+      }
+      .fields__member {
+        gap: 10px;
+      }
+    }
+    .membersRegistration__member {
+      gap: 10px;
+    } 
+    .membersRegistration__btn-send {
+      max-width: 300px;
+    }
+  }
+}
+
+@media (max-width: 499.98px) {
+  .membersRegistration {
+    .membersRegistration__member {
+      .member__field {
+        padding: 0 8px 0 10px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 419.98px) {
+  .membersRegistration {
+    .member__button {
+      max-width: 36px;
+    }  
   }
 }
