@@ -1,11 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IEvent } from "src/interface";
-import { getEventApi, setEventMembersApi } from "../api";
-import { RootState } from "../hooks";
+import { SetEventMembersPayload, getEventApi, setEventMembersApi } from "../api";
 
 interface ISetEventMembersAction {
   id: string,
-  team: string | null,
+  body: SetEventMembersPayload,
 }
 
 export const getEventAction = createAsyncThunk<IEvent, number>(
@@ -16,11 +15,9 @@ export const getEventAction = createAsyncThunk<IEvent, number>(
   }
 )
 
-export const setEventMembersAction = createAsyncThunk<void, ISetEventMembersAction, { state: RootState }>(
+export const setEventMembersAction = createAsyncThunk<void, ISetEventMembersAction>(
   'event/setEventMembersAction',
-  async ({id, team}, { getState }) => {
-    const {members} = getState().event;
-    const body = { team, members }
+  async ({id, body}) => {
     const response = await setEventMembersApi(+id, body);
     return response;
   }

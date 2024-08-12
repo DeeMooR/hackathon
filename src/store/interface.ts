@@ -12,7 +12,6 @@ export interface eventsState {
 
 export interface eventState {
   event: IEvent | null,
-  members: IMember[],
   isLoading: boolean,
   successMessage: string | null,
   errorMessage: string | null,

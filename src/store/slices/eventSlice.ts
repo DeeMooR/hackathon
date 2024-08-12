@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getEventAction, setEventMembersAction } from '../actions';
 import { eventState } from '../interface';
-import { memberAlreadyExist, removeMember } from './config';
+import { useNavigate } from 'react-router-dom';
 
 const initialState: eventState = {
   event: null,
-  members: [],
   isLoading: false,
   successMessage: null,
   errorMessage: null,
@@ -21,17 +20,8 @@ const eventSlice = createSlice({
   name: 'event',
   initialState,
   reducers: {
-    setEventMembers: (state, { payload }) => {
-      const { members } = state;
-      if (!memberAlreadyExist(members, payload)) state.members = [...members, payload];
-      else state.errorMessage = 'Такой участник уже добавлен';
-    },
-    clearEventMember: (state, { payload }) => {
-      const { members } = state;
-      state.members = removeMember(members, payload);
-    },
-    clearEventAllMembers: (state) => {
-      state.members = [];
+    setEventErrorMessage: (state, { payload }) => {
+      state.errorMessage = payload;
     },
     clearEventErrorMessage: (state) => {
       state.errorMessage = null;
@@ -43,11 +33,10 @@ const eventSlice = createSlice({
       .addCase(getEventAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.event = payload;
-        state.members = [];
       })
       .addCase(getEventAction.rejected, (state) => {
         state.isLoading = false;
-        state.errorMessage = 'Ошибка при получении мероприятия';
+        state.errorMessage = 'Ошибка при загрузке мероприятия';
       })
 
       .addCase(setEventMembersAction.pending, setLoading)
@@ -64,5 +53,5 @@ const eventSlice = createSlice({
 
 export const {
   reducer: eventReducer,
-  actions: {setEventMembers, clearEventMember, clearEventAllMembers, clearEventErrorMessage},
+  actions: {setEventErrorMessage, clearEventErrorMessage},
 } = eventSlice;

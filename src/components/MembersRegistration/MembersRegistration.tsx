@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { clearEventAllMembers, clearEventMember, getEventSelector, setEventMembers, setEventMembersAction, useAppDispatch, useAppSelector } from 'src/store';
+import { setEventErrorMessage, setEventMembersAction, useAppDispatch } from 'src/store';
 import { Input } from 'src/components';
 import { IMember, IMemberForm } from 'src/interface';
 import { eventMemberScheme } from 'src/validation';
 import { minusIcon, plusIcon } from 'src/assets';
+import { memberAlreadyExist, removeMember } from './config';
 import './MembersRegistration.css';
 
 export const MembersRegistration = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { members } = useAppSelector(getEventSelector);
+  const [members, setMembers] = useState<IMember[]>([])
 
   const {
     register,
@@ -24,42 +25,54 @@ export const MembersRegistration = () => {
   } = useForm<IMemberForm>({
     mode: 'onSubmit',
     resolver: yupResolver(eventMemberScheme),
+    defaultValues: {team: 'empty'}
   });
 
-  // чтобы если один пользователь, поле team было валидным
-  useEffect(() => {
-    const { team } = getValues();
+  // после изменения участников обновить поле team, чтобы оно оставалось валидным
+  const updateTeam = (members: IMember[], team?: string) => {
     if (team === 'empty') setValue('team', '');
     if (!members.length) setValue('team', 'empty');
-  }, [members])
-  
-  // добавить пользователя
-  const onSubmit = (data: IMemberForm) => {
-    const {team, ...user} = data;
-    dispatch(setEventMembers(user));
-    reset();
-    setValue('team', team);
   }
-  
-  // добавить пользователя в store и затем отправить запрос
-  const sendMembers = () => {
-    if (id) {
-      const {team, ...user} = getValues();
-      dispatch(setEventMembers(user));
-      const newTeam = (team === 'empty') ? null : team;
-      const body = {id, team: newTeam}
-      dispatch(setEventMembersAction(body));
-      dispatch(clearEventAllMembers());
-      reset();
+
+  // добавить участника
+  const addMember = (data: IMemberForm) => {
+    const {team, ...user} = data;
+    const isNewMember = !memberAlreadyExist(members, user);
+    reset(); // очистить все поля и затем установить team
+    setValue('team', team); 
+    if (isNewMember) {
+      const updatedMembers = [user, ...members];
+      setMembers(updatedMembers);
+      updateTeam(updatedMembers, team);
+      return updatedMembers;
+    } else {
+      dispatch(setEventErrorMessage('Такой участник уже добавлен'));
     }
   }
-  const deleteMember = (obj: IMember) => {
-    dispatch(clearEventMember(obj));
+  
+  // добавить участника и отправить запрос
+  const sendMembers = () => {
+    const data = getValues();
+    const updatedMembers = addMember(data);
+    if (updatedMembers && id) {
+      const newTeam = (data.team === 'empty') ? null : data.team;
+      const body = {team: newTeam, members: updatedMembers}
+      dispatch(setEventMembersAction({id, body}));
+      setMembers([]);
+      setValue('team', 'empty');
+    }
+  }
+
+  // удалить участника
+  const deleteMember = (user: IMember) => {
+    const updatedMembers = removeMember(members, user);
+    setMembers(updatedMembers);
+    updateTeam(updatedMembers);
   }
 
   return (
     <div className="membersRegistration">
-      <form className="membersRegistration__fields" onSubmit={handleSubmit(onSubmit)}>
+      <form className="membersRegistration__fields" onSubmit={handleSubmit(addMember)}>
         {!!members.length &&
           <div className="fields__team">
             <Input
@@ -78,7 +91,6 @@ export const MembersRegistration = () => {
             register={register}
             type="text" 
             placeholder='Имя'
-            className='input__name' 
             error={errors.name?.message}
           />
           <Input
@@ -86,7 +98,6 @@ export const MembersRegistration = () => {
             register={register}
             type="text" 
             placeholder='Фамилия'
-            className='input__surname' 
             error={errors.surname?.message}
           />
           <Input
@@ -94,7 +105,6 @@ export const MembersRegistration = () => {
             register={register}
             type="text"
             placeholder='Группа'
-            className='input__group'
             error={errors.group?.message}
           />
           <button type='submit' className='member__button'>

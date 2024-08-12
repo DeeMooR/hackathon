@@ -1,7 +1,7 @@
 const baseURL = 'http://localhost:8080'
 
 export const endpoints = {
-  events: `${baseURL}/events`,
+  events: `${baseURL}/events/`,
   eventsNextTop: `${baseURL}/events/next/top`,
   eventsPastTop: `${baseURL}/events/past/top`,
   eventsNext: `${baseURL}/events/next/filter`,
