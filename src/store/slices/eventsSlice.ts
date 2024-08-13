@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getEventMembersAPI } from '../requests'
 import { getEventsNextAction, getEventsPastAction } from '../actions';
 import { eventsState } from '../interface';
 
@@ -36,7 +35,7 @@ const eventsSlice = createSlice({
         state.filters.faculties = [];
         return;
       }
-      if (selected.length == 6 && !selected.includes(payload)) {
+      if (selected.length === 6 && !selected.includes(payload)) {
         state.filters.faculties = [];
         return;
       }

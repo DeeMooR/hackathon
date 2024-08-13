@@ -1,4 +1,4 @@
-import { IEvent, IFilters, IMember, IShortEvent } from "src/interface";
+import { IEvent, IFilters, IShortEvent } from "src/interface";
 
 export interface eventsState {
   page: 'next' | 'past' | null,
@@ -32,6 +32,13 @@ export interface mainState {
 
 export interface adminState {
   adminName: string,
+  eventsNext: IShortEvent[],
+  eventsPast: IShortEvent[],
+  modal: {
+    eventId: number | null,
+    event: IEvent | null,
+    action: 'create' | 'change' | 'delete' | null,
+  }
   isLoading: boolean,
   successMessage: string | null,
   errorMessage: string | null,

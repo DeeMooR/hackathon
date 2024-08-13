@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IconText } from 'src/components';
-import { formatDate, isPast } from 'src/helpers'
+import { formatDate } from 'src/helpers'
 import { IShortEvent } from 'src/interface'
 import { calenderIcon, locationIcon, timeIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
@@ -9,15 +9,14 @@ import './MiniCard.css'
 
 interface IMiniCard {
   obj: IShortEvent,
-  edit?: boolean,
-  show_users?: boolean,
+  isEdit?: boolean,
   clickShowMembers?: (id: number) => void,
   clickChangeEvent?: (id: number) => void
 }
 
-export const MiniCard:FC<IMiniCard> = ({obj, edit, show_users, clickShowMembers, clickChangeEvent}) => {
+export const MiniCard:FC<IMiniCard> = ({obj, isEdit, clickShowMembers, clickChangeEvent}) => {
   const navigate = useNavigate();
-  const { id, date, faculties, location, photo, time, title } = obj;
+  const { id, date, faculties, location, photo, time, title, visit } = obj;
 
   const openEventPage = () => {
     navigate(`/events/${id}`);
@@ -36,11 +35,11 @@ export const MiniCard:FC<IMiniCard> = ({obj, edit, show_users, clickShowMembers,
         <p>{faculties.join(', ')}</p>
       </div>
       <div className="mini-card__buttons">
-        {!edit && !show_users && 
+        {!isEdit &&
           <button className='second-button' onClick={openEventPage}>Подробнее</button>
         }
-        {edit && <button className='second-button' onClick={() => clickChangeEvent?.(obj.id)}>Редактировать мероприятие</button>}
-        {show_users && <button className='button' onClick={() => clickShowMembers?.(obj.id)}>Смотреть участников</button>}
+        {isEdit && <button className='second-button' onClick={() => clickChangeEvent?.(obj.id)}>Редактировать мероприятие</button>}
+        {visit === 'С регистрацией' && <button className='button' onClick={() => clickShowMembers?.(obj.id)}>Смотреть участников</button>}
       </div>
     </div>
   )

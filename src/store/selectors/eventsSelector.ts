@@ -1,5 +1,5 @@
 import { RootState } from "../hooks";
 
-export const getEvents = (state: RootState) => state.events;
+export const getEventsSelector = (state: RootState) => state.events;
 
-export const getEventsFilters = (state: RootState) => state.events.filters;
+export const getEventsFiltersSelector = (state: RootState) => state.events.filters;

@@ -22,15 +22,7 @@ export interface IEvent {
 
 export interface IAddEvent extends Omit<IEvent, 'id' | 'page'> {}
 
-export interface IShortEvent {
-  id: number,
-  photo: string,
-  title: string,
-  date: Date,
-  time: string,
-  location: string,
-  faculties: string[],
-}
+export interface IShortEvent extends Omit<IEvent, 'description' | 'type' | 'archive' | 'results' | 'page'> {}
 
 export interface IFilters {
   faculties: string[],

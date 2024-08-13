@@ -1,13 +1,13 @@
 import React from 'react'
 import { Tab } from 'src/components';
 import './Tabs.css'
-import { getEvents, getEventsFilters, setEventsErrorMessage, setEventsFaculties, useAppDispatch, useAppSelector } from 'src/store';
+import { getEventsSelector, getEventsFiltersSelector, setEventsErrorMessage, setEventsFaculties, useAppDispatch, useAppSelector } from 'src/store';
 import { ActionGetEvents, allFaculties } from 'src/helpers';
 
 export const Tabs = () => {
   const dispatch = useAppDispatch();
-  const { page } = useAppSelector(getEvents);
-  const { faculties } = useAppSelector(getEventsFilters);
+  const { page } = useAppSelector(getEventsSelector);
+  const { faculties } = useAppSelector(getEventsFiltersSelector);
   const allTabs = ['Все факультеты', ...allFaculties];
 
   const checkIsSelected = (value: string) => {

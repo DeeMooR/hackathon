@@ -37,7 +37,7 @@ const mainSlice = createSlice({
       .addCase(getEventsTopAction.pending, setLoading)
       .addCase(getEventsTopAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.eventsTop = payload;
+        state.eventsTop = {...payload};
       })
       .addCase(getEventsTopAction.rejected, (state) => {
         state.isLoading = false;

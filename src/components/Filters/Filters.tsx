@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { clearEventsFilters, clearEventsFiltersItem, getEvents, getEventsFilters, setEventsErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
+import { clearEventsFilters, clearEventsFiltersItem, getEventsSelector, getEventsFiltersSelector, setEventsErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
 import { FilterItem } from 'src/components';
 import { ActionGetEvents } from 'src/helpers';
 import { crossIcon } from 'src/assets';
@@ -7,8 +7,8 @@ import './Filters.css'
 
 export const Filters = () => {
   const dispatch = useAppDispatch();
-  const { page } = useAppSelector(getEvents);
-  const { types, visits } = useAppSelector(getEventsFilters);
+  const { page } = useAppSelector(getEventsSelector);
+  const { types, visits } = useAppSelector(getEventsFiltersSelector);
   const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {

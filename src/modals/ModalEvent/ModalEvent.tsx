@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { getAdmin, useAppDispatch, useAppSelector } from 'src/store';
+import { getAdminSelector, useAppDispatch, useAppSelector } from 'src/store';
 import { TextInput, FilterOptions, RadioOptions } from 'src/components';
 import { ModalTemplate } from 'src/modals';
 import { allFaculties, isPast } from 'src/helpers';
@@ -17,7 +17,7 @@ interface IModalEvent {
 
 export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickShowDelete }) => {
   const dispatch = useAppDispatch();
-  const { adminName } = useAppSelector(getAdmin);
+  const { adminName } = useAppSelector(getAdminSelector);
   const [selected, setSelected] = useState<string[]>([adminName]);
   const [selectedRadio1, setSelectedRadio1] = useState('');
   const [selectedRadio2, setSelectedRadio2] = useState('');

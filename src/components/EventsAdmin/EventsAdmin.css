@@ -1,0 +1,15 @@
+.eventsAdmin .eventsAdmin__events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px 40px;
+}
+.eventsAdmin .eventsAdmin__empty {
+  text-align: center;
+}
+
+@media (max-width: 599.98px) {
+  .eventsAdmin .eventsAdmin__events {
+    flex-direction: column;
+    margin: 0 0 40px 0;
+  }
+}

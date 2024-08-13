@@ -20,3 +20,4 @@ export * from './EventsTop/EventsTop';
 export * from './Notification/Notification';
 export * from './Input/Input';
 export * from './MembersRegistration/MembersRegistration';
+export * from './EventsAdmin/EventsAdmin';

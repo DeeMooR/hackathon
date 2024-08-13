@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getEvents, setEventsPage, clearEventsMessages, useAppDispatch, useAppSelector } from 'src/store';
+import { getEventsSelector, setEventsPage, clearEventsMessages, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, Tabs, Filters, MiniCard, Loading, ShowLoading, Notification } from 'src/components';
 import { IShortEvent } from 'src/interface'
 import { ActionGetEvents } from 'src/helpers';
@@ -14,7 +14,7 @@ interface IEventsPage {
 export const EventsPage:FC<IEventsPage> = ({page}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { events, isLoading, errorMessage } = useAppSelector(getEvents);
+  const { events, isLoading, errorMessage } = useAppSelector(getEventsSelector);
   const { titleWord } = EventsPageData[page];
   const showLoading = ShowLoading(isLoading);
 

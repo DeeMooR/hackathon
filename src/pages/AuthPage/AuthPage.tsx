@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { checkAuthAction, getAdmin, useAppDispatch, useAppSelector } from 'src/store'
+import { checkAuthAction, getAdminSelector, useAppDispatch, useAppSelector } from 'src/store'
 import { Header, Footer } from 'src/components';
 import { ModalMessage } from 'src/modals';
 import { IAuth } from 'src/interface'
@@ -9,7 +9,7 @@ import './AuthPage.css'
 export const AuthPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { adminName, errorMessage } = useAppSelector(getAdmin);
+  const { adminName, errorMessage } = useAppSelector(getAdminSelector);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');

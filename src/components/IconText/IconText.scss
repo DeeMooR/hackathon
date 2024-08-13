@@ -6,13 +6,13 @@
     width: 24px;
     height: 24px;
   }
-}
-.blue-box {
-  border-radius: 10px;
-  padding: 10px 15px;
-  background: var(--bright-blue);
-  width: fit-content;
-  p {
-    font-weight: 600;
+  &.blue-box {
+    border-radius: 10px;
+    padding: 10px 15px;
+    background: var(--bright-blue);
+    width: fit-content;
+    p {
+      font-weight: 600;
+    }
   }
 }

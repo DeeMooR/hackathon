@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAdmin, getEvents, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector } from 'src/store'
-import { HeaderAdmin, Footer, MiniCard } from 'src/components';
+import { clearAdminMessages, getAdminSelector, getEventsSelector, getEventsNextAction, getEventsPastAction, useAppDispatch, useAppSelector, getEventsTopAction } from 'src/store'
+import { HeaderAdmin, Footer, MiniCard, Notification, EventsAdmin } from 'src/components';
 import { ModalEvent, ModalMembers, ModalMessage, ModalDelete } from 'src/modals';
 import { allFaculties, eventExample } from 'src/helpers'
 import { IShortEvent } from 'src/interface'
@@ -10,40 +10,20 @@ import './AdminPage.css'
 
 export const AdminPage = () => {
   const dispatch = useAppDispatch();
-  const { events } = useAppSelector(getEvents);
-  const { adminName } = useAppSelector(getAdmin);
+  const { adminName, eventsNext, eventsPast, errorMessage } = useAppSelector(getAdminSelector);
+
+  const { events } = useAppSelector(getEventsSelector);
   const [isOpenModalEvent, setOpenModalEvent] = useState(false);
   const [isOpenModalChangeEvent, setOpenModalChangeEvent] = useState(false);
   const [isOpenModalMembers, setOpenModalMembers] = useState(false);
   const [isOpenModalDelete, setOpenModalDelete] = useState(false);
 
-  let visit = 'С регистрацией';
-
-  const [eventsNextFaculty, setEventsNextFaculty] = useState<IShortEvent[] | []>([]);
-  const [eventsPastFaculty, setEventsPastFaculty] = useState<IShortEvent[] | []>([]);
-
   const [idEventAction, setIdEventAction] = useState(-1);
   const [objEventAction, setObjEventAction] = useState<IShortEvent>();
 
   useEffect(() => {
-    dispatch(getEventsPastAction());
+    dispatch(getEventsTopAction());
   }, [])
-
-  useEffect(() => {
-    const updateNext = allFaculties.includes(adminName) 
-      ? events.filter((item: IShortEvent) => item.faculties.includes(adminName))
-      : [...events];
-    setEventsNextFaculty(updateNext);
-    console.log(eventsNextFaculty)
-  },[events])
-
-  useEffect(() => {
-    const updatePast = allFaculties.includes(adminName) 
-      ? events.filter((item: IShortEvent) => item.faculties.includes(adminName))
-      : [...events];
-      setEventsPastFaculty(updatePast);
-      console.log(eventsPastFaculty)
-  },[events])
 
   const showModalEvent = () => {
     console.log('ku')
@@ -90,11 +70,15 @@ export const AdminPage = () => {
 
   let organization = '';
   let faculty = '';
-  if (allFaculties.includes(adminName)) {
+  if (adminName && allFaculties.includes(adminName)) {
     organization = 'Студ. совет ';
     faculty = adminName;
   } 
-  else organization = adminName;
+  else organization = adminName || '';
+
+  const clearMessages = () => {
+    dispatch(clearAdminMessages())
+  }
 
   return (
     <>
@@ -102,42 +86,21 @@ export const AdminPage = () => {
       <div className="wrapper">
         <section className="adminPage">
           <h1>{organization}<span>{faculty}</span></h1>
-          <h2>Ближайшие мероприятия</h2>
           <div className="adminPage__events">
-            {eventsNextFaculty.length === 0 ?
-              <h3>Пусто</h3>
-            :
-            <>
-            {eventsNextFaculty.map((obj: IShortEvent, i: number) => (
-              visit !== 'С регистрацией' 
-                ? <MiniCard obj={obj} key={i} edit clickChangeEvent={clickChangeEvent} />
-                : <MiniCard obj={obj} key={i} edit show_users clickShowMembers={clickShowMembers} clickChangeEvent={clickChangeEvent} />
-            ))}
-            </>
-            }
+            <EventsAdmin eventsShow={eventsNext} type='next' />
           </div>
-          <h2>Прошедшие мероприятия</h2>
           <div className="adminPage__events">
-            {eventsPastFaculty.length === 0 ?
-              <h3>Пусто</h3>
-            :
-            <>
-            {eventsPastFaculty.map((obj: IShortEvent, i: number) => (
-              visit !== 'С регистрацией' 
-                ? <MiniCard obj={obj} key={i} edit clickChangeEvent={clickChangeEvent} />
-                : <MiniCard obj={obj} key={i} edit show_users clickShowMembers={clickShowMembers} clickChangeEvent={clickChangeEvent} />
-            ))}
-            </>
-            }
+            <EventsAdmin eventsShow={eventsPast} type='past' />
           </div>
         </section>
       </div>
       <Footer/>
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessages} />}
       <ModalEvent isOpen={isOpenModalEvent} closeModal={closeModal} action='add' />
       <ModalEvent event={eventExample} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />
       <ModalMembers isOpen={isOpenModalMembers} closeModal={closeModal} />
       <ModalDelete isOpen={isOpenModalDelete} closeModal={closeModal} deleteEvent={deleteEvent} />
-      {/* <ModalMessage isOpen={true} closeModal={closeModal} isSuccess={false}/> */}
+      <ModalMessage isOpen={true} closeModal={closeModal} isSuccess={false}/>
     </>
   )
 }

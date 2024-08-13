@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { getEvents, setEventsActiveFilter, useAppDispatch, useAppSelector } from 'src/store'
+import { getEventsSelector, setEventsActiveFilter, useAppDispatch, useAppSelector } from 'src/store'
 import { FilterOptions } from 'src/components'
 import { arrowIcon } from 'src/assets'
 import { FilterItemData, FilterItemFuncUpdate } from './config'
@@ -13,7 +13,7 @@ interface IFilterItem {
 
 export const FilterItem:FC<IFilterItem> = ({ type, selected, getAllEvents }) => {
   const dispatch = useAppDispatch();
-  const { activeFilter } = useAppSelector(getEvents);
+  const { activeFilter } = useAppSelector(getEventsSelector);
   const { title, options } = FilterItemData[type];
   const [isOpen, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
