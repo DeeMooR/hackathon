@@ -12,6 +12,7 @@ public class AdminEntity {
     private String password;
     private String name;
     private byte[] sold;
+    private String accessKey;
 
     public AdminEntity(){}
 
@@ -53,5 +54,13 @@ public class AdminEntity {
 
     public void setSold(byte[] sold) {
         this.sold = sold;
+    }
+
+    public String getAccessKey() {
+        return accessKey;
+    }
+
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
     }
 }

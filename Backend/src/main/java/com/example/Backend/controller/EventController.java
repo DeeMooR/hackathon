@@ -130,7 +130,7 @@ public class EventController {
     }
 
     @PostMapping("/past/admin")
-    public ResponseEntity pastFilter(@RequestParam String name){
+    public ResponseEntity pastFilter(@RequestBody String name){
         try {
             return ResponseEntity.ok(eventService.getPast(name));
         } catch(Exception e){
@@ -139,7 +139,7 @@ public class EventController {
     }
 
     @PostMapping("/next/admin")
-    public ResponseEntity nextEventsFilter(@RequestParam String name){
+    public ResponseEntity nextEventsFilter(@RequestBody String name){
         try {
             return ResponseEntity.ok(eventService.getNext(name));
         } catch(Exception e){

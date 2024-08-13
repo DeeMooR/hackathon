@@ -31,4 +31,13 @@ public class AdminController {
             return ResponseEntity.badRequest().body(false);
         }
     }
+
+    @PostMapping("/check")
+    public ResponseEntity check(@RequestBody String accessKey) throws MyException{
+        try{
+            return ResponseEntity.ok(adminService.check(accessKey));
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
 }

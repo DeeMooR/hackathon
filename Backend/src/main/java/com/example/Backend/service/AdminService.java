@@ -11,6 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Random;
 
 @Service
 public class AdminService {
@@ -33,6 +34,7 @@ public class AdminService {
         adminEntity.setSold(salt);
         String password = hashPassword(adminEntity.getPassword(), salt);
         adminEntity.setPassword(password);
+        adminEntity.setAccessKey(generateKey());
         adminRepo.save(adminEntity);
         return true;
     }
@@ -56,5 +58,23 @@ public class AdminService {
     public static boolean verifyPassword(String password, String hashedPassword, byte[] salt) throws NoSuchAlgorithmException {
         String newHashedPassword = hashPassword(password, salt);
         return newHashedPassword.equals(hashedPassword);
+    }
+
+    public static String generateKey(){
+        String key = "";
+        Random random = new Random();
+        char ch;
+        for(int i =0; i < 13; i++){
+            ch = (char) (random.nextInt(94) + 33);
+            key += ch;
+        }
+        return key;
+    }
+
+    public String check(String accessKey) throws MyException {
+        AdminEntity admin = adminRepo.findByAccessKey(accessKey);
+        if(admin == null)
+            throw new MyException("NO-NO-NO-NO you are not admin");
+        return admin.getName();
     }
 }
