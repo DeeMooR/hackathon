@@ -1,20 +1,29 @@
-import React, { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { clearAdminName, useAppDispatch } from 'src/store';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { clearAdminName, setAdminModalAction, useAppDispatch } from 'src/store';
 import { logoIcon } from 'src/assets';
 import './HeaderAdmin.css'
 
-interface IHeaderAdmin {
-  showModalEvent: () => void
-}
-
-export const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
+export const HeaderAdmin = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const showModalCreate = () => {
+    dispatch(setAdminModalAction('create'));
+  }
 
   const clickBack = () => {
-    localStorage.removeItem('admin_name');
     dispatch(clearAdminName());
+    localStorage.removeItem('adminName');
     navigate('/auth');
   }
 
@@ -26,10 +35,12 @@ export const HeaderAdmin:FC<IHeaderAdmin> = ({ showModalEvent }) => {
           <p>АДМИН-ПАНЕЛЬ</p>
         </div>
         <div className="headerAdmin__right">
-          <button className='second-button headerAdmin__button headerAdmin__full' onClick={showModalEvent}>Добавить мероприятие</button>
-          <button className='second-button headerAdmin__button headerAdmin__short' onClick={showModalEvent}>Добавить</button>
-          <a className='headerAdmin__link headerAdmin__full' onClick={clickBack}>Выйти из аккаунта</a>
-          <a className='headerAdmin__link headerAdmin__short' onClick={clickBack}>Выйти</a>
+          <button className='second-button headerAdmin__button' onClick={showModalCreate}>
+            {isMobile ? 'Добавить' : 'Добавить мероприятие'}
+          </button>
+          <a className='headerAdmin__link' onClick={clickBack}>
+            {isMobile ? 'Выйти' : 'Выйти из аккаунта'}
+          </a>
         </div>
       </div>
     </header>

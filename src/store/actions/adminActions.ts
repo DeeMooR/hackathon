@@ -1,21 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IAuthForm, IShortEvent } from "src/interface";
 import { checkAuthApi, getEventsNextFacultyApi, getEventsPastFacultyApi } from "../api";
-import { allFaculties } from "src/helpers";
-import { RootState } from "../hooks";
 
 interface IResponseEvents {
   eventsNext: IShortEvent[],
   eventsPast: IShortEvent[]
 }
 
-export const getEventsFacultyAction = createAsyncThunk<IResponseEvents, void, { state: RootState }>(
+export const getEventsFacultyAction = createAsyncThunk<IResponseEvents, string | null>(
   'admin/getEventsFacultyAction',
-  async (_, { getState }) => {
-    console.log(getState());
-    const { adminName } = getState().admin;
-    console.log(adminName)
-    const faculty = adminName; // (adminName && allFaculties.includes(adminName)) ? adminName : null;
+  async (faculty) => {
     const eventsNext = await getEventsNextFacultyApi(faculty);
     const eventsPast = await getEventsPastFacultyApi(faculty);
     return {eventsNext, eventsPast};

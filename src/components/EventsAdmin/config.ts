@@ -6,7 +6,7 @@ interface IEventsAdminData {
 export const EventsAdminData: { [type: string]: IEventsAdminData } = {
   next: {
     title: 'Ближайшие мероприятия',
-    emptyText: 'Не порядок, в ближайшее время мероприятий нет'
+    emptyText: 'Не порядок, в ближайшее время нет мероприятий'
   },
   past: {
     title: 'Прошедшие мероприятия',

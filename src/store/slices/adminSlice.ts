@@ -32,11 +32,14 @@ const adminSlice = createSlice({
     setAdminModalAction: (state, { payload }) => {
       state.modal.action = payload;
     },
-    clearAdminModal: (state) => {
-      state.modal = {...initialState.modal};
+    setAdminName: (state, { payload }) => {
+      state.adminName = payload;
     },
     clearAdminName: (state) => {
       state.adminName = '';
+    },
+    clearAdminModal: (state) => {
+      state.modal = {...initialState.modal};
     },
     clearAdminMessages: (state) => {
       state.successMessage = null;
@@ -73,8 +76,9 @@ export const {
   actions: {
     setAdminModalEventId,
     setAdminModalAction,
-    clearAdminModal,
+    setAdminName,
     clearAdminName,
+    clearAdminModal,
     clearAdminMessages,
   },
 } = adminSlice;

@@ -25,12 +25,6 @@
       display: flex;
       align-items: center;
       gap: 30px;
-      .headerAdmin__full {
-        display: block;
-      }
-      .headerAdmin__short {
-        display: none;
-      }
       .headerAdmin__button {
         height: 40px;
         font-size: 16px;
@@ -54,12 +48,6 @@
     .wrapper {
       .headerAdmin__right {
         gap: 20px;
-        .headerAdmin__full {
-          display: none;
-        }
-        .headerAdmin__short {
-          display: block;
-        }
         .headerAdmin__button {
           padding: 6px 12px 8px 12px;
         }
