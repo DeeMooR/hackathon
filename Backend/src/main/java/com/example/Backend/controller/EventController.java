@@ -128,4 +128,22 @@ public class EventController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/past/admin")
+    public ResponseEntity pastFilter(@RequestParam String name){
+        try {
+            return ResponseEntity.ok(eventService.getPast(name));
+        } catch(Exception e){
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
+    @PostMapping("/next/admin")
+    public ResponseEntity nextEventsFilter(@RequestParam String name){
+        try {
+            return ResponseEntity.ok(eventService.getNext(name));
+        } catch(Exception e){
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
 }

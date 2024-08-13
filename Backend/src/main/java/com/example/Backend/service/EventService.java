@@ -83,8 +83,12 @@ public class EventService {
 
     public List<Event> getPast(String top) {
         List<Event> events = this.getPast();
-        if(events.size() > 3){
-            return events.subList(0,3);
+        if(top.equals("top")){
+            if(events.size() > 3){
+                return events.subList(0,3);
+            }
+        } else{
+            events = filterFaculty(events, top);
         }
         return events;
     }
@@ -108,8 +112,12 @@ public class EventService {
 
     public List<Event> getNext(String top) {
         List<Event> events = this.getNext();
-        if(events.size() > 3){
-            return events.subList(0,3);
+        if(top.equals("top")) {
+            if (events.size() > 3) {
+                return events.subList(0, 3);
+            }
+        } else {
+            events = filterFaculty(events,top);
         }
         return events;
     }
@@ -135,7 +143,7 @@ public class EventService {
         List<EventEntity> filterEvents = new ArrayList<>();
         for(String faculty : faculties)
             for(EventEntity event : events)
-                if(event.getFaculties().contains(faculty) || event.getFaculties().contains("Все факультеты"))
+                if(event.getFaculties().contains(faculty) || event.getFaculties().contains("Все факультеты") || event.getFaculties() == null)
                     filterEvents.add(event);
         return filterEvents.stream().distinct().collect(Collectors.toList());
     }
@@ -170,6 +178,14 @@ public class EventService {
     public EventDetailed getOne(int id) throws EventNotFoundedException {
         EventEntity event = eventRepo.findById(id).orElseThrow(() -> new EventNotFoundedException("Мероприятие не найдено"));
         return EventDetailed.toModel(event);
+    }
+
+    public List<Event> filterFaculty(List<Event> events, String faculty){
+        List<Event> filterEvents = new ArrayList<>();
+        for(Event event : events)
+            if(event.getFaculties().contains(faculty) || event.getFaculties().contains("Все факультеты") || event.getFaculties().size() == 0)
+                filterEvents.add(event);
+        return filterEvents;
     }
 
 }
