@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom'
-import { checkAuthAction, getAdminSelector, useAppDispatch, useAppSelector } from 'src/store'
-import { Header, Footer } from 'src/components';
-import { ModalMessage } from 'src/modals';
-import { IAuth } from 'src/interface'
+import { useForm } from 'react-hook-form';
+import { checkAuthAction, clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector } from 'src/store'
+import { Header, Footer, Notification, Input } from 'src/components';
+import { authScheme } from 'src/validation';
+import { IAuthForm } from 'src/interface'
 import './AuthPage.css'
 
 export const AuthPage = () => {
@@ -11,46 +13,29 @@ export const AuthPage = () => {
   const dispatch = useAppDispatch();
   const { adminName, errorMessage } = useAppSelector(getAdminSelector);
 
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [isOpenModal, setOpenModal] = useState(false);
-
-  const changeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
-  };
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-  const clickSingIn = () => {
-    const obj: IAuth = {
-      login: login,
-      password: password
-    }
-    dispatch(checkAuthAction(obj));
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAuthForm>({
+    mode: 'onChange',
+    resolver: yupResolver(authScheme)
+  });
 
   useEffect(() => {
     if (adminName) {
-      localStorage.setItem('admin_name', adminName);
-      setTimeout(() => {
-        navigate('/admin');
-      }, 300)
+      localStorage.setItem('adminName', adminName);
+      navigate('/admin');
     }
-    if (errorMessage) setOpenModal(true);
-  }, [adminName, errorMessage])
+  }, [adminName])
 
-  const closeModal = () => {
-    document.body.style.overflowY = 'auto';
-    document.body.style.padding = '0';
-    setOpenModal(false);
+  const onSubmit = (data: IAuthForm) => {
+    dispatch(checkAuthAction(data));
   }
 
-  useEffect(() => {
-    if (isOpenModal) {
-      document.body.style.overflowY = 'hidden';
-      document.body.style.padding = '0 17px 0 0';
-    }
-  }, [isOpenModal])
+  const clearMessages = () => {
+    dispatch(clearAdminMessages());
+  }
 
   return (
     <>
@@ -58,15 +43,29 @@ export const AuthPage = () => {
       <div className="wrapper">
         <section className="authPage">
           <h1>Вход в админ-панель</h1>
-          <div className="authPage__fields">
-            <input type="text" className='authPage__login' placeholder='Логин' onChange={e => changeLogin(e)} />
-            <input type="password" className='authPage__password' placeholder='Пароль' onChange={e => changePassword(e)} />
-            <button className='button authPage__button' onClick={clickSingIn}>Войти</button>
-          </div>
+          <form className="authPage__form" onSubmit={handleSubmit(onSubmit)}>
+            <div className="authPage__fields">
+              <Input
+                id='login'
+                register={register}
+                type="text"
+                placeholder='Логин'
+                error={errors.login?.message}
+              />
+              <Input
+                id='password'
+                register={register}
+                type="password"
+                placeholder='Пароль'
+                error={errors.password?.message}
+              />
+            </div>
+            <button type='submit' className='button authPage__button'>Войти</button>
+          </form>
         </section>
       </div>
       <Footer/>
-      <ModalMessage isOpen={isOpenModal} closeModal={closeModal} isSuccess={false}/>
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessages} />}
     </>
   )
 }

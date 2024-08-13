@@ -1,14 +1,14 @@
 import axios from "axios";
-import { IAuth, IShortEvent } from "src/interface";
+import { IAuthForm, IShortEvent } from "src/interface";
 import { endpoints } from "./endpoints";
 
 interface CheckAuthResponse {
-  faculty: string,
+  name: string,
 }
 
 const headers = { 'Content-Type': 'application/json' };
 
-export const checkAuthApi = (obj: IAuth): Promise<CheckAuthResponse> =>
+export const checkAuthApi = (obj: IAuthForm): Promise<CheckAuthResponse> =>
   axios.post(endpoints.auth, obj, { headers }).then(({ data }) => data);
 
 export const getEventsNextFacultyApi = (faculty: string | null): Promise<IShortEvent[]> =>

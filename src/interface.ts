@@ -30,11 +30,6 @@ export interface IFilters {
   visits: string[],
 }
 
-export interface IAuth {
-  login: string,
-  password: string
-}
-
 export interface IMember {
   name: string,
   surname: string, 
@@ -43,4 +38,9 @@ export interface IMember {
 
 export interface IMemberForm extends IMember {
   team: string;
+}
+
+export interface IAuthForm {
+  login: string,
+  password: string
 }

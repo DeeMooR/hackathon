@@ -5,17 +5,17 @@
       text-align: center;
       margin: 0 0 45px 0;
     }
-    .authPage__fields {
+    .authPage__form {
       max-width: 360px;
       margin: 0 auto;
-      input {
-        width: 100%;
-      }
-      .authPage__login {
-        margin: 0 0 20px 0;
-      }
-      .authPage__password {
+      .authPage__fields {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         margin: 0 0 30px 0;
+        input {
+          width: 100%;
+        }
       }
       .authPage__button {
         width: 100%;

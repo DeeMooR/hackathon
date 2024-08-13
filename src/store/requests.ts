@@ -1,6 +1,6 @@
 import { AnyAction, ThunkDispatch, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
-import { IAddEvent, IAuth, IEvent } from 'src/interface';
+import { IAddEvent, IAuthForm, IEvent } from 'src/interface';
 
 export const getEventsNextAPI = createAsyncThunk(
   'eventsNext/getEventsNextAPI',
@@ -26,7 +26,7 @@ export const getEventsPastAPI = createAsyncThunk(
 )
 export const checkAuthAPI = createAsyncThunk(
   'admin_name/checkAuthAPI',
-  async (obj: IAuth, {rejectWithValue}) => {
+  async (obj: IAuthForm, {rejectWithValue}) => {
     try {
       const response = await fetch(`http://localhost:8080/admin/auth`, {
         method: 'POST',

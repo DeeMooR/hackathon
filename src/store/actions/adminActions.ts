@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IAuth, IShortEvent } from "src/interface";
+import { IAuthForm, IShortEvent } from "src/interface";
 import { checkAuthApi, getEventsNextFacultyApi, getEventsPastFacultyApi } from "../api";
 import { allFaculties } from "src/helpers";
 import { RootState } from "../hooks";
@@ -22,10 +22,10 @@ export const getEventsFacultyAction = createAsyncThunk<IResponseEvents, void, { 
   }
 )
 
-export const checkAuthAction = createAsyncThunk<string, IAuth>(
+export const checkAuthAction = createAsyncThunk<string, IAuthForm>(
   'admin/checkAuthAction',
   async (obj) => {
     const response = await checkAuthApi(obj);
-    return response.faculty;
+    return response.name;
   }
 )
