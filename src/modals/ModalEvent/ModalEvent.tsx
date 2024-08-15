@@ -118,7 +118,7 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
   }
 
   return (
-      <ModalTemplate isOpen={isOpen} closeModal={closeModal} positionUp>
+      <ModalTemplate closeModal={closeModal} positionUp>
         <div className="modalEvent">
           <h2><span>{word_title}</span> мероприятия</h2>
           <TextInput text='Обложка' type='text' value={photo} onChange={(v:string) => setPhoto(v)} placeholder='Вставьте ссылку на изображение'/>

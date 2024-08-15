@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { checkAuthAction, getEventsFacultyAction, signInAction } from '../actions';
+import { checkAuthAction, getEventMembersAction, getEventsFacultyAction, signInAction } from '../actions';
 import { adminState } from '../interface';
 
 const initialState: adminState = {
@@ -8,8 +8,10 @@ const initialState: adminState = {
   eventsPast: [],
   modal: {
     eventId: null,
+    action: null,
     event: null,
-    action: null
+    teams: [],
+    members: [],
   },
   isExit: false,
   isLoading: false,
@@ -85,6 +87,18 @@ const adminSlice = createSlice({
         localStorage.removeItem('accessKey');
         state.isExit = true;
         state.errorMessage = 'Произошла ошибка. Выход из аккаунта';
+      })
+
+      .addCase(getEventMembersAction.pending, setLoading)
+      .addCase(getEventMembersAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.modal.teams = payload.filter(item => item.team !== null);
+        const teamIsNull = payload.filter(item => item.team === null);
+        state.modal.members = teamIsNull.map(item => item.members[0]);
+      })
+      .addCase(getEventMembersAction.rejected, (state) => {
+        state.isLoading = false;
+        state.errorMessage = 'Ошибка загрузки участников мероприятия';
       })
   },
 })

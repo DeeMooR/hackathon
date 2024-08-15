@@ -25,20 +25,18 @@ export const EventsTop:FC<IEventsTop> = ({ eventsShow, type }) => {
     <section className='eventsTop'>
       <h2>{title}</h2>
       {showLoading ? <Loading /> : (
-        <>
-          {eventsShow.length ? (
-            <>
-              <div className="eventsTop__events">
-                {eventsShow.map((obj: IShortEvent, i: number) => 
-                  <MiniCard obj={obj} key={i} />
-                )}
-              </div>
-              <button className='button eventsTop__button' onClick={onClickButton}>{buttonText}</button>
-            </>
-          ) : (
-            <h4 className='eventsTop__empty'>{emptyText}</h4>
-          )}
-        </>
+        eventsShow.length ? (
+          <>
+            <div className="eventsTop__events">
+              {eventsShow.map((obj: IShortEvent, i: number) => 
+                <MiniCard obj={obj} key={i} />
+              )}
+            </div>
+            <button className='button eventsTop__button' onClick={onClickButton}>{buttonText}</button>
+          </>
+        ) : (
+          <h4 className='eventsTop__empty'>{emptyText}</h4>
+        )
       )}
     </section>
   )

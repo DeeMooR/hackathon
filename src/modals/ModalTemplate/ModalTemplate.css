@@ -3,13 +3,9 @@
   z-index: 20;
   inset: 0px;
   background: rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  pointer-events: none;
-  overflow-y: auto;
-}
-.modal__background.open {
   opacity: 1;
   pointer-events: auto;
+  overflow-y: auto;
 }
 .modal__background .modal {
   position: absolute;

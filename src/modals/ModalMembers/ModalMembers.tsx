@@ -1,35 +1,59 @@
-import React, { FC } from 'react'
-import { membersExample } from 'src/helpers';
+import React, { FC, useEffect } from 'react'
+import { clearAdminModal, getAdminModalSelector, getAdminSelector, getEventMembersAction, useAppDispatch, useAppSelector } from 'src/store';
 import { ModalTemplate } from 'src/modals';
-import './ModalMembers.css'
+import './ModalMembers.css';
+import { Loading } from 'src/components';
 
-interface IModalMembers {
-  isOpen: boolean,
-  closeModal: () => void
-}
+export const ModalMembers = () => {
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector(getAdminSelector);
+  const { eventId, teams, members: onlyMembers } = useAppSelector(getAdminModalSelector);
+ 
+  useEffect(() => {
+    if (eventId) dispatch(getEventMembersAction(eventId));
+  }, []);
 
-export const ModalMembers:FC<IModalMembers> = ({ isOpen, closeModal }) => {
-  const members = membersExample;
+  const closeModal = () => {
+    dispatch(clearAdminModal());
+  }
 
   return (
-  <>
-    {members &&
-      <ModalTemplate isOpen={isOpen} closeModal={closeModal}>
+    <ModalTemplate closeModal={closeModal}>
       <div className="modalMembers">
         <h2>Список участников</h2>
-        <h3>Хакатон FCADHACK</h3>
-        {members.length === 0 &&
-          <p>_ _Пусто_ _</p>
+        {isLoading ? <Loading /> : 
+        <>
+          {!!teams.length &&
+            <div className="modalMembers__category">
+              <h3 className='category__title'>Команды:</h3>
+              <ol className="category__teams">
+                {teams.map(({team, members}, i) => 
+                  <li className='category__team' key={i}>
+                    <p className='team__title'>{team}</p>
+                    <div className="team__members">
+                      {members.map(({groupNumber, name, surname}) =>
+                        <p className='team__member'>{groupNumber} {surname} {name}</p>
+                      )}
+                    </div>
+                  </li>
+                )}
+              </ol>
+            </div>
+          }
+          {!!onlyMembers.length && 
+          <div className="modalMembers__category">
+           <h3 className='category__title'>Участники без команд:</h3>
+            <ol className="category__members">
+              {onlyMembers.map(({groupNumber, name, surname}) =>
+                <li className='category__member'>{groupNumber} {surname} {name}</li>
+              )}
+            </ol>
+          </div>
+          }
+        </>
         }
-        <ol>
-          {members.map((value, i) =>
-            <li key={i}>{value}</li> 
-          )}
-        </ol>
         <button className='button' onClick={closeModal}>Назад</button>
       </div>
     </ModalTemplate>
-    }
-  </>
   )
 }

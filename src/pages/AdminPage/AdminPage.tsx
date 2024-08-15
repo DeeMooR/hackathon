@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage } from 'src/store'
+import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getAdminModalActionSelector } from 'src/store'
 import { HeaderAdmin, Footer, Notification, EventsAdmin } from 'src/components';
 import { allFaculties } from 'src/helpers'
 import './AdminPage.css'
+import { ModalMembers } from 'src/modals';
 
 export const AdminPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { adminName, eventsNext, eventsPast, errorMessage, isExit } = useAppSelector(getAdminSelector);
+  const modalAction = useAppSelector(getAdminModalActionSelector);
   const accessKey = localStorage.getItem('accessKey');
 
   useEffect(() => {
@@ -56,6 +58,7 @@ export const AdminPage = () => {
       </div>
       <Footer/>
       {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessages} />}
+      {modalAction === 'members' && <ModalMembers />}
       {/* 
       <ModalEvent isOpen={isOpenModalEvent} closeModal={closeModal} action='add' />
       <ModalEvent event={eventExample} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />

@@ -6,20 +6,30 @@ import { IShortEvent } from 'src/interface'
 import { calenderIcon, locationIcon, timeIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
 import './MiniCard.css'
+import { setAdminModalAction, setAdminModalEventId, useAppDispatch } from 'src/store';
 
 interface IMiniCard {
   obj: IShortEvent,
   isEdit?: boolean,
-  clickShowMembers?: (id: number) => void,
-  clickChangeEvent?: (id: number) => void
 }
 
-export const MiniCard:FC<IMiniCard> = ({obj, isEdit, clickShowMembers, clickChangeEvent}) => {
+export const MiniCard:FC<IMiniCard> = ({obj, isEdit}) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { id, date, faculties, location, photo, time, title, visit } = obj;
 
   const openEventPage = () => {
     navigate(`/events/${id}`);
+  }
+
+  const clickChangeEvent = () => {
+    dispatch(setAdminModalEventId(id));
+    dispatch(setAdminModalAction('change'));
+  }
+
+  const clickShowMembers = () => {
+    dispatch(setAdminModalEventId(id));
+    dispatch(setAdminModalAction('members'));
   }
   
   return (
@@ -38,8 +48,12 @@ export const MiniCard:FC<IMiniCard> = ({obj, isEdit, clickShowMembers, clickChan
         {!isEdit &&
           <button className='second-button' onClick={openEventPage}>Подробнее</button>
         }
-        {isEdit && <button className='second-button' onClick={() => clickChangeEvent?.(obj.id)}>Редактировать мероприятие</button>}
-        {visit === 'С регистрацией' && <button className='button' onClick={() => clickShowMembers?.(obj.id)}>Смотреть участников</button>}
+        {isEdit && 
+          <button className='second-button' onClick={clickChangeEvent}>Редактировать мероприятие</button>
+        }
+        {isEdit && visit === 'С регистрацией' && 
+          <button className='button' onClick={clickShowMembers}>Смотреть участников</button>
+        }
       </div>
     </div>
   )

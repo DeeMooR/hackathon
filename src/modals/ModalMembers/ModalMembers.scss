@@ -1,18 +1,38 @@
 .modalMembers {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   h2 {
-    margin: 0 0 30px 0;
+    margin: 0;
   }
-  h3 {
-    margin: 0 0 10px 0;
-  }
-  ol {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin: 0 0 30px 20px;
-    li {
-      font-weight: 400;
-      line-height: 135%;
+  .modalMembers__category {
+    .category__title {
+      margin: 0 0 5px 0;
+    }
+    .category__teams {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin: 0 0 0 20px;
+      .category__team {
+        .team__title {
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 24px;
+        }
+        .team__members {
+          .team__member {
+            line-height: 24px;
+          }
+        }
+      }
+    }
+    .category__members {
+      margin: 0 0 0 20px;
+      .category__member {
+        font-weight: 400;
+        line-height: 24px;
+      }
     }
   }
 }

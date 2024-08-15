@@ -10,7 +10,7 @@ interface IModalDelete {
 
 export const ModalDelete:FC<IModalDelete> = ({ isOpen, closeModal, deleteEvent }) => {
   return (
-    <ModalTemplate isOpen={isOpen} closeModal={closeModal}>
+    <ModalTemplate closeModal={closeModal}>
       <div className="modalDelete">
         <h2>Удалить мероприятие?</h2>
         <div className="modalDelete__buttons">

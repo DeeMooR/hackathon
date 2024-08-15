@@ -19,17 +19,15 @@ export const EventsAdmin:FC<IEventsAdmin> = ({ eventsShow, type }) => {
     <section className='eventsAdmin'>
       <h2>{title}</h2>
       {showLoading ? <Loading /> : (
-        // <>{
-          eventsShow.length ? (
-            <div className="eventsAdmin__events">
-              {eventsShow.map((event: IShortEvent, i: number) =>
-                <MiniCard obj={event} key={i} isEdit />
-              )}
-            </div>
-          ) : (
-            <h4 className='eventsAdmin__empty'>{emptyText}</h4>
-          )
-        // }</>
+        eventsShow.length ? (
+          <div className="eventsAdmin__events">
+            {eventsShow.map((event: IShortEvent, i: number) =>
+              <MiniCard obj={event} key={i} isEdit />
+            )}
+          </div>
+        ) : (
+          <h4 className='eventsAdmin__empty'>{emptyText}</h4>
+        )
       )}
     </section>
   )

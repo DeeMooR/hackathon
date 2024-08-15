@@ -19,7 +19,7 @@ export const ModalMessage:FC<IModalMessage> = ({ isOpen, closeModal, isSuccess }
   }
 
   return (
-    <ModalTemplate isOpen={isOpen} closeModal={closeModal}>
+    <ModalTemplate closeModal={closeModal}>
       <div className="modalMessage">
         <h2>{obj.title}</h2>
         <p>{obj.text}</p>
