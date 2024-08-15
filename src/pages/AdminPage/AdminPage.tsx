@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsTopAction, setAdminName, clearAdminName, getEventsFacultyAction } from 'src/store'
+import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage } from 'src/store'
 import { HeaderAdmin, Footer, Notification, EventsAdmin } from 'src/components';
 import { allFaculties } from 'src/helpers'
 import './AdminPage.css'
@@ -8,24 +8,29 @@ import './AdminPage.css'
 export const AdminPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { adminName, eventsNext, eventsPast, errorMessage } = useAppSelector(getAdminSelector);
-  
-  useEffect(() => {
-    const isAdmin = localStorage.getItem('adminName');
-    if (isAdmin) {
-      dispatch(setAdminName(isAdmin));
-    } else {
-      localStorage.removeItem('adminName');
-      navigate('/auth');
-    }
-  }, []);
+  const { adminName, eventsNext, eventsPast, errorMessage, isExit } = useAppSelector(getAdminSelector);
+  const accessKey = localStorage.getItem('accessKey');
 
   useEffect(() => {
-    if (adminName) {
-      const faculty = allFaculties.includes(adminName) ? adminName : null;
-      dispatch(getEventsFacultyAction(faculty));
+    if (isExit) {
+      navigate('/auth');
+      dispatch(setAdminIsExit(false));
     }
-  }, [adminName])
+  }, [isExit]);
+
+  useEffect(() => {
+    if (accessKey) {
+      if (adminName) {
+        const faculty = allFaculties.includes(adminName) ? adminName : null;
+        dispatch(getEventsFacultyAction(faculty));
+      } else {
+        dispatch(checkAuthAction(accessKey));
+      }
+    } else {
+      dispatch(setAdminErrorMessage('Произошла ошибка. Выход из аккаунта'));
+      navigate('/auth');
+    }
+  }, [accessKey, adminName]);
 
   const getPartTitle = () => {
     return (adminName && allFaculties.includes(adminName)) ? 'Студ. совет ' : '';

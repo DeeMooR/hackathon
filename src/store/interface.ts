@@ -39,6 +39,7 @@ export interface adminState {
     event: IEvent | null,
     action: 'create' | 'change' | 'delete' | null,
   }
+  isExit: boolean,
   isLoading: boolean,
   successMessage: string | null,
   errorMessage: string | null,

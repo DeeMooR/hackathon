@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getEventsFacultyAction, checkAuthAction } from '../actions';
+import { checkAuthAction, getEventsFacultyAction, signInAction } from '../actions';
 import { adminState } from '../interface';
 
 const initialState: adminState = {
@@ -11,6 +11,7 @@ const initialState: adminState = {
     event: null,
     action: null
   },
+  isExit: false,
   isLoading: false,
   successMessage: null,
   errorMessage: null,
@@ -32,8 +33,11 @@ const adminSlice = createSlice({
     setAdminModalAction: (state, { payload }) => {
       state.modal.action = payload;
     },
-    setAdminName: (state, { payload }) => {
-      state.adminName = payload;
+    setAdminErrorMessage: (state, { payload }) => {
+      state.errorMessage = payload;
+    },
+    setAdminIsExit: (state, { payload }) => {
+      state.isExit = payload;
     },
     clearAdminName: (state) => {
       state.adminName = '';
@@ -59,6 +63,17 @@ const adminSlice = createSlice({
         state.errorMessage = 'Ошибка при получении списка мероприятий';
       })
 
+      .addCase(signInAction.pending, setLoading)
+      .addCase(signInAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.adminName = payload.name;
+        localStorage.setItem('accessKey', payload.accessKey);
+      })
+      .addCase(signInAction.rejected, (state) => {
+        state.isLoading = false;
+        state.errorMessage = 'Ошибка входа в аккаунт';
+      })
+
       .addCase(checkAuthAction.pending, setLoading)
       .addCase(checkAuthAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
@@ -66,7 +81,10 @@ const adminSlice = createSlice({
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.isLoading = false;
-        state.errorMessage = 'Ошибка входа в аккаунт';
+        state.adminName = '';
+        localStorage.removeItem('accessKey');
+        state.isExit = true;
+        state.errorMessage = 'Произошла ошибка. Выход из аккаунта';
       })
   },
 })
@@ -76,7 +94,8 @@ export const {
   actions: {
     setAdminModalEventId,
     setAdminModalAction,
-    setAdminName,
+    setAdminErrorMessage,
+    setAdminIsExit,
     clearAdminName,
     clearAdminModal,
     clearAdminMessages,

@@ -9,5 +9,6 @@ export const endpoints = {
   eventsNextFilter: `${baseURL}/events/next/filter`,
   eventsPastFilter: `${baseURL}/events/past/filter`,
   setMembers: `${baseURL}/teams`,
-  auth: `${baseURL}/admin/auth`
+  signIn: `${baseURL}/admin/auth`,
+  checkAuth: `${baseURL}/admin/check`,
 };

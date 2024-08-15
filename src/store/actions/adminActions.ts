@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IAuthForm, IShortEvent } from "src/interface";
-import { checkAuthApi, getEventsNextFacultyApi, getEventsPastFacultyApi } from "../api";
+import { ISignInForm, IShortEvent } from "src/interface";
+import { SignInResponse, signInApi, checkAuthApi, getEventsNextFacultyApi, getEventsPastFacultyApi } from "../api";
 
 interface IResponseEvents {
   eventsNext: IShortEvent[],
@@ -16,10 +16,23 @@ export const getEventsFacultyAction = createAsyncThunk<IResponseEvents, string |
   }
 )
 
-export const checkAuthAction = createAsyncThunk<string, IAuthForm>(
-  'admin/checkAuthAction',
+export const signInAction = createAsyncThunk<SignInResponse, ISignInForm>(
+  'admin/signInAction',
   async (obj) => {
-    const response = await checkAuthApi(obj);
-    return response.name;
+    const response = await signInApi(obj);
+    return response;
+  }
+)
+
+export const checkAuthAction = createAsyncThunk<string, string>(
+  'admin/checkAuthAction',
+  async (accessKey) => {
+    try {
+      const body = { accessKey };
+      const response = await checkAuthApi(body);
+      return response.name;
+    } catch(e) {
+      throw new Error('выбросил ошибку')
+    }
   }
 )

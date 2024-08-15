@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
-import { checkAuthAction, clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector } from 'src/store'
+import { signInAction, clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector } from 'src/store'
 import { Header, Footer, Notification, Input } from 'src/components';
 import { authScheme } from 'src/validation';
-import { IAuthForm } from 'src/interface'
+import { ISignInForm } from 'src/interface'
 import './AuthPage.css'
 
 export const AuthPage = () => {
@@ -17,20 +17,17 @@ export const AuthPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAuthForm>({
+  } = useForm<ISignInForm>({
     mode: 'onChange',
     resolver: yupResolver(authScheme)
   });
 
   useEffect(() => {
-    if (adminName) {
-      localStorage.setItem('adminName', adminName);
-      navigate('/admin');
-    }
+    if (adminName) navigate('/admin');
   }, [adminName])
 
-  const onSubmit = (data: IAuthForm) => {
-    dispatch(checkAuthAction(data));
+  const onSubmit = (data: ISignInForm) => {
+    dispatch(signInAction(data));
   }
 
   const clearMessages = () => {

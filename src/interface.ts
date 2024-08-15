@@ -40,7 +40,7 @@ export interface IMemberForm extends IMember {
   team: string;
 }
 
-export interface IAuthForm {
+export interface ISignInForm {
   login: string,
   password: string
 }

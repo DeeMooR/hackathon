@@ -23,7 +23,7 @@ export const HeaderAdmin = () => {
 
   const clickBack = () => {
     dispatch(clearAdminName());
-    localStorage.removeItem('adminName');
+    localStorage.removeItem('accessKey');
     navigate('/auth');
   }
 
