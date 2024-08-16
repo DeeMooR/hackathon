@@ -71,8 +71,8 @@ public class AdminService {
         return key;
     }
 
-    public String check(String accessKey) throws MyException {
-        AdminEntity admin = adminRepo.findByAccessKey(accessKey);
+    public String check(AdminEntity adminEntity) throws MyException {
+        AdminEntity admin = adminRepo.findByAccessKey(adminEntity.getAccessKey());
         if(admin == null)
             throw new MyException("NO-NO-NO-NO you are not admin");
         return admin.getName();
