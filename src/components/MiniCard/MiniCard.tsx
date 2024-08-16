@@ -6,7 +6,7 @@ import { IShortEvent } from 'src/interface'
 import { calenderIcon, locationIcon, timeIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
 import './MiniCard.css'
-import { setAdminModalAction, setAdminModalEventId, useAppDispatch } from 'src/store';
+import { setModalAction, setModalEventId, useAppDispatch } from 'src/store';
 
 interface IMiniCard {
   obj: IShortEvent,
@@ -23,13 +23,13 @@ export const MiniCard:FC<IMiniCard> = ({obj, isEdit}) => {
   }
 
   const clickChangeEvent = () => {
-    dispatch(setAdminModalEventId(id));
-    dispatch(setAdminModalAction('change'));
+    dispatch(setModalEventId(id));
+    dispatch(setModalAction('change'));
   }
 
   const clickShowMembers = () => {
-    dispatch(setAdminModalEventId(id));
-    dispatch(setAdminModalAction('members'));
+    dispatch(setModalEventId(id));
+    dispatch(setModalAction('members'));
   }
   
   return (

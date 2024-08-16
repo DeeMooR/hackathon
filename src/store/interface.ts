@@ -34,14 +34,18 @@ export interface adminState {
   adminName: string,
   eventsNext: IShortEvent[],
   eventsPast: IShortEvent[],
-  modal: {
-    eventId: number | null,
-    action: 'create' | 'change' | 'delete' | 'members' | null,
-    event: IEvent | null,
-    teams: ITeam[],
-    members: IMember[],
-  }
   isExit: boolean,
+  isLoading: boolean,
+  successMessage: string | null,
+  errorMessage: string | null,
+}
+
+export interface modalState {
+  eventId: number | null,
+  action: 'create' | 'change' | 'delete' | 'members' | null,
+  event: IEvent | null,
+  teams: ITeam[],
+  members: IMember[],
   isLoading: boolean,
   successMessage: string | null,
   errorMessage: string | null,

@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getAdminModalActionSelector } from 'src/store'
+import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getModalActionSelector, getModalErrorMessageSelector, clearModalMessages } from 'src/store'
 import { HeaderAdmin, Footer, Notification, EventsAdmin } from 'src/components';
 import { allFaculties } from 'src/helpers'
 import './AdminPage.css'
-import { ModalMembers } from 'src/modals';
+import { ModalEvent, ModalMembers } from 'src/modals';
 
 export const AdminPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { adminName, eventsNext, eventsPast, errorMessage, isExit } = useAppSelector(getAdminSelector);
-  const modalAction = useAppSelector(getAdminModalActionSelector);
+  const modalAction = useAppSelector(getModalActionSelector);
+  const modalErrorMessage = useAppSelector(getModalErrorMessageSelector);
   const accessKey = localStorage.getItem('accessKey');
 
   useEffect(() => {
@@ -38,9 +39,8 @@ export const AdminPage = () => {
     return (adminName && allFaculties.includes(adminName)) ? 'Студ. совет ' : '';
   }
 
-  const clearMessages = () => {
-    dispatch(clearAdminMessages())
-  }
+  const clearMessagesAdmin = () => dispatch(clearAdminMessages());
+  const clearMessagesModal = () => dispatch(clearModalMessages());
 
   return (
     <>
@@ -57,8 +57,10 @@ export const AdminPage = () => {
         </section>
       </div>
       <Footer/>
-      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessages} />}
-      {modalAction === 'members' && <ModalMembers />}
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessagesAdmin} />}
+      {modalErrorMessage && <Notification type='error' message={modalErrorMessage} clearMessage={clearMessagesModal} />}
+      {modalAction === 'members' && <ModalMembers />} 
+      {/* {modalAction === 'create' && <ModalEvent />} */}
       {/* 
       <ModalEvent isOpen={isOpenModalEvent} closeModal={closeModal} action='add' />
       <ModalEvent event={eventExample} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />

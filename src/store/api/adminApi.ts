@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ISignInForm, IShortEvent, ITeam } from "src/interface";
+import { ISignInForm, IShortEvent } from "src/interface";
 import { endpoints } from "./endpoints";
 
 export interface SignInResponse {
@@ -28,6 +28,3 @@ export const getEventsNextFacultyApi = (faculty: string | null): Promise<IShortE
 
 export const getEventsPastFacultyApi = (faculty: string | null): Promise<IShortEvent[]> =>
   axios.get(endpoints.eventsPast, {params: { faculty }}).then(({ data }) => data);
-
-export const getEventMembersApi = (eventId: number): Promise<ITeam[]> =>
-  axios.get(endpoints.members, {params: { eventId }}).then(({ data }) => data);

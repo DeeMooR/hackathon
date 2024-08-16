@@ -1,20 +1,19 @@
 import React, { FC, useEffect } from 'react'
-import { clearAdminModal, getAdminModalSelector, getAdminSelector, getEventMembersAction, useAppDispatch, useAppSelector } from 'src/store';
+import { clearModal, getModalSelector, getEventMembersAction, useAppDispatch, useAppSelector } from 'src/store';
 import { ModalTemplate } from 'src/modals';
 import './ModalMembers.css';
 import { Loading } from 'src/components';
 
 export const ModalMembers = () => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector(getAdminSelector);
-  const { eventId, teams, members: onlyMembers } = useAppSelector(getAdminModalSelector);
+  const { eventId, teams, members, isLoading } = useAppSelector(getModalSelector);
  
   useEffect(() => {
     if (eventId) dispatch(getEventMembersAction(eventId));
   }, []);
 
   const closeModal = () => {
-    dispatch(clearAdminModal());
+    dispatch(clearModal());
   }
 
   return (
@@ -40,11 +39,11 @@ export const ModalMembers = () => {
               </ol>
             </div>
           }
-          {!!onlyMembers.length && 
+          {!!members.length && 
           <div className="modalMembers__category">
            <h3 className='category__title'>Участники без команд:</h3>
             <ol className="category__members">
-              {onlyMembers.map(({groupNumber, name, surname}) =>
+              {members.map(({groupNumber, name, surname}) =>
                 <li className='category__member'>{groupNumber} {surname} {name}</li>
               )}
             </ol>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { clearAdminName, setAdminModalAction, useAppDispatch } from 'src/store';
+import { clearAdminName, setModalAction, useAppDispatch } from 'src/store';
 import { logoIcon } from 'src/assets';
 import './HeaderAdmin.css'
 
@@ -18,7 +18,7 @@ export const HeaderAdmin = () => {
   }, []);
 
   const showModalCreate = () => {
-    dispatch(setAdminModalAction('create'));
+    dispatch(setModalAction('create'));
   }
 
   const clickBack = () => {
