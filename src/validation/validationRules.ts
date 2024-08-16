@@ -7,7 +7,7 @@ import {
 } from './regExp';
 
 // поле (необязательное)
-export const fieldValidation = Yup.string();
+export const fieldValidation = Yup.string().nullable();
 
 // поле (обязательное)
 export const fieldRequiredValidation = Yup.string().required('Обязательное поле');
@@ -36,3 +36,12 @@ export const loginRequiredValidation = Yup.string()
 export const passwordRequiredValidation = Yup.string()
   .required('Обязательное поле')
   .matches(NO_SPACE_PATTERN, 'Некорректный пароль');
+
+// дата (обязательное)
+export const dateRequiredValidation = Yup.date()
+  .typeError('Неверный формат даты') 
+  .required('Обязательное поле');
+
+// export const dateRequiredValidation = Yup.mixed()
+//   .test('is-date', 'Неверный формат даты', (value) => value instanceof Date && !isNaN(value.getTime()))
+//   .required('Обязательное поле');

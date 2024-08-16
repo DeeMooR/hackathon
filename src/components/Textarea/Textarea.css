@@ -1,43 +1,43 @@
-.inputBlock {
+.textareaBlock {
   position: relative;
 }
-.inputBlock .showWarning {
+.textareaBlock .showWarning {
   border: 2px solid var(--warning);
 }
-.inputBlock .error {
+.textareaBlock .error {
   position: absolute;
   display: flex;
   align-items: center;
   margin: 4px 0 0 3px;
 }
-.inputBlock .error img {
+.textareaBlock .error img {
   width: 24px;
   height: 24px;
 }
-.inputBlock .error span {
+.textareaBlock .error span {
   font-size: 12px;
   margin: 0 0 0 10px;
 }
 
 @media (max-width: 599.98px) {
-  .inputBlock .error {
+  .textareaBlock .error {
     margin: 1px 0 0 3px;
   }
-  .inputBlock .error span {
+  .textareaBlock .error span {
     line-height: 0.8;
     font-size: 11px;
   }
 }
 @media (max-width: 599.98px) {
-  .inputBlock .error span {
+  .textareaBlock .error span {
     margin: 0 0 0 3px;
   }
 }
 @media (max-width: 399.98px) {
-  .inputBlock .error img {
+  .textareaBlock .error img {
     display: none;
   }
-  .inputBlock .error span {
+  .textareaBlock .error span {
     margin: 0;
   }
 }

@@ -1,4 +1,4 @@
-.inputBlock {
+.textareaBlock {
   position: relative;
   .showWarning {
     border: 2px solid var(--warning);
@@ -20,7 +20,7 @@
 }
 
 @media (max-width: 599.98px) {
-  .inputBlock {
+  .textareaBlock {
     .error {
       margin: 1px 0 0 3px;
       span {
@@ -32,7 +32,7 @@
 }
 
 @media (max-width: 599.98px) {
-  .inputBlock {
+  .textareaBlock {
     .error {
       span {
         margin: 0 0 0 3px;
@@ -42,7 +42,7 @@
 }
 
 @media (max-width: 399.98px) {
-  .inputBlock {
+  .textareaBlock {
     .error {
       img {
         display: none;

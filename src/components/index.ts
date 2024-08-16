@@ -21,3 +21,5 @@ export * from './Notification/Notification';
 export * from './Input/Input';
 export * from './MembersRegistration/MembersRegistration';
 export * from './EventsAdmin/EventsAdmin';
+export * from './Textarea/Textarea';
+export * from './TextTextarea/TextTextarea';

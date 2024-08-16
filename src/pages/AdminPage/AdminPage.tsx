@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getModalActionSelector, getModalErrorMessageSelector, clearModalMessages } from 'src/store'
+import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getModalActionSelector, getModalErrorMessageSelector, clearModalMessages, getModalSuccessMessageSelector } from 'src/store'
 import { HeaderAdmin, Footer, Notification, EventsAdmin } from 'src/components';
 import { allFaculties } from 'src/helpers'
 import './AdminPage.css'
@@ -12,6 +12,7 @@ export const AdminPage = () => {
   const { adminName, eventsNext, eventsPast, errorMessage, isExit } = useAppSelector(getAdminSelector);
   const modalAction = useAppSelector(getModalActionSelector);
   const modalErrorMessage = useAppSelector(getModalErrorMessageSelector);
+  const modalSuccessMessage = useAppSelector(getModalSuccessMessageSelector);
   const accessKey = localStorage.getItem('accessKey');
 
   useEffect(() => {
@@ -59,8 +60,10 @@ export const AdminPage = () => {
       <Footer/>
       {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessagesAdmin} />}
       {modalErrorMessage && <Notification type='error' message={modalErrorMessage} clearMessage={clearMessagesModal} />}
+      {modalSuccessMessage && <Notification type='success' message={modalSuccessMessage} clearMessage={clearMessagesModal} />}
       {modalAction === 'members' && <ModalMembers />} 
-      {/* {modalAction === 'create' && <ModalEvent />} */}
+      {modalAction === 'create' && <ModalEvent />}
+      {modalAction === 'change' && <ModalEvent />}
       {/* 
       <ModalEvent isOpen={isOpenModalEvent} closeModal={closeModal} action='add' />
       <ModalEvent event={eventExample} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />

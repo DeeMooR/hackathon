@@ -6,9 +6,6 @@
 .modalEvent h2 {
   margin: 0;
 }
-.modalEvent .customTextarea h3 {
-  margin: 0 0 10px 0;
-}
 .modalEvent .modalEvent__select-box {
   display: flex;
   flex-direction: column;

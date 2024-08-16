@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearEventMessages, getEventAction, getEventItemSelector, getEventSelector, setEventErrorLoading, setMainErrorLoadingEventMessage, useAppDispatch, useAppSelector } from 'src/store';
 import { Header, Footer, Newsletter, IconText, Notification, MembersRegistration, Loading } from 'src/components';
-import { formatDate } from 'src/helpers'
+import { eventPlug, formatDate } from 'src/helpers'
 import { calenderIcon, locationIcon, timeIcon, dotsIcon } from 'src/assets';
 import { BackgroundImage, Container } from 'src/styled'
-import { EventPageData, eventPlug } from './config';
+import { EventPageData } from './config';
 import './EventPage.css'
 
 export const EventPage = () => {

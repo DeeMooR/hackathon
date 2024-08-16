@@ -1,49 +1,61 @@
-import React, { FC, useEffect, useState } from 'react'
-import { getAdminSelector, useAppDispatch, useAppSelector } from 'src/store';
-import { TextInput, FilterOptions, RadioOptions } from 'src/components';
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form';
+import { clearModal, getAdminSelector, getModalActionSelector, getModalEventAction, getModalEventSelector, getModalSelector, setModalAction, useAppDispatch, useAppSelector } from 'src/store';
+import { TextInput, FilterOptions, RadioOptions, TextTextarea, Loading } from 'src/components';
+import { ModalEventData, ModalEventFuncAction, transformEventToDefaultValues } from './config';
+import { allEventsTypes, allEventsVisits, allFaculties, eventPlug } from 'src/helpers';
 import { ModalTemplate } from 'src/modals';
-import { allFaculties, isPast } from 'src/helpers';
-import { IAddEvent, IEvent } from 'src/interface';
-import { addEventAPI, updateEventAPI } from 'src/store/requests';
+import { ICreateEventForm } from 'src/interface';
 import './ModalEvent.css'
 
-interface IModalEvent {
-  isOpen: boolean,
-  action: string,
-  event?: IEvent,
-  closeModal: () => void,
-  clickShowDelete?: (id: number) => void,
-}
-
-export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, clickShowDelete }) => {
+// при action: 'create' | 'change'
+export const ModalEvent = () => {
   const dispatch = useAppDispatch();
-  const { adminName } = useAppSelector(getAdminSelector);
+  //@ts-ignore
+  const action: 'create' | 'change' = useAppSelector(getModalActionSelector);
+  const event = useAppSelector(getModalEventSelector) || eventPlug;
+  const { eventId, isLoading } = useAppSelector(getModalSelector);
+  const { adminName } = useAppSelector(getAdminSelector); 
+  const { buttonText, wordTitle } = ModalEventData[action];
+  const faculties = [...allFaculties, 'Все факультеты'];
+
   const [selected, setSelected] = useState<string[]>([adminName]);
-  const [selectedRadio1, setSelectedRadio1] = useState('');
-  const [selectedRadio2, setSelectedRadio2] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedVisit, setSelectedVisit] = useState('');
 
-  const options = [...allFaculties, 'Все факультеты'];
-  const optionsRadio1 = ['Культурное', 'Образовательное', 'Спортивное'];
-  const optionsRadio2 = ['Свободный вход', 'С регистрацией'];
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ICreateEventForm>({
+    mode: 'onChange',
+    // resolver: yupResolver(createEventScheme),
+    defaultValues: transformEventToDefaultValues(event),
+  });
+  
+  useEffect(() => {
+    if (eventId) dispatch(getModalEventAction(eventId));
+  }, [eventId]);
 
-  const word_title = (action === 'add') ? 'Добавление' : 'Редактирование';
-  const word_button = (action === 'add') ? 'Добавить' : 'Редактировать';
+  const closeModal = () => {
+    dispatch(clearModal());
+  }
 
   const onClickRadio1 = (value: string) => {
-    setSelectedRadio1(value);
+    setSelectedType(value);
   }
   const onClickRadio2 = (value: string) => {
-    setSelectedRadio2(value);
+    setSelectedVisit(value);
   }
   const onClickOption = (value: string) => {
     if (value === adminName) return;
     if (value === 'Все факультеты') {
-      if (!selected.includes(value)) setSelected(options);
+      if (!selected.includes(value)) setSelected(faculties);
       else setSelected([adminName]);
       return;
     }
     if (selected.length == 6 && !selected.includes(value)) {
-      if (!selected.includes('Все факультеты')) setSelected(options);
+      if (!selected.includes('Все факультеты')) setSelected(faculties);
       return;
     }
     if (selected.length == 8 && selected.includes(value) && value !== 'Все факультеты') {
@@ -57,104 +69,104 @@ export const ModalEvent:FC<IModalEvent> = ({ isOpen, action, event, closeModal, 
     setSelected(newSelected);
   }
 
-  const [photo, setPhoto] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [time, setTime] = useState('');
-  const [date, setDate] = useState<Date>(new Date());
-  const [location, setLocation] = useState('');
-
-  const [results, setResults] = useState('');
-  const [archive, setArchive] = useState('');
-
-  useEffect(() => {
-    if (event) {
-      setSelected(event?.faculties);
-      setSelectedRadio1(event?.type);
-      setSelectedRadio2(event?.visit);
-      setPhoto(event?.photo);
-      setTitle(event?.title);
-      setDescription(event?.description);
-      setTime(event?.time);
-      setDate(event?.date);
-      setLocation(event?.location);
-      setResults('asdas');
-      setArchive('asdasd');
-    }
-  }, [event])
-
-  const addEvent = () => {
-    const obj: IAddEvent = {
-      photo: photo,
-      title: title,
-      date: date,
-      time: time,
-      location: location,
+  const clickSend = (data: ICreateEventForm) => {
+    const body = {
+      ...data,
       faculties: selected,
-      description: description,
-      type: selectedRadio1,
-      visit: 'С регистрацией'
+      type: selectedType,
+      visit: selectedVisit
     }
-    const hasEmpty = Object.values(obj).some(value => value === '');
-    if (!hasEmpty) dispatch(addEventAPI(obj));
+    const func = ModalEventFuncAction[action](body);
+    dispatch(func);
   }
-  const changeEvent = () => {
-    if (event) {
-      const obj: IAddEvent = {
-        photo: photo,
-        title: title,
-        date: date,
-        time: time,
-        location: location,
-        faculties: selected,
-        description: description,
-        type: selectedRadio1,
-        visit: 'С регистрацией',
-        results: results,
-        archive: archive,
-      }
-      dispatch(updateEventAPI(obj));
-    }
+
+  const clickDeleteEvent = () => {
+    dispatch(setModalAction('delete'));
   }
 
   return (
       <ModalTemplate closeModal={closeModal} positionUp>
-        <div className="modalEvent">
-          <h2><span>{word_title}</span> мероприятия</h2>
-          <TextInput text='Обложка' type='text' value={photo} onChange={(v:string) => setPhoto(v)} placeholder='Вставьте ссылку на изображение'/>
-          <TextInput text='Название' type='text' value={title} onChange={(v:string) => setTitle(v)}/>
-          <div className="customTextarea">
-            <h3>Описание</h3>
-            <textarea value={description} onChange={(e: any) => setDescription(e.target.value)}></textarea>
-          </div>
-          {event?.date && isPast(event?.date) &&
+        <form className="modalEvent" onSubmit={handleSubmit(clickSend)}>
+          <h2><span>{wordTitle}</span> мероприятия</h2>
+          {isLoading ? <Loading /> : 
           <>
-            <div className="customTextarea">
-              <h3>Результаты</h3>
-              <textarea value={results} onChange={(e: any) => setResults(e.target.value)}></textarea>
+            <TextInput 
+              text='Обложка' 
+              id='photo'
+              register={register}
+              type='text' 
+              placeholder='Вставьте ссылку на изображение'
+              error={errors.photo?.message}
+            />
+            <TextInput 
+              text='Название' 
+              id='title'
+              register={register}
+              type='text' 
+              error={errors.title?.message}
+            />
+            <TextTextarea 
+              text='Описание' 
+              id='description'
+              register={register}
+              error={errors.description?.message}
+            />
+            {event.page === 'past' &&
+            <>
+              <TextTextarea 
+                text='Результаты' 
+                id='results'
+                register={register}
+                error={errors.results?.message}
+              />
+              <TextInput 
+                text='Архив с фото' 
+                id='archive'
+                register={register}
+                type='text' 
+                error={errors.archive?.message}
+              />
+            </>
+            }
+            <TextInput 
+              text='Время' 
+              id='time'
+              register={register}
+              type='time' 
+              error={errors.time?.message}
+            />
+            <TextInput 
+              text='Дата' 
+              id='date'
+              register={register}
+              type='date' 
+              error={errors.date?.message}
+            />
+            <TextInput 
+              text='Место' 
+              id='location'
+              register={register}
+              type='text' 
+              error={errors.location?.message}
+            />
+        
+            <div className="modalEvent__select-box">
+              <h3>Факультеты</h3>
+              <FilterOptions options={faculties} selected={selected} onClickOption={() => onClickOption}/>
             </div>
-            <TextInput text='Архив с фото' type='text' value={archive} onChange={(v:string) => setArchive(v)}/>
+            <div className="modalEvent__select-box">
+              <h3>Вид мероприятия</h3>
+              <RadioOptions name='type' options={allEventsTypes} selected={selectedType} onClickOption={onClickRadio1}/>
+            </div>
+            <div className="modalEvent__select-box">
+              <h3>Тип посещения</h3>
+              <RadioOptions name='visit' options={allEventsVisits} selected={selectedVisit} onClickOption={onClickRadio2}/>
+            </div>
+            <button className='button'>{buttonText}</button>
           </>
           }
-          <TextInput text='Время' type='time' value={time} onChange={(v:string) => setTime(v)}/>
-          <TextInput text='Дата' type='date' value={date} onChange={(v:Date) => setDate(v)}/>
-          <TextInput text='Место' type='text' value={location} onChange={(v:string) => setLocation(v)}/>
-      
-          <div className="modalEvent__select-box">
-            <h3>Факультеты</h3>
-            <FilterOptions options={options} selected={selected} onClickOption={() => onClickOption}/>
-          </div>
-          <div className="modalEvent__select-box">
-            <h3>Вид мероприятия</h3>
-            <RadioOptions name='radio1' options={optionsRadio1} selected={selectedRadio1} onClickOption={onClickRadio1}/>
-          </div>
-          <div className="modalEvent__select-box">
-            <h3>Тип посещения</h3>
-            <RadioOptions name='radio2' options={optionsRadio2} selected={selectedRadio2} onClickOption={onClickRadio2}/>
-          </div>
-          <button className='button' onClick={action === 'add' ? addEvent : changeEvent}>{word_button} мероприятие</button>
-        </div>
-        {action === 'change' && <p className='modalEvent__delete' onClick={() => clickShowDelete?.(event?.id || -1)}>Удалить мероприятие</p>}
+        </form>
+        {action === 'change' && <p className='modalEvent__delete' onClick={clickDeleteEvent}>Удалить мероприятие</p>}
       </ModalTemplate>
   )
 }

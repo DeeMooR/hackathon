@@ -38,20 +38,3 @@ export const EventPageNextVisit: { [visit: string]: IEventPageNextVisit } = {
     class: 'registration'
   },
 }
-
-// заглушка для ts. Данные из объекта не будет использоваться
-export const eventPlug: IEvent =  {
-  id: 0,
-  photo: '',
-  title: '',
-  date: new Date(),
-  time: '',
-  location: '',
-  faculties: [],
-  description: '',
-  archive: '',
-  results: '',
-  type: '',
-  visit: 'Свободный вход',
-  page: 'next'
-}

@@ -1,3 +1,5 @@
+import { allEventsTypes, allEventsVisits } from "./helpers";
+
 export interface IContact {
   name: string,
   inst: string,
@@ -13,14 +15,16 @@ export interface IEvent {
   location: string,
   faculties: string[],
   description: string,
-  type: string,
-  visit: 'Свободный вход' | 'С регистрацией',
-  archive?: string,
-  results?: string,
+  type: typeof allEventsTypes[number],
+  visit: typeof allEventsVisits[number],
+  archive: string | null,
+  results: string | null,
   page: 'next' | 'past',
 }
 
-export interface IAddEvent extends Omit<IEvent, 'id' | 'page'> {}
+export interface ICreateEvent extends Omit<IEvent, 'id' | 'page'> {}
+
+export interface ICreateEventForm extends Omit<IEvent, 'id' | 'page' | 'type' | 'visit' | 'faculties'> {}
 
 export interface IShortEvent extends Omit<IEvent, 'description' | 'type' | 'archive' | 'results' | 'page'> {}
 
