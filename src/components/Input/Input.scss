@@ -3,6 +3,12 @@
   .showWarning {
     border: 2px solid var(--warning);
   }
+  .addPadding {
+    padding: 0 25px 0 20px;
+    &::marker {
+      cursor: pointer;
+    }
+  }
   .error {
     position: absolute;
     display: flex;

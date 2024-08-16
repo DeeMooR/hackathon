@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { getAdminSelector, useAppSelector } from 'src/store'
-import { Loading, MiniCard, ShowLoading } from 'src/components'
+import { Loading, MiniCard, Wait } from 'src/components'
 import { IShortEvent } from 'src/interface'
 import { EventsAdminData } from './config'
 import './EventsAdmin.css'
@@ -11,14 +11,15 @@ interface IEventsAdmin {
 }
 
 export const EventsAdmin:FC<IEventsAdmin> = ({ eventsShow, type }) => {
-  const { isLoading } = useAppSelector(getAdminSelector);
-  const showLoading = ShowLoading(isLoading);
+  const { eventLoading } = useAppSelector(getAdminSelector);
+  const isUpdate = eventLoading === type || eventLoading === 'all';
+  const wait = Wait(isUpdate);
   const { title, emptyText } = EventsAdminData[type];
 
   return (
     <section className='eventsAdmin'>
       <h2>{title}</h2>
-      {showLoading ? <Loading /> : (
+      {wait ? <Loading /> : (
         eventsShow.length ? (
           <div className="eventsAdmin__events">
             {eventsShow.map((event: IShortEvent, i: number) =>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getModalActionSelector, getModalErrorMessageSelector, clearModalMessages, getModalSuccessMessageSelector } from 'src/store'
+import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getAllEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getModalActionSelector, getModalErrorMessageSelector, clearModalMessages, getModalSuccessMessageSelector } from 'src/store'
 import { HeaderAdmin, Footer, Notification, EventsAdmin } from 'src/components';
 import { allFaculties } from 'src/helpers'
 import './AdminPage.css'
@@ -26,7 +26,7 @@ export const AdminPage = () => {
     if (accessKey) {
       if (adminName) {
         const faculty = allFaculties.includes(adminName) ? adminName : null;
-        dispatch(getEventsFacultyAction(faculty));
+        dispatch(getAllEventsFacultyAction(faculty));
       } else {
         dispatch(checkAuthAction(accessKey));
       }

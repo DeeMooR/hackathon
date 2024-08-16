@@ -13,8 +13,6 @@ interface ITextInput {
 }
 
 export const TextInput:FC<ITextInput> = ({text, id, type, register, placeholder, error}) => {
-  const inputStyle = (type === 'date' || type === 'time') ? 'input_padding' : '';
-
   return (
     <div className='textInput'>
       <h3>{text}</h3>
@@ -23,7 +21,6 @@ export const TextInput:FC<ITextInput> = ({text, id, type, register, placeholder,
         register={register}
         type={type}
         placeholder={placeholder}
-        className={inputStyle} 
         error={error}
       />
     </div>

@@ -34,6 +34,7 @@ export interface adminState {
   adminName: string,
   eventsNext: IShortEvent[],
   eventsPast: IShortEvent[],
+  eventLoading: 'next' | 'past' | 'all' | null;
   isExit: boolean,
   isLoading: boolean,
   successMessage: string | null,

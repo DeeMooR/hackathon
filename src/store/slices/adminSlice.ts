@@ -1,15 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { checkAuthAction, getEventsFacultyAction, signInAction } from '../actions';
+import { checkAuthAction, getAllEventsFacultyAction, getNextEventsFacultyAction, getPastEventsFacultyAction, signInAction } from '../actions';
 import { adminState } from '../interface';
 
 const initialState: adminState = {
   adminName: '',
   eventsNext: [],
   eventsPast: [],
+  eventLoading: null,
   isExit: false,
   isLoading: false,
   successMessage: null,
   errorMessage: null,
+}
+
+const setEventLoading = (state: adminState, status: 'next' | 'past' | 'all') => {
+  state.eventLoading = status;
+  state.successMessage = null;
+  state.errorMessage = null;
 }
 
 const setLoading = (state: adminState) => {
@@ -38,15 +45,41 @@ const adminSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getEventsFacultyAction.pending, setLoading)
-      .addCase(getEventsFacultyAction.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+      .addCase(getAllEventsFacultyAction.pending, (state) => {
+        setEventLoading(state, 'all');
+      })
+      .addCase(getAllEventsFacultyAction.fulfilled, (state, { payload }) => {
+        state.eventLoading = null;
         state.eventsNext = payload.eventsNext;
         state.eventsPast = payload.eventsPast;
       })
-      .addCase(getEventsFacultyAction.rejected, (state) => {
-        state.isLoading = false;
-        state.errorMessage = 'Ошибка при получении списка мероприятий';
+      .addCase(getAllEventsFacultyAction.rejected, (state) => {
+        state.eventLoading = null;
+        state.errorMessage = 'Ошибка загрузки списка мероприятий';
+      })
+
+      .addCase(getNextEventsFacultyAction.pending, (state) => {
+        setEventLoading(state, 'next');
+      })
+      .addCase(getNextEventsFacultyAction.fulfilled, (state, { payload }) => {
+        state.eventLoading = null;
+        state.eventsNext = payload;
+      })
+      .addCase(getNextEventsFacultyAction.rejected, (state) => {
+        state.eventLoading = null;
+        state.errorMessage = 'Ошибка загрузки ближайших мероприятий';
+      })
+
+      .addCase(getPastEventsFacultyAction.pending, (state) => {
+        setEventLoading(state, 'past');
+      })
+      .addCase(getPastEventsFacultyAction.fulfilled, (state, { payload }) => {
+        state.eventLoading = null;
+        state.eventsPast = payload;
+      })
+      .addCase(getPastEventsFacultyAction.rejected, (state) => {
+        state.eventLoading = null;
+        state.errorMessage = 'Ошибка загрузки прошедших мероприятий';
       })
 
       .addCase(signInAction.pending, setLoading)

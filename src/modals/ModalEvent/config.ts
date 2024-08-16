@@ -6,6 +6,12 @@ interface IModalEventData {
   buttonText: string,
 }
 
+interface IModalEventFunc {
+  body: ICreateEvent,
+  page: 'next' | 'past',
+  faculty: string | null,
+}
+
 export const ModalEventData: { [action: string]: IModalEventData } = {
   create: {
     wordTitle: 'Добавление',
@@ -18,8 +24,8 @@ export const ModalEventData: { [action: string]: IModalEventData } = {
 };
 
 export const ModalEventFuncAction = {
-  create: (body: ICreateEvent) => createEventAction(body),
-  change: (body: ICreateEvent) => changeEventAction(body)
+  create: (obj: IModalEventFunc) => createEventAction(obj),
+  change: (obj: IModalEventFunc) => changeEventAction(obj)
 };
   
 

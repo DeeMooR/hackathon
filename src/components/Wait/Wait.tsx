@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const ShowLoading = (isLoading: boolean, delay: number = 50) => {
+export const Wait = (isLoading: boolean, delay: number = 50) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {

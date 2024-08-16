@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { UseFormRegister } from 'react-hook-form';
+import cn from 'classnames';
 import { warningIcon } from 'src/assets';
 import './Input.css'
 
@@ -13,7 +14,10 @@ interface IInput {
 }
 
 export const Input:FC<IInput> = ({id, type, placeholder, className, register, error}) => {
-  const inputStyle = `${error ? 'showWarning' : ''}`
+  const inputStyle = cn({
+    showWarning: !!error,
+    addPadding: type === 'date' || type === 'time',
+  });
   
   return (
     <div className={`inputBlock ${className}`}>

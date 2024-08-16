@@ -15,7 +15,7 @@ export * from './Tab/Tab';
 export * from './TextInput/TextInput';
 export * from './ScrollToTop/ScrollToTop';
 export * from './Loading/Loading';
-export * from './ShowLoading/ShowLoading';
+export * from './Wait/Wait';
 export * from './EventsTop/EventsTop';
 export * from './Notification/Notification';
 export * from './Input/Input';

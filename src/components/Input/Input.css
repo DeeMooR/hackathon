@@ -4,6 +4,12 @@
 .inputBlock .showWarning {
   border: 2px solid var(--warning);
 }
+.inputBlock .addPadding {
+  padding: 0 25px 0 20px;
+}
+.inputBlock .addPadding::marker {
+  cursor: pointer;
+}
 .inputBlock .error {
   position: absolute;
   display: flex;

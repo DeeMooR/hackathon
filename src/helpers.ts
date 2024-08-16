@@ -1,5 +1,5 @@
 import { IContact, IEvent } from "./interface";
-import { getEventsNextAction, getEventsPastAction } from "./store";
+import { getEventsNextAction, getEventsPastAction, getNextEventsFacultyAction, getPastEventsFacultyAction } from "./store";
 
 export const contacts: IContact[] = [
   {
@@ -95,7 +95,7 @@ export const isPast = (date: Date) => {
   return false;
 }
 
-export const ActionGetEvents: { [type: string]: any } = {
+export const ActionGetEvents = {
   next: getEventsNextAction(),
   past: getEventsPastAction(),
 };
@@ -113,6 +113,6 @@ export const eventPlug: IEvent =  {
   archive: '',
   results: '',
   type: '',
-  visit: 'Свободный вход',
+  visit: '',
   page: 'next'
 }

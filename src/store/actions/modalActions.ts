@@ -2,6 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ICreateEvent, IEvent, ITeam } from "src/interface";
 import { changeEventApi, createEventApi, getEventMembersApi, getModalEventApi } from "../api";
 import { RootState } from "../hooks";
+import { ActionGetEventsFaculty } from "../config";
+
+interface IChangeEventAction {
+  body: ICreateEvent,
+  page: 'next' | 'past',
+  faculty: string | null,
+}
 
 export const getModalEventAction = createAsyncThunk<IEvent, number>(
   'modal/getModalEventAction',
@@ -19,19 +26,21 @@ export const getEventMembersAction = createAsyncThunk<ITeam[], number>(
   }
 )
 
-export const createEventAction = createAsyncThunk<void, ICreateEvent>(
+export const createEventAction = createAsyncThunk<void, IChangeEventAction>(
   'modal/createEventAction',
-  async (body) => {
-    const response = await createEventApi(body);
-    return response;
+  async ({body, page, faculty}, { dispatch }) => {
+    await createEventApi(body);
+    const func = ActionGetEventsFaculty[page](faculty);
+    dispatch(func);
   }
 )
 
-export const changeEventAction = createAsyncThunk<void, ICreateEvent, { state: RootState }>(
+export const changeEventAction = createAsyncThunk<void, IChangeEventAction, { state: RootState }>(
   'modal/changeEventAction',
-  async (body, { getState }) => {
+  async ({body, page, faculty}, { getState, dispatch }) => {
     const { eventId } = getState().modal;
-    const response = await changeEventApi(body, eventId);
-    return response;
+    await changeEventApi(body, eventId);
+    const func = ActionGetEventsFaculty[page](faculty);
+    dispatch(func);
   }
 )

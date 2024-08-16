@@ -65,26 +65,20 @@ const modalSlice = createSlice({
         const errorMessage = 'Ошибка загрузки участников мероприятия';
         Object.assign(state, {...initialState, errorMessage});
       })
-
-      .addCase(createEventAction.pending, setLoading)
+   
       .addCase(createEventAction.fulfilled, (state) => {
-        state.isLoading = false;
         const successMessage = 'Мероприятие успешно создано';
         Object.assign(state, {...initialState, successMessage});
       })
       .addCase(createEventAction.rejected, (state) => {
-        state.isLoading = false;
         state.errorMessage = 'Ошибка при создании мероприятия';
       })
-
-      .addCase(changeEventAction.pending, setLoading)
+    
       .addCase(changeEventAction.fulfilled, (state) => {
-        state.isLoading = false;
         const successMessage = 'Мероприятие успешно обновлено';
         Object.assign(state, {...initialState, successMessage});
       })
       .addCase(changeEventAction.rejected, (state) => {
-        state.isLoading = false;
         state.errorMessage = 'Ошибка при обновлении мероприятия';
       })
   },

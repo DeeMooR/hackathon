@@ -7,12 +7,28 @@ interface IResponseEvents {
   eventsPast: IShortEvent[]
 }
 
-export const getEventsFacultyAction = createAsyncThunk<IResponseEvents, string | null>(
-  'admin/getEventsFacultyAction',
+export const getAllEventsFacultyAction = createAsyncThunk<IResponseEvents, string | null>(
+  'admin/getAllEventsFacultyAction',
   async (faculty) => {
     const eventsNext = await getEventsNextFacultyApi(faculty);
     const eventsPast = await getEventsPastFacultyApi(faculty);
     return {eventsNext, eventsPast};
+  }
+)
+
+export const getNextEventsFacultyAction = createAsyncThunk<IShortEvent[], string | null>(
+  'admin/getNextEventsFacultyAction',
+  async (faculty) => {
+    const response = await getEventsNextFacultyApi(faculty);
+    return response;
+  }
+)
+
+export const getPastEventsFacultyAction = createAsyncThunk<IShortEvent[], string | null>(
+  'admin/getPastEventsFacultyAction',
+  async (faculty) => {
+    const response = await getEventsPastFacultyApi(faculty);
+    return response;
   }
 )
 
@@ -29,6 +45,6 @@ export const checkAuthAction = createAsyncThunk<string, string>(
   async (accessKey) => {
     const body = { accessKey };
     const response = await checkAuthApi(body);
-    return response.name;
+    return response;
   }
 )

@@ -7,10 +7,6 @@ export interface SignInResponse {
   accessKey: string,
 }
 
-export interface CheckAuthResponse {
-  name: string,
-}
-
 export interface CheckAuthPayload {
   accessKey: string,
 }
@@ -20,7 +16,7 @@ const headers = { 'Content-Type': 'application/json' };
 export const signInApi = (body: ISignInForm): Promise<SignInResponse> =>
   axios.post(endpoints.signIn, body, { headers }).then(({ data }) => data);
 
-export const checkAuthApi = (body: CheckAuthPayload): Promise<CheckAuthResponse> =>
+export const checkAuthApi = (body: CheckAuthPayload): Promise<string> =>
   axios.post(endpoints.checkAuth, body, { headers }).then(({ data }) => data);
 
 export const getEventsNextFacultyApi = (faculty: string | null): Promise<IShortEvent[]> =>

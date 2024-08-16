@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { clearModal, getAdminSelector, getModalActionSelector, getModalEventAction, getModalEventSelector, getModalSelector, setModalAction, useAppDispatch, useAppSelector } from 'src/store';
-import { TextInput, FilterOptions, RadioOptions, TextTextarea, Loading } from 'src/components';
+import { TextInput, FilterOptions, RadioOptions, TextTextarea, Loading, Wait } from 'src/components';
 import { ModalEventData, ModalEventFuncAction, transformEventToDefaultValues } from './config';
 import { allEventsTypes, allEventsVisits, allFaculties, eventPlug } from 'src/helpers';
 import { ModalTemplate } from 'src/modals';
@@ -13,10 +13,11 @@ export const ModalEvent = () => {
   const dispatch = useAppDispatch();
   //@ts-ignore
   const action: 'create' | 'change' = useAppSelector(getModalActionSelector);
-  const event = useAppSelector(getModalEventSelector) || eventPlug;
+  const event = useAppSelector(getModalEventSelector);
   const { eventId, isLoading } = useAppSelector(getModalSelector);
   const { adminName } = useAppSelector(getAdminSelector); 
   const { buttonText, wordTitle } = ModalEventData[action];
+  const faculty = allFaculties.includes(adminName) ? adminName : null;
   const faculties = [...allFaculties, 'Все факультеты'];
 
   const [selected, setSelected] = useState<string[]>([adminName]);
@@ -26,16 +27,20 @@ export const ModalEvent = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ICreateEventForm>({
     mode: 'onChange',
     // resolver: yupResolver(createEventScheme),
-    defaultValues: transformEventToDefaultValues(event),
   });
   
   useEffect(() => {
     if (eventId) dispatch(getModalEventAction(eventId));
   }, [eventId]);
+
+  useEffect(() => {
+    if (event) reset(transformEventToDefaultValues(event));
+  }, [event]);
 
   const closeModal = () => {
     dispatch(clearModal());
@@ -76,7 +81,9 @@ export const ModalEvent = () => {
       type: selectedType,
       visit: selectedVisit
     }
-    const func = ModalEventFuncAction[action](body);
+    const page = event?.page || 'next';
+    const obj = {body, page, faculty};
+    const func = ModalEventFuncAction[action](obj);
     dispatch(func);
   }
 
@@ -85,6 +92,8 @@ export const ModalEvent = () => {
   }
 
   return (
+  <>
+    {Wait(true) &&
       <ModalTemplate closeModal={closeModal} positionUp>
         <form className="modalEvent" onSubmit={handleSubmit(clickSend)}>
           <h2><span>{wordTitle}</span> мероприятия</h2>
@@ -111,7 +120,7 @@ export const ModalEvent = () => {
               register={register}
               error={errors.description?.message}
             />
-            {event.page === 'past' &&
+            {event?.page === 'past' &&
             <>
               <TextTextarea 
                 text='Результаты' 
@@ -163,10 +172,12 @@ export const ModalEvent = () => {
               <RadioOptions name='visit' options={allEventsVisits} selected={selectedVisit} onClickOption={onClickRadio2}/>
             </div>
             <button className='button'>{buttonText}</button>
+            {action === 'change' && <p className='modalEvent__delete' onClick={clickDeleteEvent}>Удалить мероприятие</p>}
           </>
           }
         </form>
-        {action === 'change' && <p className='modalEvent__delete' onClick={clickDeleteEvent}>Удалить мероприятие</p>}
       </ModalTemplate>
+    }
+  </>
   )
 }
