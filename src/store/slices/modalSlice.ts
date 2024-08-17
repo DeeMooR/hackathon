@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { changeEventAction, createEventAction, getEventMembersAction, getModalEventAction } from '../actions';
+import { changeEventAction, createEventAction, deleteEventAction, getEventMembersAction, getModalEventAction } from '../actions';
 import { modalState } from '../interface';
 
 const initialState: modalState = {
@@ -80,6 +80,14 @@ const modalSlice = createSlice({
       })
       .addCase(changeEventAction.rejected, (state) => {
         state.errorMessage = 'Ошибка при обновлении мероприятия';
+      })
+
+      .addCase(deleteEventAction.fulfilled, (state) => {
+        const successMessage = 'Мероприятие успешно удалено';
+        Object.assign(state, {...initialState, successMessage});
+      })
+      .addCase(deleteEventAction.rejected, (state) => {
+        state.errorMessage = 'Ошибка при удалении мероприятия';
       })
   },
 })

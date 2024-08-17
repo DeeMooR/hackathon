@@ -24,7 +24,7 @@
 }
 .modal__background .modal .modal__content {
   position: relative;
-  padding: 50px 60px 60px 60px;
+  padding: 50px 60px;
 }
 .modal__background .modal .modal__content .modal__cross {
   position: absolute;
@@ -44,12 +44,12 @@
 
 @media (max-width: 599.98px) {
   .modal__background .modal .modal__content {
-    padding: 40px 45px 45px 45px;
+    padding: 40px 45px;
   }
 }
 @media (max-width: 499.98px) {
   .modal__background .modal .modal__content {
-    padding: 40px 35px 35px 35px;
+    padding: 40px 35px;
   }
   .modal__background .modal .modal__content h2 {
     font-size: 28px;

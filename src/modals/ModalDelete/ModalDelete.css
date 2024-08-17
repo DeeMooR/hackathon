@@ -6,9 +6,13 @@
   gap: 20px;
 }
 .modalDelete .modalDelete__buttons .button-delete {
-  background: #dc1d1d;
+  background: var(--error);
+  border: 2px solid var(--error);
   color: var(--white);
-  border: none;
+}
+.modalDelete .modalDelete__buttons .button-delete:hover {
+  background: var(--delete);
+  border: 2px solid var(--delete);
 }
 .modalDelete .modalDelete__buttons .button-cancel {
   border: 2px solid var(--dark-main);

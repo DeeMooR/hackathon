@@ -4,7 +4,7 @@ import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, g
 import { HeaderAdmin, Footer, Notification, EventsAdmin } from 'src/components';
 import { allFaculties } from 'src/helpers'
 import './AdminPage.css'
-import { ModalEvent, ModalMembers } from 'src/modals';
+import { ModalDelete, ModalEvent, ModalMembers } from 'src/modals';
 
 export const AdminPage = () => {
   const dispatch = useAppDispatch();
@@ -64,13 +64,7 @@ export const AdminPage = () => {
       {modalAction === 'members' && <ModalMembers />} 
       {modalAction === 'create' && <ModalEvent />}
       {modalAction === 'change' && <ModalEvent />}
-      {/* 
-      <ModalEvent isOpen={isOpenModalEvent} closeModal={closeModal} action='add' />
-      <ModalEvent event={eventExample} isOpen={isOpenModalChangeEvent} closeModal={closeModal} action='change' clickShowDelete={clickShowDelete} />
-      <ModalMembers isOpen={isOpenModalMembers} closeModal={closeModal} />
-      <ModalDelete isOpen={isOpenModalDelete} closeModal={closeModal} deleteEvent={deleteEvent} />
-      <ModalMessage isOpen={true} closeModal={closeModal} isSuccess={false}/> 
-      */}
+      {modalAction === 'delete' && <ModalDelete />}
     </>
   )
 }

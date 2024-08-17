@@ -1,11 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ICreateEvent, IEvent, ITeam } from "src/interface";
-import { changeEventApi, createEventApi, getEventMembersApi, getModalEventApi } from "../api";
+import { changeEventApi, createEventApi, deleteEventApi, getEventMembersApi, getModalEventApi } from "../api";
 import { RootState } from "../hooks";
 import { ActionGetEventsFaculty } from "../config";
 
 interface IChangeEventAction {
   body: ICreateEvent,
+  page: 'next' | 'past',
+  faculty: string | null,
+}
+
+interface IDeleteEventAction {
   page: 'next' | 'past',
   faculty: string | null,
 }
@@ -40,6 +45,16 @@ export const changeEventAction = createAsyncThunk<void, IChangeEventAction, { st
   async ({body, page, faculty}, { getState, dispatch }) => {
     const { eventId } = getState().modal;
     await changeEventApi(body, eventId);
+    const func = ActionGetEventsFaculty[page](faculty);
+    dispatch(func);
+  }
+)
+
+export const deleteEventAction = createAsyncThunk<void, IDeleteEventAction, { state: RootState }>(
+  'modal/deleteEventAction',
+  async ({page, faculty}, { getState, dispatch }) => {
+    const { eventId } = getState().modal;
+    await deleteEventApi(eventId);
     const func = ActionGetEventsFaculty[page](faculty);
     dispatch(func);
   }

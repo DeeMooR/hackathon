@@ -15,4 +15,7 @@ export const createEventApi = (body: ICreateEvent): Promise<void> =>
 
 export const changeEventApi = (body: ICreateEvent, id: number | null): Promise<void> =>
   axios.put(endpoints.changeEvent, body, {headers, params: { id }});
+
+export const deleteEventApi = (id: number | null): Promise<void> =>
+  axios.delete(endpoints.deleteEvent, {headers, params: { id }});
   

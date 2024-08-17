@@ -6,9 +6,13 @@
     display: flex;
     gap: 20px;
     .button-delete {
-      background: #dc1d1d;
+      background: var(--error);
+      border: 2px solid var(--error);
       color: var(--white);
-      border: none;
+      &:hover {
+        background: var(--delete);
+        border: 2px solid var(--delete);
+      }
     }
     .button-cancel {
       border: 2px solid var(--dark-main);

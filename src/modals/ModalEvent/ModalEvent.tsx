@@ -47,10 +47,6 @@ export const ModalEvent = () => {
     }
   }, [event]);
 
-  const closeModal = () => {
-    dispatch(clearModal());
-  }
-
   const onClickOption = (value: string) => {
     changeSelectedFaculties({value, faculty, selected, setSelected});
   }
@@ -66,6 +62,10 @@ export const ModalEvent = () => {
     const obj = {body, page, faculty};
     const func = ModalEventFuncAction[action](obj);
     dispatch(func);
+  }
+
+  const closeModal = () => {
+    dispatch(clearModal());
   }
 
   const clickDeleteEvent = () => {
