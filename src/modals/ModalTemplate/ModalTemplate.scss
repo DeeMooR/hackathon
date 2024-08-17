@@ -22,7 +22,7 @@
     }
     .modal__content {
       position: relative;
-      padding: 50px 60px 60px 60px;
+      padding: 50px 60px;
       .modal__cross {
         position: absolute;
         padding: 10px;
@@ -46,7 +46,7 @@
   .modal__background {
     .modal {
       .modal__content {
-        padding: 40px 45px 45px 45px;
+        padding: 40px 45px;
       }
     }
   }
@@ -56,7 +56,7 @@
   .modal__background {
     .modal {
       .modal__content {
-        padding: 40px 35px 35px 35px;
+        padding: 40px 35px;
         h2 {
           font-size: 28px;
           margin: 0 0 20px 0;

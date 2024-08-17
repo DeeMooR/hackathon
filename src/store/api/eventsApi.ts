@@ -6,4 +6,4 @@ export const getEventsNextFilterApi = (body: IFilters): Promise<IShortEvent[]> =
   axios.post(endpoints.eventsNextFilter, body).then(({ data }) => data);
 
 export const getEventsPastFilterApi = (body: IFilters): Promise<IShortEvent[]> =>
-  axios.post(endpoints.eventsNextFilter, body).then(({ data }) => data);
+  axios.post(endpoints.eventsPastFilter, body).then(({ data }) => data);

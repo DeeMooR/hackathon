@@ -112,7 +112,7 @@ export const eventPlug: IEvent =  {
   description: '',
   archive: '',
   results: '',
-  type: '',
-  visit: '',
+  type: allEventsTypes[0],
+  visit: allEventsVisits[0],
   page: 'next'
 }
