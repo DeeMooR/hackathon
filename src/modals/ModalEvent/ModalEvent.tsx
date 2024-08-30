@@ -20,7 +20,7 @@ export const ModalEvent = () => {
   
   const faculty = allFaculties.includes(adminName) ? adminName : null;
   const faculties = [...allFaculties, 'Все факультеты'];
-  const [selected, setSelected] = useState<string[]>(['Все факультеты']);
+  const [selected, setSelected] = useState<string[]>(faculty ? [faculty] : ['Все факультеты']);
   const [type, setType] = useState(allEventsTypes[0]);
   const [visit, setVisit] = useState(allEventsVisits[0]);
 

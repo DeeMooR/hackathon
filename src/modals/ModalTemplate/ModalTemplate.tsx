@@ -10,26 +10,15 @@ interface IModalTemplate {
 
 export const ModalTemplate:FC<IModalTemplate> = ({ closeModal, children, positionUp }) => {
 
-  const clickClose = () => {
-    document.body.style.overflowY = 'auto';
-    document.body.style.padding = '0';
-    closeModal();
-  }
-
   const clickBackground = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) clickClose();
+    if (event.target === event.currentTarget) closeModal();
   };
-
-  useEffect(() => {
-    document.body.style.overflowY = 'hidden';
-    document.body.style.padding = '0 17px 0 0';
-  }, [])
 
   return (
     <div className='modal__background' onClick={(e) => clickBackground(e)}>
       <div className={`modal ${positionUp ? 'positionUp' : ''}`}>
         <div className="modal__content">
-          <img src={crossIcon} className='modal__cross' onClick={clickClose} alt="cross" />
+          <img src={crossIcon} className='modal__cross' onClick={closeModal} alt="cross" />
           {children}
         </div>
       </div>

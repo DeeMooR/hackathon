@@ -35,6 +35,7 @@ export const createEventAction = createAsyncThunk<void, IChangeEventAction>(
   'modal/createEventAction',
   async ({body, page, faculty}, { dispatch }) => {
     await createEventApi(body);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const func = ActionGetEventsFaculty[page](faculty);
     dispatch(func);
   }
@@ -45,6 +46,7 @@ export const changeEventAction = createAsyncThunk<void, IChangeEventAction, { st
   async ({body, page, faculty}, { getState, dispatch }) => {
     const { eventId } = getState().modal;
     await changeEventApi(body, eventId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const func = ActionGetEventsFaculty[page](faculty);
     dispatch(func);
   }
@@ -55,6 +57,7 @@ export const deleteEventAction = createAsyncThunk<void, IDeleteEventAction, { st
   async ({page, faculty}, { getState, dispatch }) => {
     const { eventId } = getState().modal;
     await deleteEventApi(eventId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const func = ActionGetEventsFaculty[page](faculty);
     dispatch(func);
   }

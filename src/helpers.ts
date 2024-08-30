@@ -116,3 +116,13 @@ export const eventPlug: IEvent =  {
   visit: allEventsVisits[0],
   page: 'next'
 }
+
+export const showScrollBar = () => {
+  document.body.style.overflowY = 'auto';
+  document.body.style.padding = '0';
+}
+
+export const hiddenScrollBar = () => {
+  document.body.style.overflowY = 'hidden';
+  document.body.style.padding = '0 17px 0 0';
+}

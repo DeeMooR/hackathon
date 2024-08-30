@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { clearAdminMessages, getAdminSelector, useAppDispatch, useAppSelector, getAllEventsFacultyAction, checkAuthAction, setAdminIsExit, setAdminErrorMessage, getModalActionSelector, getModalErrorMessageSelector, clearModalMessages, getModalSuccessMessageSelector } from 'src/store'
 import { HeaderAdmin, Footer, Notification, EventsAdmin } from 'src/components';
-import { allFaculties } from 'src/helpers'
+import { allFaculties, hiddenScrollBar, showScrollBar } from 'src/helpers'
 import './AdminPage.css'
 import { ModalDelete, ModalEvent, ModalMembers } from 'src/modals';
 
@@ -35,6 +35,11 @@ export const AdminPage = () => {
       navigate('/auth');
     }
   }, [accessKey, adminName]);
+
+  useEffect(() => {
+    if (modalAction) hiddenScrollBar();
+    else showScrollBar();
+  }, [modalAction])
 
   const getPartTitle = () => {
     return (adminName && allFaculties.includes(adminName)) ? 'Студ. совет ' : '';

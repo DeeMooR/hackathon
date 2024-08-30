@@ -1,7 +1,7 @@
 import React from 'react'
 import { ModalTemplate } from 'src/modals';
 import './ModalDelete.css'
-import { clearModal, deleteEventAction, getAdminSelector, getModalSelector, setAdminErrorMessage, setModalErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
+import { clearModal, deleteEventAction, getAdminSelector, getModalSelector, setModalErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
 import { allFaculties } from 'src/helpers';
 
 export const ModalDelete = () => {
