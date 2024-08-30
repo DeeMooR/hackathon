@@ -39,7 +39,7 @@ export const EventPage = () => {
     <>
       <Header/>
       <div className="wrapper">
-        <section className="eventPage">
+        <div className="eventPage">
           <p className='crumbs'>
             <span onClick={() => navigate('/')}>Главная</span> / 
             <span onClick={() => navigate(`/${page}`)}> {crumbs}</span>
@@ -64,26 +64,29 @@ export const EventPage = () => {
               </div>
             </div>
           </div>
-          <div className="eventPage__description">
+          <section className="eventPage__description eventPage__section">
             <h2 className='column-left'>Описание мероприятия</h2>
             <p dangerouslySetInnerHTML={{ __html: description }}></p>
-          </div>
+          </section>
           {visitClass === 'registration' &&
-            <div className="eventPage__registration">
+            <section className="eventPage__registration eventPage__section">
               <h2 className='column-left'>Регистрация на мероприятие</h2>
               <MembersRegistration eventId={+id} />
-            </div>
+            </section>
           }
           {page === 'past' && results &&
-            <div className="eventPage__results">
+            <section className="eventPage__results eventPage__section">
               <h2 className='column-left'>Результаты мероприятия</h2>
-              <div className="results__info">
-                <p dangerouslySetInnerHTML={{ __html: results }}></p>
-                {archive && <a href={archive} target='blank'>Архив с фотографиями</a>}
-              </div>
-            </div>
+              <p dangerouslySetInnerHTML={{ __html: results }}></p>
+            </section>
           }
-        </section>
+          {page === 'past' && archive &&
+            <section className="eventPage__archive eventPage__section">
+              <h2 className='column-left'>Архив с фото</h2>
+              <a href={archive} target='blank'>Ссылка на архив</a>
+            </section>
+          }
+        </div>
       </div>
       <Newsletter/>
       <Footer/>

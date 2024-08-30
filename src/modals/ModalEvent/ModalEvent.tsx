@@ -6,9 +6,9 @@ import { TextInput, FilterOptions, RadioOptions, TextTextarea, Loading, Wait } f
 import { ModalEventData, ModalEventFuncAction, changeSelectedFaculties, transformEventToDefaultValues } from './config';
 import { allEventsTypes, allEventsVisits, allFaculties } from 'src/helpers';
 import { ModalTemplate } from 'src/modals';
+import { createEventScheme } from 'src/validation';
 import { ICreateEventForm } from 'src/interface';
 import './ModalEvent.css'
-import { createEventScheme } from 'src/validation';
 
 // при action: 'create' | 'change'
 export const ModalEvent = () => {
@@ -19,6 +19,7 @@ export const ModalEvent = () => {
   const { eventId, isLoading } = useAppSelector(getModalSelector);
   const { adminName } = useAppSelector(getAdminSelector); 
   const { buttonText, wordTitle } = ModalEventData[action];
+  const wait = Wait(isLoading);
   
   const faculty = allFaculties.includes(adminName) ? adminName : null;
   const faculties = [...allFaculties, 'Все факультеты'];
@@ -80,7 +81,7 @@ export const ModalEvent = () => {
       <ModalTemplate closeModal={closeModal} positionUp>
         <form className="modalEvent" onSubmit={handleSubmit(clickSend)}>
           <h2><span>{wordTitle}</span> мероприятия</h2>
-          {isLoading ? <Loading /> : 
+          {wait ? <Loading /> : 
           <>
             <TextInput 
               text='Обложка' 

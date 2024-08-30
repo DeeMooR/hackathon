@@ -66,6 +66,7 @@ const modalSlice = createSlice({
         Object.assign(state, {...initialState, errorMessage});
       })
    
+      .addCase(createEventAction.pending, setLoading)
       .addCase(createEventAction.fulfilled, (state) => {
         const successMessage = 'Мероприятие успешно создано';
         Object.assign(state, {...initialState, successMessage});
@@ -74,6 +75,7 @@ const modalSlice = createSlice({
         state.errorMessage = 'Ошибка при создании мероприятия';
       })
     
+      .addCase(changeEventAction.pending, setLoading)
       .addCase(changeEventAction.fulfilled, (state) => {
         const successMessage = 'Мероприятие успешно обновлено';
         Object.assign(state, {...initialState, successMessage});
@@ -82,6 +84,7 @@ const modalSlice = createSlice({
         state.errorMessage = 'Ошибка при обновлении мероприятия';
       })
 
+      .addCase(deleteEventAction.pending, setLoading)
       .addCase(deleteEventAction.fulfilled, (state) => {
         const successMessage = 'Мероприятие успешно удалено';
         Object.assign(state, {...initialState, successMessage});

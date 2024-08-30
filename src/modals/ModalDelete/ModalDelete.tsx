@@ -1,14 +1,16 @@
 import React from 'react'
 import { ModalTemplate } from 'src/modals';
-import './ModalDelete.css'
 import { clearModal, deleteEventAction, getAdminSelector, getModalSelector, setModalErrorMessage, useAppDispatch, useAppSelector } from 'src/store';
 import { allFaculties } from 'src/helpers';
+import { Loading, Wait } from 'src/components';
+import './ModalDelete.css'
 
 export const ModalDelete = () => {
   const dispatch = useAppDispatch();
-  const { eventId, event } = useAppSelector(getModalSelector);
+  const { eventId, event, isLoading } = useAppSelector(getModalSelector);
   const { adminName } = useAppSelector(getAdminSelector); 
   const faculty = allFaculties.includes(adminName) ? adminName : null;
+  const wait = Wait(isLoading);
 
   const deleteEvent = () => {
     if (event && event.id === eventId) {
@@ -26,10 +28,12 @@ export const ModalDelete = () => {
     <ModalTemplate closeModal={closeModal}>
       <div className="modalDelete">
         <h2>Удалить мероприятие?</h2>
-        <div className="modalDelete__buttons">
-          <button className='second-button button-delete' onClick={deleteEvent}>Да, удалить</button>
-          <button className='second-button button-cancel' onClick={closeModal}>Нет, оставить</button>
-        </div>
+        {wait ? <Loading /> : 
+          <div className="modalDelete__buttons">
+            <button className='second-button button-delete' onClick={deleteEvent}>Да, удалить</button>
+            <button className='second-button button-cancel' onClick={closeModal}>Нет, оставить</button>
+          </div>
+        }
       </div>
     </ModalTemplate>
   )

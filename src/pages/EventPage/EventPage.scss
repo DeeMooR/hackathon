@@ -48,29 +48,23 @@
         }
       }
     }
-    .eventPage__description {
+    .eventPage__section {
       display: flex;
       gap: 40px;
       margin: 0 0 120px 0;
-      p {
-        max-width: 560px;
-        line-height: 135%;
-      }
-    }
-    .eventPage__registration {
-      display: flex;
-      gap: 40px;
-      margin: 0 0 120px 0;
-    }
-    .eventPage__results {
-      display: flex;
-      gap: 40px;
-      margin: 0 0 120px 0;
-      .results__info {
+      &.eventPage__description {
         p {
-          line-height: 2;
-          margin: 0 0 10px 0;
+          max-width: 560px;
+          line-height: 135%;
         }
+      }
+      &.eventPage__results {
+        p {
+          max-width: 560px;
+          line-height: 135%;
+        }
+      }
+      &.eventPage__archive {
         a {
           line-height: 135%;
           text-decoration: underline;
@@ -89,17 +83,7 @@
 @media (max-width: 1099.98px) {
   .wrapper {
     .eventPage {
-      .eventPage__description {
-        h2 {
-          font-size: 38px;
-        }
-      }
-      .eventPage__registration {
-        h2 {
-          font-size: 38px;
-        }
-      }
-      .eventPage__results {
+      .eventPage__section {
         h2 {
           font-size: 38px;
         }
@@ -128,17 +112,7 @@
           }
         }
       }
-      .eventPage__description {
-        h2 {
-          font-size: 28px;
-        }
-      }
-      .eventPage__registration {
-        h2 {
-          font-size: 28px;
-        }
-      }
-      .eventPage__results {
+      .eventPage__section {
         h2 {
           font-size: 28px;
         }
@@ -183,23 +157,10 @@
           }
         }
       }
-      .eventPage__description {
+      .eventPage__section {
         flex-direction: column;
         gap: 20px;
-        h2 {
-          width: 100%;
-        }
-      }
-      .eventPage__registration {
-        flex-direction: column;
-        gap: 20px;
-        h2 {
-          width: 100%;
-        }
-      }
-      .eventPage__results {
-        flex-direction: column;
-        gap: 20px;
+        margin: 0 0 80px 0;
         h2 {
           width: 100%;
         }
@@ -227,15 +188,6 @@
           }
         }
       }
-      .eventPage__description {
-        margin: 0 0 80px 0;
-      }
-      .eventPage__registration {
-        margin: 0 0 80px 0;
-      }
-      .eventPage__results {
-        margin: 0 0 80px 0;
-      }
     }
   }
 }
@@ -243,17 +195,7 @@
 @media (max-width: 499.98px) {
   .wrapper {
     .eventPage {
-      .eventPage__description {
-        h2 {
-          font-size: 24px;
-        }
-      }
-      .eventPage__registration {
-        h2 {
-          font-size: 24px;
-        }
-      }
-      .eventPage__results {
+      .eventPage__section {
         h2 {
           font-size: 24px;
         }
