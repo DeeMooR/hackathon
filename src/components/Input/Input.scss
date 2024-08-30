@@ -13,10 +13,10 @@
     position: absolute;
     display: flex;
     align-items: center;
-    margin: 4px 0 0 3px;
+    margin: 1px 0 0 3px;
     img {
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
     }
     span {
       font-size: 12px;
@@ -33,7 +33,6 @@
 @media (max-width: 599.98px) {
   .inputBlock {
     .error {
-      margin: 1px 0 0 3px;
       span {
         line-height: 0.8;
         font-size: 11px;

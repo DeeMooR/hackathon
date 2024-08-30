@@ -16,6 +16,7 @@ export const Newsletter = () => {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm<IEmailForm>({
     mode: 'onSubmit',
@@ -23,7 +24,10 @@ export const Newsletter = () => {
   });
 
   const onSubmit = (data: IEmailForm) => {
-    if (data.email) dispatch(setReceiverEmailAction(data));
+    if (data.email) {
+      dispatch(setReceiverEmailAction(data));
+      reset();
+    }
     else setError('email', { type: 'custom', message: 'Некорректная почта' })
   }
 
