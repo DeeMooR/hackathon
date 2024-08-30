@@ -21,8 +21,8 @@ public class ReceiverService{
         if (receiverRepo.existsById(receiver.getEmail())){
             throw new ReceiverAlreadyExists("Получатель уже существует");
         }
-        receiverRepo.save(receiver);
         send(receiver.getEmail());
+        receiverRepo.save(receiver);
         return true;
     }
     public void send(String emailTo) {
