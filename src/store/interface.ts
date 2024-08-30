@@ -29,7 +29,6 @@ export interface mainState {
   errorLoadingEventMessage: string | null,
 }
 
-
 export interface adminState {
   adminName: string,
   eventsNext: IShortEvent[],
@@ -47,6 +46,12 @@ export interface modalState {
   event: IEvent | null,
   teams: ITeam[],
   members: IMember[],
+  isLoading: boolean,
+  successMessage: string | null,
+  errorMessage: string | null,
+}
+
+export interface emailState {
   isLoading: boolean,
   successMessage: string | null,
   errorMessage: string | null,

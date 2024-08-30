@@ -24,6 +24,9 @@
   font-size: 12px;
   margin: 0 0 0 10px;
 }
+.inputBlock .error.isDark span {
+  color: var(--white);
+}
 
 @media (max-width: 599.98px) {
   .inputBlock .error {

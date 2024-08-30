@@ -1,15 +1,34 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from 'src/store';
-import { setReceiverEmailAPI } from 'src/store/requests';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { clearEmailMessages, getEmailSelector, setReceiverEmailAction, useAppDispatch, useAppSelector } from 'src/store';
+import { Input, Notification } from 'src/components';
 import { emailImage } from 'src/assets';
 import './Newsletter.css'
+import { IEmailForm } from 'src/interface';
+import { emailScheme } from 'src/validation';
 
 export const Newsletter = () => {
   const dispatch = useAppDispatch();
-  const [email, setEmail] = useState('');
+  const { successMessage, errorMessage } = useAppSelector(getEmailSelector);
 
-  const clickBth = () => {
-    dispatch(setReceiverEmailAPI(email));
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<IEmailForm>({
+    mode: 'onSubmit',
+    resolver: yupResolver(emailScheme)
+  });
+
+  const onSubmit = (data: IEmailForm) => {
+    if (data.email) dispatch(setReceiverEmailAction(data));
+    else setError('email', { type: 'custom', message: 'Некорректная почта' })
+  }
+
+  const clearMessages = () => {
+    dispatch(clearEmailMessages());
   }
 
   return (
@@ -22,13 +41,23 @@ export const Newsletter = () => {
               <h2>Узнавайте первым о новых событиях</h2>
               <p>Введите почту и получайте уведомления о мероприятиях в БГУИР</p>
             </div>
-            <div className="newsletter__fields">
-              <input type="email" className='input-dark newsletter__input' onChange={(e: any) => setEmail(e.target.value)} placeholder='Эл. почта' />
-              <button className='second-button newsletter__button' onClick={clickBth}>Получать уведомления на почту</button>
-            </div>
+            <form className="newsletter__fields" onClick={handleSubmit(onSubmit)}>
+              <Input
+                id='email'
+                register={register}
+                type="email"
+                placeholder='Эл. почта'
+                className='newsletter__input'
+                error={errors.email?.message}
+                isDark
+              />
+              <button className='second-button newsletter__button'>Получать уведомления на почту</button>
+            </form>
           </div>
         </div>
       </div>
+      {errorMessage && <Notification type='error' message={errorMessage} clearMessage={clearMessages} />}
+      {successMessage && <Notification type='success' message={successMessage} clearMessage={clearMessages} />}
     </div>
   )
 }

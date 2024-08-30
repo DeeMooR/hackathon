@@ -24,11 +24,17 @@
         }
         .newsletter__fields {
           max-width: 360px;
+          height: fit-content;
           .newsletter__input {
-            margin: 0 0 20px 0;
+            margin: 0 0 29px 0;
+            width: 360px;
           }
           .newsletter__button {
             width: 100%;
+            &:hover {
+              background-color: #374aa0;
+              border: 2px solid rgba(255, 255, 255, 0.5);
+            }
           }
         }
       }
@@ -99,6 +105,13 @@
         gap: 30px;
         .newsletter__photo {
           display: none;
+        }
+        .newsletter__text-fields {
+          .newsletter__fields {
+            .newsletter__input {
+              width: 100%;
+            }
+          }
         }
       }
     }

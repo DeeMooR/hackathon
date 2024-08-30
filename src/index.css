@@ -109,12 +109,12 @@ input {
 input::placeholder {
   opacity: 0.5;
 }
-.input-dark {
-  border: 1px solid rgba(255, 255, 255, 0.5);
+.inputDark {
+  border: 2px solid rgba(255, 255, 255, 0.5);
   background: var(--main);
   color: var(--white);
 }
-.input-dark::placeholder {
+.inputDark::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 

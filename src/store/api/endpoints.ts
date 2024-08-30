@@ -14,4 +14,5 @@ export const endpoints = {
   members: `${baseURL}/teams`,
   signIn: `${baseURL}/admin/auth`,
   checkAuth: `${baseURL}/admin/check`,
+  emailReceiver: `${baseURL}/receiver/new`,
 };

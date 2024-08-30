@@ -3,3 +3,4 @@ export * from './eventsApi';
 export * from './eventApi';
 export * from './adminApi';
 export * from './modalApi';
+export * from './emailApi';

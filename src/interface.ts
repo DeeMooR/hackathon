@@ -53,3 +53,7 @@ export interface ISignInForm {
   login: string,
   password: string
 }
+
+export interface IEmailForm {
+  email?: string
+}

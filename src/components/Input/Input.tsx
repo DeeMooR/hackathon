@@ -11,12 +11,14 @@ interface IInput {
   className?: string;
   placeholder?: string;
   error?: string;
+  isDark?: boolean,
 }
 
-export const Input:FC<IInput> = ({id, type, placeholder, className, register, error}) => {
+export const Input:FC<IInput> = ({id, type, placeholder, className, register, error, isDark}) => {
   const inputStyle = cn({
     showWarning: !!error,
     addPadding: type === 'date' || type === 'time',
+    inputDark: !!isDark,
   });
   
   return (
@@ -29,7 +31,7 @@ export const Input:FC<IInput> = ({id, type, placeholder, className, register, er
         className={inputStyle}
       />
       {error &&
-        <p className='error'>
+        <p className={`error ${isDark ? 'isDark' : ''}`}>
           <img src={warningIcon} alt="warning" />
           <span>{error}</span>
         </p>
