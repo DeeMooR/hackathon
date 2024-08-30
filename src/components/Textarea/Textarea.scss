@@ -1,0 +1,55 @@
+.textareaBlock {
+  position: relative;
+  .showWarning {
+    border: 2px solid var(--warning);
+  }
+  .error {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 3px;
+    img {
+      width: 18px;
+      height: 18px;
+    }
+    span {
+      font-size: 12px;
+      margin: 0 0 0 10px;
+      line-height: 1.2;
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  .textareaBlock {
+    .error {
+      span {
+        line-height: 0.8;
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  .textareaBlock {
+    .error {
+      span {
+        margin: 0 0 0 3px;
+      }
+    }
+  }
+}
+
+@media (max-width: 399.98px) {
+  .textareaBlock {
+    .error {
+      img {
+        display: none;
+      }
+      span {
+        margin: 0;
+      }
+    }
+  }
+}

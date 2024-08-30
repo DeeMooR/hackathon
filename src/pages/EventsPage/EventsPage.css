@@ -1,0 +1,15 @@
+.wrapper .eventsPage {
+  margin: 60px 0 120px;
+}
+.wrapper .eventsPage h1 {
+  margin: 0 0 45px 0;
+}
+.wrapper .eventsPage .eventsPage__events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px 40px;
+  padding: 60px 0 0 0;
+}
+.wrapper .eventsPage .eventsPage__events .eventsPage__empty {
+  margin: 0 auto;
+}

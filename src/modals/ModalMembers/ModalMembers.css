@@ -1,0 +1,32 @@
+.modalMembers {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.modalMembers h2 {
+  margin: 0;
+}
+.modalMembers .modalMembers__category .category__title {
+  margin: 0 0 5px 0;
+}
+.modalMembers .modalMembers__category .category__teams {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0 0 0 20px;
+}
+.modalMembers .modalMembers__category .category__teams .category__team .team__title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.modalMembers .modalMembers__category .category__teams .category__team .team__members .team__member {
+  line-height: 24px;
+}
+.modalMembers .modalMembers__category .category__members {
+  margin: 0 0 0 20px;
+}
+.modalMembers .modalMembers__category .category__members .category__member {
+  font-weight: 400;
+  line-height: 24px;
+}

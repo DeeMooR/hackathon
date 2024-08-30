@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/*--------- CONST ----------*/
+:root {
+  --font-family: 'Manrope', sans-serif;
+  --dark-main: #24262E;
+  --dark-text: #42444C;
+  --main: #263681;
+  --bright-blue: #C6D2FF;
+  --bright-blue-hover: #ABBDFF;
+  --white: #FFFFFF;
+  --main-background: #F6F8FF;
+  --error: #DF5A5A;
+  --warning: #FFAA00;
+  --success: #4DB84D;
+  --delete: #DC1D1D;
+}
+
+/*--------- NULLING STYLE ----------*/
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;}
+*,*:before, after{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{
+	min-height: 100%;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+	font-size: 18px;
+  font-weight: 600;
+  font-family: var(--font-family);
+  background-color: var(--main-background);
+  color: var(--dark-main);
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;}
+div, p, a, span {font-family: var(--font-family);}
+input,button,textarea{font-family: var(--font-family);}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-mox-focus-inner {padding:0; border:0;}
+a, a:visited{text-decoration: none; cursor: pointer;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{display: block; vertical-align: top;}
+h1,h2,h3,h4,h5,h6{font-family: var(--font-family); font-weight:600;}
+
+/*--------- STYLES ---------*/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 110%;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 110%;
+  margin: 0 0 45px 0;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 125%;
+}
+
+h1 span, h2 span {
+  color: var(--main);
+}
+
+p {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+a {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--dark-main);
+}
+
+input {
+  width: 100%;
+  height: 54px;
+  background: var(--bright-blue);
+  border-radius: 10px;
+  padding: 0 10px 0 20px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 135%;
+  color: var(--dark-text);
+  border: 2px solid transparent;
+}
+input::placeholder {
+  opacity: 0.5;
+}
+.inputDark {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: var(--main);
+  color: var(--white);
+}
+.inputDark::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+textarea {
+  width: 100%;
+  height: 105px;
+  background: var(--bright-blue);
+  border-radius: 10px;
+  padding: 14px 10px 16px 20px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 135%;
+  color: var(--dark-text);
+  resize: none;
+}
+
+.button {
+  height: 54px;
+  border-radius: 10px;
+  padding: 0 10px 0 10px;
+  background: var(--main);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 135%;
+  color: var(--white);
+}
+.button:hover {
+  background: #3a4a95;
+}
+.button:disabled {
+  background: var(--main);
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.second-button {
+  height: 54px;
+  border: 2px solid var(--main);
+  background: var(--main-background);
+  border-radius: 10px;
+  padding: 0 10px 0 10px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 135%;
+  color: var(--dark-main);
+}
+.second-button:hover {
+  background: var(--main);
+  color: var(--white);
+}
+.second-button:disabled {
+  background: var(--main-background);
+  color: var(--dark-main);
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.crumbs {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: 0.5;
+  margin: 0 0 13px 0;
+  cursor: pointer;
+}
+
+@media (max-width: 599.98px) {
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 36px;
+    margin: 0 0 30px 0;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+  a {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 499.98px) {
+  input {
+    padding: 0 8px 0 10px;
+    font-size: 16px;
+  }
+  textarea {
+    padding: 14px 8px 16px 10px;
+    font-size: 16px;
+  }
+  .button, .second-button {
+    font-size: 16px;
+  }
+}

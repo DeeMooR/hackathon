@@ -1,0 +1,44 @@
+.filterItem {
+  position: relative;
+  .filterItem__title {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    p {
+      line-height: 135%;
+    }
+    img {
+      width: 20px;
+      height: 20px;
+      transition: all 0.3s ease-in-out 0s;
+    }
+    &:hover {
+      color: var(--main);
+    }
+    &.open {
+      img {
+        transform: scaleY(-1);
+      }
+    }
+  }
+  .filterItem__options-container {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 20px;
+    background: var(--white);
+    border: 1px solid var(--main);
+    border-radius: 10px;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 399.98px) {
+  .filterItem {
+    width: fit-content;
+  }
+}

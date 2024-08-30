@@ -1,0 +1,28 @@
+.modalEvent {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.modalEvent h2 {
+  margin: 0;
+}
+.modalEvent .modalEvent__select-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modalEvent .modalEvent__select-box h3 {
+  margin: 0;
+}
+
+.modalEvent__delete {
+  font-weight: 400;
+  line-height: 135%;
+  text-align: center;
+  color: var(--delete);
+  opacity: 0.5;
+  cursor: pointer;
+}
+.modalEvent__delete:hover {
+  opacity: 1;
+}

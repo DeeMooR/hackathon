@@ -1,0 +1,21 @@
+.modalDelete {
+  h2 {
+    margin: 0 0 30px 0;
+  }
+  .modalDelete__buttons {
+    display: flex;
+    gap: 20px;
+    .button-delete {
+      background: var(--error);
+      border: 2px solid var(--error);
+      color: var(--white);
+      &:hover {
+        background: var(--delete);
+        border: 2px solid var(--delete);
+      }
+    }
+    .button-cancel {
+      border: 2px solid var(--dark-main);
+    }
+  }
+}

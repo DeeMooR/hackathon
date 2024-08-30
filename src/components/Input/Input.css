@@ -1,0 +1,50 @@
+.inputBlock {
+  position: relative;
+}
+.inputBlock .showWarning {
+  border: 2px solid var(--warning);
+}
+.inputBlock .addPadding {
+  padding: 0 25px 0 20px;
+}
+.inputBlock .addPadding::marker {
+  cursor: pointer;
+}
+.inputBlock .error {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  margin: 2px 0 0 3px;
+}
+.inputBlock .error img {
+  width: 18px;
+  height: 18px;
+}
+.inputBlock .error span {
+  font-size: 12px;
+  margin: 0 0 0 10px;
+  line-height: 1.2;
+}
+.inputBlock .error.isDark span {
+  color: var(--white);
+}
+
+@media (max-width: 599.98px) {
+  .inputBlock .error span {
+    line-height: 0.8;
+    font-size: 11px;
+  }
+}
+@media (max-width: 599.98px) {
+  .inputBlock .error span {
+    margin: 0 0 0 3px;
+  }
+}
+@media (max-width: 399.98px) {
+  .inputBlock .error img {
+    display: none;
+  }
+  .inputBlock .error span {
+    margin: 0;
+  }
+}

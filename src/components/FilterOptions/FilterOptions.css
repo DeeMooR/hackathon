@@ -1,0 +1,22 @@
+.filterOptions__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.filterOptions__checkbox .checkbox__icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("src/assets/icons/Unchecked.svg");
+}
+.filterOptions__checkbox .checkbox__text {
+  line-height: 135%;
+  white-space: nowrap;
+}
+.filterOptions__checkbox input {
+  display: none;
+}
+.filterOptions__checkbox input:checked + .checkbox__icon {
+  background-image: url("src/assets/icons/Checked.svg");
+}
