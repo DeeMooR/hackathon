@@ -145,7 +145,7 @@ public class EventEntity {
                 + "Где: " + getLocation() + "\n"
                 + "Когда: " + getDate().toString() + " " + getTime() + "\n"
                 + "За подробностями обращайся на наш сайт или в социальные сети. А вот ссылка на наш сайт:\n" +
-                "http://localhost:3000/next/" + getId();;
+                "http://localhost:3000/events/" + getId();;
         return message;
     }
 }
