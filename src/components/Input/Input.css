@@ -14,7 +14,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  margin: 1px 0 0 3px;
+  margin: 2px 0 0 3px;
 }
 .inputBlock .error img {
   width: 18px;
@@ -23,6 +23,7 @@
 .inputBlock .error span {
   font-size: 12px;
   margin: 0 0 0 10px;
+  line-height: 1.2;
 }
 .inputBlock .error.isDark span {
   color: var(--white);

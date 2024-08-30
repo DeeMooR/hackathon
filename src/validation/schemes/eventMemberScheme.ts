@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
-import { teamRequiredValidation, nameRequiredValidation, surnameRequiredValidation, groupRequiredValidation } from '../validationRules';
+import { max25RequiredValidation, nameRequiredValidation, surnameRequiredValidation, groupRequiredValidation } from '../validationRules';
 
 export const eventMemberScheme = Yup.object().shape({
-  team: teamRequiredValidation,
+  team: max25RequiredValidation,
   name: nameRequiredValidation,
   surname: surnameRequiredValidation,
   groupNumber: groupRequiredValidation,

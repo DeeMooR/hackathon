@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { clearModal, getAdminSelector, getModalActionSelector, getModalEventAction, getModalEventSelector, getModalSelector, setModalAction, useAppDispatch, useAppSelector } from 'src/store';
 import { TextInput, FilterOptions, RadioOptions, TextTextarea, Loading, Wait } from 'src/components';
 import { ModalEventData, ModalEventFuncAction, changeSelectedFaculties, transformEventToDefaultValues } from './config';
@@ -7,6 +8,7 @@ import { allEventsTypes, allEventsVisits, allFaculties } from 'src/helpers';
 import { ModalTemplate } from 'src/modals';
 import { ICreateEventForm } from 'src/interface';
 import './ModalEvent.css'
+import { createEventScheme } from 'src/validation';
 
 // при action: 'create' | 'change'
 export const ModalEvent = () => {
@@ -31,7 +33,7 @@ export const ModalEvent = () => {
     formState: { errors },
   } = useForm<ICreateEventForm>({
     mode: 'onChange',
-    // resolver: yupResolver(createEventScheme),
+    resolver: yupResolver(createEventScheme),
   });
   
   useEffect(() => {
@@ -114,6 +116,7 @@ export const ModalEvent = () => {
                 id='archive'
                 register={register}
                 type='text' 
+                placeholder='Вставьте ссылку на архив'
                 error={errors.archive?.message}
               />
             </>

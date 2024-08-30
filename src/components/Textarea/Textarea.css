@@ -8,7 +8,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  margin: 1px 0 0 3px;
+  margin: 0 0 0 3px;
 }
 .textareaBlock .error img {
   width: 18px;
@@ -17,6 +17,7 @@
 .textareaBlock .error span {
   font-size: 12px;
   margin: 0 0 0 10px;
+  line-height: 1.2;
 }
 
 @media (max-width: 599.98px) {

@@ -1,13 +1,21 @@
 import * as Yup from 'yup';
-import { dateRequiredValidation, fieldRequiredValidation, fieldValidation } from '../validationRules';
+import { 
+  dateRequiredValidation, 
+  descriptionRequiredValidation, 
+  fieldRequiredValidation, 
+  max25RequiredValidation, 
+  resultsValidation, 
+  urlRequiredValidation, 
+  urlValidation 
+} from '../validationRules';
 
 export const createEventScheme = Yup.object().shape({
-  photo: fieldRequiredValidation,
-  title: fieldRequiredValidation,
+  photo: urlRequiredValidation,
+  title: max25RequiredValidation,
   date: dateRequiredValidation,
   time: fieldRequiredValidation,
-  location: fieldRequiredValidation,
-  description: fieldRequiredValidation,
-  archive: fieldValidation,
-  results: fieldValidation,
+  location: max25RequiredValidation,
+  description: descriptionRequiredValidation,
+  archive: urlValidation,
+  results: resultsValidation,
 });

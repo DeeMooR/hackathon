@@ -17,8 +17,8 @@ export interface IEvent {
   description: string,
   type: typeof allEventsTypes[number],
   visit: typeof allEventsVisits[number],
-  archive: string | null,
-  results: string | null,
+  archive?: string | null,
+  results?: string | null,
   page: 'next' | 'past',
 }
 
